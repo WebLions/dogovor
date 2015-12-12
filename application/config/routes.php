@@ -37,7 +37,8 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+$route['login'] = "user/login";
+$route['logout'] = "user/logout";
 $route['default_controller'] = "home";
 $route['404_override'] = '';
 

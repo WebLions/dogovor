@@ -52,6 +52,9 @@ class CI_Controller {
 		$this->load->initialize();
 		
 		log_message('debug', "Controller Class Initialized");
+
+        $this->load->model('user_model');
+        $this->data['user_id'] = $this->user_model->login_in();
 	}
 
 	public static function &get_instance()
