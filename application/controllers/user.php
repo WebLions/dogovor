@@ -2,20 +2,26 @@
 
 class User extends CI_Controller {
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         
         parent::__construct();
         $this->load->helper('html');
-       // $this->load->model('user');
+
     }
 
     public function login()
     {
-
-        $this->load->view('user/header');
-        $this->load->view('user/login');
-        $this->load->view('user/footer');
+        if( !$this->data['user_id'] ) {
+            $this->load->view('user/header');
+            $this->load->view('user/login');
+            $this->load->view('user/footer');
+        }else{
+            redirect('/','refresh');
+        }
     }
 
     public function document()
