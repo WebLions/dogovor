@@ -4,7 +4,9 @@ class User extends CI_Controller {
 
     public function __construct()
     {
+        
         parent::__construct();
+        $this->load->helper('html');
        // $this->load->model('user');
     }
 
@@ -13,6 +15,13 @@ class User extends CI_Controller {
 
         $this->load->view('user/header');
         $this->load->view('user/login');
+        $this->load->view('user/footer');
+    }
+
+    public function document()
+    {
+        $this->load->view('user/header');
+        $this->load->view('user/document');
         $this->load->view('user/footer');
     }
 
