@@ -3,7 +3,7 @@
 
     <div class="container">
 
-      <form class="login-form" action="profile">        
+      <form class="login-form" action="/user/profile">
         <div class="login-wrap">
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
