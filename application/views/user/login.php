@@ -15,7 +15,7 @@
                 <input type="password" class="form-control" placeholder="Пароль">
             </div>
             <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Запомнить меня sdf
+                <input type="checkbox" value="remember-me"> Запомнить меня
                 <span class="pull-right"> <a href="#"> Забыли пароль?</a></span>
             </label>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Войти</button>
