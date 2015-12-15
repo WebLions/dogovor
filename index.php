@@ -1,6 +1,6 @@
 <?php
 session_start();
-hello
+echo ("Hello roma");
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
