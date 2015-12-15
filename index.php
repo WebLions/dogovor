@@ -1,6 +1,6 @@
 <?php
 session_start();
-echo ("Hello roma");vj
+echo ("Hello roma");v
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
