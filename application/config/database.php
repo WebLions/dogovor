@@ -48,10 +48,10 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = '';
-$db['default']['password'] = '';
-$db['default']['database'] = '';
+$db['default']['hostname'] = 'angara5.beget.ru';
+$db['default']['username'] = 'fb3809sd_dogovor';
+$db['default']['password'] = 'JB&!2^lS';
+$db['default']['database'] = 'fb3809sd_dogovor';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
