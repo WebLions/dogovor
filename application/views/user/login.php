@@ -20,7 +20,7 @@
             </label>
             <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
             <a href = "register" class="btn btn-info btn-lg btn-block">Signup</a>
-        </div> 
+        </div>
       </form>
 
     </div>
