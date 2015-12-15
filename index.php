@@ -1,4 +1,4 @@
-<?php //hello
+<?php
 session_start();
 //echo ("Hello igor");
 /*
