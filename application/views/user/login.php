@@ -8,18 +8,18 @@
             <p class="login-img"><i class="icon_lock_alt"></i></p>
             <div class="input-group">
               <span class="input-group-addon"><i class="icon_profile"></i></span>
-              <input type="text" class="form-control" placeholder="Username" autofocus>
+              <input type="text" class="form-control" placeholder="Логин" autofocus>
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="icon_key_alt"></i></span>
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Пароль">
             </div>
             <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
-                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+                <input type="checkbox" value="remember-me"> Запомнить меня
+                <span class="pull-right"> <a href="#"> Забыли пароль?</a></span>
             </label>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-            <a href = "register" class="btn btn-info btn-lg btn-block">Signup</a>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Войти</button>
+            <a href = "register" class="btn btn-info btn-lg btn-block">Зарегистрироваться</a>
         </div>
       </form>
 
