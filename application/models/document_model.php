@@ -5,7 +5,7 @@ class Document_model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->databese();//Подключение к базе данных
+        $this->load->database();//Работа с бд
     }
 
     //------------------------------------------------------------------------------------------------------------------
