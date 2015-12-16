@@ -16,7 +16,7 @@ class User extends CI_Controller {
     public function login()
     {
         if( !$this->data['user_id'] ) {
-            $this->load->view('user/header');
+            $this->load->view('user/login_header');
             $this->load->view('user/login');
             $this->load->view('user/footer');
         }else{
@@ -38,7 +38,7 @@ class User extends CI_Controller {
 
     public function register()
     {
-        $this->load->view('user/header');
+        $this->load->view('user/login_header');
         $this->load->view('user/register');
         $this->load->view('user/footer');
 
