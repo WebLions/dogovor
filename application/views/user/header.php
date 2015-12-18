@@ -20,6 +20,7 @@
     <?php echo link_tag('bootstrap/css/jquery-ui-1.10.4.min.css'); ?>
     <?php echo link_tag('bootstrap/css/jquery-jvectormap-1.2.2.css'); ?>
     <?php echo link_tag('bootstrap/css/style.css'); ?>
+    <?php echo link_tag('bootstrap/css/content_style.css'); ?>
    
    
   </head>
