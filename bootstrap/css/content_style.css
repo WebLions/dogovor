@@ -1,0 +1,28 @@
+.content-block{
+
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #ffffff;
+
+}
+.content-header{
+
+    text-align: center;
+    padding-top: 10px;
+    font: bold  130% serif;
+
+}
+
+.content-radio{
+
+    text-align: center;
+    margin: 10px;
+
+}
+
+.content-input{
+    display:inline-block;
+    margin-right: 20px;
+    text-align: center;
+
+}
