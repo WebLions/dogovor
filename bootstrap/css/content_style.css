@@ -2,7 +2,9 @@
 
     border: 2px solid black;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #65c4ff;
+    border-color: #424fff;
+    margin: 10px;
 
 }
 .content-header{
@@ -16,7 +18,8 @@
 .content-radio{
 
     text-align: center;
-    margin: 10px;
+    margin: 15px;
+
 
 }
 
@@ -24,5 +27,16 @@
     display:inline-block;
     margin-right: 20px;
     text-align: center;
+
+}
+.content-required{
+
+    color: #ff1917ж
+
+}
+
+.content-input-group{
+
+    margin: 10px;
 
 }
