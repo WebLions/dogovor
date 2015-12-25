@@ -15,10 +15,10 @@ class Document extends CI_Controller
 
     }
 
-    public function <name>()  //  в ссылке выглядит так document/name
+    public function buy_sale()  //  в ссылке выглядит так document/name
     {
 
-        $this->document_model->//вызов нужно функции модели;
+        $this->document_model->get_doc_buy_sale();//вызов нужно функции модели;
 
     }
 
