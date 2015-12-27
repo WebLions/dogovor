@@ -22,4 +22,10 @@ class Document extends CI_Controller
 
     }
 
+    public function act_of_reception()  //  в ссылке выглядит так document/name
+    {
+
+        $this->document_model->get_doc_act_of_reception();//вызов нужно функции модели;
+
+    }
 }
