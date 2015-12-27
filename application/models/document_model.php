@@ -79,6 +79,7 @@ class Document_model extends CI_Model
     public $penalty_for_buyer = "1 000 000";
     public $penalty_for_vendor = "2 000 000";
     public $penalty_for_garanty = "228 228";
+    public $oil_in_car = "95 prime";
     //------------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
@@ -204,7 +205,40 @@ FROM buy_deal');*/
     //акт приема-передачи автомобиля
     public function get_doc_act_of_reception()
     {
+        $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/act_of_reception.docx');
+        $document->setValue('city_contract', $this->city_contract);
+        $document->setValue('day', $this->day);
+        $document->setValue('month', $this->month);
+        $document->setValue('year', $this->year);
 
+        $document->setValue('vendor_fio', $this->vendor_fio);
+        $document->setValue('buyer_fio', $this->buyer_fio);
+        $document->setValue('mark', $this->mark);
+        $document->setValue('vin', $this->vin);
+        $document->setValue('reg_number', $this->reg_number);
+        $document->setValue('car_type', $this->car_type);
+        $document->setValue('date_of_product', $this->date_of_product);
+        $document->setValue('engine_model', $this->engine_model);
+        $document->setValue('shassi', $this->shassi);
+        $document->setValue('carcass', $this->carcass);
+        $document->setValue('color_carcass', $this->color_carcass);
+        $document->setValue('other_parameters', $this->other_parameters);
+        $document->setValue('serial_car', $this->serial_car);
+        $document->setValue('number_of_serial_car', $this->number_of_serial_car);
+        $document->setValue('bywho_serial_car', $this->bywho_serial_car);
+        $document->setValue('date_of_serial_car', $this->date_of_serial_car);
+        $document->setValue('additional_equip', $this->additional_equip);
+        $document->setValue('oil_in_car', $this->oil_in_car);
+        $document->setValue('defects_all', $this->defects_all);
+        $document->setValue('features', $this->features);
+
+        //Вопросы по пост-пунткам пунтка 7
+
+        // Сохранение результатов
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'act_of_reception.docx';//Имя файла и путь к нему
+        //setcookie('name_of_doc',$name_of_file);
+        $document->save($name_of_file); // Сохранение документа
+        echo 'File created.';
     }
     //------------------------------------------------------------------------------------------------------------------
     //расписка в получении денежных средств
