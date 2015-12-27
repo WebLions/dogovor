@@ -19,10 +19,12 @@ class Document_model extends CI_Model
     public $vendor_bywho_d = "11";
     public $vendor_bywho_m = "сентября";
     public $vendor_bywho_y = "2001";
+    public $vendor_bywho_date = '';
     public $vendor_city = "Вашингтон";
     public $vendor_street = "Рузвельт стрит";
     public $vendor_house = "42";
     public $vendor_flat = "28";
+    public $vendor_adress = '';
     public $vendor_phone = "+38(066)666-66-66";
     public $buyer_fio = "Петров Петр Петрович";
     public $buyer_b_day = "19";
@@ -34,10 +36,12 @@ class Document_model extends CI_Model
     public $buyer_bywho_d = "02";
     public $buyer_bywho_m = "октября";
     public $buyer_bywho_y = "2007";
+    //public $buyer_bywho_date = '"' . $buyer_bywho_d . '" ' . $buyer_bywho_m . ' ' . $buyer_bywho_y . 'г.';
     public $buyer_city = "Прага";
     public $buyer_street = "Красная улица";
     public $buyer_house = "9";
     public $buyer_flat = "11";
+    //public $buyer_adress =  $buyer_city . ", " . $buyer_street . ", ". $buyer_house . ", " . $buyer_flat . ".";
     public $buyer_phone = "+7(000)333-22-11";
     public $mark = "Ламбаргини";
     public $vin = "8888";
@@ -64,6 +68,8 @@ class Document_model extends CI_Model
     public $features = "Слишком греет печка";
     public $price = "28 000 000";
     public $price_str = "двадцать восемь миллионов";
+    public $currency = "рублей";
+    public $document_number = "28";
     public $day_of_pay = "01";
     public $month_of_pay = "01";
     public $year_of_pay = "2016";
@@ -88,6 +94,21 @@ class Document_model extends CI_Model
         $this->load->library('word');
     }
     //------------------------------------------------------------------------------------------------------------------
+    public function format_date($day, $month, $year)
+    {
+        $date = '"'. $day . '" ' . $month . ' ' . $year . 'г.';
+        return $date;
+    }
+    $vendor_bywho_date = format_date($vendor_bywho_d, $vendor_bywho_m, $vendor_bywho_y);
+    //------------------------------------------------------------------------------------------------------------------
+    public function format_adress($city, $street, $house, $flat)
+    {
+        $adress = $city .', '. $street .', '. $house .', '. $flat;
+        return $adress;
+    }
+    $vendor_adress = format_adress($vendor_city, $vendor_street, $vendor_house, $vendor_flat);
+    //------------------------------------------------------------------------------------------------------------------
+
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
     public function set_header_doc()
@@ -206,6 +227,8 @@ FROM buy_deal');*/
     public function get_doc_act_of_reception()
     {
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/act_of_reception.docx');
+
+        //Задание значений переменных
         $document->setValue('city_contract', $this->city_contract);
         $document->setValue('day', $this->day);
         $document->setValue('month', $this->month);
@@ -244,7 +267,38 @@ FROM buy_deal');*/
     //расписка в получении денежных средств
     public function get_doc_receipt_of_money()
     {
+        $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/receipt_of_money.docx');
 
+        //Задание значений переменных
+        $document->setValue('city_contract', $this->city_contract);
+        $document->setValue('day', $this->day);
+        $document->setValue('month', $this->month);
+        $document->setValue('year', $this->year);
+
+        $document->setValue('vendor_fio', $this->vendor_fio);
+        $document->setValue('vendor_serial_ch', $this->vendor_serial_ch);
+        $document->setValue('vendor_number_ser', $this->vendor_number_ser);
+        $document->setValue('vendor_ser_bywho', $this->vendor_ser_bywho);
+        $document->setValue('vendor_bywho_date', $this->vendor_bywho_date);
+        $document->setValue('vendor_adress', $this->vendor_adress);
+
+        $document->setValue('buyer_fio', $this->buyer_fio);
+        $document->setValue('buyer_serial_ch', $this->buyer_serial_ch);
+        $document->setValue('buyer_number_ser', $this->buyer_number_ser);
+        $document->setValue('buyer_ser_bywho', $this->buyer_ser_bywho);
+        $document->setValue('buyer_bywho_date', $this->buyer_bywho_date);
+        $document->setValue('buyer_adress', $this->buyer_adress);
+
+        $document->setValue('price', $this->price);
+        $document->setValue('price_str', $this->price_str);
+        $document->setValue('currency', $this->currency);
+        $document->setValue('document_number', $this->document_number);
+
+        // Сохранение результатов
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'receipt_of_money.docx';//Имя файла и путь к нему
+        //setcookie('name_of_doc',$name_of_file);
+        $document->save($name_of_file); // Сохранение документа
+        echo 'File created.';
     }
     //------------------------------------------------------------------------------------------------------------------
     //заявление в ГИБДД для смены собственника
