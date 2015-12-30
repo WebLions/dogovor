@@ -22,22 +22,27 @@ var files= new Array(   'data_city',
                         'wife_info',
                         'penalty');
 
+
+
+
+
+
 var i = 0;
 
 $(document).ready(function(){
 
-    $('.next').click(function(){
-        $('.next').remove();
+    $('.content-button').on('click','.next',function(){
+
         string = "/blocks/load/"+files[i];
         $.ajax({
             url: string,
             dataType: "html",
             success: function (data, textStatus) {
                 $('.document').append(data);
+
             }
         });
         console.log(i);
         i++;
-    })
-
+    });
 });

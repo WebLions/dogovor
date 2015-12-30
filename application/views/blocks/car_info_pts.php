@@ -17,10 +17,6 @@
             <input class = "form-control" type="text" name="qwe"  placeholder="Кем выдан">
         </div>
 
-        <div class = "content-button">
-            <button class="btn btn-primary next"> Продолжить</button>
-        </div>
-        <br>
 
     </div>
 </div>

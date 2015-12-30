@@ -16,10 +16,7 @@
 
             </div>
 
-            <div class = "content-button">
-                <button class="btn btn-primary next"> Продолжить</button>
-            </div>
-            <br>
+
 
         </div>
     </div>
