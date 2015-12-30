@@ -14,6 +14,12 @@ class Document extends CI_Controller
         $this->load->model('document_model');
 
     }
+    public function create()  //  в ссылке выглядит так document/name
+    {
+
+        $this->load->view('user/document');
+
+    }
 
     public function buy_sale()  //  в ссылке выглядит так document/name
     {
