@@ -2,7 +2,6 @@
 
 class Document extends CI_Controller
 {
-
     /**
      * User constructor.
      */

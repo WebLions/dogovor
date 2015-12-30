@@ -10,7 +10,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-		redirect('/login','refresh');
+		//redirect('/login','refresh');
 
 		$this->load->view('home');
 
