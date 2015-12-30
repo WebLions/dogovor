@@ -1,12 +1,13 @@
 .content-block{
 
-    border: 2px solid black;
-    border-radius: 10px;
-    background-color: #65c4ff;
-    border-color: #424fff;
+    border: 1px dashed;
+    border-radius: 25px;
+    background-color: #FFFFFF;
+    border-color: #0351EC;
     margin: 10px;
-
+    color: #365bff;
 }
+
 .content-header{
 
     text-align: center;
@@ -27,6 +28,12 @@
     display:inline-block;
     margin-right: 20px;
     text-align: center;
+
+}
+.content-button{
+
+    text-align: center;
+
 
 }
 .content-required{

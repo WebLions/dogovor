@@ -26,7 +26,7 @@ class User extends CI_Controller {
 
     public function document()
     {
-        $this->load->view('user/header');
+        $this->load->view('user/document_header');
         $this->load->view('user/document');
         $this->load->view('user/footer');
     }

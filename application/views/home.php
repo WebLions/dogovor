@@ -826,7 +826,7 @@
 		<img src="images/img0001.png" id="indexImage1" alt="" style="width:150px;height:100px;">
 	</div>
 	<div id="wb_indexText1" style="position:absolute;left:10px;top:130px;width:220px;height:48px;text-align:center;z-index:9;">
-		<span style="color:#dc143c;font-family:'cooper black';font-size:29px;"><strong>Cars</strong></span><span style="color:#4169e1;font-family:'cooper black';font-size:29px;"><strong>Doc</strong></span><span style="color:#4169e1;font-family:'cooper black';font-size:37px;"><strong><br></strong></span><h1>КОНСТРУКТОР ДОГОВОРОВ</h1>
+		<span style="color:#dc143c;font-family:'cooper black';font-size:29px;"><strong>Cars</strong></span><span style="color:#4169e1;font-family:'cooper black';font-size:29px;"><strong>Doc</strong></span><span style="color:#4169e1;font-family:'cooper black';"><strong><br></strong></span><h6>КОНСТРУКТОР ДОГОВОРОВ</h6>
 	</div>
 	<div id="wb_indexImage2" style="position:absolute;left:410px;top:190px;width:560px;height:384px;z-index:10;">
 		<img src="images/shutterstock_199867346-e1422304464866.jpg" id="indexImage2" alt="" style="width:560px;height:384px;">
@@ -838,7 +838,7 @@
 		<span style="color:#404040;font-family:verdana;font-size:17px;">Тысячи пользователей готовят документы с помощью сервиса CarsDoc</span>
 	</div>
 	<div id="wb_indexImage3" style="position:absolute;left:60px;top:480px;width:289px;height:90px;z-index:13;">
-		<a href="./sostavit-dogovor-kupli-prodazhi-auto.html"><img src="images/snapshot.jpg" id="indexImage3" alt="" style="width:289px;height:90px;"></a>
+		<a href="/user/document"><img src="images/snapshot.jpg" id="indexImage3" alt="" style="width:289px;height:90px;"></a>
 	</div>
 	<div id="wb_indexImage4" style="position:absolute;left:0px;top:560px;width:970px;height:384px;z-index:14;">
 		<img src="images/img0002.jpg" id="indexImage4" alt="" style="width:970px;height:384px;">
@@ -1015,7 +1015,7 @@
 		<span style="color:#ffffff;font-family:verdana;font-size:37px;">3</span>
 	</div>
 	<div id="wb_indexImage16" style="position:absolute;left:240px;top:3000px;width:493px;height:148px;z-index:72;">
-		<a href="./sostavit-dogovor-kupli-prodazhi-auto.html"><img src="images/snapshot-3.jpg" id="indexImage16" alt="" style="width:493px;height:148px;"></a>
+		<a href="/user/document"><img src="images/snapshot-3.jpg" id="indexImage16" alt="" style="width:493px;height:148px;"></a>
 	</div>
 	<div id="wb_indexText41" style="position:absolute;left:230px;top:3250px;width:520px;height:52px;text-align:center;z-index:73;">
 		<span style="color:#404040;font-family:verdana;font-size:43px;">Получите бесплатно:</span>
@@ -1084,7 +1084,7 @@
 		<span style="color:#696969;font-family:verdana;font-size:24px;">Выберите свой вариант. Введите данные. Договор готов.</span>
 	</div>
 	<div id="wb_indexImage26" style="position:absolute;left:220px;top:4640px;width:493px;height:148px;z-index:95;">
-		<a href="http://carsdoc.ru/sostavit-dogovor-kupli-prodazhi-auto.html"><img src="images/snapshot-1.jpg" id="indexImage26" alt="" style="width:493px;height:148px;"></a>
+		<a href="/user/document"><img src="images/snapshot-1.jpg" id="indexImage26" alt="" style="width:493px;height:148px;"></a>
 	</div>
 	<div id="wb_footer" style="position:absolute;left:0px;top:4810px;width:970px;height:320px;z-index:96;">
 		<img src="images/blur.jpg" id="footer" alt="" style="width:970px;height:320px;">
