@@ -1,12 +1,5 @@
-/**
- * Created by PhpStorm.
- * User: Swarge
- * Date: 12/29/2015
- * Time: 3:33 PM
- */
-
 <div class="row">
-    <div class="col-lg-7 col-lg-offset-3">
+    <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Введите данныe покупателя:</p>
             <div class = "content-radio">
