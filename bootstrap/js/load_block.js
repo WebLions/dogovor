@@ -29,7 +29,14 @@ $(document).ready(function(){
     $('.next').click(function(){
         $('.next').remove();
         string = "/blocks/load/"+files[i];
-        $('.wrapper').load(string);
+        $.ajax({
+            url: string,
+            dataType: "html",
+            success: function (data, textStatus) {
+                $('.document').append(data);
+            }
+        });
+        console.log(i);
         i++;
     })
 
