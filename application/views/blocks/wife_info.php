@@ -42,8 +42,6 @@
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="qwe"  placeholder="кем выдано свидетельство о браке:">
                 </div>
-
-
             </div>
         </div>
     </div>
