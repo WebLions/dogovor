@@ -28,7 +28,7 @@ $(document).ready(function(){
 
     $('.next').click(function(){
         $('.next').remove();
-        string = "/application/views/blocks/"+files[i]+".php .row"
+        string = "/blocks/load/"+files[i];
         $('.wrapper').load(string);
         i++;
     })

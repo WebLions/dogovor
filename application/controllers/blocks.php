@@ -16,7 +16,7 @@ class Blocks extends CI_Controller
     public function load($name)
     {
 
-            $this->load->view("user/{$name}");
+            $this->load->view("blocks/{$name}");
 
     }
 
