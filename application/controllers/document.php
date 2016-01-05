@@ -32,4 +32,16 @@ class Document extends CI_Controller
         $this->document_model->get_doc_receipt_of_money();//вызов нужно функции модели;
 
     }
+    public function gibdd()  //  в ссылке выглядит так document/name
+    {
+
+        $this->document_model->get_doc_statement_gibdd();//вызов нужно функции модели;
+
+    }
+    public function marriage()  //  в ссылке выглядит так document/name
+    {
+
+        $this->document_model->get_doc_statement_vendor_marriage();//вызов нужно функции модели;
+
+    }
 }
