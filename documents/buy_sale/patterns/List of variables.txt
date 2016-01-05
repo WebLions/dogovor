@@ -5,9 +5,7 @@ year
 vendor_name
 vendor_surname
 vendor_patronymic
-vendor_b_day
-vendor_b_month
-vendor_b_year
+vendor_date
 vendor_serial_ch
 vendor_number_ser
 vendor_ser_bywho
@@ -20,9 +18,7 @@ vendor_phone
 buyer_name
 buyer_surname
 buyer_patronymic
-buyer_b_day
-buyer_b_month
-buyer_b_year
+buyer_date
 buyer_serial_ch
 buyer_number_ser
 buyer_ser_bywho
