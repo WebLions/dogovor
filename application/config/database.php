@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'angara5.beget.ru';
-$db['default']['username'] = 'fb3809sd_dogovor';
-$db['default']['password'] = 'JB&!2^lS';
-$db['default']['database'] = 'fb3809sd_dogovor';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['hostname'] = 'jera.mysql.ukraine.com.ua';
+$db['default']['username'] = 'jera_dogovor';
+$db['default']['password'] = 'wrx2depx';
+$db['default']['database'] = 'jera_dogovor';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
