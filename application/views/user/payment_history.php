@@ -1,4 +1,4 @@
-<section>
+<section id="main-content">
     <section class="wrapper">
         <!--overview start-->
         <div class="row">
@@ -10,12 +10,12 @@
             </div>
         </div>
 
-        <table>
+        <table style="width: 100%">
             <thead>
                 <th style="width: 25%">Название документа</th>
                 <th style="width: 25%">Дата создания</th>
                 <th style="width: 25%">Статус оплаты</th>
-                <th style="width: 25%">Действия</th>
+                <th style="width: 25%;float: right">Действия</th>
             </thead>
 
             <tr>
