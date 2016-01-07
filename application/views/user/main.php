@@ -1,4 +1,4 @@
-<section>
+<section id="main-content">
     <section class="wrapper">
         <!--overview start-->
         <div class="row">
@@ -8,8 +8,6 @@
                 </ol>
             </div>
         </div>
-
-
     </section>
 </section>
 <!--main content end-->
