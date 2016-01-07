@@ -30,6 +30,12 @@ class User extends CI_Controller {
         $this->load->view('user/document');
         $this->load->view('user/footer');
     }
+    public function main()
+    {
+        $this->load->view('user/header');
+        $this->load->view('user/main');
+        $this->load->view('user/footer');
+    }
 
     public function logout()
     {

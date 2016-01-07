@@ -22,9 +22,13 @@
     <?php echo link_tag('bootstrap/css/style.css'); ?>
     <?php echo link_tag('bootstrap/css/content_style.css'); ?>
     <?php echo link_tag('bootstrap/datepicker/css/datepicker.css'); ?>
+
+
    
    
   </head>
+
+
 
   <body>
   <!-- container section start -->
@@ -38,10 +42,10 @@
                 <a href="#"><i class="icon_profile"></i> Профиль </a>
               </li>
               <li>
-                <a href="#"><i class="icon_mail_alt"></i> Почта </a>
+                <a href="/document"><i class="icon_mail_alt"></i> Создать </a>
               </li>
               <li>
-                <a href="#"><i class="icon_clock_alt"></i> Документы</a>
+                <a href="/documents"><i class="icon_clock_alt"></i> Документы</a>
               </li>
               <li>
                 <a href="#"><i class="icon_chat_alt"></i> Кошелёк </a>
@@ -73,24 +77,14 @@
             <a href="document" class="">
               <i class="icon_document_alt"></i>
               <span>Документы</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
             </a>
-            <ul class="sub">
-              <li><a class="" href="form_component.html">Form Elements</a></li>
-              <li><a class="" href="form_validation.html">Form Validation</a></li>
-            </ul>
           </li>
           <li class="sub-menu">
             <a href="javascript:;" class="">
               <i class="icon_desktop"></i>
               <span>Статистика</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
             </a>
-            <ul class="sub">
-              <li><a class="" href="general.html">Elements</a></li>
-              <li><a class="" href="buttons.html">Buttons</a></li>
-              <li><a class="" href="grids.html">Grids</a></li>
-            </ul>
+
           </li>
           <li>
             <a class="" href="widgets.html">
@@ -98,24 +92,19 @@
               <span>Транзакции</span>
             </a>
           </li>
+
           <li>
             <a class="" href="chart-chartjs.html">
               <i class="icon_piechart"></i>
               <span>Помощь</span>
-
             </a>
-
           </li>
 
           <li class="sub-menu">
             <a href="login" class="">
               <i class="icon_table"></i>
               <span>Выход</span>
-              <span class="menu-arrow arrow_carrot-right"></span>
             </a>
-            <ul class="sub">
-              <li><a class="" href="basic_table.html">Basic Table</a></li>
-            </ul>
           </li>
 
         </ul>

@@ -22,14 +22,14 @@
                           <div class = "content-radio">
                               <div class = "content-input">
 
-                                  <input type="radio" name="browser" value="opera">
+                                  <input id = "bs_deal" type="radio" name="bs_deal" value="bs_deal">
                                   <span class = "content-input-align">Договор купли-продажи ТС</span>
 
                               </div>
 
                               <div class = "content-input">
 
-                                  <input type="radio" name="browser" value="opera">
+                                  <input type="radio" name="gift_deal" value="gift_deal">
                                   <span class = "content-input-align">Договор дарения ТС</span>
 
                               </div>
@@ -38,26 +38,16 @@
                           <br>
                       </div>
 
-
-
-
-
  </div>
 
         </div>
       </div>
-                      <div class = "row">
-                          <div class = "col-lg-3 col-lg-offset-4">
-                              <div class = "content-button">
-                                  <button class="btn btn-primary next"> Далее</button>
-                              </div>
-                          </div>
-                      </div>
+
       </div>
-         <div class="col-lg-6">
+         <div class="col-lg-6" >
                       <div class = "row">
                           <div class = "col-lg-10">
-                              <div class = "content-block" style="width: 600px;height: 600px;">
+                              <div class = "content-block" style="width: 600px;height: 600px;" id="content-preview">
 
                               </div>
                           </div>
