@@ -5,12 +5,12 @@
             <p class = "content-header">Автомобиль приобретен в период брака?</p>
             <div class = "content-radio">
                 <div class = "content-input">
-                    <input type="radio" name="browser" value="opera">
+                    <input id = "wife_yes" type="radio" name="browser" value="opera">
                     <span class = "content-input-align">Да</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="radio" name="browser" value="opera">
+                    <input id = "wife_no" type="radio" name="browser" value="opera">
                     <span class = "content-input-align">Нет</span>
                 </div>
 

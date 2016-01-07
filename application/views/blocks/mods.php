@@ -6,14 +6,14 @@
             <div class = "content-radio">
                 <div class = "content-input">
 
-                    <input type="radio" name="browser" value="opera">
+                    <input id = "mods_yes" type="radio" name="browser" value="opera">
                     <span class = "content-input-align">Да</span>
 
                 </div>
 
                 <div class = "content-input">
 
-                    <input type="radio" name="browser" value="opera">
+                    <input id = "mods_no"  type="radio" name="browser" value="opera">
                     <span class = "content-input-align">Нет</span>
 
                 </div>
