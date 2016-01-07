@@ -12,7 +12,6 @@
 
         <div class = "row">
             <div class = "col-lg-12">
-
                 <table style="width: 100%">
                     <thead>
                         <th style="width: 25%">Название документа</th>
