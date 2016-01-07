@@ -110,7 +110,7 @@ var no_wife = new Array('penalty',
         });
     });
 
-    $('.document').on('chacked','#reg_ts', function() {
+    $('.document').on('checked','#reg_ts', function() {
               $.ajax({
                 url: string,
                 dataType: "html",
