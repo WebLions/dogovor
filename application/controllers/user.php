@@ -68,6 +68,12 @@ class User extends CI_Controller {
         $this->load->view('user/profile');
         $this->load->view('user/footer');
     }
+    public function wallet()
+    {
+        $this->load->view('user/header');
+        $this->load->view('user/wallet');
+        $this->load->view('user/footer');
+    }
 
     public function my_document()
     {

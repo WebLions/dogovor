@@ -94,7 +94,7 @@
           </li>
 
           <li>
-            <a class="" href="">
+            <a class="" href="wallet">
               <i class="glyphicon glyphicon-usd"></i>
               <span>Кошелёк</span>
             </a>
