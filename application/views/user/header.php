@@ -69,40 +69,40 @@
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="profile">
-              <i class="icon_house_alt"></i>
-              <span>Новости</span>
+              <i class="glyphicon glyphicon-home"></i>
+              <span>Главная</span>
             </a>
           </li>
           <li class="sub-menu">
             <a href="document" class="">
-              <i class="icon_document_alt"></i>
+              <i class="glyphicon glyphicon-plus"></i>
+              <span>Создать</span>
+            </a>
+          </li>
+          <li class="sub-menu">
+            <a href="documents" class="">
+              <i class="glyphicon glyphicon-file"></i>
               <span>Документы</span>
             </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-              <i class="icon_desktop"></i>
-              <span>Статистика</span>
-            </a>
 
           </li>
-          <li>
-            <a class="" href="widgets.html">
-              <i class="icon_genius"></i>
-              <span>Транзакции</span>
+          <li class="sub-menu">
+            <a class="" href="payment_history">
+              <i class="glyphicon glyphicon-align-justify"></i>
+              <span>История</span>
             </a>
           </li>
 
           <li>
-            <a class="" href="chart-chartjs.html">
-              <i class="icon_piechart"></i>
-              <span>Помощь</span>
+            <a class="" href="">
+              <i class="glyphicon glyphicon-usd"></i>
+              <span>Кошелёк</span>
             </a>
           </li>
 
           <li class="sub-menu">
-            <a href="login" class="">
-              <i class="icon_table"></i>
+            <a href="home" class="">
+              <i class="glyphicon glyphicon-log-out"></i>
               <span>Выход</span>
             </a>
           </li>
