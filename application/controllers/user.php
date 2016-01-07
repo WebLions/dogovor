@@ -68,4 +68,22 @@ class User extends CI_Controller {
         $this->load->view('user/profile');
         $this->load->view('user/footer');
     }
+
+    public function my_document()
+    {
+        $this->data['listDocuments'] = $this->user_model->get_my_documents();
+
+        $this->load->view('user/header');
+        $this->load->view('user/myDocuments', $this->data);
+        $this->load->view('user/footer');
+    }
+    public function payments()
+    {
+        $this->data['payments'] = $this->user_model->get_my_documents();
+
+        $this->load->view('user/header');
+        $this->load->view('user/myDocuments', $this->data);
+        $this->load->view('user/footer');
+    }
+
 }
