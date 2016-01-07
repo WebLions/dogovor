@@ -36,7 +36,15 @@
 
                 </table>
                 <br>
-                <button class = "btn btn-success" style="float: right;">Что либо</button>
+
+                <div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class = "content-button">
+                                <button type="button" class="btn btn-success">Что-либо</button>
+                            </div>
+                        </div>
+                    </div>
 
             </div>
         </div>
