@@ -110,31 +110,142 @@ class Document_model extends CI_Model
     public $gibdd_eco_class = 'ЕС';
     public $gibdd_max_mass = '444';
     public $gibdd_min_mass = '333';
-
-
-
-
+    //
+    public $type_of_vendor = 'physical';
+    public $type_of_buyer = 'physical';
+    public $vendor_law_company_name  = 'OOO "Стрела"';
+    public $vendor_law_actor_position = '';
+    public $vendor_law_fio = '';
+    public $vendor_law_document_osn = '';
+    public $vendor_law_proxy_number = '';
+    public $vendor_law_proxy_date = '';
+    public $buyer_law_company_name = '';
+    public $buyer_law_actor_position = '';
+    public $buyer_law_fio = '';
+    public $buyer_law_document_osn = '';
+    public $buyer_law_proxy_number = '';
+    public $buyer_law_proxy_date = '';
+    public $vendor_ind_fio = '';
+    public $vendor_number_of_certificate = '';
+    public $vendor_date_of_certificate = '';
+    public $buyer_ind_fio = '';
+    public $buyer_number_of_certificate = '';
+    public $buyer_date_of_certificate = '';
+    public $header_doc = ''; //
     //------------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
         parent::__construct();
         $this->load->database();//Работа с бд
         $this->load->library('word');
-
-        //Форматирование даты
-        $this->vendor_bywho_date = $this->format_date($this->vendor_bywho_d, $this->vendor_bywho_m, $this->vendor_bywho_y);
-        $this->buyer_bywho_date = $this->format_date($this->buyer_bywho_d, $this->buyer_bywho_m, $this->buyer_bywho_y);
-        $this->vendor_birthday = $this->format_date($this->vendor_b_day, $this->vendor_b_month, $this->vendor_b_year);
-        $this->date_of_contract = $this->format_date($this->day, $this->month, $this->year);
-        //Форматирование адреса
-        $this->vendor_adress = $this->format_adress($this->vendor_city, $this->vendor_street, $this->vendor_house, $this->vendor_flat);
-        $this->buyer_adress = $this->format_adress($this->buyer_city, $this->buyer_street, $this->buyer_house, $this->buyer_flat);
-
-        //Форматирование ФИО
-
     }
     //------------------------------------------------------------------------------------------------------------------
+    // Запрос и присвание переменных с базы
+    public function select_from_datebase()//Возможно нужно будет разбить для каждого документа свой запрос. Но тогда будет дублироваться запрос одинаковых полей.
+    {
+        $query = $this->db->query('SELECT number_of_dogovor, city_contract,date_of_contract, vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,reg_number,date_of_product,engine_model,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,defects_all,defects_rightnow,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,marriage_info,marriage_number,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass,mark,vin,car_type,shassi,ts_date,features,gibdd_inn
+ FROM buy_sale
+ WHERE number_of_dogovor = $_SESSION[number_of_dogovor]');
 
+        //
+        $result_arr = $query->row_array();//Форматирование массива с данными
+        $this->city_contract = $result_arr['city_contract'];
+        $this->date_of_contract = $result_arr['date_of_contract'];
+        $this->vendor_name = $result_arr['vendor_name'];
+        $this->vendor_surname = $result_arr['vendor_surname'];
+        $this->vendor_patronymic = $result_arr['vendor_patronymic'];
+        $this->vendor_date = $result_arr['vendor_date'];
+        $this->vendor_serial_ch = $result_arr['vendor_serial_ch'];
+        $this->vendor_number_ser = $result_arr['vendor_number_ser'];
+        $this->vendor_ser_bywho = $result_arr['vendor_ser_bywho'];
+        $this->vendor_bywho_date = $result_arr['vendor_bywho_date'];
+        $this->vendor_city = $result_arr['vendor_city'];
+        $this->vendor_street = $result_arr['vendor_street'];
+        $this->vendor_house = $result_arr['vendor_house'];
+        $this->vendor_flat = $result_arr['vendor_flat'];
+        $this->vendor_phone = $result_arr['vendor_phone'];
+        $this->buyer_name = $result_arr['buyer_name'];
+        $this->buyer_surname = $result_arr['buyer_surname'];
+        $this->buyer_patronymic = $result_arr['buyer_patronymic'];
+        $this->buyer_date = $result_arr['buyer_date'];
+        $this->buyer_serial_ch = $result_arr['buyer_serial_ch'];
+        $this->buyer_number_ser = $result_arr['buyer_number_ser'];
+        $this->buyer_ser_bywho = $result_arr['buyer_ser_bywho'];
+        $this->buyer_bywho_date = $result_arr['buyer_bywho_date'];
+        $this->buyer_city = $result_arr['buyer_city'];
+        $this->buyer_street = $result_arr['buyer_street'];
+        $this->buyer_house = $result_arr['buyer_house'];
+        $this->buyer_flat = $result_arr['buyer_flat'];
+        $this->buyer_phone = $result_arr['buyer_phone'];
+        $this->mark = $result_arr['mark'];
+        $this->vin = $result_arr['vin'];
+        $this->reg_number = $result_arr['reg_number'];
+        $this->car_type = $result_arr['car_type'];
+        $this->date_of_product = $result_arr['date_of_product'];
+        $this->engine_model = $result_arr['engine_model'];
+        $this->shassi = $result_arr['shassi'];
+        $this->carcass = $result_arr['carcass'];
+        $this->color_carcass = $result_arr['color_carcass'];
+        $this->other_parameters = $result_arr['other_parameters'];
+        $this->additional_equip = $result_arr['additional_equip'];
+        $this->serial_car = $result_arr['serial_car'];
+        $this->number_of_serial_car = $result_arr['number_of_serial_car'];
+        $this->bywho_serial_car = $result_arr['bywho_serial_car'];
+        $this->date_of_serial_car = $result_arr['date_of_serial_car'];
+        $this->status_of_car = $result_arr['status_of_car'];
+        $this->ts_date = $result_arr['ts_date'];
+        $this->defects_all = $result_arr['defects_all'];
+        $this->defects_rightnow = $result_arr['defects_rightnow'];
+        $this->features = $result_arr['features'];
+        $this->price = $result_arr['price'];
+        $this->currency = $result_arr['currency'];
+        $this->date_of_pay = $result_arr['date_of_pay'];
+        $this->date_of_car = $result_arr['date_of_car'];
+        $this->equipment_for_car = $result_arr['equipment_for_car'];
+        $this->other_documents_car = $result_arr['other_documents_car'];
+        $this->marriage_info = $result_arr['marriage_info'];
+        $this->marriage_number = $result_arr['marriage_number'];
+        $this->penalty_for_buyer = $result_arr['penalty_for_buyer'];
+        $this->penalty_for_vendor = $result_arr['penalty_for_vendor'];
+        $this->penalty_for_garanty = $result_arr['penalty_for_garanty'];
+        $this->oil_in_car = $result_arr['oil_in_car'];
+        $this->spouse_name = $result_arr['spouse_name'];
+        $this->spouse_surname = $result_arr['spouse_surname'];
+        $this->spouse_patronymic = $result_arr['spouse_patronymic'];
+        $this->spouse_pass_serial = $result_arr['spouse_pass_serial'];
+        $this->spouse_pass_number = $result_arr['spouse_pass_number'];
+        $this->spouse_pass_bywho = $result_arr['spouse_pass_bywho'];
+        $this->spouse_pass_date = $result_arr['spouse_pass_date'];
+        $this->spouse_city = $result_arr['spouse_city'];
+        $this->spouse_stree = $result_arr['spouse_stree'];
+        $this->spouse_house = $result_arr['spouse_house'];
+        $this->spouse_flat = $result_arr['spouse_flat'];
+        $this->marriage_svid_serial = $result_arr['marriage_svid_serial'];
+        $this->marriage_svid_number = $result_arr['marriage_svid_number'];
+        $this->marriage_svid_bywho = $result_arr['marriage_svid_bywho'];
+        $this->marriage_svid_date = $result_arr['marriage_svid_date'];
+        $this->gibdd_reg_name = $result_arr['gibdd_reg_name'];
+        $this->reg_gov_number = $result_arr['reg_gov_number'];
+        $this->giver_date = $result_arr['giver_date'];
+        $this->giver_pass = $result_arr['giver_pass'];
+        $this->gibdd_inn = $result_arr['gibdd_inn'];
+        $this->giver_agent_name = $result_arr['giver_agent_name'];
+        $this->giver_agent_surname = $result_arr['giver_agent_surname'];
+        $this->giver_agent_patronymic = $result_arr['giver_agent_patronymic'];
+        $this->giver_agent_pass = $result_arr['giver_agent_pass'];
+        $this->giver_agent_city = $result_arr['giver_agent_city'];
+        $this->giver_agent_street = $result_arr['giver_agent_street'];
+        $this->giver_agent_house = $result_arr['giver_agent_house'];
+        $this->giver_agent_flat = $result_arr['giver_agent_flat'];
+        $this->giver_agent_phone = $result_arr['giver_agent_phone'];
+        $this->gibdd_power_ingine = $result_arr['gibdd_power_ingine'];
+        $this->gibdd_eco_class = $result_arr['gibdd_eco_class'];
+        $this->gibdd_max_mass = $result_arr['gibdd_max_mass'];
+        $this->gibdd_min_mass = $result_arr['gibdd_min_mass'];
+
+        $this->format_all_data();// Форматированние полученных переменных в нужный формат.(дата, фио, адрес)
+    }
+    //------------------------------------------------------------------------------------------------------------------
     public function format_date($day, $month, $year)
     {
         $date = '"'. $day . '" ' . $month . ' ' . $year . 'г.';
@@ -153,13 +264,59 @@ class Document_model extends CI_Model
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
+   public function format_all_data()
+   {
+       //Форматирование даты
+       $this->vendor_bywho_date = $this->format_date($this->vendor_bywho_d, $this->vendor_bywho_m, $this->vendor_bywho_y);
+       $this->buyer_bywho_date = $this->format_date($this->buyer_bywho_d, $this->buyer_bywho_m, $this->buyer_bywho_y);
+       $this->vendor_birthday = $this->format_date($this->vendor_b_day, $this->vendor_b_month, $this->vendor_b_year);
+       $this->date_of_contract = $this->format_date($this->day, $this->month, $this->year);
+       //Форматирование адреса
+       $this->vendor_adress = $this->format_adress($this->vendor_city, $this->vendor_street, $this->vendor_house, $this->vendor_flat);
+       $this->buyer_adress = $this->format_adress($this->buyer_city, $this->buyer_street, $this->buyer_house, $this->buyer_flat);
+       //Форматирование ФИО
+
+       return true;
+   }
+    //------------------------------------------------------------------------------------------------------------------
 
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
-    public function set_header_doc()
+    public function set_header_doc($type_of_vendor, $type_of_buyer) //law //physical //individual
     {
-
-        //return $header;
+        if ($type_of_vendor == 'physical' && $type_of_buyer == 'physical')
+        {
+            $header = 'Гражданин ' . $this->vendor_fio . ', далее именуемый "Продавец", с одной стороны, и гражданин ' . $this->buyer_fio . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+        }
+        elseif ($type_of_vendor == 'law' && $type_of_buyer == 'law')
+        {
+            $header = $this->vendor_law_company_name .', далее именуемое "Продавец", в лице'. $this->vendor_law_actor_position .', '. $this->vendor_law_fio .', действующего на основании '. $this->vendor_law_document_osn . ' №'.$this->vendor_law_proxy_number. 'от'.$this->vendor_law_proxy_date.' , с одной стороны, и '.$this->buyer_law_company_name.', далее именуемое "Покупатель", в лице' . $this->buyer_law_actor_position .', '. $this->buyer_law_fio .', действующего на основании '. $this->buyer_law_document_osn . ' №'.$this->buyer_law_proxy_number. ' от'.$this->buyer_law_proxy_date.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+        }
+        elseif ($type_of_vendor == 'physical' && $type_of_buyer == 'law')
+        {
+            $header = 'Гражданин' . $this->vendor_fio . ', далее именуемый "Продавец", с одной стороны и '.$this->buyer_law_company_name.', далее именуемое "Покупатель", в лице' . $this->buyer_law_actor_position .', '. $this->buyer_law_fio .', действующего на основании '. $this->buyer_law_document_osn . ' №'.$this->buyer_law_proxy_number. ' от'.$this->buyer_law_proxy_date.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+        }
+        elseif ($type_of_vendor == 'law' && $type_of_buyer == 'physical')
+        {
+            $header = $this->vendor_law_company_name .', далее именуемое "Продавец", в лице'. $this->vendor_law_actor_position .', '. $this->vendor_law_fio .', действующего на основании '. $this->vendor_law_document_osn . ' №'.$this->vendor_law_proxy_number. 'от'.$this->vendor_law_proxy_date.' , с одной стороны и гражданин '. $this->buyer_fio . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+        }
+        elseif ($type_of_vendor == 'physical' && $type_of_buyer == 'individual')
+        {
+            $header =  'Гражданин' . $this->vendor_fio . ', далее именуемый "Продавец", с одной стороны и '.$this->buyer_ind_fio.', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$this->buyer_number_of_certificate.' от '.$this->buyer_date_of_certificate.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+        }
+        elseif ($type_of_vendor == 'individual' && $type_of_buyer == 'physical')
+        {
+            $header = $this->vendor_ind_fio.', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$this->vendor_number_of_certificate.' от '.$this->vendor_date_of_certificate.', с одной стороны и гражданин '.$this->buyer_fio.', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+        }
+        elseif ($type_of_vendor == 'law' && $type_of_buyer == 'individual')
+        {
+            $header = $this->vendor_law_company_name .', далее именуемое "Продавец", в лице'. $this->vendor_law_actor_position .', '. $this->vendor_law_fio .', действующего на основании '. $this->vendor_law_document_osn . ' №'.$this->vendor_law_proxy_number. 'от'.$this->vendor_law_proxy_date.'с одной стороны и '.$this->buyer_ind_fio.', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$this->buyer_number_of_certificate.' от '.$this->buyer_date_of_certificate.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+        }
+        elseif ($type_of_vendor == 'individual' && $type_of_buyer == 'law')
+        {
+            $header = $this->vendor_ind_fio.', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$this->vendor_number_of_certificate.' от '.$this->vendor_date_of_certificate.', с одной стороны и '.$this->buyer_law_company_name.', далее именуемое "Покупатель", в лице' . $this->buyer_law_actor_position .', '. $this->buyer_law_fio .', действующего на основании '. $this->buyer_law_document_osn . ' №'.$this->buyer_law_proxy_number. ' от'.$this->buyer_law_proxy_date.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';        }
+        else $header = 'Incorrect type of vendor/buyer.Type of vendor = '.$type_of_vendor.', Type of buyer = '.$type_of_buyer;
+        return $header;
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор купли-продажи транспортного средства
@@ -174,6 +331,9 @@ class Document_model extends CI_Model
         $document->setValue('day', $this->day);
         $document->setValue('month', $this->month);
         $document->setValue('year', $this->year);
+
+        $this->header_doc = $this->set_header_doc($this->type_of_vendor, $this->type_of_buyer);
+        $document->setValue('header_doc', $this->header_doc);
 
         $document->setValue('vendor_fio', $this->vendor_fio);
         $document->setValue('vendor_b_day', $this->vendor_b_day);
@@ -255,11 +415,9 @@ class Document_model extends CI_Model
         $document->save($name_of_file); // Сохранение документа
         echo 'File created.';
         //Запрос предмусмотрен на договор между двумя физическими лицами. Появится ещё несколько новых полей
-       /* $this->db->query('SELECT city, day, month, year, vendor_fio, buyer_fio, mark, vin, reg_number, nametype, category, year_of_product, model, chassis, bodycar, color_bodycar, other_parametrs, additional_equip, serial_chars, serial_numbers, serial_bywho, serial_day, serial_month, serial_year, status_of_car, ts_day, ts_month, ts_year, ts_bywho, defects_all, defects_rightnow, price, price_str, day_of_pay, month_of_pay, year_of_pay, serial_car_chars, serial_car_numbers, day_car, month_car, year_car, other_documents_car, equipment_for_car, marriage_info, marriage_number, penalty_for_buyer, penalty_for_vendor, penalty_for_garanty, vendor_b_day, vendor_b_month, vendor_b_year, vendor_serial_ch, vendor_number_ser, vendor_ser_bywho, vendor_bywho_d, vendor_bywho_m, vendor_bywho_y, vendor_city, vendor_house, vendor_flat, vendor_phone, buyer_b_day, buyer_b_month, buyer_b_year, buyer_serial_ch, buyer_number_ser, buyer_ser_bywho, buyer_bywho_d, buyer_bywho_m, buyer_bywho_y, buyer_city, buyer_house, buyer_flat, buyer_phone
-FROM buy_deal');*/
 
-
-
+        /* $this->db->query('SELECT city, day, month, year, vendor_fio, buyer_fio, mark, vin, reg_number, nametype, category, year_of_product, model, chassis, bodycar, color_bodycar, other_parametrs, additional_equip, serial_chars, serial_numbers, serial_bywho, serial_day, serial_month, serial_year, status_of_car, ts_day, ts_month, ts_year, ts_bywho, defects_all, defects_rightnow, price, price_str, day_of_pay, month_of_pay, year_of_pay, serial_car_chars, serial_car_numbers, day_car, month_car, year_car, other_documents_car, equipment_for_car, marriage_info, marriage_number, penalty_for_buyer, penalty_for_vendor, penalty_for_garanty, vendor_b_day, vendor_b_month, vendor_b_year, vendor_serial_ch, vendor_number_ser, vendor_ser_bywho, vendor_bywho_d, vendor_bywho_m, vendor_bywho_y, vendor_city, vendor_house, vendor_flat, vendor_phone, buyer_b_day, buyer_b_month, buyer_b_year, buyer_serial_ch, buyer_number_ser, buyer_ser_bywho, buyer_bywho_d, buyer_bywho_m, buyer_bywho_y, buyer_city, buyer_house, buyer_flat, buyer_phone
+ FROM buy_deal');*/
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор дарения
@@ -437,6 +595,13 @@ FROM buy_deal');*/
     {
 
     }*/
+    //------------------------------------------------------------------------------------------------------------------
+    public function insert_into_datebase()
+    {
+        $query = "INSERT INTO buy_sale(city_contract,date_of_contract,vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,mark,vin,reg_number,car_type,date_of_product,engine_model,shassi,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,ts_date,defects_all,defects_rightnow,features,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,marriage_info,marriage_number,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,gibdd_inn,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass)
+VALUES ('$_POST[city_contract]','$_POST[date_of_contract]','$_POST[vendor_name]','$_POST[vendor_surname]','$_POST[vendor_patronymic]','$_POST[vendor_date]','$_POST[vendor_serial_ch]','$_POST[vendor_number_ser]','$_POST[vendor_ser_bywho]','$_POST[vendor_bywho_date]','$_POST[vendor_city]','$_POST[vendor_street]','$_POST[vendor_house]','$_POST[vendor_flat]','$_POST[vendor_phone]','$_POST[buyer_name]','$_POST[buyer_surname]','$_POST[buyer_patronymic]','$_POST[buyer_date]','$_POST[buyer_serial_ch]','$_POST[buyer_number_ser]','$_POST[buyer_ser_bywho]','$_POST[buyer_bywho_date]','$_POST[buyer_city]','$_POST[buyer_street]','$_POST[buyer_house]','$_POST[buyer_flat]','$_POST[buyer_phone]','$_POST[mark]','$_POST[vin]','$_POST[reg_number]','$_POST[car_type]','$_POST[date_of_product]','$_POST[engine_model]','$_POST[shassi]','$_POST[carcass]','$_POST[color_carcass]','$_POST[other_parameters]','$_POST[additional_equip]','$_POST[serial_car]','$_POST[number_of_serial_car]','$_POST[bywho_serial_car]','$_POST[date_of_serial_car]','$_POST[status_of_car]','$_POST[ts_date]','$_POST[defects_all]','$_POST[defects_rightnow]','$_POST[features]','$_POST[price]','$_POST[currency]','$_POST[date_of_pay]','$_POST[date_of_car]','$_POST[equipment_for_car]','$_POST[other_documents_car]','$_POST[marriage_info]','$_POST[marriage_number]','$_POST[penalty_for_buyer]','$_POST[penalty_for_vendor]','$_POST[penalty_for_garanty]','$_POST[oil_in_car]','$_POST[spouse_name]','$_POST[spouse_surname]','$_POST[spouse_patronymic]','$_POST[spouse_pass_serial]','$_POST[spouse_pass_number]','$_POST[spouse_pass_bywho]','$_POST[spouse_pass_date]','$_POST[spouse_city]','$_POST[spouse_stree]','$_POST[spouse_house]','$_POST[spouse_flat]','$_POST[marriage_svid_serial]','$_POST[marriage_svid_number]','$_POST[marriage_svid_bywho]','$_POST[marriage_svid_date]','$_POST[gibdd_reg_name]','$_POST[reg_gov_number]','$_POST[giver_date]','$_POST[giver_pass]','$_POST[gibdd_inn]','$_POST[giver_agent_name]','$_POST[giver_agent_surname]','$_POST[giver_agent_patronymic]','$_POST[giver_agent_pass]','$_POST[giver_agent_city]','$_POST[giver_agent_street]','$_POST[giver_agent_house]','$_POST[giver_agent_flat]','$_POST[giver_agent_phone]','$_POST[gibdd_power_ingine]','$_POST[gibdd_eco_class]','$_POST[gibdd_max_mass]','$_POST[gibdd_min_mass]')"
+        $this->db->query($query);
+    }
     //------------------------------------------------------------------------------------------------------------------
 
 }
