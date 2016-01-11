@@ -110,6 +110,7 @@ class Document_model extends CI_Model
     public $gibdd_eco_class = 'ЕС';
     public $gibdd_max_mass = '444';
     public $gibdd_min_mass = '333';
+    public $car_in_marriage = '';
     //
     public $type_of_vendor = 'physical';
     public $type_of_buyer = 'physical';
@@ -132,6 +133,7 @@ class Document_model extends CI_Model
     public $buyer_number_of_certificate = '';
     public $buyer_date_of_certificate = '';
     public $header_doc = ''; //
+
     //------------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
@@ -143,7 +145,7 @@ class Document_model extends CI_Model
     // Запрос и присвание переменных с базы
     public function select_from_datebase()//Возможно нужно будет разбить для каждого документа свой запрос. Но тогда будет дублироваться запрос одинаковых полей.
     {
-        $query = $this->db->query('SELECT number_of_dogovor, city_contract,date_of_contract, vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,reg_number,date_of_product,engine_model,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,defects_all,defects_rightnow,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,marriage_info,marriage_number,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass,mark,vin,car_type,shassi,ts_date,features,gibdd_inn
+        $query = $this->db->query('SELECT number_of_dogovor, city_contract,date_of_contract, vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,reg_number,date_of_product,engine_model,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,defects_all,defects_rightnow,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,car_in_marriage,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass,mark,vin,car_type,shassi,ts_date,features,gibdd_inn
  FROM doc_buy_sale
  WHERE number_of_dogovor = $_SESSION[number_of_dogovor]');
 
@@ -203,8 +205,7 @@ class Document_model extends CI_Model
         $this->date_of_car = $result_arr['date_of_car'];
         $this->equipment_for_car = $result_arr['equipment_for_car'];
         $this->other_documents_car = $result_arr['other_documents_car'];
-        $this->marriage_info = $result_arr['marriage_info'];
-        $this->marriage_number = $result_arr['marriage_number'];
+        $this->car_in_marriage= $result_arr['car_in_marriage'];
         $this->penalty_for_buyer = $result_arr['penalty_for_buyer'];
         $this->penalty_for_vendor = $result_arr['penalty_for_vendor'];
         $this->penalty_for_garanty = $result_arr['penalty_for_garanty'];
@@ -319,6 +320,22 @@ class Document_model extends CI_Model
         return $header;
     }
     //------------------------------------------------------------------------------------------------------------------
+    public function get_marriage_info($car_in_marriage)
+    {
+        if ($car_in_marriage == true)
+        {
+            // Если продавец в браке то
+            $this->marriage_info ="<w:br/>4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства с супругой(ом)".$this->spouse_fio."и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
+            $this->marriage_number = 5; //номер следующего пункта
+        }
+        elseif ($car_in_marriage == false)
+        {
+            //Если не в браке
+            $this->marriage_info = "";//пропускаем этот пункт
+            $this->marriage_number = 4; //номер следующего пункта
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
     //договор купли-продажи транспортного средства
     public function get_doc_buy_sale()
     {
@@ -402,8 +419,11 @@ class Document_model extends CI_Model
         $document->setValue('year_car', $this->year_car);
         $document->setValue('equipment_for_car', $this->equipment_for_car);
         $document->setValue('other_documents_car', $this->other_documents_car);
+
+        $this->get_marriage_info($this->car_in_marriage);
         $document->setValue('marriage_info', $this->marriage_info);
         $document->setValue('marriage_number', $this->marriage_number);
+
         $document->setValue('penalty_for_buyer', $this->penalty_for_buyer);
         $document->setValue('penalty_for_vendor', $this->penalty_for_vendor);
         $document->setValue('penalty_for_garanty', $this->penalty_for_garanty);
@@ -598,21 +618,10 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_datebase()
     {
-        $query = "INSERT INTO doc_buy_sale(city_contract,date_of_contract,vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,mark,vin,reg_number,car_type,date_of_product,engine_model,shassi,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,ts_date,defects_all,defects_rightnow,features,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,marriage_info,marriage_number,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,gibdd_inn,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass)
-VALUES ('$_POST[city_contract]','$_POST[date_of_contract]','$_POST[vendor_name]','$_POST[vendor_surname]','$_POST[vendor_patronymic]','$_POST[vendor_date]','$_POST[vendor_serial_ch]','$_POST[vendor_number_ser]','$_POST[vendor_ser_bywho]','$_POST[vendor_bywho_date]','$_POST[vendor_city]','$_POST[vendor_street]','$_POST[vendor_house]','$_POST[vendor_flat]','$_POST[vendor_phone]','$_POST[buyer_name]','$_POST[buyer_surname]','$_POST[buyer_patronymic]','$_POST[buyer_date]','$_POST[buyer_serial_ch]','$_POST[buyer_number_ser]','$_POST[buyer_ser_bywho]','$_POST[buyer_bywho_date]','$_POST[buyer_city]','$_POST[buyer_street]','$_POST[buyer_house]','$_POST[buyer_flat]','$_POST[buyer_phone]','$_POST[mark]','$_POST[vin]','$_POST[reg_number]','$_POST[car_type]','$_POST[date_of_product]','$_POST[engine_model]','$_POST[shassi]','$_POST[carcass]','$_POST[color_carcass]','$_POST[other_parameters]','$_POST[additional_equip]','$_POST[serial_car]','$_POST[number_of_serial_car]','$_POST[bywho_serial_car]','$_POST[date_of_serial_car]','$_POST[status_of_car]','$_POST[ts_date]','$_POST[defects_all]','$_POST[defects_rightnow]','$_POST[features]','$_POST[price]','$_POST[currency]','$_POST[date_of_pay]','$_POST[date_of_car]','$_POST[equipment_for_car]','$_POST[other_documents_car]','$_POST[marriage_info]','$_POST[marriage_number]','$_POST[penalty_for_buyer]','$_POST[penalty_for_vendor]','$_POST[penalty_for_garanty]','$_POST[oil_in_car]','$_POST[spouse_name]','$_POST[spouse_surname]','$_POST[spouse_patronymic]','$_POST[spouse_pass_serial]','$_POST[spouse_pass_number]','$_POST[spouse_pass_bywho]','$_POST[spouse_pass_date]','$_POST[spouse_city]','$_POST[spouse_stree]','$_POST[spouse_house]','$_POST[spouse_flat]','$_POST[marriage_svid_serial]','$_POST[marriage_svid_number]','$_POST[marriage_svid_bywho]','$_POST[marriage_svid_date]','$_POST[gibdd_reg_name]','$_POST[reg_gov_number]','$_POST[giver_date]','$_POST[giver_pass]','$_POST[gibdd_inn]','$_POST[giver_agent_name]','$_POST[giver_agent_surname]','$_POST[giver_agent_patronymic]','$_POST[giver_agent_pass]','$_POST[giver_agent_city]','$_POST[giver_agent_street]','$_POST[giver_agent_house]','$_POST[giver_agent_flat]','$_POST[giver_agent_phone]','$_POST[gibdd_power_ingine]','$_POST[gibdd_eco_class]','$_POST[gibdd_max_mass]','$_POST[gibdd_min_mass]')"
+        $query = "INSERT INTO doc_buy_sale(city_contract,date_of_contract,vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,mark,vin,reg_number,car_type,date_of_product,engine_model,shassi,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,ts_date,defects_all,defects_rightnow,features,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,car_in_marriage,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,gibdd_inn,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass)
+VALUES ('$_POST[city_contract]','$_POST[date_of_contract]','$_POST[vendor_name]','$_POST[vendor_surname]','$_POST[vendor_patronymic]','$_POST[vendor_date]','$_POST[vendor_serial_ch]','$_POST[vendor_number_ser]','$_POST[vendor_ser_bywho]','$_POST[vendor_bywho_date]','$_POST[vendor_city]','$_POST[vendor_street]','$_POST[vendor_house]','$_POST[vendor_flat]','$_POST[vendor_phone]','$_POST[buyer_name]','$_POST[buyer_surname]','$_POST[buyer_patronymic]','$_POST[buyer_date]','$_POST[buyer_serial_ch]','$_POST[buyer_number_ser]','$_POST[buyer_ser_bywho]','$_POST[buyer_bywho_date]','$_POST[buyer_city]','$_POST[buyer_street]','$_POST[buyer_house]','$_POST[buyer_flat]','$_POST[buyer_phone]','$_POST[mark]','$_POST[vin]','$_POST[reg_number]','$_POST[car_type]','$_POST[date_of_product]','$_POST[engine_model]','$_POST[shassi]','$_POST[carcass]','$_POST[color_carcass]','$_POST[other_parameters]','$_POST[additional_equip]','$_POST[serial_car]','$_POST[number_of_serial_car]','$_POST[bywho_serial_car]','$_POST[date_of_serial_car]','$_POST[status_of_car]','$_POST[ts_date]','$_POST[defects_all]','$_POST[defects_rightnow]','$_POST[features]','$_POST[price]','$_POST[currency]','$_POST[date_of_pay]','$_POST[date_of_car]','$_POST[equipment_for_car]','$_POST[other_documents_car]','$_POST[car_in_marriage]','$_POST[penalty_for_buyer]','$_POST[penalty_for_vendor]','$_POST[penalty_for_garanty]','$_POST[oil_in_car]','$_POST[spouse_name]','$_POST[spouse_surname]','$_POST[spouse_patronymic]','$_POST[spouse_pass_serial]','$_POST[spouse_pass_number]','$_POST[spouse_pass_bywho]','$_POST[spouse_pass_date]','$_POST[spouse_city]','$_POST[spouse_stree]','$_POST[spouse_house]','$_POST[spouse_flat]','$_POST[marriage_svid_serial]','$_POST[marriage_svid_number]','$_POST[marriage_svid_bywho]','$_POST[marriage_svid_date]','$_POST[gibdd_reg_name]','$_POST[reg_gov_number]','$_POST[giver_date]','$_POST[giver_pass]','$_POST[gibdd_inn]','$_POST[giver_agent_name]','$_POST[giver_agent_surname]','$_POST[giver_agent_patronymic]','$_POST[giver_agent_pass]','$_POST[giver_agent_city]','$_POST[giver_agent_street]','$_POST[giver_agent_house]','$_POST[giver_agent_flat]','$_POST[giver_agent_phone]','$_POST[gibdd_power_ingine]','$_POST[gibdd_eco_class]','$_POST[gibdd_max_mass]','$_POST[gibdd_min_mass]'";
         $this->db->query($query);
     }
     //------------------------------------------------------------------------------------------------------------------
 
 }
-
-//----------------------------------------------------------------------------------------------------------------------
-//Заготовка для обработки документа купли-продажи в случае брака продавца
-// Если продавец в браке то
-$marriage_info ="4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства с супругой(ом) __ ФИО __ и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
-$marriage_number = 5; //номер следующего пункта
-//Если не в браке
-$marriage_info = "";//пропускаем этот пункт
-$marriage_number = 4; //номер следующего пункта
-//----------------------------------------------------------------------------------------------------------------------
-
