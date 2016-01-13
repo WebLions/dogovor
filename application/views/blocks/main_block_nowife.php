@@ -4,17 +4,17 @@
             <p class = "content-header">Размер неустойки по договору</p>
             <div class = "content-radio">
                 <div class = "content-input">
-                    <input type="radio" name="browser" value="opera">
+                    <input type="radio" name="penalty" value="0,02%">
                     <span class = "content-input-align">0,02%</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="radio" name="browser" value="opera">
+                    <input type="radio" name="penalty" value="0,05%">
                     <span class = "content-input-align">0,05%</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="radio" name="browser" value="opera">
+                    <input type="radio" name="penalty" value="0,1%">
                     <span class = "content-input-align">0,1%</span>
                 </div>
 
