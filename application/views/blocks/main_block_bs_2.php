@@ -156,9 +156,6 @@
                     <input type="checkbox" name="documents" value="garant_talon">
                     <span class = "content-input-align">Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование</span>
                 </div>
-
-
-
             </div>
         </div>
     </div>
