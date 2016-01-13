@@ -94,6 +94,7 @@
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_flat"  placeholder="Квартира:">
                 </div>
+
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_phone"  placeholder="Телефон:">
                 </div>
