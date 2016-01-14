@@ -29,7 +29,7 @@
                     <input class="form-control" type="text" name="spouse_pass_bywho"  placeholder="Кем выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_name"  placeholder="Адрес регистрации(город):">
+                    <input class = "form-control" type="text" name="spouse_city"  placeholder="Адрес регистрации(город):">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="spouse_street"  placeholder="Адрес регистрации(улица):">

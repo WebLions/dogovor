@@ -10,10 +10,14 @@ class Document_model extends CI_Model
     public $month = "ноября";
     public $year = "2028";
     public $date_of_contract = '';
-    public $vendor_fio = "Иванов Иван Иванович ";
+    public $vendor_name = 'Иван';
+    public $vendor_surname = 'Иванов';
+    public $vendor_patronymic = 'Иванович';
+    public $vendor_fio = "";
     public $vendor_b_day = "28";
     public $vendor_b_month = "апреля";
     public $vendor_b_year = "1997";
+    public $vendor_date = '';
     public $vendor_serial_ch = "АВ";
     public $vendor_number_ser = "228911";
     public $vendor_ser_bywho = "Ивановский отдел";
@@ -48,6 +52,7 @@ class Document_model extends CI_Model
     public $vin = "8888";
     public $reg_number = "ВЕ 666 ВТ";
     public $car_type = "седан";
+    public $category = '';
     public $date_of_product = "22.11.2000";
     public $engine_model = "А4ЕЕ975Т";
     public $shassi = "ШШШ";
@@ -63,6 +68,7 @@ class Document_model extends CI_Model
     public $ts_day = "42";
     public $ts_month = "сорок второй";
     public $ts_year = "2042";
+    public $ts_date = '';
     public $ts_bywho = "Фиксики";
     public $defects_all = "Поломка правого зеркала, царапины на капоте";
     public $defects_rightnow = "царапины на капоте";
@@ -133,6 +139,7 @@ class Document_model extends CI_Model
     public $buyer_number_of_certificate = '';
     public $buyer_date_of_certificate = '';
     public $header_doc = ''; //
+    public $accessories = "";
 
     //------------------------------------------------------------------------------------------------------------------
     public function __construct()
@@ -143,108 +150,106 @@ class Document_model extends CI_Model
     }
     //------------------------------------------------------------------------------------------------------------------
     // Запрос и присвание переменных с базы
-    public function select_from_datebase()//Возможно нужно будет разбить для каждого документа свой запрос. Но тогда будет дублироваться запрос одинаковых полей.
+    public function select_from_database()//Возможно нужно будет разбить для каждого документа свой запрос. Но тогда будет дублироваться запрос одинаковых полей.
     {
-        $query = $this->db->query('SELECT number_of_dogovor, city_contract,date_of_contract, vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,reg_number,date_of_product,engine_model,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,defects_all,defects_rightnow,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,car_in_marriage,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass,mark,vin,car_type,shassi,ts_date,features,gibdd_inn
- FROM doc_buy_sale
- WHERE number_of_dogovor = $_SESSION[number_of_dogovor]');
+        $this->db->select();
+        $id_user = $_SESSION['id_user'] = 1;
+        $id_document = $_SESSION['id_document'] = 1;
+        $where = "id_user = '$id_user' AND id_document = '$id_document'";
+        //$this->db->where($where);
+        $query = $this->db->get('doc_buy_sale');
+        $result_arr = $query->result_array();
 
-        //
-        $result_arr = $query->row_array();//Форматирование массива с данными
-        $this->city_contract = $result_arr['city_contract'];
-        $this->date_of_contract = $result_arr['date_of_contract'];
-        $this->vendor_name = $result_arr['vendor_name'];
-        $this->vendor_surname = $result_arr['vendor_surname'];
-        $this->vendor_patronymic = $result_arr['vendor_patronymic'];
-        $this->vendor_date = $result_arr['vendor_date'];
-        $this->vendor_serial_ch = $result_arr['vendor_serial_ch'];
-        $this->vendor_number_ser = $result_arr['vendor_number_ser'];
-        $this->vendor_ser_bywho = $result_arr['vendor_ser_bywho'];
-        $this->vendor_bywho_date = $result_arr['vendor_bywho_date'];
-        $this->vendor_city = $result_arr['vendor_city'];
-        $this->vendor_street = $result_arr['vendor_street'];
-        $this->vendor_house = $result_arr['vendor_house'];
-        $this->vendor_flat = $result_arr['vendor_flat'];
-        $this->vendor_phone = $result_arr['vendor_phone'];
-        $this->buyer_name = $result_arr['buyer_name'];
-        $this->buyer_surname = $result_arr['buyer_surname'];
-        $this->buyer_patronymic = $result_arr['buyer_patronymic'];
-        $this->buyer_date = $result_arr['buyer_date'];
-        $this->buyer_serial_ch = $result_arr['buyer_serial_ch'];
-        $this->buyer_number_ser = $result_arr['buyer_number_ser'];
-        $this->buyer_ser_bywho = $result_arr['buyer_ser_bywho'];
-        $this->buyer_bywho_date = $result_arr['buyer_bywho_date'];
-        $this->buyer_city = $result_arr['buyer_city'];
-        $this->buyer_street = $result_arr['buyer_street'];
-        $this->buyer_house = $result_arr['buyer_house'];
-        $this->buyer_flat = $result_arr['buyer_flat'];
-        $this->buyer_phone = $result_arr['buyer_phone'];
-        $this->mark = $result_arr['mark'];
-        $this->vin = $result_arr['vin'];
-        $this->reg_number = $result_arr['reg_number'];
-        $this->car_type = $result_arr['car_type'];
-        $this->date_of_product = $result_arr['date_of_product'];
-        $this->engine_model = $result_arr['engine_model'];
-        $this->shassi = $result_arr['shassi'];
-        $this->carcass = $result_arr['carcass'];
-        $this->color_carcass = $result_arr['color_carcass'];
-        $this->other_parameters = $result_arr['other_parameters'];
-        $this->additional_equip = $result_arr['additional_equip'];
-        $this->serial_car = $result_arr['serial_car'];
-        $this->number_of_serial_car = $result_arr['number_of_serial_car'];
-        $this->bywho_serial_car = $result_arr['bywho_serial_car'];
-        $this->date_of_serial_car = $result_arr['date_of_serial_car'];
-        $this->status_of_car = $result_arr['status_of_car'];
-        $this->ts_date = $result_arr['ts_date'];
-        $this->defects_all = $result_arr['defects_all'];
-        $this->defects_rightnow = $result_arr['defects_rightnow'];
-        $this->features = $result_arr['features'];
-        $this->price = $result_arr['price'];
-        $this->currency = $result_arr['currency'];
-        $this->date_of_pay = $result_arr['date_of_pay'];
-        $this->date_of_car = $result_arr['date_of_car'];
-        $this->equipment_for_car = $result_arr['equipment_for_car'];
-        $this->other_documents_car = $result_arr['other_documents_car'];
-        $this->car_in_marriage= $result_arr['car_in_marriage'];
-        $this->penalty_for_buyer = $result_arr['penalty_for_buyer'];
-        $this->penalty_for_vendor = $result_arr['penalty_for_vendor'];
-        $this->penalty_for_garanty = $result_arr['penalty_for_garanty'];
-        $this->oil_in_car = $result_arr['oil_in_car'];
-        $this->spouse_name = $result_arr['spouse_name'];
-        $this->spouse_surname = $result_arr['spouse_surname'];
-        $this->spouse_patronymic = $result_arr['spouse_patronymic'];
-        $this->spouse_pass_serial = $result_arr['spouse_pass_serial'];
-        $this->spouse_pass_number = $result_arr['spouse_pass_number'];
-        $this->spouse_pass_bywho = $result_arr['spouse_pass_bywho'];
-        $this->spouse_pass_date = $result_arr['spouse_pass_date'];
-        $this->spouse_city = $result_arr['spouse_city'];
-        $this->spouse_stree = $result_arr['spouse_stree'];
-        $this->spouse_house = $result_arr['spouse_house'];
-        $this->spouse_flat = $result_arr['spouse_flat'];
-        $this->marriage_svid_serial = $result_arr['marriage_svid_serial'];
-        $this->marriage_svid_number = $result_arr['marriage_svid_number'];
-        $this->marriage_svid_bywho = $result_arr['marriage_svid_bywho'];
-        $this->marriage_svid_date = $result_arr['marriage_svid_date'];
-        $this->gibdd_reg_name = $result_arr['gibdd_reg_name'];
-        $this->reg_gov_number = $result_arr['reg_gov_number'];
-        $this->giver_date = $result_arr['giver_date'];
-        $this->giver_pass = $result_arr['giver_pass'];
-        $this->gibdd_inn = $result_arr['gibdd_inn'];
-        $this->giver_agent_name = $result_arr['giver_agent_name'];
-        $this->giver_agent_surname = $result_arr['giver_agent_surname'];
-        $this->giver_agent_patronymic = $result_arr['giver_agent_patronymic'];
-        $this->giver_agent_pass = $result_arr['giver_agent_pass'];
-        $this->giver_agent_city = $result_arr['giver_agent_city'];
-        $this->giver_agent_street = $result_arr['giver_agent_street'];
-        $this->giver_agent_house = $result_arr['giver_agent_house'];
-        $this->giver_agent_flat = $result_arr['giver_agent_flat'];
-        $this->giver_agent_phone = $result_arr['giver_agent_phone'];
-        $this->gibdd_power_ingine = $result_arr['gibdd_power_ingine'];
-        $this->gibdd_eco_class = $result_arr['gibdd_eco_class'];
-        $this->gibdd_max_mass = $result_arr['gibdd_max_mass'];
-        $this->gibdd_min_mass = $result_arr['gibdd_min_mass'];
 
-        $this->format_all_data();// Форматированние полученных переменных в нужный формат.(дата, фио, адрес)
+        //Тестовый вывод содержимого результата
+        /*echo '<pre>';
+        print_r($result_arr);
+        echo '</pre>';*/
+        foreach ($result_arr as $record)
+        {
+            $this->id_user = $record['id_user'];
+            $this->type_of_contract = $record['type_of_contract'];
+            $this->city_contract = $record['place_of_contract'];
+            $this->date_of_contract = $record['date_of_contract'];
+            $this->type_of_vendor = $record['type_of_giver'];
+            $this->vendor_is_owner_car = $record['vendor_is_owner_car'];
+            $this->vendor_name = $record['vendor_name'];
+            $this->vendor_surname = $record['vendor_surname'];
+            $this->vendor_patronymic = $record['vendor_patronymic'];
+            $this->vendor_date = $record['vendor_birthday'];
+            $this->vendor_serial_ch = $record['vendor_passport_serial'];
+            $this->vendor_number_ser = $record['vendor_passport_number'];
+            $this->vendor_ser_bywho = $record['vendor_passport_bywho'];
+            $this->vendor_bywho_date = $record['vendor_passport_date'];
+            $this->vendor_city = $record['vendor_city'];
+            $this->vendor_street = $record['vendor_street'];
+            $this->vendor_house = $record['vendor_house'];
+            $this->vendor_flat = $record['vendor_flat'];
+            $this->vendor_phone = $record['vendor_phone'];
+            $this->type_of_buyer = $record['type_of_buyer'];
+            $this->buyer_name = $record['buyer_name'];
+            $this->buyer_surname = $record['buyer_surname'];
+            $this->buyer_patronymic = $record['buyer_patronymic'];
+            $this->buyer_date = $record['buyer_birthday'];
+            $this->buyer_serial_ch = $record['buyer_passport_serial'];
+            $this->buyer_number_ser = $record['buyer_passport_number'];
+            $this->buyer_ser_bywho = $record['buyer_passport_bywho'];
+            $this->buyer_bywho_date = $record['buyer_passport_date'];
+            $this->buyer_city = $record['buyer_city'];
+            $this->buyer_street = $record['buyer_street'];
+            $this->buyer_house = $record['buyer_house'];
+            $this->buyer_flat = $record['buyer_flat'];
+            $this->buyer_phone = $record['buyer_phone'];
+            $this->mark = $record['mark'];
+            $this->vin = $record['vin'];
+            $this->reg_number = $record['reg_gov_number'];
+            $this->car_type = $record['car_type'];
+            $this->category = $record['category'];
+            $this->date_of_product = $record['date_of_product'];
+            $this->engine_model = $record['engine_model'];
+            $this->shassi = $record['shassi'];
+            //$this->carcass = $record[''];Пропущен блок в верстке :с
+            $this->color_carcass = $record['color_carcass'];
+            $this->other_parameters = $record['other_parametrs'];
+            $this->additional_equip = $record['additional_devices'];
+            $this->serial_car = $record['serial_car'];
+            $this->number_of_serial_car = $record['number_of_serial_car'];
+            $this->bywho_serial_car = $record['bywho_serial_car'];
+            $this->date_of_serial_car = $record['date_of_serial_car'];
+            $this->status_of_car = $record['car_allstatus'];
+            $this->ts_date = $record['maintenance_date'];
+            $this->ts_bywho = $record['maintenance_bywho'];
+            $this->defects_all = $record['defects'];
+            //$this->defects_rightnow = $record[''];Где в алгоритме этот пункт вообще? Вопрос заказчику.
+            $this->features = $record['features'];
+            $this->price = $record['price_car'];
+            $this->currency = $record['currency'];
+            $this->date_of_pay = $record['payment_date'];
+            //$this->date_of_car = $record[''];
+            $this->other_documents_car = $record['documents'];
+            $this->accessories = $record['accessories'];
+            $this->car_in_marriage = $record['car_in_marriage'];
+            $this->penalty = $record['penalty'];
+            $this->oil_in_car = $record['oil_in_car'];
+            $this->spouse_name = $record['spouse_name'];
+            $this->spouse_surname = $record['spouse_surname'];
+            $this->spouse_patronymic = $record['spouse_patronymic'];
+            $this->spouse_birthday = $record['spouse_birthday'];
+            $this->spouse_pass_serial = $record['spouse_pass_serial'];
+            $this->spouse_pass_number = $record['spouse_pass_number'];
+            $this->spouse_pass_bywho = $record['spouse_pass_bywho'];
+            $this->spouse_pass_date = $record['spouse_pass_date'];
+            $this->spouse_city = $record['spouse_city'];
+            $this->spouse_stree = $record['spouse_street'];
+            $this->spouse_house = $record['spouse_house'];
+            $this->spouse_flat = $record['spouse_flat'];
+            $this->marriage_svid_serial = $record['marriage_svid_serial'];
+            $this->marriage_svid_number = $record['marriage_svid_number'];
+            $this->marriage_svid_bywho = $record['marriage_svid_bywho'];
+            $this->marriage_svid_date = $record['marriage_svid_date'];
+        }
+
+        $this->format_all_data();// Форматированние полученных переменных в нужный формат.(дата, фио, адрес)*/
     }
     //------------------------------------------------------------------------------------------------------------------
     public function format_date($day, $month, $year)
@@ -259,9 +264,9 @@ class Document_model extends CI_Model
         return $adress;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function format_fio($name, $surname, $patronymic)
+    public function format_fio($surname, $name, $patronymic)
     {
-        $fio = $name .' '. $surname . ' '. $patronymic;
+        $fio = $surname .' '. $name . ' '. $patronymic;
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -279,6 +284,24 @@ class Document_model extends CI_Model
 
        return true;
    }
+    //------------------------------------------------------------------------------------------------------------------
+    public function set_pack_of_documents($type_of_vendor, $type_of_buyer)
+    {
+        if ($type_of_vendor == 'physical' && $type_of_buyer == 'physical')
+        {
+            $this->get_doc_buy_sale();
+            $this->get_doc_act_of_reception();
+            $this->get_doc_receipt_of_money();
+            $this->get_doc_statement_gibdd();
+            $this->get_doc_statement_vendor_marriage();
+        }
+        elseif ($type_of_vendor == 'law' && $type_of_buyer == 'law')
+        {
+            $this->get_doc_buy_sale();
+            $this->get_doc_act_of_reception();
+            $this->get_doc_statement_gibdd();
+        }
+    }
     //------------------------------------------------------------------------------------------------------------------
 
     //Функция вывода заголовка документа
@@ -352,7 +375,9 @@ class Document_model extends CI_Model
         $this->header_doc = $this->set_header_doc($this->type_of_vendor, $this->type_of_buyer);
         $document->setValue('header_doc', $this->header_doc);
 
+        $this->vendor_fio = $this->format_fio($this->vendor_surname, $this->vendor_name, $this->vendor_patronymic);
         $document->setValue('vendor_fio', $this->vendor_fio);
+
         $document->setValue('vendor_b_day', $this->vendor_b_day);
         $document->setValue('vendor_b_month', $this->vendor_b_month);
         $document->setValue('vendor_b_year', $this->vendor_b_year);
@@ -388,6 +413,7 @@ class Document_model extends CI_Model
         $document->setValue('vin', $this->vin);
         $document->setValue('reg_number', $this->reg_number);
         $document->setValue('car_type', $this->car_type);
+        $document->setValue('category', $this->category);
         $document->setValue('date_of_product', $this->date_of_product);
         $document->setValue('engine_model', $this->engine_model);
         $document->setValue('shassi', $this->shassi);
@@ -405,7 +431,7 @@ class Document_model extends CI_Model
         $document->setValue('ts_year', $this->ts_year);
         $document->setValue('ts_bywho', $this->ts_bywho);
         $document->setValue('defects_all', $this->defects_all);
-        $document->setValue('defects_rightnow', $this->defects_rightnow);
+        //$document->setValue('defects_rightnow', $this->defects_rightnow);
         $document->setValue('features', $this->features);
         $document->setValue('price', $this->price);
         $document->setValue('price_str', $this->price_str);
@@ -417,8 +443,8 @@ class Document_model extends CI_Model
         $document->setValue('day_car', $this->day_car);
         $document->setValue('month_car', $this->month_car);
         $document->setValue('year_car', $this->year_car);
-        $document->setValue('equipment_for_car', $this->equipment_for_car);
         $document->setValue('other_documents_car', $this->other_documents_car);
+        $document->setValue('accessories', $this->accessories);
 
         $this->get_marriage_info($this->car_in_marriage);
         $document->setValue('marriage_info', $this->marriage_info);
@@ -616,11 +642,97 @@ class Document_model extends CI_Model
 
     }*/
     //------------------------------------------------------------------------------------------------------------------
-    public function insert_into_datebase()
+    public function insert_into_database()
     {
-        $query = "INSERT INTO doc_buy_sale(city_contract,date_of_contract,vendor_name,vendor_surname,vendor_patronymic,vendor_date,vendor_serial_ch,vendor_number_ser,vendor_ser_bywho,vendor_bywho_date,vendor_city,vendor_street,vendor_house,vendor_flat,vendor_phone,buyer_name,buyer_surname,buyer_patronymic,buyer_date,buyer_serial_ch,buyer_number_ser,buyer_ser_bywho,buyer_bywho_date,buyer_city,buyer_street,buyer_house,buyer_flat,buyer_phone,mark,vin,reg_number,car_type,date_of_product,engine_model,shassi,carcass,color_carcass,other_parameters,additional_equip,serial_car,number_of_serial_car,bywho_serial_car,date_of_serial_car,status_of_car,ts_date,defects_all,defects_rightnow,features,price,currency,date_of_pay,date_of_car,equipment_for_car,other_documents_car,car_in_marriage,penalty_for_buyer,penalty_for_vendor,penalty_for_garanty,oil_in_car,spouse_name,spouse_surname,spouse_patronymic,spouse_pass_serial,spouse_pass_number,spouse_pass_bywho,spouse_pass_date,spouse_city,spouse_stree,spouse_house,spouse_flat,marriage_svid_serial,marriage_svid_number,marriage_svid_bywho,marriage_svid_date,gibdd_reg_name,reg_gov_number,giver_date,giver_pass,gibdd_inn,giver_agent_name,giver_agent_surname,giver_agent_patronymic,giver_agent_pass,giver_agent_city,giver_agent_street,giver_agent_house,giver_agent_flat,giver_agent_phone,gibdd_power_ingine,gibdd_eco_class,gibdd_max_mass,gibdd_min_mass)
-VALUES ('$_POST[city_contract]','$_POST[date_of_contract]','$_POST[vendor_name]','$_POST[vendor_surname]','$_POST[vendor_patronymic]','$_POST[vendor_date]','$_POST[vendor_serial_ch]','$_POST[vendor_number_ser]','$_POST[vendor_ser_bywho]','$_POST[vendor_bywho_date]','$_POST[vendor_city]','$_POST[vendor_street]','$_POST[vendor_house]','$_POST[vendor_flat]','$_POST[vendor_phone]','$_POST[buyer_name]','$_POST[buyer_surname]','$_POST[buyer_patronymic]','$_POST[buyer_date]','$_POST[buyer_serial_ch]','$_POST[buyer_number_ser]','$_POST[buyer_ser_bywho]','$_POST[buyer_bywho_date]','$_POST[buyer_city]','$_POST[buyer_street]','$_POST[buyer_house]','$_POST[buyer_flat]','$_POST[buyer_phone]','$_POST[mark]','$_POST[vin]','$_POST[reg_number]','$_POST[car_type]','$_POST[date_of_product]','$_POST[engine_model]','$_POST[shassi]','$_POST[carcass]','$_POST[color_carcass]','$_POST[other_parameters]','$_POST[additional_equip]','$_POST[serial_car]','$_POST[number_of_serial_car]','$_POST[bywho_serial_car]','$_POST[date_of_serial_car]','$_POST[status_of_car]','$_POST[ts_date]','$_POST[defects_all]','$_POST[defects_rightnow]','$_POST[features]','$_POST[price]','$_POST[currency]','$_POST[date_of_pay]','$_POST[date_of_car]','$_POST[equipment_for_car]','$_POST[other_documents_car]','$_POST[car_in_marriage]','$_POST[penalty_for_buyer]','$_POST[penalty_for_vendor]','$_POST[penalty_for_garanty]','$_POST[oil_in_car]','$_POST[spouse_name]','$_POST[spouse_surname]','$_POST[spouse_patronymic]','$_POST[spouse_pass_serial]','$_POST[spouse_pass_number]','$_POST[spouse_pass_bywho]','$_POST[spouse_pass_date]','$_POST[spouse_city]','$_POST[spouse_stree]','$_POST[spouse_house]','$_POST[spouse_flat]','$_POST[marriage_svid_serial]','$_POST[marriage_svid_number]','$_POST[marriage_svid_bywho]','$_POST[marriage_svid_date]','$_POST[gibdd_reg_name]','$_POST[reg_gov_number]','$_POST[giver_date]','$_POST[giver_pass]','$_POST[gibdd_inn]','$_POST[giver_agent_name]','$_POST[giver_agent_surname]','$_POST[giver_agent_patronymic]','$_POST[giver_agent_pass]','$_POST[giver_agent_city]','$_POST[giver_agent_street]','$_POST[giver_agent_house]','$_POST[giver_agent_flat]','$_POST[giver_agent_phone]','$_POST[gibdd_power_ingine]','$_POST[gibdd_eco_class]','$_POST[gibdd_max_mass]','$_POST[gibdd_min_mass]'";
-        $this->db->query($query);
+        $data = array
+        (
+            'id_user' => $_SESSION['id_user'],
+            'type_of_contract' => $_POST['type_of_contract'],
+            'place_of_contract' => $_POST['place_of_contract'],
+            'date_of_contract' => $_POST['date_of_contract'],
+            'type_of_giver' => $_POST['type_of_giver'],
+            'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
+            'vendor_surname' => $_POST['vendor_surname'],
+            'vendor_name' => $_POST['vendor_name'],
+            'vendor_patronymic' => $_POST['vendor_patronymic'],
+            'vendor_birthday' => $_POST['vendor_birthday'],
+            'vendor_passport_serial' => $_POST['vendor_passport_serial'],
+            'vendor_passport_number' => $_POST['vendor_passport_number'],
+            'vendor_passport_date' => $_POST['vendor_passport_date'],
+            'vendor_passport_bywho' => $_POST['vendor_passport_bywho'],
+            'vendor_city' => $_POST['vendor_city'],
+            'vendor_street' => $_POST['vendor_street'],
+            'vendor_house' => $_POST['vendor_house'],
+            'vendor_flat' => $_POST['vendor_flat'],
+            'vendor_phone' => $_POST['vendor_phone'],
+            'type_of_buyer' => $_POST['type_of_taker'],
+            'buyer_surname' => $_POST['buyer_surname'],
+            'buyer_name' => $_POST['buyer_name'],
+            'buyer_patronymic' => $_POST['buyer_patronymic'],
+            'buyer_birthday' => $_POST['buyer_birthday'],
+            'buyer_passport_serial' => $_POST['buyer_passport_serial'],
+            'buyer_passport_number' => $_POST['buyer_passport_number'],
+            'buyer_passport_date' => $_POST['buyer_passport_date'],
+            'buyer_passport_bywho' => $_POST['buyer_passport_bywho'],
+            'buyer_city' => $_POST['buyer_city'],
+            'buyer_street' => $_POST['buyer_street'],
+            'buyer_house' => $_POST['buyer_house'],
+            'buyer_flat' => $_POST['buyer_flat'],
+            'buyer_phone' => $_POST['buyer_phone'],
+            'mark' => $_POST['mark'],
+            'vin' => $_POST['vin'],
+            'reg_gov_number' => $_POST['reg_gov_number'],
+            'car_type' => $_POST['car_type'],
+            'category' => $_POST['category'],
+            'date_of_product' => $_POST['date_of_product'],
+            'engine_model' => $_POST['engime_model'],
+            'shassi' => $_POST['shassi'],
+            'color_carcass' => $_POST['color_carcass'],
+            'other_parametrs' => $_POST['other_parametrs'],
+            'serial_car' => $_POST['serial_car'],
+            'number_of_serial_car' => $_POST['number_of_serial_car'],
+            'date_of_serial_car' => $_POST['date_of_serial_car'],
+            'bywho_serial_car' => $_POST['bywho_serial_car'],
+            'price_car' => $_POST['price_car'],
+            'currency' => $_POST['currency'],
+            'additional_devices' => $_POST['additional_devices'],
+            'oil_in_car' => $_POST['oil_in_car'],
+            'car_allstatus' => $_POST['car_allstatus'],
+            'maintenance_date' => $_POST['maintenance_date'],
+            'maintenance_bywho' => $_POST['maintenance_bywho'],
+            'defects' => $_POST['defects'],
+            'features' => $_POST['features'],
+            'payment_date' => $_POST['payment_date'],
+            'documents' => $_POST['documents'],
+            'accessories' => $_POST['accessories'],
+            'car_in_marriage' => $_POST['car_in_marriage'],
+            'spouse_surname' => $_POST['spouse_surname'],
+            'spouse_name' => $_POST['spouse_name'],
+            'spouse_patronymic' => $_POST['spouse_patronymic'],
+            'spouse_birthday' => $_POST['spouse_birthday'],
+            'spouse_pass_serial' => $_POST['spouse_pass_serial'],
+            'spouse_pass_number' => $_POST['spouse_pass_number'],
+            'spouse_pass_date' => $_POST['spouse_pass_date'],
+            'spouse_pass_bywho' => $_POST['spouse_pass_bywho'],
+            'spouse_city' => $_POST['spouse_city'],
+            'spouse_street' => $_POST['spouse_street'],
+            'spouse_house' => $_POST['spouse_house'],
+            'spouse_flat' => $_POST['spouse_flat'],
+            'marriage_svid_serial' => $_POST['marriage_svid_serial'],
+            'marriage_svid_number' => $_POST['marriage_svid_number'],
+            'marriage_svid_date' => $_POST['marriage_svid_date'],
+            'marriage_svid_bywho' => $_POST['marriage_svid_bywho'],
+            'penalty' => $_POST['penalty']
+
+        );
+        //Бизопаснасть
+        foreach ($data as $key)
+        {
+            mysql_real_escape_string($key);
+        }
+        //Отправка данных
+        $this->db->insert('doc_buy_sale', $data);
+        echo 'query was complete.';
 
     }
 
