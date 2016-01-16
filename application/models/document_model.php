@@ -9,7 +9,7 @@ class Document_model extends CI_Model
     public $day = "28";
     public $month = "ноября";
     public $year = "2028";
-    public $date_of_contract = '';
+    public $date_of_contract = "";
     public $vendor_name = 'Иван';
     public $vendor_surname = 'Иванов';
     public $vendor_patronymic = 'Иванович';
@@ -17,7 +17,7 @@ class Document_model extends CI_Model
     public $vendor_b_day = "28";
     public $vendor_b_month = "апреля";
     public $vendor_b_year = "1997";
-    public $vendor_date = '';
+    public $vendor_date = "";
     public $vendor_serial_ch = "АВ";
     public $vendor_number_ser = "228911";
     public $vendor_ser_bywho = "Ивановский отдел";
@@ -31,10 +31,14 @@ class Document_model extends CI_Model
     public $vendor_flat = "28";
     public $vendor_adress = '';
     public $vendor_phone = "+38(066)666-66-66";
+    public $buyer_surname = "Петров";
+    public $buyer_name = "Петр";
+    public $buyer_patronymic = "Петрович";
     public $buyer_fio = "Петров Петр Петрович";
     public $buyer_b_day = "19";
     public $buyer_b_month = "декабря";
     public $buyer_b_year = "1994";
+    public $buyer_date = "";
     public $buyer_serial_ch = "ПГРЬ";
     public $buyer_number_ser = "11111111";
     public $buyer_ser_bywho = "Петровский отдел";
@@ -68,7 +72,7 @@ class Document_model extends CI_Model
     public $ts_day = "42";
     public $ts_month = "сорок второй";
     public $ts_year = "2042";
-    public $ts_date = '';
+    public $ts_date = "";
     public $ts_bywho = "Фиксики";
     public $defects_all = "Поломка правого зеркала, царапины на капоте";
     public $defects_rightnow = "царапины на капоте";
@@ -79,6 +83,7 @@ class Document_model extends CI_Model
     public $day_of_pay = "01";
     public $month_of_pay = "01";
     public $year_of_pay = "2016";
+    public $date_of_pay = "";
     /*public $serial_car_chars = "ОО";
     public $serial_car_numbers = "23АМ21";*/
     public $day_car = "12";
@@ -88,17 +93,23 @@ class Document_model extends CI_Model
     public $other_documents_car = "Другие документы";//Смотря под что приходит
     public $marriage_info = "Имеется в браке";
     public $marriage_number = "777";
-    public $penalty_for_buyer = "1 000 000";
-    public $penalty_for_vendor = "2 000 000";
-    public $penalty_for_garanty = "228 228";
+    public $penalty = "";
     public $oil_in_car = "95 prime";
     public $vendor_birthday = '';
+    public $spouse_surname = 'Леонидов';
+    public $spouse_name = "Леонид";
+    public $spouse_patronymic = 'Леонидов Леонид Леонидович';
     public $spouse_fio = 'Леонидов Леонид Леонидович';
     public $spouse_pass_serial = 'ЛЛ';
     public $spouse_pass_number = '42284228';
     public $spouse_pass_bywho = 'Леонидовский отдел';
     public $spouse_pass_date = '23.03.2023';
-    public $spouse_adress = 'Леонидовский городо, леонидовская улица 28, кв. 42';
+    public $spouse_city = 'Леонидовский город';
+    public $spouse_street = 'леонидовская улица';
+    public $spouse_house = 'улица 28';
+    public $spouse_flat = 'кв. 42';
+    public $spouse_adress = '';
+    public $spouse_birthday = '';
     public $marriage_svid_serial = 'СОБ';
     public $marriage_svid_number = '777ДЛ666';
     public $marriage_svid_bywho = 'Петровский загс';
@@ -140,6 +151,10 @@ class Document_model extends CI_Model
     public $buyer_date_of_certificate = '';
     public $header_doc = ''; //
     public $accessories = "";
+    public $id_user = "";
+    public $id_document = "";
+    public $type_of_contract = "";
+    public $vendor_is_owner_car;
 
     //------------------------------------------------------------------------------------------------------------------
     public function __construct()
@@ -153,11 +168,11 @@ class Document_model extends CI_Model
     public function select_from_database()//Возможно нужно будет разбить для каждого документа свой запрос. Но тогда будет дублироваться запрос одинаковых полей.
     {
         $this->db->select();
-        $id_user = $_SESSION['id_user'] = 1;
-        $id_document = $_SESSION['id_document'] = 1;
-        $where = "id_user = '$id_user' AND id_document = '$id_document'";
+        //$id_user = $_SESSION['id_user'] = 1;
+        //$id_document = $_SESSION['id_document'] = 1;
+        //$where = "id_user = '$id_user' AND id_document = '$id_document'";
         //$this->db->where($where);
-        $query = $this->db->get('doc_buy_sale');
+        $query = $this->db->get('buy_sale');
         $result_arr = $query->result_array();
 
 
@@ -168,6 +183,7 @@ class Document_model extends CI_Model
         foreach ($result_arr as $record)
         {
             $this->id_user = $record['id_user'];
+            $this->id_document = $record['id'];
             $this->type_of_contract = $record['type_of_contract'];
             $this->city_contract = $record['place_of_contract'];
             $this->date_of_contract = $record['date_of_contract'];
@@ -240,7 +256,7 @@ class Document_model extends CI_Model
             $this->spouse_pass_bywho = $record['spouse_pass_bywho'];
             $this->spouse_pass_date = $record['spouse_pass_date'];
             $this->spouse_city = $record['spouse_city'];
-            $this->spouse_stree = $record['spouse_street'];
+            $this->spouse_street = $record['spouse_street'];
             $this->spouse_house = $record['spouse_house'];
             $this->spouse_flat = $record['spouse_flat'];
             $this->marriage_svid_serial = $record['marriage_svid_serial'];
@@ -250,6 +266,7 @@ class Document_model extends CI_Model
         }
 
         $this->format_all_data();// Форматированние полученных переменных в нужный формат.(дата, фио, адрес)*/
+        $this->get_doc_buy_sale();
     }
     //------------------------------------------------------------------------------------------------------------------
     public function format_date($day, $month, $year)
@@ -273,15 +290,21 @@ class Document_model extends CI_Model
    public function format_all_data()
    {
        //Форматирование даты
+       /*
        $this->vendor_bywho_date = $this->format_date($this->vendor_bywho_d, $this->vendor_bywho_m, $this->vendor_bywho_y);
        $this->buyer_bywho_date = $this->format_date($this->buyer_bywho_d, $this->buyer_bywho_m, $this->buyer_bywho_y);
        $this->vendor_birthday = $this->format_date($this->vendor_b_day, $this->vendor_b_month, $this->vendor_b_year);
        $this->date_of_contract = $this->format_date($this->day, $this->month, $this->year);
+       $this->date_of_serial_car = $this->format_date($this->day, $this->month, $this->year);
+       */
        //Форматирование адреса
        $this->vendor_adress = $this->format_adress($this->vendor_city, $this->vendor_street, $this->vendor_house, $this->vendor_flat);
        $this->buyer_adress = $this->format_adress($this->buyer_city, $this->buyer_street, $this->buyer_house, $this->buyer_flat);
+       $this->spouse_adress = $this->format_adress($this->spouse_city, $this->spouse_street, $this->spouse_house, $this->spouse_flat);
        //Форматирование ФИО
-
+        $this->vendor_fio = $this->format_fio($this->vendor_surname, $this->vendor_name, $this->vendor_patronymic);
+        $this->buyer_fio = $this->format_fio($this->buyer_surname, $this->buyer_name, $this->buyer_patronymic);
+        $this->spouse_fio = $this->format_fio($this->spouse_surname, $this->spouse_name, $this->spouse_patronymic);
        return true;
    }
     //------------------------------------------------------------------------------------------------------------------
@@ -365,48 +388,32 @@ class Document_model extends CI_Model
         // Подготовка
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
 
-        // !Оптимизируй даты. Формат "дд" месяц_имя гггг г.
         // Задание значений
         $document->setValue('city_contract', $this->city_contract);
-        $document->setValue('day', $this->day);
-        $document->setValue('month', $this->month);
-        $document->setValue('year', $this->year);
-
+        $document->setValue('date_of_contract',  $this->date_of_contract);
         $this->header_doc = $this->set_header_doc($this->type_of_vendor, $this->type_of_buyer);
         $document->setValue('header_doc', $this->header_doc);
 
-        $this->vendor_fio = $this->format_fio($this->vendor_surname, $this->vendor_name, $this->vendor_patronymic);
         $document->setValue('vendor_fio', $this->vendor_fio);
-
-        $document->setValue('vendor_b_day', $this->vendor_b_day);
-        $document->setValue('vendor_b_month', $this->vendor_b_month);
-        $document->setValue('vendor_b_year', $this->vendor_b_year);
+        $document->setValue('vendor_date', $this->vendor_date);
         $document->setValue('vendor_serial_ch', $this->vendor_serial_ch);
         $document->setValue('vendor_number_ser', $this->vendor_number_ser);
         $document->setValue('vendor_ser_bywho', $this->vendor_ser_bywho);
         $document->setValue('vendor_bywho_d', $this->vendor_bywho_d);
         $document->setValue('vendor_bywho_m', $this->vendor_bywho_m);
         $document->setValue('vendor_bywho_y', $this->vendor_bywho_y);
-        $document->setValue('vendor_city', $this->vendor_city);
-        $document->setValue('vendor_street', $this->vendor_street);
-        $document->setValue('vendor_house', $this->vendor_house);
-        $document->setValue('vendor_flat', $this->vendor_flat);
+        $document->setValue('vendor_adress', $this->vendor_adress);
         $document->setValue('vendor_phone', $this->vendor_phone);
 
         $document->setValue('buyer_fio', $this->buyer_fio);
-        $document->setValue('buyer_b_day', $this->buyer_b_day);
-        $document->setValue('buyer_b_month', $this->buyer_b_month);
-        $document->setValue('buyer_b_year', $this->buyer_b_year);
+        $document->setValue('buyer_date', $this->buyer_date);
         $document->setValue('buyer_serial_ch', $this->buyer_serial_ch);
         $document->setValue('buyer_number_ser', $this->buyer_number_ser);
         $document->setValue('buyer_ser_bywho', $this->buyer_ser_bywho);
         $document->setValue('buyer_bywho_d', $this->buyer_bywho_d);
         $document->setValue('buyer_bywho_m', $this->buyer_bywho_m);
         $document->setValue('buyer_bywho_y', $this->vendor_bywho_y);
-        $document->setValue('buyer_city', $this->buyer_city);
-        $document->setValue('buyer_street', $this->buyer_street);
-        $document->setValue('buyer_house', $this->buyer_house);
-        $document->setValue('buyer_flat', $this->buyer_flat);
+        $document->setValue('buyer_adress', $this->buyer_adress);
         $document->setValue('buyer_phone', $this->buyer_phone);
 
         $document->setValue('mark', $this->mark);
@@ -426,23 +433,14 @@ class Document_model extends CI_Model
         $document->setValue('bywho_serial_car', $this->bywho_serial_car);
         $document->setValue('date_of_serial_car', $this->date_of_serial_car);
         $document->setValue('status_of_car', $this->status_of_car);
-        $document->setValue('ts_day', $this->ts_day);
-        $document->setValue('ts_month', $this->ts_month);
-        $document->setValue('ts_year', $this->ts_year);
+        $document->setValue('ts_date', $this->ts_date);
         $document->setValue('ts_bywho', $this->ts_bywho);
         $document->setValue('defects_all', $this->defects_all);
         //$document->setValue('defects_rightnow', $this->defects_rightnow);
         $document->setValue('features', $this->features);
         $document->setValue('price', $this->price);
         $document->setValue('price_str', $this->price_str);
-        $document->setValue('day_of_pay', $this->day_of_pay);
-        $document->setValue('month_of_pay', $this->month_of_pay);
-        $document->setValue('year_of_pay', $this->year_of_pay);
-        $document->setValue('serial_car_chars', $this->serial_car);
-        $document->setValue('serial_car_numbers', $this->number_of_serial_car);
-        $document->setValue('day_car', $this->day_car);
-        $document->setValue('month_car', $this->month_car);
-        $document->setValue('year_car', $this->year_car);
+        $document->setValue('date_of_pay', $this->date_of_pay);
         $document->setValue('other_documents_car', $this->other_documents_car);
         $document->setValue('accessories', $this->accessories);
 
@@ -450,9 +448,7 @@ class Document_model extends CI_Model
         $document->setValue('marriage_info', $this->marriage_info);
         $document->setValue('marriage_number', $this->marriage_number);
 
-        $document->setValue('penalty_for_buyer', $this->penalty_for_buyer);
-        $document->setValue('penalty_for_vendor', $this->penalty_for_vendor);
-        $document->setValue('penalty_for_garanty', $this->penalty_for_garanty);
+        $document->setValue('penalty', $this->penalty);
 
 
         // Сохранение результатов
@@ -460,10 +456,6 @@ class Document_model extends CI_Model
         //setcookie('name_of_doc',$name_of_file);
         $document->save($name_of_file); // Сохранение документа
         echo 'File created.';
-        //Запрос предмусмотрен на договор между двумя физическими лицами. Появится ещё несколько новых полей
-
-        /* $this->db->query('SELECT city, day, month, year, vendor_fio, buyer_fio, mark, vin, reg_number, nametype, category, year_of_product, model, chassis, bodycar, color_bodycar, other_parametrs, additional_equip, serial_chars, serial_numbers, serial_bywho, serial_day, serial_month, serial_year, status_of_car, ts_day, ts_month, ts_year, ts_bywho, defects_all, defects_rightnow, price, price_str, day_of_pay, month_of_pay, year_of_pay, serial_car_chars, serial_car_numbers, day_car, month_car, year_car, other_documents_car, equipment_for_car, marriage_info, marriage_number, penalty_for_buyer, penalty_for_vendor, penalty_for_garanty, vendor_b_day, vendor_b_month, vendor_b_year, vendor_serial_ch, vendor_number_ser, vendor_ser_bywho, vendor_bywho_d, vendor_bywho_m, vendor_bywho_y, vendor_city, vendor_house, vendor_flat, vendor_phone, buyer_b_day, buyer_b_month, buyer_b_year, buyer_serial_ch, buyer_number_ser, buyer_ser_bywho, buyer_bywho_d, buyer_bywho_m, buyer_bywho_y, buyer_city, buyer_house, buyer_flat, buyer_phone
- FROM buy_deal');*/
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор дарения
@@ -731,8 +723,8 @@ class Document_model extends CI_Model
             mysql_real_escape_string($key);
         }
         //Отправка данных
-        $this->db->insert('doc_buy_sale', $data);
-        echo 'query was complete.';
+        $this->db->insert('buy_sale', $data);
+        echo 'query-insert was complete.';
 
     }
 

@@ -13,7 +13,7 @@
 
               <div class="row">
                   <div class="col-lg-6">
-                      <form method="post" action="">
+                      <form method="post" action="/document/go_buy_sale">
                       <div class = "document">
                       <div class = "row">
                           <div class = "col-lg-12">

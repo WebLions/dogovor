@@ -57,4 +57,9 @@ class Document extends CI_Controller
         print_r($_POST);
         echo '</pre>';
     }
+    public function go_buy_sale()
+    {
+        $this->insert_into_database();
+        //$this->select_from_database();
+    }
 }
