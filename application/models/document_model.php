@@ -5,7 +5,7 @@ class Document_model extends CI_Model
 {
     //------------------------------------------------------------------------------------------------------------------
     // Тестовые переменные
-    public $city_contract = "Одесса";
+   /* public $city_contract = "Одесса";
     public $day = "28";
     public $month = "ноября";
     public $year = "2028";
@@ -84,8 +84,6 @@ class Document_model extends CI_Model
     public $month_of_pay = "01";
     public $year_of_pay = "2016";
     public $date_of_pay = "";
-    /*public $serial_car_chars = "ОО";
-    public $serial_car_numbers = "23АМ21";*/
     public $day_car = "12";
     public $month_car = "12";
     public $year_car = "2012";
@@ -154,7 +152,7 @@ class Document_model extends CI_Model
     public $id_user = "";
     public $id_document = "";
     public $type_of_contract = "";
-    public $vendor_is_owner_car;
+    public $vendor_is_owner_car;*/
 
     //------------------------------------------------------------------------------------------------------------------
     public function __construct()
@@ -173,100 +171,13 @@ class Document_model extends CI_Model
         //$where = "id_user = '$id_user' AND id_document = '$id_document'";
         //$this->db->where($where);
         $query = $this->db->get('buy_sale');
-        $result_arr = $query->result_array();
-
+        $result = $query->row();
 
         //Тестовый вывод содержимого результата
-        /*echo '<pre>';
-        print_r($result_arr);
-        echo '</pre>';*/
-        foreach ($result_arr as $record)
-        {
-            $this->id_user = $record['id_user'];
-            $this->id_document = $record['id'];
-            $this->type_of_contract = $record['type_of_contract'];
-            $this->city_contract = $record['place_of_contract'];
-            $this->date_of_contract = $record['date_of_contract'];
-            $this->type_of_vendor = $record['type_of_giver'];
-            $this->vendor_is_owner_car = $record['vendor_is_owner_car'];
-            $this->vendor_name = $record['vendor_name'];
-            $this->vendor_surname = $record['vendor_surname'];
-            $this->vendor_patronymic = $record['vendor_patronymic'];
-            $this->vendor_date = $record['vendor_birthday'];
-            $this->vendor_serial_ch = $record['vendor_passport_serial'];
-            $this->vendor_number_ser = $record['vendor_passport_number'];
-            $this->vendor_ser_bywho = $record['vendor_passport_bywho'];
-            $this->vendor_bywho_date = $record['vendor_passport_date'];
-            $this->vendor_city = $record['vendor_city'];
-            $this->vendor_street = $record['vendor_street'];
-            $this->vendor_house = $record['vendor_house'];
-            $this->vendor_flat = $record['vendor_flat'];
-            $this->vendor_phone = $record['vendor_phone'];
-            $this->type_of_buyer = $record['type_of_buyer'];
-            $this->buyer_name = $record['buyer_name'];
-            $this->buyer_surname = $record['buyer_surname'];
-            $this->buyer_patronymic = $record['buyer_patronymic'];
-            $this->buyer_date = $record['buyer_birthday'];
-            $this->buyer_serial_ch = $record['buyer_passport_serial'];
-            $this->buyer_number_ser = $record['buyer_passport_number'];
-            $this->buyer_ser_bywho = $record['buyer_passport_bywho'];
-            $this->buyer_bywho_date = $record['buyer_passport_date'];
-            $this->buyer_city = $record['buyer_city'];
-            $this->buyer_street = $record['buyer_street'];
-            $this->buyer_house = $record['buyer_house'];
-            $this->buyer_flat = $record['buyer_flat'];
-            $this->buyer_phone = $record['buyer_phone'];
-            $this->mark = $record['mark'];
-            $this->vin = $record['vin'];
-            $this->reg_number = $record['reg_gov_number'];
-            $this->car_type = $record['car_type'];
-            $this->category = $record['category'];
-            $this->date_of_product = $record['date_of_product'];
-            $this->engine_model = $record['engine_model'];
-            $this->shassi = $record['shassi'];
-            //$this->carcass = $record[''];Пропущен блок в верстке :с
-            $this->color_carcass = $record['color_carcass'];
-            $this->other_parameters = $record['other_parametrs'];
-            $this->additional_equip = $record['additional_devices'];
-            $this->serial_car = $record['serial_car'];
-            $this->number_of_serial_car = $record['number_of_serial_car'];
-            $this->bywho_serial_car = $record['bywho_serial_car'];
-            $this->date_of_serial_car = $record['date_of_serial_car'];
-            $this->status_of_car = $record['car_allstatus'];
-            $this->ts_date = $record['maintenance_date'];
-            $this->ts_bywho = $record['maintenance_bywho'];
-            $this->defects_all = $record['defects'];
-            //$this->defects_rightnow = $record[''];Где в алгоритме этот пункт вообще? Вопрос заказчику.
-            $this->features = $record['features'];
-            $this->price = $record['price_car'];
-            $this->currency = $record['currency'];
-            $this->date_of_pay = $record['payment_date'];
-            //$this->date_of_car = $record[''];
-            $this->other_documents_car = $record['documents'];
-            $this->accessories = $record['accessories'];
-            $this->car_in_marriage = $record['car_in_marriage'];
-            $this->penalty = $record['penalty'];
-            $this->oil_in_car = $record['oil_in_car'];
-            $this->spouse_name = $record['spouse_name'];
-            $this->spouse_surname = $record['spouse_surname'];
-            $this->spouse_patronymic = $record['spouse_patronymic'];
-            $this->spouse_birthday = $record['spouse_birthday'];
-            $this->spouse_pass_serial = $record['spouse_pass_serial'];
-            $this->spouse_pass_number = $record['spouse_pass_number'];
-            $this->spouse_pass_bywho = $record['spouse_pass_bywho'];
-            $this->spouse_pass_date = $record['spouse_pass_date'];
-            $this->spouse_city = $record['spouse_city'];
-            $this->spouse_street = $record['spouse_street'];
-            $this->spouse_house = $record['spouse_house'];
-            $this->spouse_flat = $record['spouse_flat'];
-            $this->marriage_svid_serial = $record['marriage_svid_serial'];
-            $this->marriage_svid_number = $record['marriage_svid_number'];
-            $this->marriage_svid_bywho = $record['marriage_svid_bywho'];
-            $this->marriage_svid_date = $record['marriage_svid_date'];
-        }
-
-        $this->format_all_data();// Форматированние полученных переменных в нужный формат.(дата, фио, адрес)*/
-        $this->get_doc_buy_sale();
+        echo '<pre>';
+        print_r($result);
+        //echo $result->place_of_contract;
+        echo '</pre>';
     }
     //------------------------------------------------------------------------------------------------------------------
     public function format_date($day, $month, $year)
@@ -296,7 +207,7 @@ class Document_model extends CI_Model
        $this->vendor_birthday = $this->format_date($this->vendor_b_day, $this->vendor_b_month, $this->vendor_b_year);
        $this->date_of_contract = $this->format_date($this->day, $this->month, $this->year);
        $this->date_of_serial_car = $this->format_date($this->day, $this->month, $this->year);
-       */
+
        //Форматирование адреса
        $this->vendor_adress = $this->format_adress($this->vendor_city, $this->vendor_street, $this->vendor_house, $this->vendor_flat);
        $this->buyer_adress = $this->format_adress($this->buyer_city, $this->buyer_street, $this->buyer_house, $this->buyer_flat);
@@ -306,38 +217,20 @@ class Document_model extends CI_Model
         $this->buyer_fio = $this->format_fio($this->buyer_surname, $this->buyer_name, $this->buyer_patronymic);
         $this->spouse_fio = $this->format_fio($this->spouse_surname, $this->spouse_name, $this->spouse_patronymic);
        return true;
+       */
    }
     //------------------------------------------------------------------------------------------------------------------
-    public function set_pack_of_documents($type_of_vendor, $type_of_buyer)
-    {
-        if ($type_of_vendor == 'physical' && $type_of_buyer == 'physical')
-        {
-            $this->get_doc_buy_sale();
-            $this->get_doc_act_of_reception();
-            $this->get_doc_receipt_of_money();
-            $this->get_doc_statement_gibdd();
-            $this->get_doc_statement_vendor_marriage();
-        }
-        elseif ($type_of_vendor == 'law' && $type_of_buyer == 'law')
-        {
-            $this->get_doc_buy_sale();
-            $this->get_doc_act_of_reception();
-            $this->get_doc_statement_gibdd();
-        }
-    }
-    //------------------------------------------------------------------------------------------------------------------
-
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
-    public function set_header_doc($type_of_vendor, $type_of_buyer) //law //physical //individual
+    public function set_header_doc($type_of_vendor, $type_of_buyer, $data_for_header) //law //physical //individual
     {
         if ($type_of_vendor == 'physical' && $type_of_buyer == 'physical')
         {
-            $header = 'Гражданин ' . $this->vendor_fio . ', далее именуемый "Продавец", с одной стороны, и гражданин ' . $this->buyer_fio . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = 'Граж$данин ' . $data_for_header['vendor_fio'] . ', далее именуемый "Продавец", с одной стороны, и гражданин ' . $data_for_header['buyer_fio'] . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'law')
         {
-            $header = $this->vendor_law_company_name .', далее именуемое "Продавец", в лице'. $this->vendor_law_actor_position .', '. $this->vendor_law_fio .', действующего на основании '. $this->vendor_law_document_osn . ' №'.$this->vendor_law_proxy_number. 'от'.$this->vendor_law_proxy_date.' , с одной стороны, и '.$this->buyer_law_company_name.', далее именуемое "Покупатель", в лице' . $this->buyer_law_actor_position .', '. $this->buyer_law_fio .', действующего на основании '. $this->buyer_law_document_osn . ' №'.$this->buyer_law_proxy_number. ' от'.$this->buyer_law_proxy_date.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'physical' && $type_of_buyer == 'law')
         {
@@ -385,71 +278,96 @@ class Document_model extends CI_Model
     //договор купли-продажи транспортного средства
     public function get_doc_buy_sale()
     {
+        //Работа с базой
+        $this->db->select();
+        //$id_user = $_SESSION['id_user'] = 1;
+        //$id_document = $_SESSION['id_document'] = 1;
+        //$where = "id_user = '$id_user' AND id_document = '$id_document'";
+        //$this->db->where($where);
+        $query = $this->db->get('buy_sale');
+        $result = $query->row();
 
-        // Подготовка
+        $this->format_data_buy_sale();// Форматированние полученных переменных в нужный формат.(дата, фио, адрес)
+        // Подготовка данных для работы с документов
+
+        $vendor_fio = $this->format_fio($result->surname, $result->name, $result->patronymic);
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $data_for_header = array(
+            'vendor_fio' => $vendor_fio,
+            'buyer_fio' => $buyer_fio,
+            'vendor_law_company_name' => $result->vendor_law_company_name,
+            'vendor_law_actor_position' => $result->vendor_law_actor_position,
+            'vendor_law_fio' => $result->vendor_law_fio,
+            'vendor_law_document_osn' => $result->vendor_law_document_osn,
+            'vendor_law_proxy_number' => $result->vendor_law_proxy_number,
+            'vendor_law_proxy_date' => $result->vendor_law_proxy_date,
+            'vendor_law_actor_position' => $result->vendor_law_actor_position,
+            'vendor_law_actor_position' => $result->vendor_law_actor_position,
+            'vendor_law_actor_position' => $result->vendor_law_actor_position,
+            'vendor_law_actor_position' => $result->vendor_law_actor_position,
+            'vendor_law_actor_position' => $result->vendor_law_actor_position,
+        );
+        $header_doc = $this->set_header_doc($result->type_of_giver, $result->type_of_buyer, $data_for_header);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
 
+
         // Задание значений
-        $document->setValue('city_contract', $this->city_contract);
-        $document->setValue('date_of_contract',  $this->date_of_contract);
-        $this->header_doc = $this->set_header_doc($this->type_of_vendor, $this->type_of_buyer);
-        $document->setValue('header_doc', $this->header_doc);
+        $document->setValue('city_contract', $result->place_of_contract);
+        $document->setValue('date_of_contract',  $result->date_of_contract);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('header_doc', $header_doc);
+        $document->setValue('vendor_fio', $vendor_fio);
+        $document->setValue('vendor_date', $result->vendor_birthday);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('vendor_serial_ch', $result->vendor_passport_serial);
+        $document->setValue('vendor_number_ser', $result->vendor_passport_number);
+        $document->setValue('vendor_ser_bywho', $result->vendor_passport_bywho);
+        $document->setValue('vendor_bywho_date', $result->vendor_passport_date);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('vendor_adress', $vendor_adress);
+        $document->setValue('vendor_phone', $result->vendor_phone);
+        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('buyer_date', $result->buyer_birthday);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('buyer_serial_ch', $result->buyer_passport_serial);
+        $document->setValue('buyer_number_ser', $result->vendor_passport_number);
+        $document->setValue('buyer_ser_bywho', $result->vendor_passport_bywho);
 
-        $document->setValue('vendor_fio', $this->vendor_fio);
-        $document->setValue('vendor_date', $this->vendor_date);
-        $document->setValue('vendor_serial_ch', $this->vendor_serial_ch);
-        $document->setValue('vendor_number_ser', $this->vendor_number_ser);
-        $document->setValue('vendor_ser_bywho', $this->vendor_ser_bywho);
-        $document->setValue('vendor_bywho_d', $this->vendor_bywho_d);
-        $document->setValue('vendor_bywho_m', $this->vendor_bywho_m);
-        $document->setValue('vendor_bywho_y', $this->vendor_bywho_y);
-        $document->setValue('vendor_adress', $this->vendor_adress);
-        $document->setValue('vendor_phone', $this->vendor_phone);
+        $document->setValue('buyer_bywho_date', $result->buyer_bywho_date);
 
-        $document->setValue('buyer_fio', $this->buyer_fio);
-        $document->setValue('buyer_date', $this->buyer_date);
-        $document->setValue('buyer_serial_ch', $this->buyer_serial_ch);
-        $document->setValue('buyer_number_ser', $this->buyer_number_ser);
-        $document->setValue('buyer_ser_bywho', $this->buyer_ser_bywho);
-        $document->setValue('buyer_bywho_d', $this->buyer_bywho_d);
-        $document->setValue('buyer_bywho_m', $this->buyer_bywho_m);
-        $document->setValue('buyer_bywho_y', $this->vendor_bywho_y);
-        $document->setValue('buyer_adress', $this->buyer_adress);
-        $document->setValue('buyer_phone', $this->buyer_phone);
+        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $document->setValue('buyer_adress', $buyer_adress);
 
-        $document->setValue('mark', $this->mark);
-        $document->setValue('vin', $this->vin);
-        $document->setValue('reg_number', $this->reg_number);
-        $document->setValue('car_type', $this->car_type);
-        $document->setValue('category', $this->category);
-        $document->setValue('date_of_product', $this->date_of_product);
-        $document->setValue('engine_model', $this->engine_model);
-        $document->setValue('shassi', $this->shassi);
-        $document->setValue('carcass', $this->carcass);
-        $document->setValue('color_carcass', $this->color_carcass);
-        $document->setValue('other_parameters', $this->other_parameters);
-        $document->setValue('additional_equip', $this->additional_equip);
-        $document->setValue('serial_car', $this->serial_car);
-        $document->setValue('number_of_serial_car', $this->number_of_serial_car);
-        $document->setValue('bywho_serial_car', $this->bywho_serial_car);
-        $document->setValue('date_of_serial_car', $this->date_of_serial_car);
-        $document->setValue('status_of_car', $this->status_of_car);
-        $document->setValue('ts_date', $this->ts_date);
-        $document->setValue('ts_bywho', $this->ts_bywho);
-        $document->setValue('defects_all', $this->defects_all);
-        //$document->setValue('defects_rightnow', $this->defects_rightnow);
-        $document->setValue('features', $this->features);
-        $document->setValue('price', $this->price);
-        $document->setValue('price_str', $this->price_str);
-        $document->setValue('date_of_pay', $this->date_of_pay);
-        $document->setValue('other_documents_car', $this->other_documents_car);
-        $document->setValue('accessories', $this->accessories);
+        $document->setValue('buyer_phone', $result->buyer_phone);
+        $document->setValue('mark', $result->mark);
+        $document->setValue('vin', $result->vin);
+        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('car_type', $result->car_type);
+        $document->setValue('category', $result->category);
+        $document->setValue('date_of_product', $result->date_of_product);
+        $document->setValue('engine_model', $result->engine_model);
+        $document->setValue('shassi', $result->shassi);
+        //$document->setValue('carcass', $result->carcass); Пропущен блок в верстке
+        $document->setValue('color_carcass', $result->color_carcass);
+        $document->setValue('other_parameters', $result->other_parameters);
+        $document->setValue('additional_equip', $result->additional_devices);
+        $document->setValue('serial_car', $result->serial_car);
+        $document->setValue('number_of_serial_car', $result->number_of_serial_car);
+        $document->setValue('bywho_serial_car', $result->bywho_serial_car);
+        $document->setValue('date_of_serial_car', $result->date_of_serial_car);
+        $document->setValue('status_of_car', $result->car_allstatus);
+        $document->setValue('ts_date', $result->maintenance_date);
+        $document->setValue('ts_bywho', $result->maintenance_bywho);
+        $document->setValue('defects_all', $result->defects);
+        //$document->setValue('defects_rightnow', $result->defects_rightnow);
+        $document->setValue('features', $result->features);
+        $document->setValue('price', $result->price_car);
+        $document->setValue('price_str', $result->price_str);//Написать функцию превращения числа в строку
+        $document->setValue('date_of_pay', $result->payment_date);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('other_documents_car', $result->documents);
+        $document->setValue('accessories', $result->accessories);
 
-        $this->get_marriage_info($this->car_in_marriage);
-        $document->setValue('marriage_info', $this->marriage_info);
-        $document->setValue('marriage_number', $this->marriage_number);
-
-        $document->setValue('penalty', $this->penalty);
+        $marriage = $this->get_marriage_info($result->car_in_marriage);
+        $document->setValue('marriage_info', $marriage['info']);
+        $document->setValue('marriage_number', $marriage['number']);
+        $document->setValue('penalty', $result->penalty);
 
 
         // Сохранение результатов
@@ -739,15 +657,5 @@ class Document_model extends CI_Model
         $data = array(
             'name' => $post['name']
         );
-
-
-        $data = array('city','date','vendor'); // обявленый масив
-
-        foreach($data as $key => $val)
-        {
-            $data[$key] = isset($_POST[$key]) ? $_POST[$key] : Null; //заполняем
-        }
-
-
     }
 }
