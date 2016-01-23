@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,12 +22,7 @@
     <?php echo link_tag('bootstrap/css/content_style.css'); ?>
     <?php echo link_tag('bootstrap/datepicker/css/datepicker.css'); ?>
 
-
-   
-   
   </head>
-
-
 
   <body>
   <!-- container section start -->

@@ -6,7 +6,7 @@
 
   <script src="/bootstrap/js/load_block.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
-  <script src="/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>
+  <!--<script src="/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>-->
 
 
   <script src="/bootstrap/js/jquery.sticky.js"></script>

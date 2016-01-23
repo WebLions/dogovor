@@ -11,6 +11,8 @@ class Document extends CI_Controller
         parent::__construct();
         $this->load->helper('html');
         $this->load->model('document_model');
+        $this->load->model('user_model');
+        $this->load->library('form_validation');
 
     }
     public function buy_sale()  //  в ссылке выглядит так document/name
@@ -59,7 +61,15 @@ class Document extends CI_Controller
     }
     public function go_buy_sale()
     {
-        $this->insert_into_database();
+        $this->form_validation->set_rules('email','E-mail','trim|required|xss_clean');
+        if($this->form_validation->run() == true)
+        {
+            $this->data['user_id'] = $this->user_model->register( $this->input->post('email') );
+            $this->document_model->insert_into_database( $this->data['user_id'] );
+            redirect('user/login');
+        }else{
+            redirect('user/login');
+        }
         //$this->select_from_database();
     }
 }

@@ -385,6 +385,7 @@ class Document_model extends CI_Model
     //договор купли-продажи транспортного средства
     public function get_doc_buy_sale()
     {
+
         // Подготовка
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
 
@@ -738,5 +739,15 @@ class Document_model extends CI_Model
         $data = array(
             'name' => $post['name']
         );
+
+
+        $data = array('city','date','vendor'); // обявленый масив
+
+        foreach($data as $key => $val)
+        {
+            $data[$key] = isset($_POST[$key]) ? $_POST[$key] : Null; //заполняем
+        }
+
+
     }
 }
