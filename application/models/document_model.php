@@ -558,6 +558,7 @@ class Document_model extends CI_Model
         $data = array
         (
             'id_user' => $_SESSION['id_user'],
+            'date' => date(),
             'type_of_contract' => $_POST['type_of_contract'],
             'place_of_contract' => $_POST['place_of_contract'],
             'date_of_contract' => $_POST['date_of_contract'],
