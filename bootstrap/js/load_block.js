@@ -91,12 +91,14 @@ var bs_deal = true,
             });
         });
 
-    $('.document').on('click','#ready-button',function(){
+$( document ).ready(function() {
+    $('.document').on('click', '#ready-button', function () {
 
+        console.log("click");
+        $('#create-doc').trigger("submit");
 
-
-    })
-
+    });
+});
 
 
 

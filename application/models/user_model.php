@@ -13,27 +13,44 @@ class User_model extends CI_Model
 
     public function register($email)
     {
-        $pass = $this->generate_password(8);
-        $password = md5($pass . 'soult228');
-        preg_match("/(.*)@/", $email, $login);
-        $login = $login[1];
-        $data = array(
-            'login' => $login,
-            'email' => $email,
-            'password' => $password
-        );
-        $this->db->insert('users', $data);
-        //$this->XMail($email, $pass);
-        return (bool) ($this->db->affected_rows() > 0);
+        $this->db->where("email", $email);
+        $query = $this->db->get("users",1,0);
+        if($query->num_rows() == 0)
+        {
+            $pass = $this->generate_password(8);
+            $password = md5($pass . 'soult228');
+            //preg_match("/(.*)@/", $email, $login);
+            $login = $email;
+            $data = array(
+                'login' => $login,
+                'email' => $email,
+                'password' => $password
+            );
+            $this->db->insert('users', $data);
+            $user_id = $this->db->insert_id();
+
+            $text = "Спасибо!\n";
+            $text.= "Теперь вы можете зайти в личный кабинет\n";
+            $text.= "Логин: " . $email . "\n";
+            $text.= "Пароль: " . $pass . "\n";
+            $text.= "Внимание! Поменяйте сгенерированый пароль на новый!\n";
+
+            $this->XMail("info@jera.ws", $email, "Регистрация", $text);
+
+        }else{
+            $result = $query->row();
+            $user_id = $result->id;
+        }
+        return $user_id;
     }
 
     public function login_in()
     {
         return isset($_SESSION['user_id']);
     }
-    private function XMail($from, $to, $subj, $text, $filename)
+    private function XMail($from, $to, $subj, $text)
     {
-        $f         = fopen($filename,"rb");
+       // $f         = fopen($filename,"rb");
         $un        = strtoupper(uniqid(time()));
         $head      = "From: $from\n";
         $head     .= "To: $to\n";
@@ -47,11 +64,11 @@ class User_model extends CI_Model
         $zag      .= "Content-Transfer-Encoding: 8bit\n\n$text\n\n";
         $zag      .= "------------".$un."\n";
         $zag      .= "Content-Type: application/octet-stream;";
-        $zag      .= "name=\"".basename($filename)."\"\n";
+       /* $zag      .= "name=\"".basename($filename)."\"\n";
         $zag      .= "Content-Transfer-Encoding:base64\n";
         $zag      .= "Content-Disposition:attachment;";
         $zag      .= "filename=\"".basename($filename)."\"\n\n";
-        $zag      .= chunk_split(base64_encode(fread($f,filesize($filename))))."\n";
+        $zag      .= chunk_split(base64_encode(fread($f,filesize($filename))))."\n";*/
 
         return @mail("$to", "$subj", $zag, $head);
     }
