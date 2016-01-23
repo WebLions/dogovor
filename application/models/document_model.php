@@ -230,49 +230,52 @@ class Document_model extends CI_Model
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'law')
         {
-            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'physical' && $type_of_buyer == 'law')
         {
-            $header = 'Гражданин' . $this->vendor_fio . ', далее именуемый "Продавец", с одной стороны и '.$this->buyer_law_company_name.', далее именуемое "Покупатель", в лице' . $this->buyer_law_actor_position .', '. $this->buyer_law_fio .', действующего на основании '. $this->buyer_law_document_osn . ' №'.$this->buyer_law_proxy_number. ' от'.$this->buyer_law_proxy_date.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = 'Гражданин' . $data_for_header['vendor_fio']. ', далее именуемый "Продавец", с одной стороны и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'physical')
         {
-            $header = $this->vendor_law_company_name .', далее именуемое "Продавец", в лице'. $this->vendor_law_actor_position .', '. $this->vendor_law_fio .', действующего на основании '. $this->vendor_law_document_osn . ' №'.$this->vendor_law_proxy_number. 'от'.$this->vendor_law_proxy_date.' , с одной стороны и гражданин '. $this->buyer_fio . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и гражданин '. $data_for_header['buyer_fio']. ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'physical' && $type_of_buyer == 'individual')
         {
-            $header =  'Гражданин' . $this->vendor_fio . ', далее именуемый "Продавец", с одной стороны и '.$this->buyer_ind_fio.', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$this->buyer_number_of_certificate.' от '.$this->buyer_date_of_certificate.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header =  'Гражданин' . $data_for_header['vendor_fio ']. ', далее именуемый "Продавец", с одной стороны и '.$data_for_header['buyer_ind_fio'].', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'individual' && $type_of_buyer == 'physical')
         {
-            $header = $this->vendor_ind_fio.', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$this->vendor_number_of_certificate.' от '.$this->vendor_date_of_certificate.', с одной стороны и гражданин '.$this->buyer_fio.', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_ind_fio'].', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и гражданин '.$data_for_header['buyer_fio'].', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'individual')
         {
-            $header = $this->vendor_law_company_name .', далее именуемое "Продавец", в лице'. $this->vendor_law_actor_position .', '. $this->vendor_law_fio .', действующего на основании '. $this->vendor_law_document_osn . ' №'.$this->vendor_law_proxy_number. 'от'.$this->vendor_law_proxy_date.'с одной стороны и '.$this->buyer_ind_fio.', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$this->buyer_number_of_certificate.' от '.$this->buyer_date_of_certificate.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_law_company_name '].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].'с одной стороны и '.$data_for_header['buyer_ind_fio'].', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'individual' && $type_of_buyer == 'law')
         {
-            $header = $this->vendor_ind_fio.', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$this->vendor_number_of_certificate.' от '.$this->vendor_date_of_certificate.', с одной стороны и '.$this->buyer_law_company_name.', далее именуемое "Покупатель", в лице' . $this->buyer_law_actor_position .', '. $this->buyer_law_fio .', действующего на основании '. $this->buyer_law_document_osn . ' №'.$this->buyer_law_proxy_number. ' от'.$this->buyer_law_proxy_date.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';        }
+            $header = $data_for_header['vendor_ind_fio'].', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';        }
         else $header = 'Incorrect type of vendor/buyer.Type of vendor = '.$type_of_vendor.', Type of buyer = '.$type_of_buyer;
         return $header;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function get_marriage_info($car_in_marriage)
+    public function get_marriage_info($car_in_marriage, $spouse_fio)
     {
+        $marriage = array();
         if ($car_in_marriage == true)
         {
             // Если продавец в браке то
-            $this->marriage_info ="<w:br/>4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства с супругой(ом)".$this->spouse_fio."и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
-            $this->marriage_number = 5; //номер следующего пункта
+            $marriage['info'] ="<w:br/>4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства с супругой(ом)".$spouse_fio."и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
+            $marriage['number'] = 5; //номер следующего пункта
         }
         elseif ($car_in_marriage == false)
         {
             //Если не в браке
-            $this->marriage_info = "";//пропускаем этот пункт
-            $this->marriage_number = 4; //номер следующего пункта
+            $marriage['info'] = "";//пропускаем этот пункт
+            $marriage['number'] = 4; //номер следующего пункта
         }
+
+        return $marriage;
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор купли-продажи транспортного средства
@@ -287,12 +290,13 @@ class Document_model extends CI_Model
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
-        $this->format_data_buy_sale();// Форматированние полученных переменных в нужный формат.(дата, фио, адрес)
         // Подготовка данных для работы с документов
-
-        $vendor_fio = $this->format_fio($result->surname, $result->name, $result->patronymic);
+        $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
             'buyer_fio' => $buyer_fio,
@@ -302,15 +306,15 @@ class Document_model extends CI_Model
             'vendor_law_document_osn' => $result->vendor_law_document_osn,
             'vendor_law_proxy_number' => $result->vendor_law_proxy_number,
             'vendor_law_proxy_date' => $result->vendor_law_proxy_date,
-            'vendor_law_actor_position' => $result->vendor_law_actor_position,
-            'vendor_law_actor_position' => $result->vendor_law_actor_position,
-            'vendor_law_actor_position' => $result->vendor_law_actor_position,
-            'vendor_law_actor_position' => $result->vendor_law_actor_position,
-            'vendor_law_actor_position' => $result->vendor_law_actor_position,
+            'buyer_law_company_name' => $result->buyer_law_company_name,
+            'buyer_law_actor_position' => $result->buyer_law_actor_position,
+            'buyer_law_fio' => $result->buyer_law_fio,
+            'buyer_law_document_osn' => $result->buyer_law_document_osn,
+            'buyer_law_proxy_number' => $result->buyer_law_proxy_number,
+            'buyer_law_proxy_date' => $result->buyer_law_proxy_date,
         );
         $header_doc = $this->set_header_doc($result->type_of_giver, $result->type_of_buyer, $data_for_header);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
-
 
         // Задание значений
         $document->setValue('city_contract', $result->place_of_contract);
@@ -321,7 +325,7 @@ class Document_model extends CI_Model
         $document->setValue('vendor_serial_ch', $result->vendor_passport_serial);
         $document->setValue('vendor_number_ser', $result->vendor_passport_number);
         $document->setValue('vendor_ser_bywho', $result->vendor_passport_bywho);
-        $document->setValue('vendor_bywho_date', $result->vendor_passport_date);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('vendor_bywho_date', $result->vendor_passport_date);//Форматирование даты. Дописать
         $document->setValue('vendor_adress', $vendor_adress);
         $document->setValue('vendor_phone', $result->vendor_phone);
         $document->setValue('buyer_fio', $buyer_fio);
@@ -329,12 +333,8 @@ class Document_model extends CI_Model
         $document->setValue('buyer_serial_ch', $result->buyer_passport_serial);
         $document->setValue('buyer_number_ser', $result->vendor_passport_number);
         $document->setValue('buyer_ser_bywho', $result->vendor_passport_bywho);
-
         $document->setValue('buyer_bywho_date', $result->buyer_bywho_date);
-
-        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
         $document->setValue('buyer_adress', $buyer_adress);
-
         $document->setValue('buyer_phone', $result->buyer_phone);
         $document->setValue('mark', $result->mark);
         $document->setValue('vin', $result->vin);
@@ -363,12 +363,9 @@ class Document_model extends CI_Model
         $document->setValue('date_of_pay', $result->payment_date);//Форматирование даты. Дописать после Ромыного апдейта
         $document->setValue('other_documents_car', $result->documents);
         $document->setValue('accessories', $result->accessories);
-
-        $marriage = $this->get_marriage_info($result->car_in_marriage);
         $document->setValue('marriage_info', $marriage['info']);
         $document->setValue('marriage_number', $marriage['number']);
         $document->setValue('penalty', $result->penalty);
-
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'buy_sale_deal.docx';//Имя файла и путь к нему
@@ -386,37 +383,44 @@ class Document_model extends CI_Model
     //акт приема-передачи автомобиля
     public function get_doc_act_of_reception()
     {
+        //Работа с базой
+        $this->db->select();
+        //$id_user = $_SESSION['id_user'] = 1;
+        //$id_document = $_SESSION['id_document'] = 1;
+        //$where = "id_user = '$id_user' AND id_document = '$id_document'";
+        //$this->db->where($where);
+        $query = $this->db->get('buy_sale');
+        $result = $query->row();
+
+        //Подготовка данных
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/act_of_reception.docx');
+        $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        $buyer_fio = $this->format_fio($result->buyer_surname, $result->buyer_name, $result->buyer_patronymic);
 
         //Задание значений переменных
-        $document->setValue('city_contract', $this->city_contract);
-        $document->setValue('day', $this->day);
-        $document->setValue('month', $this->month);
-        $document->setValue('year', $this->year);
-
-        $document->setValue('vendor_fio', $this->vendor_fio);
-        $document->setValue('buyer_fio', $this->buyer_fio);
-        $document->setValue('mark', $this->mark);
-        $document->setValue('vin', $this->vin);
-        $document->setValue('reg_number', $this->reg_number);
-        $document->setValue('car_type', $this->car_type);
-        $document->setValue('date_of_product', $this->date_of_product);
-        $document->setValue('engine_model', $this->engine_model);
-        $document->setValue('shassi', $this->shassi);
-        $document->setValue('carcass', $this->carcass);
-        $document->setValue('color_carcass', $this->color_carcass);
-        $document->setValue('other_parameters', $this->other_parameters);
-        $document->setValue('serial_car', $this->serial_car);
-        $document->setValue('number_of_serial_car', $this->number_of_serial_car);
-        $document->setValue('bywho_serial_car', $this->bywho_serial_car);
-        $document->setValue('date_of_serial_car', $this->date_of_serial_car);
-        $document->setValue('additional_equip', $this->additional_equip);
-        $document->setValue('oil_in_car', $this->oil_in_car);
-        $document->setValue('defects_all', $this->defects_all);
-        $document->setValue('features', $this->features);
-
+        $document->setValue('city_contract', $result->place_contract);
+        $document->setValue('date_of_contract', $result->date_of_contract);//
+        $document->setValue('vendor_fio', $vendor_fio);
+        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('mark', $result->mark);
+        $document->setValue('vin', $result->vin);
+        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('car_type', $result->car_type);
+        $document->setValue('date_of_product', $result->date_of_product);///
+        $document->setValue('engine_model', $result->engine_model);
+        $document->setValue('shassi', $result->shassi);
+        //$document->setValue('carcass', $result->carcass);
+        $document->setValue('color_carcass', $result->color_carcass);
+        $document->setValue('other_parameters', $result->other_parameters);
+        $document->setValue('additional_equip', $result->additional_devices);
+        $document->setValue('serial_car', $result->serial_car);
+        $document->setValue('number_of_serial_car', $result->number_of_serial_car);
+        $document->setValue('bywho_serial_car', $result->bywho_serial_car);
+        $document->setValue('date_of_serial_car', $result->date_of_serial_car);//
+        $document->setValue('oil_in_car', $result->oil_in_car);
+        $document->setValue('defects_all', $result->defects);
+        $document->setValue('features', $result->features);
         //Вопросы по пост-пунткам пунтка 7
-
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'act_of_reception.docx';//Имя файла и путь к нему
         //setcookie('name_of_doc',$name_of_file);
@@ -553,11 +557,11 @@ class Document_model extends CI_Model
 
     }*/
     //------------------------------------------------------------------------------------------------------------------
-    public function insert_into_database()
+    public function insert_into_database($id_user)
     {
         $data = array
         (
-            'id_user' => $_SESSION['id_user'],
+            'id_user' => $id_user,
             'date' => date(),
             'type_of_contract' => $_POST['type_of_contract'],
             'place_of_contract' => $_POST['place_of_contract'],
