@@ -9,18 +9,30 @@ class User extends CI_Controller {
     {
 
         parent::__construct();
-        $this->load->helper('html');
-
+        $this->load->helper(array('html','url'));
+        $this->load->library('form_validation');
+        $this->load->model('user_model');
     }
 
     public function login()
     {
-        if( !$this->data['user_id'] ) {
+        if( $this->data['user_id'] ) {
+            redirect('/user/main','refresh');
+        }
+        $this->form_validation->set_rules('login','Login','trim|required|xss_clean');
+        $this->form_validation->set_rules('password','Password','trim|required|xss_clean');
+        if( $this->form_validation->run() == TRUE )
+        {
+            $result = $this->user_model->login( $this->input->post('login'), $this->input->post('password') );
+            if($result){
+                redirect('user/main');
+            }else{
+                redirect('user/login');
+            }
+        }else {
             $this->load->view('user/login_header');
             $this->load->view('user/login');
             $this->load->view('user/footer');
-        }else{
-            redirect('/','refresh');
         }
     }
 
@@ -32,6 +44,10 @@ class User extends CI_Controller {
     }
     public function main()
     {
+        if( !$this->data['user_id'] ) {
+            redirect('/user/login','refresh');
+        }
+        echo $this->data['user_id'];
         $this->load->view('user/header');
         $this->load->view('user/main');
         $this->load->view('user/footer');
@@ -44,8 +60,12 @@ class User extends CI_Controller {
     }
     public function documents()
     {
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
+        $this->data['documents'] = $this->user_model->getListDocuments( );
         $this->load->view('user/header');
-        $this->load->view('user/documents');
+        $this->load->view('user/documents', $this->data);
         $this->load->view('user/footer');
     }
 
