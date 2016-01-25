@@ -74,11 +74,11 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <div class = "content-block">
+        <div class = "content-block" id="defects_block">
             <p class = "content-header">Неустраненные повреждения и эксплуатационные дефекты:</p>
             <div class = "content-radio">
                 <div class = "content-input">
-                    <input type="radio" name="defects" value="true">
+                    <input id="defects_yes" type="radio" name="defects" value="true">
                     <span class = "content-input-align">Есть</span>
                 </div>
 
@@ -95,11 +95,11 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <div class = "content-block">
+        <div class = "content-block" id="features_block">
             <p class = "content-header">Особенности, которые не влияют на безопасность ТС:</p>
             <div class = "content-radio">
                 <div class = "content-input">
-                    <input type="radio" name="features" value="true">
+                    <input id="features_yes" type="radio" name="features" value="true">
                     <span class = "content-input-align">Есть</span>
                 </div>
 

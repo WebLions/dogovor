@@ -4,11 +4,11 @@ var bs_deal = true,
     wife_no = true,
     wife_yes= true,
     defects_true= true,
+    features_true= true;
     reg_ts  = true;
 
 
 $( document ).ready(function() {
-
     $('#bs_deal').change(function(){
          string = "/blocks/load/main_block_bs";
         if(bs_deal == true)
@@ -80,9 +80,25 @@ $( document ).ready(function() {
         wife_yes = false;
         });
 
-    $('.document').on('change','#defects_true', function() {
+    $('.document').on('change','#defects_yes', function() {
 
-      console.log('Suka');
+        if(defects_true == true) $('#defects_block').append('<div class = "content-input-group">'+
+                                                            '<input class="form-control" type="text"  name="defects[]"  placeholder="Дефекты">'+
+                                                            '</div>');
+        defects_true=false;
+    });
+    $('.document').on('change','#features_yes', function() {
+
+        if(features_true == true) $('#features_block').append('<div class = "content-input-group">'+
+                                                              '<input class="form-control" type="text"  name="features[]"  placeholder="Особенности">'+
+                                                              '</div>');
+        features_true=false;
+    });
+
+    $('.document').on('click','#date_of_contract', function () {
+        $('#date_of_contract').datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
     });
 
     $('.document').on('click', '#ready-button', function () {
