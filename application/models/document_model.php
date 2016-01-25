@@ -562,7 +562,7 @@ class Document_model extends CI_Model
         $data = array
         (
             'id_user' => $id_user,
-            'date' => date(),
+            'date' => date("Y-m-d H:I:s"),
             'type_of_contract' => $_POST['type_of_contract'],
             'place_of_contract' => $_POST['place_of_contract'],
             'date_of_contract' => $_POST['date_of_contract'],
@@ -651,7 +651,21 @@ class Document_model extends CI_Model
         echo 'query-insert was complete.';
 
     }
+    public function testjson()
+    {
+        $test_array = array
+        (
+            'first_string'=> 1,
+            'second_string'=>2,
+            'some_string'=> 'example of string'
 
+        );
+        $instruments = json_encode($test_array);  //
+        /// прочитать защиту sql
+        $instruments = json_decode($instruments);
+
+        echo $instruments->first_string;
+    }
     //------------------------------------------------------------------------------------------------------------------
     public function save_info($post = array())
     {
