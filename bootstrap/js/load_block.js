@@ -3,8 +3,11 @@ var bs_deal = true,
     mods_no = true,
     wife_no = true,
     wife_yes= true,
+    defects_true= true,
     reg_ts  = true;
 
+
+$( document ).ready(function() {
 
     $('#bs_deal').change(function(){
          string = "/blocks/load/main_block_bs";
@@ -77,21 +80,11 @@ var bs_deal = true,
         wife_yes = false;
         });
 
+    $('.document').on('change','#defects_true', function() {
 
-    $('.document').on('checked','#accessories', function() {
-        i++;
-              $.ajax({
-                url: string,
-                dataType: "html",
-                success: function (data, textStatus) {
-                    $('#seller_tools').append('<div class = "content-input-group">'+
-                                          '<input class="form-control" type="text" name="tools'+i+' "placeholder="Документы">'+
-                                          '</div>');
-                }
-            });
-        });
+      console.log('Suka');
+    });
 
-$( document ).ready(function() {
     $('.document').on('click', '#ready-button', function () {
 
         console.log("click");

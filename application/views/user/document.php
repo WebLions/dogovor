@@ -5,7 +5,7 @@
               <div class="row">
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="main">Главная страница</a></li>
+                        <li><i class="fa fa-home"></i><a href="/">Главная страница</a></li>
                         <li><i class="fa fa-laptop"></i>Создание документа</li>
                     </ol>
                 </div>
