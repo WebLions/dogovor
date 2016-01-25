@@ -318,6 +318,8 @@ class Document_model extends CI_Model
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
         //$vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
         //$buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        //$buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
         $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
         $other_documents_car = $this->json_to_string($result->documents);
@@ -337,6 +339,12 @@ class Document_model extends CI_Model
             'buyer_law_document_osn' => $result->buyer_law_document_osn,
             'buyer_law_proxy_number' => $result->buyer_law_proxy_number,
             'buyer_law_proxy_date' => $result->buyer_law_proxy_date,
+            //'vendor_ind_fio' => $result->vendor_ind_fio,
+            'vendor_number_of_certificate' => $result->vendor_number_of_certificate,
+            'vendor_date_of_certificate' => $result->vendor_date_of_certificate,
+            //'buyer_ind_fio' => $result->buyer_ind_fio,
+            'buyer_number_of_certificate' => $result->buyer_number_of_certificate,
+            'buyer_date_of_certificate' => $result->buyer_date_of_certificate,
         );
         $header_doc = $this->set_header_doc($result->type_of_giver, $result->type_of_buyer, $data_for_header);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
@@ -627,7 +635,7 @@ class Document_model extends CI_Model
             'engine_model' => $_POST['engime_model'],
             'shassi' => $_POST['shassi'],
             'color_carcass' => $_POST['color_carcass'],
-            'other_parametrs' => $_POST['other_parametrs'],
+            'other_parameters' => $_POST['other_parameters'],
             'serial_car' => $_POST['serial_car'],
             'number_of_serial_car' => $_POST['number_of_serial_car'],
             'date_of_serial_car' => $_POST['date_of_serial_car'],
