@@ -198,6 +198,27 @@ class Document_model extends CI_Model
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
+    public function json_to_string($target)
+    {
+        $quantity = count($target);
+        if ($quantity == 1)
+        {
+            $string = $target[0];
+        }
+        $last_element = $quantity-1;//Ибо счет с нуля
+        elseif ($quantity > 1)
+        {
+            $string = $target[0];
+            for ($i = 1, $i<$quantity, $i++)
+            {
+                $string .= ", " . $target[$i];
+            }
+            $string .= ", " . $target[$last_element] . ".";
+        }
+        else $string = "Error, Quantity <0";
+        return $string;
+    }
+    //------------------------------------------------------------------------------------------------------------------
    public function format_all_data()
    {
        //Форматирование даты
@@ -279,14 +300,13 @@ class Document_model extends CI_Model
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор купли-продажи транспортного средства
-    public function get_doc_buy_sale()
+    public function get_doc_buy_sale($id)
     {
         //Работа с базой
         $this->db->select();
-        //$id_user = $_SESSION['id_user'] = 1;
-        //$id_document = $_SESSION['id_document'] = 1;
-        //$where = "id_user = '$id_user' AND id_document = '$id_document'";
-        //$this->db->where($where);
+        $id_user = $this->data['user_id'];
+        $where = "id_user = '$id_user' AND id = '$id '";
+        $this->db->where($where);
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
@@ -361,8 +381,10 @@ class Document_model extends CI_Model
         $document->setValue('price', $result->price_car);
         $document->setValue('price_str', $result->price_str);//Написать функцию превращения числа в строку
         $document->setValue('date_of_pay', $result->payment_date);//Форматирование даты. Дописать после Ромыного апдейта
+
         $document->setValue('other_documents_car', $result->documents);
         $document->setValue('accessories', $result->accessories);
+
         $document->setValue('marriage_info', $marriage['info']);
         $document->setValue('marriage_number', $marriage['number']);
         $document->setValue('penalty', $result->penalty);
@@ -371,7 +393,8 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'buy_sale_deal.docx';//Имя файла и путь к нему
         //setcookie('name_of_doc',$name_of_file);
         $document->save($name_of_file); // Сохранение документа
-        echo 'File created.';
+
+        return $name_of_file;
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор дарения
@@ -619,8 +642,8 @@ class Document_model extends CI_Model
             'defects' => $_POST['defects'],
             'features' => $_POST['features'],
             'payment_date' => $_POST['payment_date'],
-            'documents' => $_POST['documents'],
-            'accessories' => $_POST['accessories'],
+            'documents' => json_encode($_POST['documents']),
+            'accessories' => json_encode($_POST['accessories']),
             'car_in_marriage' => $_POST['car_in_marriage'],
             'spouse_surname' => $_POST['spouse_surname'],
             'spouse_name' => $_POST['spouse_name'],
