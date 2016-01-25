@@ -7,7 +7,7 @@
             </div>
 
             <div class = "content-input-group">
-                <input class="form-control datepicker" data-provide="datepicker"aria-describedby="sizing-addon3" name="date_of_contract"  placeholder="Дата заключения договора:">
+                <input id="date_of_contract" class="form-control datepicker"  name="date_of_contract"  placeholder="Дата заключения договора:">
             </div>
         </div>
     </div>

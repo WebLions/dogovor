@@ -6,10 +6,15 @@
 
   <script src="/bootstrap/js/load_block.js"></script>
   <script src="/bootstrap/js/bootstrap.min.js"></script>
-  <!--<script src="/bootstrap/datepicker/js/bootstrap-datepicker.js"></script>-->
+
+  <link href="/datepicker/bootstrap-datetimepicker.css" rel="stylesheet">
+  <script src="/datepicker/moment-with-locales.js"></script>
+  <script src="/datepicker/bootstrap-datetimepicker.js"></script>
+
 
 
   <script src="/bootstrap/js/jquery.sticky.js"></script>
+
   <script>
       $(document).ready(function(){
           $("#content-preview").sticky({topSpacing:50});

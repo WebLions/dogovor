@@ -65,7 +65,7 @@
             <p class = "content-header">Неустраненные повреждения и эксплуатационные дефекты:</p>
             <div class = "content-radio">
                 <div class = "content-input">
-                    <input id="defects_true" type="radio" name="defects" value="true" >
+                    <input id="defects_yes" type="radio" name="defects" value="true" >
                     <span class = "content-input-align">Есть</span>
                 </div>
 
