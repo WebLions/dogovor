@@ -201,7 +201,7 @@ class Document_model extends CI_Model
     public function json_to_string($target)
     {
         $quantity = count($target);
-        $last_element = $quantity;//Ибо счет с нуля
+        $last_element = $quantity-1;//Ибо счет с нуля
         if ($quantity == 1)
         {
             $string = $target[0];
@@ -216,6 +216,7 @@ class Document_model extends CI_Model
             $string .= ", " . $target[$last_element] . ".";
         }
         else $string = "Error, Quantity <0";
+
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
