@@ -66,17 +66,25 @@ class Document extends CI_Controller
     }
     public function go_buy_sale()
     {
-        $this->form_validation->set_rules('email','E-mail','trim|required|xss_clean');
-        if($this->form_validation->run() == true)
-        {
-            if( !$this->data['user_id'] ) {
-                $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
+        if( !$this->data['user_id'] ) {
+            $this->form_validation->set_rules('email','E-mail','trim|required|xss_clean');
+            if($this->form_validation->run() == true)
+            {
+                if( !$this->data['user_id'] ) {
+                    $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
+                }
+            }else{
+                redirect('user/login');
             }
+        }else{
             $this->document_model->insert_into_database( $this->data['user_id'] );
             redirect('user/login');
-        }else{
-            redirect('user/login');
         }
-        //$this->select_from_database();
+    }
+    public function create()
+    {
+        $this->load->view('user/document_header');
+        $this->load->view('user/document');
+        $this->load->view('user/footer');
     }
 }

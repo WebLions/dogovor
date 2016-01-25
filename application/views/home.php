@@ -838,7 +838,7 @@
 		<span style="color:#404040;font-family:verdana;font-size:17px;">Тысячи пользователей готовят документы с помощью сервиса CarsDoc</span>
 	</div>
 	<div id="wb_indexImage3" style="position:absolute;left:60px;top:480px;width:289px;height:90px;z-index:13;">
-		<a href="/user/main"><img src="images/snapshot.jpg" id="indexImage3" alt="" style="width:289px;height:90px;"></a>
+		<a href="/document/create"><img src="images/snapshot.jpg" id="indexImage3" alt="" style="width:289px;height:90px;"></a>
 	</div>
 	<div id="wb_indexImage4" style="position:absolute;left:0px;top:560px;width:970px;height:384px;z-index:14;">
 		<img src="images/img0002.jpg" id="indexImage4" alt="" style="width:970px;height:384px;">

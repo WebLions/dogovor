@@ -33,19 +33,19 @@
       <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">
-                <a href="#"><i class="icon_profile"></i> Профиль </a>
+                <a href="/user/profile"><i class="icon_profile"></i> Профиль </a>
               </li>
               <li>
-                <a href="/document"><i class="icon_mail_alt"></i> Создать </a>
+                <a href="/document/create"><i class="icon_mail_alt"></i> Создать </a>
               </li>
               <li>
-                <a href="/documents"><i class="icon_clock_alt"></i> Документы</a>
+                <a href="/user/documents"><i class="icon_clock_alt"></i> Документы</a>
               </li>
               <li>
-                <a href="#"><i class="icon_chat_alt"></i> Кошелёк </a>
+                <a href="/user/payment_history"><i class="icon_chat_alt"></i> Кошелёк </a>
               </li>
               <li>
-                <a href="login.html"><i class="icon_key_alt"></i> Выход</a>
+                <a href="/user/logout"><i class="icon_key_alt"></i> Выход</a>
               </li>
             </ul>
           </li>
@@ -62,40 +62,40 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="active">
-            <a class="" href="profile">
+            <a class="" href="/user/profile">
               <i class="glyphicon glyphicon-home"></i>
               <span>Главная</span>
             </a>
           </li>
           <li class="sub-menu">
-            <a href="document" class="">
+            <a href="/document/create" class="">
               <i class="glyphicon glyphicon-plus"></i>
               <span>Создать</span>
             </a>
           </li>
           <li class="sub-menu">
-            <a href="documents" class="">
+            <a href="documents" class="/user/documents">
               <i class="glyphicon glyphicon-file"></i>
               <span>Документы</span>
             </a>
 
           </li>
           <li class="sub-menu">
-            <a class="" href="payment_history">
+            <a class="" href="/user/payment_history">
               <i class="glyphicon glyphicon-align-justify"></i>
               <span>История</span>
             </a>
           </li>
 
           <li>
-            <a class="" href="wallet">
+            <a class="" href="/user/wallet">
               <i class="glyphicon glyphicon-usd"></i>
               <span>Кошелёк</span>
             </a>
           </li>
 
           <li class="sub-menu">
-            <a href="home" class="">
+            <a href="/user/logout" class="">
               <i class="glyphicon glyphicon-log-out"></i>
               <span>Выход</span>
             </a>
