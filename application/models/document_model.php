@@ -405,10 +405,11 @@ class Document_model extends CI_Model
         $document->setValue('penalty', $result->penalty);
 
         // Сохранение результатов
-        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/buy_sale_deal?id='.$id.'.docx';//Имя файла и путь к нему
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
 
-        return $name_of_file;
+        $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.docx';
+        return $name_for_server;
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор дарения
