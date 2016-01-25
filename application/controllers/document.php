@@ -9,7 +9,7 @@ class Document extends CI_Controller
     {
 
         parent::__construct();
-        $this->load->helper('html');
+        $this->load->helper(array('html','url'));
         $this->load->model('document_model');
         $this->load->model('user_model');
         $this->load->library('form_validation');
@@ -64,7 +64,9 @@ class Document extends CI_Controller
         $this->form_validation->set_rules('email','E-mail','trim|required|xss_clean');
         if($this->form_validation->run() == true)
         {
-            $this->data['user_id'] = $this->user_model->register( $this->input->post('email') );
+            if( !$this->data['user_id'] ) {
+                $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
+            }
             $this->document_model->insert_into_database( $this->data['user_id'] );
             redirect('user/login');
         }else{

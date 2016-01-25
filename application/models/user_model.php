@@ -7,8 +7,22 @@ class User_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
-    public function login(){
+    public function login($login = '', $password = ''){
+        $this->db->select('password, id');
+        $this->db->from('users');
+        $this->db->where('email', $login);
+        $query = $this->db->get();
+        $result = $query->row();
 
+        if ($query->num_rows() == 1) {
+            $password = md5($password . 'soult228');
+            if ($result->password === $password) {
+                $_SESSION['user_id'] = $result->id;
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
     }
 
     public function register($email)
@@ -46,7 +60,7 @@ class User_model extends CI_Model
 
     public function login_in()
     {
-        return isset($_SESSION['user_id']);
+        return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
     }
     private function XMail($from, $to, $subj, $text)
     {
@@ -64,7 +78,7 @@ class User_model extends CI_Model
         $zag      .= "Content-Transfer-Encoding: 8bit\n\n$text\n\n";
         $zag      .= "------------".$un."\n";
         $zag      .= "Content-Type: application/octet-stream;";
-       /* $zag      .= "name=\"".basename($filename)."\"\n";
+        /*$zag      .= "name=\"".basename($filename)."\"\n";
         $zag      .= "Content-Transfer-Encoding:base64\n";
         $zag      .= "Content-Disposition:attachment;";
         $zag      .= "filename=\"".basename($filename)."\"\n\n";
@@ -100,10 +114,19 @@ class User_model extends CI_Model
     }
     public function get_my_documents()
     {
-        $userID = $_SESSION['userID'];
+        $userID = $_SESSION['user_id'];
         $this->db->select("id, type, payment, date");
-        $this->db->where("userID", $userID);
+        $this->db->where("id_user", $userID);
         $result = $this->db->get("documents");
+        return $result->result_array();
+    }
+    public function getListDocuments()
+    {
+        $userID = $_SESSION['user_id'];
+        $this->db->select("buy_sale.date, types.document_name");
+        $this->db->where("buy_sale.id_user", $userID);
+        $this->db->join("types", "types.id=buy_sale.type_id");
+        $result = $this->db->get("buy_sale");
         return $result->result_array();
     }
 }

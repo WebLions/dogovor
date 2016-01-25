@@ -20,20 +20,20 @@
                         <th style="width: 20%">Дата создания</th>
                         <th style="width: 15%">Действия</th>
                     </thead>
+                    <? foreach ($documents as $document) {?>
                     <tr>
-                        <td>Документ 1</td>
+                        <td><?=$document['document_name']?></td>
                         <td>30 дней</td>
                         <td>Оплачено</td>
-                        <td>07.01.2016</td>
+                        <td><?=$document['date']?></td>
                         <td style="float: left">
                             <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href=""></a>
                             <a class="glyphicon glyphicon-trash btn btn-danger btn-xs" style="float:right;" href=""></a>
                             <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" href="">
                             <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href=""></a>
                         <td>
-
                     </tr>
-
+                    <? } ?>
                 </table>
                 <br>
 
