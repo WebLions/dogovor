@@ -201,15 +201,15 @@ class Document_model extends CI_Model
     public function json_to_string($target)
     {
         $quantity = count($target);
+        $last_element = $quantity;//Ибо счет с нуля
         if ($quantity == 1)
         {
             $string = $target[0];
         }
-        $last_element = $quantity-1;//Ибо счет с нуля
         elseif ($quantity > 1)
         {
             $string = $target[0];
-            for ($i = 1, $i<$quantity, $i++)
+            for ($i = 1; $i<$quantity; $i++)
             {
                 $string .= ", " . $target[$i];
             }
