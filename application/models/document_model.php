@@ -180,8 +180,12 @@ class Document_model extends CI_Model
         echo '</pre>';
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function format_date($day, $month, $year)
+    public function format_date($date)
     {
+        $date = DateTime::createFromFormat('d.m.Y', $date);
+        $day = $date->format('d');
+        $month = $date->format('m');
+        $year = $date->format('Y');
         $date = '"'. $day . '" ' . $month . ' ' . $year . 'г.';
         return $date;
     }
@@ -401,7 +405,7 @@ class Document_model extends CI_Model
         $document->setValue('penalty', $result->penalty);
 
         // Сохранение результатов
-        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'buy_sale_deal.docx';//Имя файла и путь к нему
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/buy_sale_deal?id='.$id.'.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
 
         return $name_of_file;
