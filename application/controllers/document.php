@@ -45,8 +45,13 @@ class Document extends CI_Controller
         $this->document_model->get_doc_statement_vendor_marriage();//вызов нужно функции модели;
 
     }
+    public function json()
+    {
+        $this->document_model->testjson();
+    }
     public function select_from_database()
     {
+        echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
         $this->document_model->select_from_database();
     }
     public function insert_into_database()
