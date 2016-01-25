@@ -358,7 +358,7 @@ class Document_model extends CI_Model
         $document->setValue('buyer_serial_ch', $result->buyer_passport_serial);
         $document->setValue('buyer_number_ser', $result->vendor_passport_number);
         $document->setValue('buyer_ser_bywho', $result->vendor_passport_bywho);
-        $document->setValue('buyer_bywho_date', $result->buyer_bywho_date);
+        $document->setValue('buyer_bywho_date', $result->buyer_passport_date);
         $document->setValue('buyer_adress', $buyer_adress);
         $document->setValue('buyer_phone', $result->buyer_phone);
         $document->setValue('mark', $result->mark);
@@ -384,7 +384,7 @@ class Document_model extends CI_Model
         //$document->setValue('defects_rightnow', $result->defects_rightnow);
         $document->setValue('features', $result->features);
         $document->setValue('price', $result->price_car);
-        $document->setValue('price_str', $result->price_str);//Написать функцию превращения числа в строку
+        //$document->setValue('price_str', $result->price_str);//Написать функцию превращения числа в строку
         $document->setValue('date_of_pay', $result->payment_date);//Форматирование даты. Дописать после Ромыного апдейта
         $document->setValue('other_documents_car', $other_documents_car);
         $document->setValue('accessories', $accessories);
