@@ -215,7 +215,11 @@
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="shassi"  placeholder="Номер рамы,шасси:">
-                </div><div class = "content-input-group">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="carcass"  placeholder="Кузов(кабина,прицеп):">
+                </div>
+                <div class = "content-input-group">
                     <input class = "form-control" type="text" name="color_carcass"  placeholder="Цвет кузова,кабины,прицепа:">
                 </div>
                 <div class = "content-input-group">
