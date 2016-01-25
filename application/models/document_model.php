@@ -316,20 +316,24 @@ class Document_model extends CI_Model
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        //$vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        //$buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
         $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
         $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
+        $other_documents_car = $this->json_to_string($result->documents);
+        $accessories = $this->json_to_string($result->accessories);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
             'buyer_fio' => $buyer_fio,
             'vendor_law_company_name' => $result->vendor_law_company_name,
             'vendor_law_actor_position' => $result->vendor_law_actor_position,
-            'vendor_law_fio' => $result->vendor_law_fio,
+            //'vendor_law_fio' => $vendor_law_fio,
             'vendor_law_document_osn' => $result->vendor_law_document_osn,
             'vendor_law_proxy_number' => $result->vendor_law_proxy_number,
             'vendor_law_proxy_date' => $result->vendor_law_proxy_date,
             'buyer_law_company_name' => $result->buyer_law_company_name,
             'buyer_law_actor_position' => $result->buyer_law_actor_position,
-            'buyer_law_fio' => $result->buyer_law_fio,
+            //'buyer_law_fio' => $buyer_law_fio,
             'buyer_law_document_osn' => $result->buyer_law_document_osn,
             'buyer_law_proxy_number' => $result->buyer_law_proxy_number,
             'buyer_law_proxy_date' => $result->buyer_law_proxy_date,
@@ -382,17 +386,14 @@ class Document_model extends CI_Model
         $document->setValue('price', $result->price_car);
         $document->setValue('price_str', $result->price_str);//Написать функцию превращения числа в строку
         $document->setValue('date_of_pay', $result->payment_date);//Форматирование даты. Дописать после Ромыного апдейта
-
-        $document->setValue('other_documents_car', $result->documents);
-        $document->setValue('accessories', $result->accessories);
-
+        $document->setValue('other_documents_car', $other_documents_car);
+        $document->setValue('accessories', $accessories);
         $document->setValue('marriage_info', $marriage['info']);
         $document->setValue('marriage_number', $marriage['number']);
         $document->setValue('penalty', $result->penalty);
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'buy_sale_deal.docx';//Имя файла и путь к нему
-        //setcookie('name_of_doc',$name_of_file);
         $document->save($name_of_file); // Сохранение документа
 
         return $name_of_file;
@@ -405,14 +406,13 @@ class Document_model extends CI_Model
     }
     //------------------------------------------------------------------------------------------------------------------
     //акт приема-передачи автомобиля
-    public function get_doc_act_of_reception()
+    public function get_doc_act_of_reception($id)
     {
         //Работа с базой
         $this->db->select();
-        //$id_user = $_SESSION['id_user'] = 1;
-        //$id_document = $_SESSION['id_document'] = 1;
-        //$where = "id_user = '$id_user' AND id_document = '$id_document'";
-        //$this->db->where($where);
+        $id_user = $this->data['user_id'];
+        $where = "id_user = '$id_user' AND id = '$id '";
+        $this->db->where($where);
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
@@ -447,7 +447,6 @@ class Document_model extends CI_Model
         //Вопросы по пост-пунткам пунтка 7
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'act_of_reception.docx';//Имя файла и путь к нему
-        //setcookie('name_of_doc',$name_of_file);
         $document->save($name_of_file); // Сохранение документа
         echo 'File created.';
     }
