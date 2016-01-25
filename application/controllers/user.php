@@ -17,7 +17,7 @@ class User extends CI_Controller {
     public function login()
     {
         if( $this->data['user_id'] ) {
-            redirect('/user/main','refresh');
+            redirect('/user/profile','refresh');
         }
         $this->form_validation->set_rules('login','Login','trim|required|xss_clean');
         $this->form_validation->set_rules('password','Password','trim|required|xss_clean');
@@ -25,7 +25,7 @@ class User extends CI_Controller {
         {
             $result = $this->user_model->login( $this->input->post('login'), $this->input->post('password') );
             if($result){
-                redirect('user/main');
+                redirect('user/profile');
             }else{
                 redirect('user/login');
             }
@@ -36,22 +36,6 @@ class User extends CI_Controller {
         }
     }
 
-    public function document()
-    {
-        $this->load->view('user/document_header');
-        $this->load->view('user/document');
-        $this->load->view('user/footer');
-    }
-    public function main()
-    {
-        if( !$this->data['user_id'] ) {
-            redirect('/user/login','refresh');
-        }
-        echo $this->data['user_id'];
-        $this->load->view('user/header');
-        $this->load->view('user/main');
-        $this->load->view('user/footer');
-    }
     public function payment_history()
     {
         $this->load->view('user/header');
@@ -71,11 +55,14 @@ class User extends CI_Controller {
 
     public function logout()
     {
-        //$this->load->view('login');
+        unset($_SESSION['user_id']);
+        session_destroy();
+        redirect('/user/login','refresh');
     }
 
     public function register()
     {
+
         $this->load->view('user/login_header');
         $this->load->view('user/register');
         $this->load->view('user/footer');
@@ -84,27 +71,28 @@ class User extends CI_Controller {
 
     public function profile()
     {
+        if( !$this->data['user_id'] ) {
+            redirect('/user/login','refresh');
+        }
         $this->load->view('user/header');
         $this->load->view('user/profile');
         $this->load->view('user/footer');
     }
     public function wallet()
     {
+        if( !$this->data['user_id'] ) {
+            redirect('/user/login','refresh');
+        }
         $this->load->view('user/header');
         $this->load->view('user/wallet');
         $this->load->view('user/footer');
     }
 
-    public function my_document()
-    {
-        $this->data['listDocuments'] = $this->user_model->get_my_documents();
-
-        $this->load->view('user/header');
-        $this->load->view('user/myDocuments', $this->data);
-        $this->load->view('user/footer');
-    }
     public function payments()
     {
+        if( !$this->data['user_id'] ) {
+            redirect('/user/login','refresh');
+        }
         $this->data['payments'] = $this->user_model->get_my_documents();
 
         $this->load->view('user/header');

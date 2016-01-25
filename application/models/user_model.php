@@ -126,6 +126,7 @@ class User_model extends CI_Model
         $this->db->select("buy_sale.date, types.document_name");
         $this->db->where("buy_sale.id_user", $userID);
         $this->db->join("types", "types.id=buy_sale.type_id");
+        $this->db->order_by("buy_sale.date");
         $result = $this->db->get("buy_sale");
         return $result->result_array();
     }
