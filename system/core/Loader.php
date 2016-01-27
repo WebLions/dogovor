@@ -746,7 +746,7 @@ class CI_Loader {
 		{
 			$$_ci_val = ( ! isset($_ci_data[$_ci_val])) ? FALSE : $_ci_data[$_ci_val];
 		}
-
+		//var_dump($_ci_data['_ci_vars']);
 		$file_exists = FALSE;
 
 		// Set the path to the requested file
@@ -854,6 +854,7 @@ class CI_Loader {
 		 * template and any subsequent ones. Oy!
 		 *
 		 */
+		//var_dump($documents);
 		if (ob_get_level() > $this->_ci_ob_level + 1)
 		{
 			ob_end_flush();

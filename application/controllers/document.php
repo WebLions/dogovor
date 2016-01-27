@@ -15,11 +15,13 @@ class Document extends CI_Controller
         $this->load->library('form_validation');
 
     }
-    public function buy_sale()  //  в ссылке выглядит так document/name
+    public function buy_sale($id)  //  в ссылке выглядит так document/name
     {
-
-        $this->document_model->get_doc_buy_sale();//вызов нужно функции модели;
-
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
+        $this->data['doc'] = $this->document_model->get_doc_buy_sale( (int) $id );//вызов нужно функции модели;
+        redirect($this->data['doc']);
     }
     public function act_of_reception()  //  в ссылке выглядит так document/name
     {
@@ -73,6 +75,8 @@ class Document extends CI_Controller
                 if( !$this->data['user_id'] ) {
                     $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
                 }
+                $this->document_model->insert_into_database( $this->data['user_id'] );
+                redirect('user/login');
             }else{
                 redirect('user/login');
             }

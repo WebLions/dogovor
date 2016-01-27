@@ -30,13 +30,12 @@
                             <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href=""></a>
                             <a class="glyphicon glyphicon-trash btn btn-danger btn-xs" style="float:right;" href=""></a>
                             <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" href="">
-                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href=""></a>
+                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$document['url']?>/<?=$document['id']?>"></a>
                         <td>
                     </tr>
                     <? } ?>
                 </table>
                 <br>
-
                 <div>
                     <div class="row">
                         <div class="col-lg-12">
@@ -45,7 +44,6 @@
                             </div>
                         </div>
                     </div>
-
             </div>
         </div>
 

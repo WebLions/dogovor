@@ -48,11 +48,11 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'jera.mysql.ukraine.com.ua';
-$db['default']['username'] = 'jera_dogovor';
-$db['default']['password'] = 'wrx2depx';
-$db['default']['database'] = 'jera_dogovor';
-$db['default']['dbdriver'] = 'mysql';
+$db['default']['hostname'] = '212.109.223.89';
+$db['default']['username'] = 'project_dogovor';
+$db['default']['password'] = 'CK62hKUdGAfX5sFq';
+$db['default']['database'] = 'project_dogovor';
+$db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
