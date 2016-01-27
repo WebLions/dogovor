@@ -23,6 +23,9 @@ class Document extends CI_Controller
         $this->data['doc'] = $this->document_model->get_doc_buy_sale( (int) $id );//вызов нужно функции модели;
         redirect($this->data['doc']);
     }
+    /*public function test_packset(){
+        $this->document_model->testpack();
+    }*/
     public function act_of_reception()  //  в ссылке выглядит так document/name
     {
 

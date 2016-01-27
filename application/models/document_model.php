@@ -122,6 +122,56 @@ class Document_model extends CI_Model
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
+    public function set_pack_of_documents($giver, $taker, $type_of_document)
+    {
+        if ($type_of_document == 'buy_sell')
+        {
+            if ($giver == 'physical' && $taker == 'physical')
+            {
+                $id_type = 1;
+            }
+            elseif ($giver == 'individual' && $taker == 'individual')
+            {
+                $id_type = 1;
+            }
+            elseif ($giver == 'law' && $taker == 'law')
+            {
+                $id_type = 2;
+            }
+            elseif ($giver == 'physical' && $taker == 'law' || $taker == 'individual')
+            {
+                $id_type = 3;
+            }
+            elseif ($giver == 'law' || $giver == 'individual' && $taker == 'physical')
+            {
+                $id_type = 4;
+            }
+            else $id_type = false;
+        }
+        if ($type_of_document == 'gift')
+        {
+            if ($giver == 'physical' && $taker == 'physical')
+            {
+                $id_type = 5;
+            }
+            elseif ($giver == 'individual' && $taker == 'individual')
+            {
+                $id_type = 5;
+            }
+            elseif ($giver == 'physical' || $giver == 'individual' && $taker == 'law')
+            {
+                $id_type = 6;
+            }
+            else $id_type = false;
+        }
+        return $id_type;
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    /*public function testpack()
+    {
+        echo $this->set_pack_of_documents('law','physical','buy_sell');
+    }*/
+    //------------------------------------------------------------------------------------------------------------------
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
     public function set_header_doc($type_of_vendor, $type_of_buyer, $data_for_header) //law //physical //individual
@@ -523,6 +573,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database($id_user)
     {
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract']);
         $data = array
         (
             'id_user' => $id_user,
@@ -567,6 +618,7 @@ class Document_model extends CI_Model
             'date_of_product' => $_POST['date_of_product'],
             'engine_model' => $_POST['engime_model'],
             'shassi' => $_POST['shassi'],
+            'carcass' => $_POST['carcass'],
             'color_carcass' => $_POST['color_carcass'],
             'other_parameters' => $_POST['other_parameters'],
             'serial_car' => $_POST['serial_car'],
@@ -603,34 +655,19 @@ class Document_model extends CI_Model
             'marriage_svid_date' => $_POST['marriage_svid_date'],
             'marriage_svid_bywho' => $_POST['marriage_svid_bywho'],
             'penalty' => $_POST['penalty'],
-            'type_id' => 1
+            'type_id' => $type_id
 
         );
         //Бизопаснасть
-        foreach ($data as $key)
+        /*foreach ($data as $key)
         {
             mysql_real_escape_string($key);
-        }
+        }*/
         //Отправка данных
         $this->db->insert('buy_sale', $data);
 
         return true;
-    }
-    public function testjson()
-    {
-        $test_array = array
-        (
-            'first_string'=> 1,
-            'second_string'=>2,
-            'some_string'=> 'example of string'
-        );
-        $instruments = json_encode($test_array);  //
-        /// прочитать защиту sql
-        $instruments = json_decode($instruments);
-
-        echo $instruments->first_string;
-    }
-    //------------------------------------------------------------------------------------------------------------------
+    }//------------------------------------------------------------------------------------------------------------------
     public function save_info($post = array())
     {
 
