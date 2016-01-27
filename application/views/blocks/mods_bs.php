@@ -146,27 +146,27 @@
             <p class = "content-header">Продавец передает Покупателю следующие документы(Выберите из списка):</p>
             <div class = "content-radio">
                 <div class = "content-input">
-                    <input type="checkbox" name="documents" value="svid">
+                    <input type="checkbox" name="documents[]" value="svid">
                     <span class = "content-input-align">Свидетельство о регистрации транспортного средства:</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="documents" value="diagnostic_card">
+                    <input type="checkbox" name="documents[]" value="diagnostic_card">
                     <span class = "content-input-align">Диагностическую карту (талон технического осмотра)</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="documents" value="garanty">
+                    <input type="checkbox" name="documents[]" value="garanty">
                     <span class = "content-input-align">Гарантийную (сервисную) книжку</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="documents" value="instruction">
+                    <input type="checkbox" name="documents[]" value="instruction">
                     <span class = "content-input-align">Инструкцию (руководство) по эксплуатации транспортного средства</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="documents" value="garant_talon">
+                    <input type="checkbox" name="documents[]" value="garant_talon">
                     <span class = "content-input-align">Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование</span>
                 </div>
 
@@ -184,32 +184,32 @@
             <div class = "content-radio">
 
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories" value="keys">
+                    <input type="checkbox" name="accessories[]" value="keys">
                     <span class = "content-input-align">Оригинальные ключи в количестве :</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories" value="keys_immob">
+                    <input type="checkbox" name="accessories[]" value="keys_immob">
                     <span class = "content-input-align">Ключи от иммобилайзера в количестве </span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories" value="spare_wheel">
+                    <input type="checkbox" name="accessories[]" value="spare_wheel">
                     <span class = "content-input-align">Запасное колесо</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories" value="jack">
+                    <input type="checkbox" name="accessories[]" value="jack">
                     <span class = "content-input-align">Домкрат</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories" value="key_wheel">
+                    <input type="checkbox" name="accessories[]" value="key_wheel">
                     <span class = "content-input-align">Балонный ключ</span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories" value="Нет">
+                    <input type="checkbox" name="accessories[]" value="Нет">
                     <span class = "content-input-align">Иное:</span>
                 </div>
 
