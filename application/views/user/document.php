@@ -46,7 +46,10 @@
          <div class="col-lg-6" >
                       <div class = "row">
                           <div class = "col-lg-10">
-                              <div class = "content-block" style="width: 600px;height: 600px;" id="content-preview">
+                              <div class = "content-block" style="width: 600px;height: 600px;" id="content-preview_block">
+                                  <canvas id="content_preview">
+
+                                  </canvas>
 
                               </div>
                           </div>

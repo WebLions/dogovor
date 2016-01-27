@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <table style="width: 100%" class="table">
+        <table style="width: 100%" class="table table-striped">
             <thead>
                 <th style="width: 25%">Название документа</th>
                 <th style="width: 25%">Дата создания</th>
