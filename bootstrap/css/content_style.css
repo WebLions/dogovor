@@ -37,11 +37,23 @@
     padding-left: 10%;
     padding-bottom: 3%;
 }
+.content-radio-inline{
+
+    text-align:center;
+    padding-left: 10%;
+    padding-bottom: 3%;
+}
 
 .content-input{
 
+    text-align: left;
+
+}
+.content-input-inline{
 
     text-align: center;
+    padding-left: 10%;
+    padding-bottom: 3%;
 
 }
 .content-button{
