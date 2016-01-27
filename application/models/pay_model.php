@@ -19,6 +19,7 @@ class Pay_model extends CI_Model
         $notify_by_api = '0';
         $api_in_key = '';
 
+
         $data = array(
             "price_final"=>"true",
             "user_login"=>"onpay",
