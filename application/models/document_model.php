@@ -3,158 +3,7 @@ error_reporting (0);
 
 class Document_model extends CI_Model
 {
-    //------------------------------------------------------------------------------------------------------------------
-    // Тестовые переменные
-   /* public $city_contract = "Одесса";
-    public $day = "28";
-    public $month = "ноября";
-    public $year = "2028";
-    public $date_of_contract = "";
-    public $vendor_name = 'Иван';
-    public $vendor_surname = 'Иванов';
-    public $vendor_patronymic = 'Иванович';
-    public $vendor_fio = "";
-    public $vendor_b_day = "28";
-    public $vendor_b_month = "апреля";
-    public $vendor_b_year = "1997";
-    public $vendor_date = "";
-    public $vendor_serial_ch = "АВ";
-    public $vendor_number_ser = "228911";
-    public $vendor_ser_bywho = "Ивановский отдел";
-    public $vendor_bywho_d = "11";
-    public $vendor_bywho_m = "сентября";
-    public $vendor_bywho_y = "2001";
-    public $vendor_bywho_date = '';
-    public $vendor_city = "Вашингтон";
-    public $vendor_street = "Рузвельт стрит";
-    public $vendor_house = "42";
-    public $vendor_flat = "28";
-    public $vendor_adress = '';
-    public $vendor_phone = "+38(066)666-66-66";
-    public $buyer_surname = "Петров";
-    public $buyer_name = "Петр";
-    public $buyer_patronymic = "Петрович";
-    public $buyer_fio = "Петров Петр Петрович";
-    public $buyer_b_day = "19";
-    public $buyer_b_month = "декабря";
-    public $buyer_b_year = "1994";
-    public $buyer_date = "";
-    public $buyer_serial_ch = "ПГРЬ";
-    public $buyer_number_ser = "11111111";
-    public $buyer_ser_bywho = "Петровский отдел";
-    public $buyer_bywho_d = "02";
-    public $buyer_bywho_m = "октября";
-    public $buyer_bywho_y = "2007";
-    public $buyer_bywho_date = '';
-    public $buyer_city = "Прага";
-    public $buyer_street = "Красная улица";
-    public $buyer_house = "9";
-    public $buyer_flat = "11";
-    public $buyer_adress = '';
-    public $buyer_phone = "+7(000)333-22-11";
-    public $mark = "Ламбаргини";
-    public $vin = "8888";
-    public $reg_number = "ВЕ 666 ВТ";
-    public $car_type = "седан";
-    public $category = '';
-    public $date_of_product = "22.11.2000";
-    public $engine_model = "А4ЕЕ975Т";
-    public $shassi = "ШШШ";
-    public $carcass = "ККК";
-    public $color_carcass = "Белый";
-    public $other_parameters = "Освежитель воздуха";
-    public $additional_equip = "Ёлочка";
-    public $serial_car = "КК";//
-    public $number_of_serial_car = "9АЕ22ИС";//
-    public $bywho_serial_car = "Римский завод Ламбаргини";
-    public $date_of_serial_car = "11.11.2011";
-    public $status_of_car = "Впоряде";
-    public $ts_day = "42";
-    public $ts_month = "сорок второй";
-    public $ts_year = "2042";
-    public $ts_date = "";
-    public $ts_bywho = "Фиксики";
-    public $defects_all = "Поломка правого зеркала, царапины на капоте";
-    public $defects_rightnow = "царапины на капоте";
-    public $features = "Слишком греет печка";
-    public $price = "28 000 000";
-    public $price_str = "двадцать восемь миллионов";
-    public $currency = "рублей";
-    public $day_of_pay = "01";
-    public $month_of_pay = "01";
-    public $year_of_pay = "2016";
-    public $date_of_pay = "";
-    public $day_car = "12";
-    public $month_car = "12";
-    public $year_car = "2012";
-    public $equipment_for_car = "Носовой платок";
-    public $other_documents_car = "Другие документы";//Смотря под что приходит
-    public $marriage_info = "Имеется в браке";
-    public $marriage_number = "777";
-    public $penalty = "";
-    public $oil_in_car = "95 prime";
-    public $vendor_birthday = '';
-    public $spouse_surname = 'Леонидов';
-    public $spouse_name = "Леонид";
-    public $spouse_patronymic = 'Леонидов Леонид Леонидович';
-    public $spouse_fio = 'Леонидов Леонид Леонидович';
-    public $spouse_pass_serial = 'ЛЛ';
-    public $spouse_pass_number = '42284228';
-    public $spouse_pass_bywho = 'Леонидовский отдел';
-    public $spouse_pass_date = '23.03.2023';
-    public $spouse_city = 'Леонидовский город';
-    public $spouse_street = 'леонидовская улица';
-    public $spouse_house = 'улица 28';
-    public $spouse_flat = 'кв. 42';
-    public $spouse_adress = '';
-    public $spouse_birthday = '';
-    public $marriage_svid_serial = 'СОБ';
-    public $marriage_svid_number = '777ДЛ666';
-    public $marriage_svid_bywho = 'Петровский загс';
-    public $marriage_svid_date = '55.05.2005';
-    public $gibdd_reg_name = 'Гибддшній отдел';
-    public $reg_gov_number = '1223344440';
-    public $giver_date = '20.11.1999';
-    public $giver_pass = 'Паспорт';
-    public $gibdd_inn = 'ИНН228854';
-    public $giver_agent = 'Агентовский Агент Агентинович';
-    public $giver_agent_pass = 'Паспорт норм у агента';
-    public $giver_agent_adress = 'г. Агент, ул. Агентова, дом 11А, кв. 4а';
-    public $giver_agent_phone = '+380661715740';
-    public $gibdd_power_ingine = '220';
-    public $gibdd_eco_class = 'ЕС';
-    public $gibdd_max_mass = '444';
-    public $gibdd_min_mass = '333';
-    public $car_in_marriage = '';
-    //
-    public $type_of_vendor = 'physical';
-    public $type_of_buyer = 'physical';
-    public $vendor_law_company_name  = 'OOO "Стрела"';
-    public $vendor_law_actor_position = '';
-    public $vendor_law_fio = '';
-    public $vendor_law_document_osn = '';
-    public $vendor_law_proxy_number = '';
-    public $vendor_law_proxy_date = '';
-    public $buyer_law_company_name = '';
-    public $buyer_law_actor_position = '';
-    public $buyer_law_fio = '';
-    public $buyer_law_document_osn = '';
-    public $buyer_law_proxy_number = '';
-    public $buyer_law_proxy_date = '';
-    public $vendor_ind_fio = '';
-    public $vendor_number_of_certificate = '';
-    public $vendor_date_of_certificate = '';
-    public $buyer_ind_fio = '';
-    public $buyer_number_of_certificate = '';
-    public $buyer_date_of_certificate = '';
-    public $header_doc = ''; //
-    public $accessories = "";
-    public $id_user = "";
-    public $id_document = "";
-    public $type_of_contract = "";
-    public $vendor_is_owner_car;*/
-
-    //------------------------------------------------------------------------------------------------------------------
+   //------------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
         parent::__construct();
@@ -178,6 +27,55 @@ class Document_model extends CI_Model
         print_r($result);
         //echo $result->place_of_contract;
         echo '</pre>';
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    function num2str($num)
+    {
+        $nul='ноль';
+        $ten=array(
+            array('','один','два','три','четыре','пять','шесть','семь', 'восемь','девять'),
+            array('','одна','две','три','четыре','пять','шесть','семь', 'восемь','девять'),
+        );
+        $a20=array('десять','одиннадцать','двенадцать','тринадцать','четырнадцать' ,'пятнадцать','шестнадцать','семнадцать','восемнадцать','девятнадцать');
+        $tens=array(2=>'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят' ,'восемьдесят','девяносто');
+        $hundred=array('','сто','двести','триста','четыреста','пятьсот','шестьсот', 'семьсот','восемьсот','девятьсот');
+        $unit=array( // Units
+            array('десятая' ,'десятых' ,'десятых',	 1),
+            array('целая'   ,'целых'   ,'целых'    ,0),
+            array('тысяча'  ,'тысячи'  ,'тысяч'     ,1),
+            array('миллион' ,'миллиона','миллионов' ,0),
+            array('миллиард','милиарда','миллиардов',0),
+        );
+        //
+        list($rub,$kop) = explode('.',sprintf("%015.2f", floatval($num)));
+        $out = array();
+        if (intval($rub)>0) {
+            foreach(str_split($rub,3) as $uk=>$v) { // by 3 symbols
+                if (!intval($v)) continue;
+                $uk = sizeof($unit)-$uk-1; // unit key
+                $gender = $unit[$uk][3];
+                list($i1,$i2,$i3) = array_map('intval',str_split($v,1));
+                // mega-logic
+                $out[] = $hundred[$i1]; # 1xx-9xx
+                if ($i2>1) $out[]= $tens[$i2].' '.$ten[$gender][$i3]; # 20-99
+                else $out[]= $i2>0 ? $a20[$i3] : $ten[$gender][$i3]; # 10-19 | 1-9
+                // units without rub & kop
+                if ($uk>1) $out[]= morph($v,$unit[$uk][0],$unit[$uk][1],$unit[$uk][2]);
+            } //foreach
+        }
+        else $out[] = $nul;
+        $out[] = morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
+        //$out[] = $kop.' '.morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
+        return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
+    }
+    function morph($n, $f1, $f2, $f5)
+    {
+        $n = abs(intval($n)) % 100;
+        if ($n>10 && $n<20) return $f5;
+        $n = $n % 10;
+        if ($n>1 && $n<5) return $f2;
+        if ($n==1) return $f1;
+        return $f5;
     }
     //------------------------------------------------------------------------------------------------------------------
     public function format_date($date)
@@ -223,28 +121,6 @@ class Document_model extends CI_Model
 
         return $string;
     }
-    //------------------------------------------------------------------------------------------------------------------
-   public function format_all_data()
-   {
-       //Форматирование даты
-       /*
-       $this->vendor_bywho_date = $this->format_date($this->vendor_bywho_d, $this->vendor_bywho_m, $this->vendor_bywho_y);
-       $this->buyer_bywho_date = $this->format_date($this->buyer_bywho_d, $this->buyer_bywho_m, $this->buyer_bywho_y);
-       $this->vendor_birthday = $this->format_date($this->vendor_b_day, $this->vendor_b_month, $this->vendor_b_year);
-       $this->date_of_contract = $this->format_date($this->day, $this->month, $this->year);
-       $this->date_of_serial_car = $this->format_date($this->day, $this->month, $this->year);
-
-       //Форматирование адреса
-       $this->vendor_adress = $this->format_adress($this->vendor_city, $this->vendor_street, $this->vendor_house, $this->vendor_flat);
-       $this->buyer_adress = $this->format_adress($this->buyer_city, $this->buyer_street, $this->buyer_house, $this->buyer_flat);
-       $this->spouse_adress = $this->format_adress($this->spouse_city, $this->spouse_street, $this->spouse_house, $this->spouse_flat);
-       //Форматирование ФИО
-        $this->vendor_fio = $this->format_fio($this->vendor_surname, $this->vendor_name, $this->vendor_patronymic);
-        $this->buyer_fio = $this->format_fio($this->buyer_surname, $this->buyer_name, $this->buyer_patronymic);
-        $this->spouse_fio = $this->format_fio($this->spouse_surname, $this->spouse_name, $this->spouse_patronymic);
-       return true;
-       */
-   }
     //------------------------------------------------------------------------------------------------------------------
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
@@ -320,6 +196,11 @@ class Document_model extends CI_Model
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $date_of_contract = $this->format_date($result->date_of_contract);
+        $vendor_birthday = $this->format_date($result->vendor_birthday);
+        $vendor_passport_date = $this->format_date($result->vendor_passport_date);
+        $buyer_birthday = $this->format_date($result->buyer_birthday);
+        $payment_date = $this->format_date($result->payment_date);
         //$vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
         //$buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
         //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
@@ -328,6 +209,7 @@ class Document_model extends CI_Model
         $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
         $other_documents_car = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string($result->accessories);
+        $price_str = $this->num2str($result->price);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
             'buyer_fio' => $buyer_fio,
@@ -353,20 +235,20 @@ class Document_model extends CI_Model
         $header_doc = $this->set_header_doc($result->type_of_giver, $result->type_of_buyer, $data_for_header);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
 
-        // Задание значений
+        //Заполнение
         $document->setValue('city_contract', $result->place_of_contract);
-        $document->setValue('date_of_contract',  $result->date_of_contract);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('date_of_contract',  $date_of_contract);
         $document->setValue('header_doc', $header_doc);
         $document->setValue('vendor_fio', $vendor_fio);
-        $document->setValue('vendor_date', $result->vendor_birthday);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('vendor_date', $vendor_birthday);
         $document->setValue('vendor_serial_ch', $result->vendor_passport_serial);
         $document->setValue('vendor_number_ser', $result->vendor_passport_number);
         $document->setValue('vendor_ser_bywho', $result->vendor_passport_bywho);
-        $document->setValue('vendor_bywho_date', $result->vendor_passport_date);//Форматирование даты. Дописать
+        $document->setValue('vendor_bywho_date', $vendor_passport_date);
         $document->setValue('vendor_adress', $vendor_adress);
         $document->setValue('vendor_phone', $result->vendor_phone);
         $document->setValue('buyer_fio', $buyer_fio);
-        $document->setValue('buyer_date', $result->buyer_birthday);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('buyer_date', $buyer_birthday);
         $document->setValue('buyer_serial_ch', $result->buyer_passport_serial);
         $document->setValue('buyer_number_ser', $result->vendor_passport_number);
         $document->setValue('buyer_ser_bywho', $result->vendor_passport_bywho);
@@ -396,8 +278,8 @@ class Document_model extends CI_Model
         //$document->setValue('defects_rightnow', $result->defects_rightnow);
         $document->setValue('features', $result->features);
         $document->setValue('price', $result->price_car);
-        //$document->setValue('price_str', $result->price_str);//Написать функцию превращения числа в строку
-        $document->setValue('date_of_pay', $result->payment_date);//Форматирование даты. Дописать после Ромыного апдейта
+        $document->setValue('price_str', $price_str);
+        $document->setValue('date_of_pay', $payment_date);
         $document->setValue('other_documents_car', $other_documents_car);
         $document->setValue('accessories', $accessories);
         $document->setValue('marriage_info', $marriage['info']);
@@ -407,7 +289,6 @@ class Document_model extends CI_Model
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
-
         $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.docx';
         return $name_for_server;
     }
@@ -433,17 +314,20 @@ class Document_model extends CI_Model
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/act_of_reception.docx');
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname, $result->buyer_name, $result->buyer_patronymic);
+        $date_of_contract = $this->format_date($result->date_of_contract);
+        $date_of_product = $this->format_date($result->date_of_product);
+        $date_of_serial_car = $this->format_date($result->date_of_serial_car);
 
-        //Задание значений переменных
+        //Заполнение
         $document->setValue('city_contract', $result->place_contract);
-        $document->setValue('date_of_contract', $result->date_of_contract);//
+        $document->setValue('date_of_contract', $date_of_contract);
         $document->setValue('vendor_fio', $vendor_fio);
         $document->setValue('buyer_fio', $buyer_fio);
         $document->setValue('mark', $result->mark);
         $document->setValue('vin', $result->vin);
         $document->setValue('reg_number', $result->reg_gov_number);
         $document->setValue('car_type', $result->car_type);
-        $document->setValue('date_of_product', $result->date_of_product);///
+        $document->setValue('date_of_product', $date_of_product);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('shassi', $result->shassi);
         //$document->setValue('carcass', $result->carcass);
@@ -453,136 +337,182 @@ class Document_model extends CI_Model
         $document->setValue('serial_car', $result->serial_car);
         $document->setValue('number_of_serial_car', $result->number_of_serial_car);
         $document->setValue('bywho_serial_car', $result->bywho_serial_car);
-        $document->setValue('date_of_serial_car', $result->date_of_serial_car);//
+        $document->setValue('date_of_serial_car', $date_of_serial_car);
         $document->setValue('oil_in_car', $result->oil_in_car);
         $document->setValue('defects_all', $result->defects);
         $document->setValue('features', $result->features);
         //Вопросы по пост-пунткам пунтка 7
         // Сохранение результатов
-        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'act_of_reception.docx';//Имя файла и путь к нему
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'act_of_reception.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
-        echo 'File created.';
+        $name_for_server = '/documents/buy_sale/'.$id.'act_of_reception.docx';
+        return $name_for_server;
     }
     //------------------------------------------------------------------------------------------------------------------
     //расписка в получении денежных средств
-    public function get_doc_receipt_of_money()
+    public function get_doc_receipt_of_money($id)
     {
+        //Работа с базой
+        $this->db->select();
+        $id_user = $this->data['user_id'];
+        $where = "id_user = '$id_user' AND id = '$id '";
+        $this->db->where($where);
+        $query = $this->db->get('buy_sale');
+        $result = $query->row();
+
+        //Подготовка данных
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/receipt_of_money.docx');
-
-        //Задание значений переменных
-        $document->setValue('city_contract', $this->city_contract);
-        $document->setValue('day', $this->day);
-        $document->setValue('month', $this->month);
-        $document->setValue('year', $this->year);
-
-        $document->setValue('vendor_fio', $this->vendor_fio);
-        $document->setValue('vendor_serial_ch', $this->vendor_serial_ch);
-        $document->setValue('vendor_number_ser', $this->vendor_number_ser);
-        $document->setValue('vendor_ser_bywho', $this->vendor_ser_bywho);
-        $document->setValue('vendor_bywho_date', $this->vendor_bywho_date);
-        $document->setValue('vendor_adress', $this->vendor_adress);
-
-        $document->setValue('buyer_fio', $this->buyer_fio);
-        $document->setValue('buyer_serial_ch', $this->buyer_serial_ch);
-        $document->setValue('buyer_number_ser', $this->buyer_number_ser);
-        $document->setValue('buyer_ser_bywho', $this->buyer_ser_bywho);
-        $document->setValue('buyer_bywho_date', $this->buyer_bywho_date);
-        $document->setValue('buyer_adress', $this->buyer_adress);
-
-        $document->setValue('price', $this->price);
-        $document->setValue('price_str', $this->price_str);
-        $document->setValue('currency', $this->currency);
-
+        $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        $buyer_fio = $this->format_fio($result->buyer_surname, $result->buyer_name, $result->buyer_patronymic);
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $date_of_contract = $this->format_date($result->date_of_contract);
+        $vendor_passport_date = $this->format_date($result->vendor_passport_date);
+        $buyer_passport_date = $this->format_date($result->buyer_passport_date);
+        $price_str = $this->num2str($result->price);
+        //Заполнение
+        $document->setValue('city_contract', $result->city_contract);
+        $document->setValue('date_of_contract', $date_of_contract);
+        $document->setValue('vendor_fio', $vendor_fio);
+        $document->setValue('vendor_serial_ch', $result->vendor_passport_serial);
+        $document->setValue('vendor_number_ser', $result->vendor_passport_number);
+        $document->setValue('vendor_ser_bywho', $result->vendor_passport_bywho);
+        $document->setValue('vendor_bywho_date', $vendor_passport_date);
+        $document->setValue('vendor_adress', $vendor_adress);
+        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('buyer_serial_ch', $result->buyer_passport_serial);
+        $document->setValue('buyer_number_ser', $result->buyer_passport_number);
+        $document->setValue('buyer_ser_bywho', $result->buyer_passport_bywho);
+        $document->setValue('buyer_bywho_date', $buyer_passport_date);
+        $document->setValue('buyer_adress', $buyer_adress);
+        $document->setValue('price', $result->price);
+        $document->setValue('price_str', $price_str);
+        $document->setValue('currency', $result->currency);
 
         // Сохранение результатов
-        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'receipt_of_money.docx';//Имя файла и путь к нему
-        //setcookie('name_of_doc',$name_of_file);
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'receipt_of_money.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
-        echo 'File created.';
+        $name_for_server = '/documents/buy_sale/'.$id.'receipt_of_money.docx';
+        return $name_for_server;
     }
     //------------------------------------------------------------------------------------------------------------------
-    //заявление в ГИБДД для смены собственника
-    public function get_doc_statement_gibdd()
+    //заявление в ГИБДД для смены собственника !Не работает!
+    public function get_doc_statement_gibdd($id)
     {
-        $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/gibdd.docx');
+        //Работа с базой
+        $this->db->select();
+        $id_user = $this->data['user_id'];
+        $where = "id_user = '$id_user' AND id = '$id '";
+        $this->db->where($where);
+        $query = $this->db->get('buy_sale');
+        $result = $query->row();
 
-        $document->setValue('gibdd_reg_name', $this->gibdd_reg_name);
-        $document->setValue('buyer_fio', $this->buyer_fio);
-        $document->setValue('mark', $this->mark);
-        $document->setValue('date_of_product', $this->date_of_product);
-        $document->setValue('vin', $this->vin);
-        $document->setValue('reg_gov_number', $this->reg_gov_number);
-        $document->setValue('giver_date', $this->giver_date);
-        $document->setValue('giver_pass', $this->giver_pass);
-        $document->setValue('gibdd_inn', $this->gibdd_inn);
-        $document->setValue('giver_adress', $this->vendor_adress);//Вендор = гивер?
-        $document->setValue('giver_phone', $this->vendor_phone);
-        $document->setValue('giver_agent', $this->giver_agent);
-        $document->setValue('giver_agent_pass', $this->giver_agent_pass);
-        $document->setValue('giver_agent_adress', $this->giver_agent_adress);
-        $document->setValue('giver_agent_phone', $this->giver_agent_phone);
-        $document->setValue('mark', $this->mark);
-        $document->setValue('date_of_product', $this->date_of_product);
-        $document->setValue('car_type', $this->car_type);
-        $document->setValue('color_carcass', $this->color_carcass);
-        $document->setValue('reg_number', $this->reg_number);
-        $document->setValue('vin', $this->vin);
-        $document->setValue('carcass', $this->carcass);
-        $document->setValue('shassi', $this->shassi);
-        $document->setValue('gibdd_power_ingine', $this->gibdd_power_ingine);
-        $document->setValue('gibdd_eco_class', $this->gibdd_eco_class);
-        $document->setValue('gibdd_max_mass', $this->gibdd_max_mass);
-        $document->setValue('gibdd_min_mass', $this->gibdd_min_mass);
+        //Подготовка
+        $buyer_fio = $this->format_fio($result->buyer_surname, $result->buyer_name, $result->buyer_patronymic);
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/gibdd.docx');
+        $date_of_contract = $this->format_date($result->date_of_contract);
+        $giver_date = $this->format_date($result->giver_date);
+
+        //Заполнение
+        $document->setValue('gibdd_reg_name', $result->gibdd_reg_name);
+        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('mark', $result->mark);
+        $document->setValue('date_of_product', $date_of_contract);
+        $document->setValue('vin', $result->vin);
+        $document->setValue('reg_gov_number', $result->reg_gov_number);
+        $document->setValue('giver_date', $giver_date);
+        $document->setValue('giver_pass', $result->giver_pass);
+        $document->setValue('gibdd_inn', $result->gibdd_inn);
+        $document->setValue('giver_adress', $vendor_adress);
+        $document->setValue('giver_phone', $result->vendor_phone);
+        $document->setValue('giver_agent', $result->giver_agent);
+        $document->setValue('giver_agent_pass', $result->giver_agent_pass);
+        $document->setValue('giver_agent_adress', $result->giver_agent_adress);
+        $document->setValue('giver_agent_phone', $result->giver_agent_phone);
+        $document->setValue('mark', $result->mark);
+        $document->setValue('car_type', $result->car_type);
+        $document->setValue('color_carcass', $result->color_carcass);
+        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('vin', $result->vin);
+        $document->setValue('carcass', $result->carcass);
+        $document->setValue('shassi', $result->shassi);
+        $document->setValue('gibdd_power_ingine', $result->gibdd_power_ingine);
+        $document->setValue('gibdd_eco_class', $result->gibdd_eco_class);
+        $document->setValue('gibdd_max_mass', $result->gibdd_max_mass);
+        $document->setValue('gibdd_min_mass', $result->gibdd_min_mass);
 
         // Сохранение результатов
-        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'gibdd.docx';//Имя файла и путь к нему
-        //setcookie('name_of_doc',$name_of_file);
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'gibdd.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
-        echo 'File created.';
+        $name_for_server = '/documents/buy_sale/'.$id.'gibdd.docx';
+        return $name_for_server;
     }
     //------------------------------------------------------------------------------------------------------------------
     //заявление продавца о согласии супруга
-    public function get_doc_statement_vendor_marriage()
+    public function get_doc_statement_vendor_marriage($id)
     {
+        //Работа с базой
+        $this->db->select();
+        $id_user = $this->data['user_id'];
+        $where = "id_user = '$id_user' AND id = '$id '";
+        $this->db->where($where);
+        $query = $this->db->get('buy_sale');
+        $result = $query->row();
+
+        //Подготовка
+        $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        $spouse_adress = $this->format_adress($result->spouse_city,$result->spouse_street,$result->spouse_house,$result->spouse_flat);
+        $price_str = $this->num2str($result->price);
+        $date_of_contract = $this->format_date($result->date_of_contract);
+        $vendor_passport_date = $this->format_date($result->vendor_passport_date);
+        $date_of_product = $this->format_date($result->date_of_product);
+        $spouse_pass_date = $this->format_date($result->spouse_pass_date);
+        $marriage_svid_date = $this->format_date($result->marriage_svid_date);
+        $date_of_serial_car = $this->format_date($result->date_of_serial_car);
+
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
 
-        $document->setValue('date_of_contract', $this->date_of_contract);
-        $document->setValue('buyer_fio', $this->buyer_fio);
-        $document->setValue('vendor_fio', $this->vendor_fio);
-        $document->setValue('vendor_birthday', $this->vendor_birthday);
-        $document->setValue('vendor_serial', $this->vendor_serial_ch);
-        $document->setValue('vendor_numbers', $this->vendor_number_ser);
-        $document->setValue('vendor_passport_bywho', $this->vendor_ser_bywho);
-        $document->setValue('vendor_passport_date', $this->vendor_bywho_date);
-        $document->setValue('vendor_adress', $this->vendor_adress);
-        $document->setValue('place_of_contract', $this->city_contract);
-        $document->setValue('reg_number', $this->reg_number);
-        $document->setValue('vin', $this->vin);
-        $document->setValue('date_of_product', $this->date_of_product);
-        $document->setValue('engine_model', $this->engine_model);
-        $document->setValue('carcass', $this->carcass);
-        $document->setValue('serial_car', $this->serial_car);
-        $document->setValue('number_of_serial_car', $this->number_of_serial_car);
-        $document->setValue('bywho_serial_car', $this->bywho_serial_car);
-        $document->setValue('date_of_serial_car', $this->date_of_serial_car);
-        $document->setValue('spouse_fio', $this->spouse_fio);
-        $document->setValue('spouse_pass_serial', $this->spouse_pass_serial);
-        $document->setValue('spouse_pass_number', $this->spouse_pass_number);
-        $document->setValue('spouse_pass_bywho', $this->spouse_pass_bywho);
-        $document->setValue('spouse_pass_date', $this->spouse_pass_date);
-        $document->setValue('spouse_adress', $this->spouse_adress);
-        $document->setValue('marriage_svid_serial', $this->marriage_svid_serial);
-        $document->setValue('marriage_svid_number', $this->marriage_svid_number);
-        $document->setValue('marriage_svid_bywho', $this->marriage_svid_bywho);
-        $document->setValue('marriage_svid_date', $this->marriage_svid_date);
-        $document->setValue('price', $this->price);
-        $document->setValue('price_str', $this->price_str);
+        $document->setValue('date_of_contract', $date_of_contract);
+        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('vendor_fio', $vendor_fio);
+        $document->setValue('vendor_birthday', $result->vendor_birthday);
+        $document->setValue('vendor_serial', $result->vendor_passport_serial);
+        $document->setValue('vendor_numbers', $result->vendor_passport_number);
+        $document->setValue('vendor_passport_bywho', $result->vendor_passport_bywho);
+        $document->setValue('vendor_passport_date', $vendor_passport_date);
+        $document->setValue('vendor_adress', $vendor_adress);
+        $document->setValue('place_of_contract', $result->place_of_contract);
+        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('vin', $result->vin);
+        $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('engine_model', $result->engine_model);
+        $document->setValue('carcass', $result->carcass);
+        $document->setValue('serial_car', $result->serial_car);
+        $document->setValue('number_of_serial_car', $result->number_of_serial_car);
+        $document->setValue('bywho_serial_car', $result->bywho_serial_car);
+        $document->setValue('date_of_serial_car', $date_of_serial_car);
+        $document->setValue('spouse_fio', $spouse_fio);
+        $document->setValue('spouse_pass_serial', $result->spouse_pass_serial);
+        $document->setValue('spouse_pass_number', $result->spouse_pass_number);
+        $document->setValue('spouse_pass_bywho', $result->spouse_pass_bywho);
+        $document->setValue('spouse_pass_date', $spouse_pass_date);
+        $document->setValue('spouse_adress', $spouse_adress);
+        $document->setValue('marriage_svid_serial', $result->marriage_svid_serial);
+        $document->setValue('marriage_svid_number', $result->marriage_svid_number);
+        $document->setValue('marriage_svid_bywho', $result->marriage_svid_bywho);
+        $document->setValue('marriage_svid_date', $marriage_svid_date);
+        $document->setValue('price', $result->price);
+        $document->setValue('price_str', $price_str);
 
         // Сохранение результатов
-        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'statement_vendor_marriage.docx';//Имя файла и путь к нему
-        //setcookie('name_of_doc',$name_of_file);
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'statement_vendor_marriage.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
-        echo 'File created.';
+        $name_for_server = '/documents/buy_sale/'.$id.'statement_vendor_marriage.docx';
+        return $name_for_server;
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор аренды
