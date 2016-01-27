@@ -8,24 +8,90 @@ var bs_deal = true,
     reg_ts  = true;
 
 $( document ).ready(function() {
+    //ДАТАПИКЕР
     $("#doc_create").delegate("#date_of_contract", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD'
         });
     });
-    $('#bs_deal').change(function(){
-         string = "/blocks/load/blocks";
-        if(bs_deal == true)
-            $.ajax({
-                url: string,
-                dataType: "html",
-                success: function (data, textStatus) {
-                    $('.document').append(data);
-
-                }
-            });
-        bs_deal = false;
+    $("#doc_create").delegate("#vendor_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
         });
+    });
+    $("#doc_create").delegate("#vendor_passport_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#buyer_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#buyer_passport_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#date_of_product", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#maintenance_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#marriage_svid_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    //ДАТАПИКЕР
+
+
+    //BLOCK FUNCTION
+    $('.document').on('change','.ajax-button', function(){
+
+        var func_name = $(this).attr('data-name');
+
+        $.ajax({
+            url: '/blocks/'+func_name,
+            dataType: "html",
+            success: function (data, textStatus) {
+                $('.document').append(data);
+
+            }
+        });
+        });
+
+    //INBLOCK FUNCTION
+    $('.document').on('change','.ajax-button', function(){
+
+        var func_name = $(this).attr('data-name');
+
+        $.ajax({
+            url: '/blocks/'+func_name,
+            dataType: "html",
+            success: function (data, textStatus) {
+                $('.document').append(data);
+
+            }
+        });
+    });
+
 
 
 

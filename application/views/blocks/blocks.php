@@ -1,16 +1,5 @@
 
-<div class="row" id="block_deal">
-    <div class="col-lg-12 ">
-        <div class = "content-block">
-            <div class = "content-input-group">
-                <input class = "form-control" type="text" name="place_of_contract"  placeholder="Место заключения договора:">
-            </div>
-            <div class = "content-input-group">
-                <input id="date_of_contract" class="form-control datetimepicker"  name="date_of_contract"  placeholder="Дата заключения договора:">
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <div class="row" id="block_seller">
     <div class="col-lg-12">
@@ -67,7 +56,7 @@
                     <input class = "form-control" type="text" name="vendor_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text"  name="vendor_birthday"  placeholder="Дата рождения:">
+                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_passport_serial"  placeholder="Серия паспорта:">
@@ -76,7 +65,7 @@
                     <input class="form-control" type="text" name="vendor_passport_number"  placeholder="Номер паспорта:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_passport_date"  placeholder="Дата выдачи паспорта:">
+                    <input id="vendor_password_date" class = "form-control datetimepicker" type="text" name="vendor_passport_date"  placeholder="Дата выдачи паспорта:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_passport_bywho"  placeholder="Кем выдан паспорт:">
@@ -118,7 +107,7 @@
                     <input class = "form-control" type="text" name="buyer_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
+                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_passport_serial"  placeholder="Серия паспорта:">
@@ -127,7 +116,7 @@
                     <input class="form-control" type="text" name="buyer_passport_number"  placeholder="Номер паспорта:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="buyer_passport_date"  placeholder="Дата выдачи паспорта:">
+                    <input id="buyer_passport_date" class = "form-control datetimepicker" type="text" name="buyer_passport_date"  placeholder="Дата выдачи паспорта:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="buyer_passport_bywho"  placeholder="Кем выдан паспорт:">
@@ -173,7 +162,7 @@
                     <input class = "form-control" type="text" name="category"  placeholder="Категория:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="date_of_product"  placeholder="Год изготовления:">
+                    <input id="date_of_product" class="form-control datetimepicker" type="text" name="date_of_product"  placeholder="Год изготовления:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="engime_model"  placeholder="Модель, номер двигателя:">
@@ -207,7 +196,7 @@
                 <input class = "form-control" type="text" name="number_of_serial_car"  placeholder="Номер:">
             </div>
             <div class = "content-input-group">
-                <input class="form-control" type="text" name="date_of_serial_car"  placeholder="Дата выдачи:">
+                <input id="date_of_serial_car" class="form-control datetimepicker" type="text" name="date_of_serial_car"  placeholder="Дата выдачи:">
             </div>
             <div class = "content-input-group">
                 <input class = "form-control" type="text" name="bywho_serial_car"  placeholder="Кем выдан">
@@ -460,7 +449,7 @@
                             <span class = "content-input-align">Спойлер задний</span>
                         </div>
                         <div class = "content-input">
-                            <input type="checkbox" name="additional_devices_array[]" value="Люк механический>
+                            <input type="checkbox" name="additional_devices_array[]" value="Люк механический">
                                 <span class = "content-input-align">Люк механический</span>
                         </div>
 
@@ -592,7 +581,7 @@
             <p class = "content-header">Последнее техническое обслуживание транспортного средства проведено:</p>
 
             <div class = "content-input-group">
-                <input class="form-control" type="text"  name="maintenance_date"  placeholder="Дата:">
+                <input id="maintenance_date" class="form-control datetimepicker" type="text"  name="maintenance_date"  placeholder="Дата:">
             </div>
             <div class = "content-input-group">
                 <input class = "form-control" type="text" name="maintenance_bywho"  placeholder="Кем проведено:">
@@ -772,7 +761,7 @@
                     <input class = "form-control" type="text" name="spouse_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text"  name="spouse_birthday"  placeholder="Дата рождения:">
+                    <input id="spouse_birthday" class="form-control datetimepicker" type="text"  name="spouse_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="spouse_pass_serial"  placeholder="Серия паспорта:">
@@ -781,7 +770,7 @@
                     <input class="form-control" type="text" name="spouse_pass_number"  placeholder="Номер паспорта:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_pass_date"  placeholder="Дата выдачи паспорта:">
+                    <input id="spouse_pass_date" class = "form-control datetimepicker" type="text" name="spouse_pass_date"  placeholder="Дата выдачи паспорта:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="spouse_pass_bywho"  placeholder="Кем выдан паспорт:">
@@ -805,7 +794,7 @@
                     <input class="form-control" type="text" name="marriage_svid_number"  placeholder="Номер свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:">
+                    <input id="marriage_svid_date" class="form-control datetimepicker" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="marriage_svid_bywho"  placeholder="Kем выдано свидетельство о браке:">
