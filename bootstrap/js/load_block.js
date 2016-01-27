@@ -14,7 +14,7 @@ $( document ).ready(function() {
         });
     });
     $('#bs_deal').change(function(){
-         string = "/blocks/load/main_block_bs";
+         string = "/blocks/load/blocks";
         if(bs_deal == true)
             $.ajax({
                 url: string,
@@ -27,60 +27,7 @@ $( document ).ready(function() {
         bs_deal = false;
         });
 
-        $('.document').on('change','#mods_yes', function() {
-         string = "/blocks/load/mods_bs";
-            if(mods_yes == true)
-                $.ajax({
-                    url: string,
-                    dataType: "html",
-                    success: function (data, textStatus) {
-                        $('.document').append(data);
-                    }
-                });
-            mods_yes = false;
-            });
 
-
-    $('.document').on('change','#mods_no', function() {
-        string = "/blocks/load/main_block_bs_2.php";
-        if(mods_no == true)
-                $.ajax({
-                    url: string,
-                    dataType: "html",
-                    success: function (data, textStatus) {
-                        $('.document').append(data);
-                    }
-                });
-        mods_no = false;
-        });
-
-
-    $('.document').on('change','#wife_no', function() {
-            string = "/blocks/load/main_block_nowife";
-        if(wife_no == true)
-            $.ajax({
-                url: string,
-                dataType: "html",
-                success: function (data, textStatus) {
-                    $('.document').append(data);
-                }
-            });
-        wife_no = false;
-        });
-
-
-    $('.document').on('change','#wife_yes', function() {
-            string = "/blocks/load/main_block_wife";
-        if(wife_yes == true)
-            $.ajax({
-                url: string,
-                dataType: "html",
-                success: function (data, textStatus) {
-                    $('.document').append(data);
-                }
-            });
-        wife_yes = false;
-        });
 
     $('.document').on('change','#defects_yes', function() {
 
@@ -106,7 +53,7 @@ $( document ).ready(function() {
            $('.document').find("#myModal").html(data);
         });
     });
-    //swag
+
 });
 
 
