@@ -76,13 +76,18 @@ class Document extends CI_Controller
                     $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
                 }
                 $this->document_model->insert_into_database( $this->data['user_id'] );
-                redirect('user/login');
+
+                $link = $this->pay_model->getPayLink();
+                redirect($link);
+
             }else{
                 redirect('user/login');
             }
         }else{
             $this->document_model->insert_into_database( $this->data['user_id'] );
-            redirect('user/login');
+
+            $link = $this->pay_model->getPayLink();
+            redirect($link);
         }
     }
     public function create()

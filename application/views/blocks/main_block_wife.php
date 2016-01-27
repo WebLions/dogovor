@@ -85,30 +85,12 @@
 <div class="row">
     <div class="col-lg-12">
         <div class = "content-button">
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            <button type="button" id="modal_pay" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 Оплатить и скачать
             </button>
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Спасибо за испольование нашего сервиса.</h4>
-                        </div>
-                        <div class="modal-body">
-                            Для того чтобы скачать документ нужно оплатить сумму в размере 210руб.
-                            На указанный вами E-mail прийдет созданный для вас логин и пароль.
-                            Скачать документ вы сможете после оплаты.
-                            <div class="content-input-group">
-                                <input class="form-control" type="text" name="email" id="user-email"  placeholder="E-mail">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="ready_button" type="submit" class="btn btn-success">Готово</button>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
