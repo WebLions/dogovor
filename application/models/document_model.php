@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+error_reporting (0);
 
 class Document_model extends CI_Model
 {
@@ -578,8 +578,6 @@ class Document_model extends CI_Model
         $document->setValue('price', $this->price);
         $document->setValue('price_str', $this->price_str);
 
-
-
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'. time() .'statement_vendor_marriage.docx';//Имя файла и путь к нему
         //setcookie('name_of_doc',$name_of_file);
@@ -685,8 +683,8 @@ class Document_model extends CI_Model
         }
         //Отправка данных
         $this->db->insert('buy_sale', $data);
-        echo 'query-insert was complete.';
 
+        return true;
     }
     public function testjson()
     {
@@ -695,7 +693,6 @@ class Document_model extends CI_Model
             'first_string'=> 1,
             'second_string'=>2,
             'some_string'=> 'example of string'
-
         );
         $instruments = json_encode($test_array);  //
         /// прочитать защиту sql

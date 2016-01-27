@@ -27,8 +27,6 @@ $( document ).ready(function() {
         bs_deal = false;
         });
 
-
-
         $('.document').on('change','#mods_yes', function() {
          string = "/blocks/load/mods_bs";
             if(mods_yes == true)
@@ -99,12 +97,14 @@ $( document ).ready(function() {
         features_true=false;
     });
 
-
     $('.document').on('click', '#ready-button', function () {
-
-        console.log("click");
         $('#create-doc').trigger("submit");
+    });
 
+    $('.document').on('click', '#modal_pay', function () {
+        $.post('/ajax/modal_pay',function(data){
+           $('.document').find("#myModal").html(data);
+        });
     });
 });
 
