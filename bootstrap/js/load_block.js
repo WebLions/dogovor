@@ -1,11 +1,8 @@
-var bs_deal = true,
-    mods_yes= true,
-    mods_no = true,
-    wife_no = true,
-    wife_yes= true,
+var credit_true=true,
+    accessories_true= true,
     defects_true= true,
-    features_true= true;
-    reg_ts  = true;
+    features_true= true,
+    add_devices_true = true;
 
 $( document ).ready(function() {
     //ДАТАПИКЕР
@@ -63,9 +60,10 @@ $( document ).ready(function() {
 
 
     //BLOCK FUNCTION
-    $('.document').on('change','.ajax-button', function(){
+   $('.document').on('change','.ajax-button', function(){
 
         var func_name = $(this).attr('data-name');
+
 
         $.ajax({
             url: '/blocks/'+func_name,
@@ -77,23 +75,33 @@ $( document ).ready(function() {
         });
         });
 
-    //INBLOCK FUNCTION
+    /*//INBLOCK FUNCTION
     $('.document').on('change','.ajax-button', function(){
 
         var func_name = $(this).attr('data-name');
 
-        $.ajax({
-            url: '/blocks/'+func_name,
-            dataType: "html",
-            success: function (data, textStatus) {
-                $('.document').append(data);
 
-            }
-        });
-    });
+        if($(this).attr('data-block-name')) {
+            var block_name ='#'+$(this).attr('data-block-name');
+            block_name += ' .content-block';
+        }
 
 
+        if(block_name) {
 
+            $.ajax({
+
+                url: '/blocks/' + func_name,
+                dataType: "html",
+                success: function (data, textStatus) {
+                    $(block_name).append(data);
+
+                }
+            });
+        }
+        block_name = '.document';
+
+    });*/
 
     $('.document').on('change','#defects_yes', function() {
 
@@ -109,6 +117,21 @@ $( document ).ready(function() {
                                                               '</div>');
         features_true=false;
     });
+    $('.document').on('change','#credit', function() {
+
+        if(credit_true == true) $('#block_payment_date').append('<div class = "content-input-group">'+
+                                                                '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
+                                                                '</div>');
+        credit_true_true=false;
+    });
+    $('.document').on('change','#accessories_other', function() {
+
+        if(accessories_true == true) $('#block_accessories').append('<div class = "content-input-group">'+
+                                                                    '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
+                                                                    '</div>');
+        accessories_true=false;
+    });
+
 
     $('.document').on('click', '#ready-button', function () {
         $('#create-doc').trigger("submit");

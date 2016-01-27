@@ -10,22 +10,17 @@
             </div>
         </div>
 
-        <table style="width: 100%">
+        <table style="width: 100%" class="table">
             <thead>
                 <th style="width: 25%">Название документа</th>
                 <th style="width: 25%">Дата создания</th>
                 <th style="width: 25%">Статус оплаты</th>
-                <th style="width: 25%;float: right">Действия</th>
             </thead>
 
             <tr>
                 <td>Документ №1</td>
                 <td>07.01.2016</td>
                 <td>Не оплачен</td>
-                <td>
-                    <a class="glyphicon glyphicon-eye-open btn btn-danger btn-xs" style="float:right;" href=""></a>
-                    <a class="glyphicon glyphicon-trash btn btn-success btn-xs" style="float:right;" href=""></a>
-                </td>
             </tr>
 
         </table>

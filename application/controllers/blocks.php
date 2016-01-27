@@ -34,5 +34,12 @@ class Blocks extends CI_Controller
     {
         $this->blocks_model->bs_not_owned_car();
     }
-
+    public function bs_wife_true()
+    {
+        $this->blocks_model->bs_wife_true();
+    }
+    public function bs_wife_false()
+    {
+        $this->blocks_model->bs_wife_false();
+    }
 }
