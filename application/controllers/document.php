@@ -12,6 +12,7 @@ class Document extends CI_Controller
         $this->load->helper(array('html','url'));
         $this->load->model('document_model');
         $this->load->model('user_model');
+        $this->load->model('pay_model');
         $this->load->library('form_validation');
 
     }
