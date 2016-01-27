@@ -8,9 +8,14 @@ var bs_deal = true,
     reg_ts  = true;
 
 $( document ).ready(function() {
+    $("#doc_create").delegate("#date_of_contract", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
     $('#bs_deal').change(function(){
          string = "/blocks/load/main_block_bs";
-        if(bs_deal == true) {
+        if(bs_deal == true)
             $.ajax({
                 url: string,
                 dataType: "html",
@@ -19,10 +24,6 @@ $( document ).ready(function() {
 
                 }
             });
-            $('.document #date_of_contract').datetimepicker({
-                format: 'YYYY-MM-DD'
-            });
-        }
         bs_deal = false;
         });
 
@@ -98,9 +99,6 @@ $( document ).ready(function() {
         features_true=false;
     });
 
-    $('.document').on('click','#date_of_contract', function () {
-
-    });
 
     $('.document').on('click', '#ready-button', function () {
 

@@ -7,7 +7,7 @@
             </div>
 
             <div class = "content-input-group">
-                <input id="date_of_contract" class="form-control datepicker"  name="date_of_contract"  placeholder="Дата заключения договора:">
+                <input id="date_of_contract" class="form-control datetimepicker"  name="date_of_contract"  placeholder="Дата заключения договора:">
             </div>
         </div>
     </div>
