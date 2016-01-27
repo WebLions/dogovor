@@ -11,6 +11,7 @@ class Blocks extends CI_Controller
 
         parent::__construct();
         $this->load->helper('html');
+        $this->load->model('blocks_model');
 
     }
     public function load($name)
