@@ -7,11 +7,10 @@ var bs_deal = true,
     features_true= true;
     reg_ts  = true;
 
-
 $( document ).ready(function() {
     $('#bs_deal').change(function(){
          string = "/blocks/load/main_block_bs";
-        if(bs_deal == true)
+        if(bs_deal == true) {
             $.ajax({
                 url: string,
                 dataType: "html",
@@ -20,6 +19,10 @@ $( document ).ready(function() {
 
                 }
             });
+            $('.document #date_of_contract').datetimepicker({
+                format: 'YYYY-MM-DD'
+            });
+        }
         bs_deal = false;
         });
 
@@ -96,9 +99,7 @@ $( document ).ready(function() {
     });
 
     $('.document').on('click','#date_of_contract', function () {
-        $('#date_of_contract').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
+
     });
 
     $('.document').on('click', '#ready-button', function () {

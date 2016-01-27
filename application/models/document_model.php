@@ -674,7 +674,8 @@ class Document_model extends CI_Model
             'marriage_svid_number' => $_POST['marriage_svid_number'],
             'marriage_svid_date' => $_POST['marriage_svid_date'],
             'marriage_svid_bywho' => $_POST['marriage_svid_bywho'],
-            'penalty' => $_POST['penalty']
+            'penalty' => $_POST['penalty'],
+            'type_id' => 1
 
         );
         //Бизопаснасть
