@@ -16,6 +16,10 @@ class Document extends CI_Controller
         $this->load->library('form_validation');
 
     }
+    public function pay($id)
+    {
+        echo $this->pay_model->getPayLink($id);
+    }
     public function buy_sale($id)  //  в ссылке выглядит так document/name
     {
         if( !$this->data['user_id'] ) {
@@ -76,18 +80,18 @@ class Document extends CI_Controller
                 if( !$this->data['user_id'] ) {
                     $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
                 }
-                $this->document_model->insert_into_database( $this->data['user_id'] );
+                $doc_id = $this->document_model->insert_into_database( $this->data['user_id'] );
 
-                $link = $this->pay_model->getPayLink();
+                $link = $this->pay_model->getPayLink($doc_id);
                 redirect($link);
 
             }else{
                 redirect('user/login');
             }
         }else{
-            $this->document_model->insert_into_database( $this->data['user_id'] );
+            $doc_id = $this->document_model->insert_into_database( $this->data['user_id'] );
 
-            $link = $this->pay_model->getPayLink();
+            $link = $this->pay_model->getPayLink($doc_id);
             redirect($link);
         }
     }

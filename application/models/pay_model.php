@@ -8,10 +8,27 @@ class Pay_model extends CI_Model
         parent::__construct();
         $this->load->database();//Работа с бд
     }
-    public function getPayLink()
+    public function getPayLink($doc_id)
     {
         $pay_amount = '390.00';
-        $pay_for = 'Оплата одного документа';
+        $this->db->where("payID",$doc_id);
+        $query = $this->db->get("payments",1,0);
+
+        if($query->num_rows()=='0'){
+            $data = array(
+                "userID"=>$_SESSION['user_id'],
+                "payID"=>$doc_id,
+                "type"=>false,
+                "money"=>$pay_amount,
+                "date"=>date("Y-m-d H:i:s")
+            );
+            $this->db->insert('payments',$data);
+            $for = $this->db->insert_id();
+        }else{
+            $result = $query->row();
+            $for = $result->id;
+        }
+        $pay_for = $for;
         $ticker = 'TST';
         $user_login = 'CarsDoc_ru';
         $price_final = '0';
@@ -31,9 +48,10 @@ class Pay_model extends CI_Model
             "pay_type"=> $pay_type,
             "pay_amount"=> $pay_amount,
             "ticker"=> $ticker,
+            "f"=>11,
             "md5"=> $md5,
             "pay_for"=> $pay_for,
-            "user_email"=> 'igorok901@gmail.com'
+            "user_email"=> 'igorok901@mail.ru'
         );
 
         //$postdata = http_build_query($data,PHP_QUERY_RFC3986);
@@ -51,5 +69,126 @@ class Pay_model extends CI_Model
         curl_close($ch);
 
         return $result;
+    }
+    public function check()
+    {
+        $pay_for = $_POST['pay_for'];
+        $amount = $_POST['amount'];
+        $user_email = $_POST['user_email'];
+        $singature = $_POST['singature'];
+        $way = $_POST['way'];
+        $mode = $_POST['mode'];
+        $secret_key = 'R0QR6V1juMy';
+
+        $singature_1 = sha1("check;".$pay_for.";".$amount.";".$way.";".$mode.";".$secret_key);
+        $this->db->insert("debag",array("text"=>"check"));
+        $this->db->insert("debag",array("text"=>json_encode($_POST)));
+        if($singature!=$singature_1)
+        {
+            $return['status'] = false;
+            $return['pay_for'] = $pay_for;
+            $return['singature'] = sha1("check;false".$pay_for.";".$secret_key);
+            echo json_encode($return);
+            return false;
+        }
+        $this->db->select("users.email");
+        $this->db->join("payments","payments.userID=users.id");
+        $this->db->where("payments.id",$pay_for);
+        $query = $this->db->get("users",1,0);
+        $result = $query->row();
+        if($result->email!=$user_email)
+        {
+            $return['status'] = false;
+            $return['pay_for'] = $pay_for;
+            $return['singature'] = sha1("check;false".$pay_for.";".$secret_key);
+            echo json_encode($return);
+            return false;
+        }
+        $return['status'] = true;
+        $return['pay_for'] = $pay_for;
+        $return['singature'] = sha1("check;true".$pay_for.";".$secret_key);
+        echo json_encode($return);
+        return true;
+    }
+    public function pay()
+    {
+        $pay_for = $_POST['pay_for'];
+        $user_email = $_POST['user_email'];
+        $onpay_id = $_POST['onpay_id'];
+        $order_amount = $_POST['order_amount'];
+        $order_currency = $_POST['order_currency'];
+        $order_id = $pay_for;
+        $api_key = 'R0QR6V1juMy';
+        $md5 = $_POST['md5'];
+
+        $md5_1 = strtoupper(md5("pay;".$pay_for.";".$onpay_id.";".$order_amount.";".$order_currency.";".$api_key));
+        $this->db->insert("debag",array("text"=>"pay"));
+        $this->db->insert("debag",array("text"=>json_encode($_POST)));
+        if($md5!=$md5_1)
+        {
+            $this->db->insert("debag",array("text"=>$md5_1));
+            $md5 = strtoupper(md5("pay;".$pay_for.";".$onpay_id.";".$order_id.";".$order_amount.";".$order_currency.";7;".$api_key));
+            echo<<<END
+<?xml version="1.0" encoding="UTF-8"?>
+	<result>
+		<code>7</code>
+		<comment>ERROR: md5 not found</comment>
+		<onpay_id>{$onpay_id}</onpay_id>
+		<pay_for>{$pay_for}</pay_for>
+		<order_id>{$pay_for}</order_id>
+		<md5>{$md5}</md5>
+	</result>
+END;
+            return false;
+        }
+        $this->db->insert("debag",array("text"=>"md5 успешно!"));
+
+        $this->db->select("users.email");
+        $this->db->join("payments","payments.userID=users.id");
+        $this->db->where("payments.id",$pay_for);
+        $query = $this->db->get("users",1,0);
+        $result = $query->row();
+        if($result->email!=$user_email)
+        {
+            $this->db->insert("debag",array("text"=>$user_email));
+            $md5 = strtoupper(md5("pay;".$pay_for.";".$onpay_id.";".$order_id.";".$order_amount.";".$order_currency.";3;".$api_key));
+            echo<<<END
+<?xml version="1.0" encoding="UTF-8"?>
+	<result>
+		<code>3</code>
+		<comment>ERROR: client not found</comment>
+		<onpay_id>{$onpay_id}</onpay_id>
+		<pay_for>{$pay_for}</pay_for>
+		<order_id>{$pay_for}</order_id>
+		<md5>{$md5}</md5>
+	</result>
+END;
+            return false;
+        }
+        $this->db->insert("debag",array("text"=>"email {$pay_for}"));
+        //$this->db->flush_cache();
+        $this->db->update("payments",array("type"=>"1"),array("id"=>$pay_for));
+        /*$data = array(
+            'type' => 1
+        );
+        $this->db->where('id', $pay_for);
+        $this->db->update('payments', $data);*/
+        //$this->db->flush_cache();
+        $this->db->insert("debag",array("text"=>$this->db->last_query()));
+        //$this->db->flush_cache();
+        $this->db->insert("debag",array("text"=>"Успешно зачислен!"));
+        $md5 = strtoupper(md5("pay;".$pay_for.";".$onpay_id.";".$order_id.";".$order_amount.";".$order_currency.";0;".$api_key));
+        echo<<<END
+<?xml version="1.0" encoding="UTF-8"?>
+	<result>
+		<code>0</code>
+		<comment>OK</comment>
+		<onpay_id>{$onpay_id}</onpay_id>
+		<pay_for>{$pay_for}</pay_for>
+		<order_id>{$order_id}</order_id>
+		<md5>{$md5}</md5>
+	</result>
+END;
+        return true;
     }
 }

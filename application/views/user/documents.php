@@ -24,12 +24,12 @@
                     <tr>
                         <td><?=$document['document_name']?></td>
                         <td>30 дней</td>
-                        <td>Оплачено</td>
+                        <td><?=($document['type']==1)?"Оплаченно":"Не оплаченно"?></td>
                         <td><?=$document['date']?></td>
                         <td>
                             <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href=""></a>
                             <a class="glyphicon glyphicon-trash btn btn-danger btn-xs" style="float:right;" href=""></a>
-                            <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" href="">
+                            <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" target="_blank" href="/payment/doc/<?=$document['id']?>"></a>
                             <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$document['url']?>/<?=$document['id']?>"></a>
                         <td>
                     </tr>
