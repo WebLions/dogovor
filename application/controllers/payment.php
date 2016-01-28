@@ -10,25 +10,24 @@ class Payment extends CI_Controller {
 
         parent::__construct();
         $this->load->helper(array('html','url'));
-        $this->load->library('form_validation');
-        $this->load->model('user_model');
+        //$this->load->library('form_validation');
+       // $this->load->model('user_model');
+        $this->load->model('pay_model');
+    }
+    public function check()
+    {
+        $type = $_POST['type'];
+        if($type=="check"){
+            $this->pay_model->check();
+        }elseif($type=="pay"){
+            $this->pay_model->pay();
+        }else{
+            echo false;
+        }
     }
 
-    public function document()
+    public function doc($id)
     {
-
-        //$md5 = pay_amount, pay_for, ticker, user_login, price_final, pay_type, notify_by_api, api_in_key
-        $data = array(
-        "price_final"=>"true",
-        "user_login"=>"onpay",
-        "notify_by_api"=>"true",
-        "pay_type"=>"1",
-        "pay_amount"=>"100",
-        "ticker"=>"RUR",
-        "md5"=>"cf653b4c4a7861b2224bd31eb3e3f291",
-        "pay_for"=>"Order 342",
-        "user_email"=>"user@pochta.ru"
-        );
-        $this->load->view('blocks/modal_pay',$this->data);
+        redirect($this->pay_model->getPayLink($id));
     }
 }

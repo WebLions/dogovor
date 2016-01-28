@@ -43,11 +43,11 @@ class User_model extends CI_Model
             $this->db->insert('users', $data);
             $user_id = $this->db->insert_id();
 
-            $text = "Спасибо!\r\n";
-            $text.= "Теперь вы можете зайти в личный кабинет <a href='project.dogovor.jera.ws/user/login'>project.dogovor.jera.ws/user/login</a>\r\n";
-            $text.= "Логин: " . $email . "\r\n";
-            $text.= "Пароль: " . $pass . "\r\n";
-            $text.= "Внимание! Поменяйте сгенерированый пароль на новый!\r\n";
+            $text = "Спасибо!<br>";
+            $text.= "Теперь вы можете зайти в личный кабинет <a href='project.dogovor.jera.ws/user/login'>project.dogovor.jera.ws/user/login</a><br>";
+            $text.= "Логин: " . $email . "<br>";
+            $text.= "Пароль: " . $pass . "<br>";
+            $text.= "Внимание! Поменяйте сгенерированый пароль на новый!<br>";
 
             $this->XMail("info@jera.ws", $email, "Регистрация", $text);
 
@@ -123,9 +123,10 @@ class User_model extends CI_Model
     public function getListDocuments()
     {
         $userID = $_SESSION['user_id'];
-        $this->db->select("buy_sale.id, buy_sale.date, types.document_name, types.url");
+        $this->db->select("buy_sale.id, buy_sale.date, types.document_name, types.url, payments.type");
         $this->db->where("buy_sale.id_user", $userID);
         $this->db->join("types", "types.id=buy_sale.type_id");
+        $this->db->join("payments", "payments.payID=buy_sale.id");
         $this->db->order_by("buy_sale.date");
         $result = $this->db->get("buy_sale");
         return $result->result_array();

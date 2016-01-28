@@ -29,7 +29,7 @@ class Document_model extends CI_Model
         echo '</pre>';
     }
     //------------------------------------------------------------------------------------------------------------------
-    function num2str($num)
+    private  function num2str($num)
     {
         $nul='ноль';
         $ten=array(
@@ -60,15 +60,15 @@ class Document_model extends CI_Model
                 if ($i2>1) $out[]= $tens[$i2].' '.$ten[$gender][$i3]; # 20-99
                 else $out[]= $i2>0 ? $a20[$i3] : $ten[$gender][$i3]; # 10-19 | 1-9
                 // units without rub & kop
-                if ($uk>1) $out[]= morph($v,$unit[$uk][0],$unit[$uk][1],$unit[$uk][2]);
+                if ($uk>1) $out[]= $this->morph($v,$unit[$uk][0],$unit[$uk][1],$unit[$uk][2]);
             } //foreach
         }
         else $out[] = $nul;
-        $out[] = morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
+        $out[] = $this->morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
         //$out[] = $kop.' '.morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
         return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
     }
-    function morph($n, $f1, $f2, $f5)
+    private function morph($n, $f1, $f2, $f5)
     {
         $n = abs(intval($n)) % 100;
         if ($n>10 && $n<20) return $f5;
@@ -80,11 +80,17 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function format_date($date)
     {
+        if(empty($date)){
+            return false;
+        }
         $date = DateTime::createFromFormat('d.m.Y', $date);
         $day = $date->format('d');
         $month = $date->format('m');
         $year = $date->format('Y');
-        $date = '"'. $day . '" ' . $month . ' ' . $year . 'г.';
+        //$date = '"'. $day . '" ' . $month . ' ' . $year . 'г.';
+
+        $date = $date->format('"d" m Yг.');
+        echo $date;
         return $date;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -288,7 +294,9 @@ class Document_model extends CI_Model
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
-        $document->save($name_of_file); // Сохранение документа
+        $document->save($name_of_file,true); // Сохранение документа
+
+
         $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.docx';
         return $name_for_server;
     }
@@ -613,8 +621,8 @@ class Document_model extends CI_Model
         }
         //Отправка данных
         $this->db->insert('buy_sale', $data);
-
-        return true;
+        $doc_id = $this->db->insert_id();
+        return $doc_id;
     }
     public function testjson()
     {
