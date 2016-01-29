@@ -143,11 +143,12 @@ END;
         }
         $this->db->insert("debag",array("text"=>"md5 успешно!"));
 
-        $this->db->select("users.email");
+        $this->db->select("users.email, payments.subID");
         $this->db->join("payments","payments.userID=users.id");
         $this->db->where("payments.id",$pay_for);
         $query = $this->db->get("users",1,0);
         $result = $query->row();
+        $subID = $result->subID;
         if($result->email!=$user_email)
         {
             $this->db->insert("debag",array("text"=>$user_email));
@@ -189,6 +190,88 @@ END;
 		<md5>{$md5}</md5>
 	</result>
 END;
+        if($subID>0)
+        {
+            $this->setSub($pay_for);
+        }
         return true;
     }
+    public function setSub($pay_id)
+    {
+        $user_id = $_SESSION['user_id'];
+        $this->db->where("user_id",$user_id);
+        $this->db->order_by("date", "desc");
+        $query = $this->db->get("subscribe",1,0);
+        $result = $query->row();
+        if($result->num_row()>0)
+        {
+            $first_date = $result->date_start;
+            $last_date = $result->date_finish;
+            $this->db->select("subscribe_type.mouth");
+            $this->db->where("payments.id", $pay_id);
+            $this->db->join("subscribe_type","subscribe_type.id=payments.subID");
+            $query = $this->db->get("payments",1,0);
+            $result = $query->row();
+            $srok = $result->mouth;
+            $data = DataTime::createFromFormat('Y-m-d H:i:s',$last_date);
+            $first_date = $data->modify("+3 mouth");
+        }
+    }
+    public function getPaySubLink($sub_id)
+    {
+        $this->db->where("id",$sub_id);
+        $query = $this->db->get("subscribe_type",1,0);
+        $result= $query->row();
+        $pay_amount = $result->cost;
+
+        $data = array(
+            "userID"=>$_SESSION['user_id'],
+            "subID"=>$sub_id,
+            "type"=>false,
+            "money"=>$pay_amount,
+            "date"=>date("Y-m-d H:i:s")
+        );
+        $this->db->insert('payments',$data);
+        $for = $this->db->insert_id();
+
+        $pay_for = $for;
+        $ticker = 'TST';
+        $user_login = 'CarsDoc_ru';
+        $user_email = $_SESSION['user_email'];
+        $price_final = '0';
+        $pay_type = '1';
+        $notify_by_api = '0';
+        $api_in_key = 'R0QR6V1juMy';
+
+        $md5 =$pay_amount.":".$pay_for.":".$ticker.":".$user_login;
+        $md5.=":".$price_final.":".$pay_type.":".$notify_by_api.":".$api_in_key;
+        $md5 = md5(mb_strtoupper($md5));
+
+        $data = array(
+            "price_final"=> $price_final,
+            "user_login"=> $user_login,
+            "notify_by_api"=> $notify_by_api,
+            "pay_type"=> $pay_type,
+            "pay_amount"=> $pay_amount,
+            "ticker"=> $ticker,
+            "f"=>11,
+            "md5"=> $md5,
+            "pay_for"=> $pay_for,
+            "user_email"=> $user_email
+        );
+
+        $fields_string = http_build_query($data);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://secure.onpay.ru/pay/make_payment_link");
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch,CURLOPT_POST, 1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        return $result;
+    }
+
 }
