@@ -84,13 +84,7 @@ class Document_model extends CI_Model
             return false;
         }
         $date = DateTime::createFromFormat('d.m.Y', $date);
-        $day = $date->format('d');
-        $month = $date->format('m');
-        $year = $date->format('Y');
-        //$date = '"'. $day . '" ' . $month . ' ' . $year . 'г.';
-
         $date = $date->format('"d" m Yг.');
-        echo $date;
         return $date;
     }
     //------------------------------------------------------------------------------------------------------------------

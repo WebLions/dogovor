@@ -30,4 +30,8 @@ class Payment extends CI_Controller {
     {
         redirect($this->pay_model->getPayLink($id));
     }
+    public function subscribe($id)
+    {
+        redirect($this->pay_model->getPaySubLink($id));
+    }
 }
