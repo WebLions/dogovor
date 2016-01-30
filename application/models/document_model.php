@@ -178,7 +178,7 @@ class Document_model extends CI_Model
     {
         if ($type_of_vendor == 'physical' && $type_of_buyer == 'physical')
         {
-            $header = 'Граж$данин ' . $data_for_header['vendor_fio'] . ', далее именуемый "Продавец", с одной стороны, и гражданин ' . $data_for_header['buyer_fio'] . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = ' Гражданин ' . $data_for_header['vendor_fio'] . ', далее именуемый "Продавец", с одной стороны, и гражданин ' . $data_for_header['buyer_fio'] . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'law')
         {
@@ -716,6 +716,93 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function get_data_for_canvas()
     {
+        //Подготовка данных
+        strip_tags($_POST);
+        $vendor_fio = $this->format_fio($_POST['vendor_surname'], $_POST['vendor_name'], $_POST['vendor_patronymic']);
+        $buyer_fio = $this->format_fio($_POST['buyer_surname'],$_POST['buyer_name'],$_POST['buyer_patronymic']);
+        $data_for_header = array(
+            'vendor_fio' => $vendor_fio,
+            'buyer_fio' => $buyer_fio,
+            'vendor_law_company_name' => $_POST['vendor_law_company_name'],
+            'vendor_law_actor_position' => $_POST['vendor_law_actor_position'],
+            //'vendor_law_fio' => $vendor_law_fio,
+            'vendor_law_document_osn' => $_POST['vendor_law_document_osn'],
+            'vendor_law_proxy_number' => $_POST['vendor_law_proxy_number'],
+            'vendor_law_proxy_date' => $_POST['vendor_law_proxy_date'],
+            'buyer_law_company_name' => $_POST['buyer_law_company_name'],
+            'buyer_law_actor_position' => $_POST['buyer_law_actor_position'],
+            //'buyer_law_fio' => $buyer_law_fio,
+            'buyer_law_document_osn' => $_POST['buyer_law_document_osn'],
+            'buyer_law_proxy_number' => $_POST['buyer_law_proxy_number'],
+            'buyer_law_proxy_date' => $_POST['buyer_law_proxy_date'],
+            //'vendor_ind_fio' => $vendor_ind_fio,
+            'vendor_number_of_certificate' => $_POST['vendor_number_of_certificate'],
+            'vendor_date_of_certificate' => $_POST['vendor_date_of_certificate'],
+            //'buyer_ind_fio' => $buyer_ind_fio,
+            'buyer_number_of_certificate' => $_POST['buyer_number_of_certificate'],
+            'buyer_date_of_certificate' => $_POST['buyer_date_of_certificate']
+        );
+        $header_doc = $this->set_header_doc($_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
+
+        //Массив данных для канванса
+        $data = array
+        (
+            0 => array
+            (
+                'text' => 'ДОГОВОР',
+                'align' => 'center',
+                'style' => 'bold'
+            ),
+            1 => array
+            (
+                'text' => 'КУПЛИ-ПРОДАЖИ ТРАНСПОРТНОГО СРЕДСТВА',
+                'align' => 'center',
+                'style' => 'normal'
+            ),
+            3 => array
+            (
+                'text' => $header_doc,
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            4 => array
+            (
+                'text' => '1. Предмет Договора',
+                'align' => 'center',
+                'style' => 'normal'
+            ),
+            5 => array
+            (
+                'text' => ' 1.1. Продавец обязуется передать в собственность Покупателя, а Покупатель обязуется принять и оплатить следующее транспортное средство (далее - транспортное средство):
+        - марка, модель: ${mark};
+        - идентификационный номер (VIN): ${vin};
+        - государственный регистрационный знак: ${reg_number};
+        - наименование (тип): ${car_type};
+        - категория (А, В, С, D, М, прицеп): ${category};
+        - год изготовления: ${date_of_product};
+        - модель, N двигателя: ${engine_model};
+        - шасси (рама) N: ${shassi};
+        - кузов (кабина, прицеп) N: ${carcass};
+        - цвет кузова (кабины, прицепа): ${color_carcass};
+        -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): ${other_parameters}.',
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            6 => array
+            (
+                'text' => '',
+                'align' => '',
+                'style' => ''
+            ),
+            7 => array
+            (
+                'text' => '',
+                'align' => '',
+                'style' => ''
+            )
+        );
+        json_encode($data);
+        return $data;
 
     }
     //------------------------------------------------------------------------------------------------------------------
