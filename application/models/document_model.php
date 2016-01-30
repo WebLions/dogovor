@@ -801,8 +801,9 @@ class Document_model extends CI_Model
                 'style' => ''
             )
         );
-        json_encode($data);
-        return $data;
+        $data = json_encode($data);
+        echo $data;
+        return true;
 
     }
     //------------------------------------------------------------------------------------------------------------------
