@@ -407,7 +407,7 @@ class Document_model extends CI_Model
         $header_doc = $this->set_header_doc($result->type_of_giver, $result->type_of_buyer, $data_for_header);
 
         //Заполнение
-        $document->setValue('city_contract', $result->place_contract);
+        $document->setValue('city_contract', $result->place_of_contract);
         $document->setValue('date_of_contract', $date_of_contract);
         $document->setValue('header_doc', $header_doc);
         $document->setValue('vendor_fio', $vendor_fio);

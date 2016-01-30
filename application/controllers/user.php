@@ -48,7 +48,6 @@ class User extends CI_Controller {
             redirect('/','refresh');
         }
         $this->data['documents'] = $this->user_model->getListDocuments( );
-       // var_dump($this->data['documents']);
 
         $this->load->view('user/header');
         $this->load->view('user/documents', $this->data);
