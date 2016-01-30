@@ -25,7 +25,9 @@ class Payment extends CI_Controller {
             echo false;
         }
     }
-
+    public function test($id){
+        $this->pay_model->setSub($id);
+    }
     public function doc($id)
     {
         redirect($this->pay_model->getPayLink($id));

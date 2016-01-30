@@ -26,9 +26,8 @@
                                 </div>
                             </div>
                             <div class="content-payment-header btn">
-                                Заказать
+                                <a href="/payment/subscribe/1" target="_blank">Заказать</a>
                             </div>
-
 
                         </div>
                     </div>
@@ -41,9 +40,6 @@
                         </div>
                     </div>
         </div>
-
-
-
     </section>
 </section>
 <!--main content end-->
