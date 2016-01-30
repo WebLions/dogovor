@@ -102,6 +102,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function json_to_string($target)
     {
+        json_decode($target);
         $quantity = count($target);
         $last_element = $quantity-1;//Ибо счет с нуля
         if ($quantity == 1)
@@ -166,11 +167,6 @@ class Document_model extends CI_Model
         }
         return $id_type;
     }
-    //------------------------------------------------------------------------------------------------------------------
-    /*public function testpack()
-    {
-        echo $this->set_pack_of_documents('law','physical','buy_sell');
-    }*/
     //------------------------------------------------------------------------------------------------------------------
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
@@ -242,24 +238,31 @@ class Document_model extends CI_Model
         $result = $query->row();
 
         // Подготовка данных для работы с документов
+        //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
-        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        //$vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        //$buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        //$buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        //Адрес
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
+        $date_of_product = $this->format_date($result->date_of_product);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
         $vendor_passport_date = $this->format_date($result->vendor_passport_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $payment_date = $this->format_date($result->payment_date);
-        //$vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
-        //$buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
-        //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
-        //$buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
-        $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
-        $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
+        //Джсон
         $other_documents_car = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string($result->accessories);
+        $other_parameters = $this->json_to_string($result->other_parameters);
+        //Иные
+        $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
         $price_str = $this->num2str($result->price);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
@@ -311,12 +314,12 @@ class Document_model extends CI_Model
         $document->setValue('reg_number', $result->reg_gov_number);
         $document->setValue('car_type', $result->car_type);
         $document->setValue('category', $result->category);
-        $document->setValue('date_of_product', $result->date_of_product);
+        $document->setValue('date_of_product', $date_of_product);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('shassi', $result->shassi);
         $document->setValue('carcass', $result->carcass);
         $document->setValue('color_carcass', $result->color_carcass);
-        $document->setValue('other_parameters', $result->other_parameters);
+        $document->setValue('other_parameters', $other_parameters);
         $document->setValue('additional_equip', $result->additional_devices);
         $document->setValue('serial_car', $result->serial_car);
         $document->setValue('number_of_serial_car', $result->number_of_serial_car);
@@ -664,14 +667,14 @@ class Document_model extends CI_Model
             'shassi' => $_POST['shassi'],
             'carcass' => $_POST['carcass'],
             'color_carcass' => $_POST['color_carcass'],
-            'other_parameters' => $_POST['other_parameters'],
+            'other_parameters' => json_encode($_POST['other_parameters']),
             'serial_car' => $_POST['serial_car'],
             'number_of_serial_car' => $_POST['number_of_serial_car'],
             'date_of_serial_car' => $_POST['date_of_serial_car'],
             'bywho_serial_car' => $_POST['bywho_serial_car'],
             'price_car' => $_POST['price_car'],
             'currency' => $_POST['currency'],
-            'additional_devices' => $_POST['additional_devices'],
+            'additional_devices' => json_encode($_POST['additional_devices']),
             'oil_in_car' => $_POST['oil_in_car'],
             'car_allstatus' => $_POST['car_allstatus'],
             'maintenance_date' => $_POST['maintenance_date'],
@@ -716,8 +719,33 @@ class Document_model extends CI_Model
     {
         //Подготовка данных
         strip_tags($_POST);
+        //ФИО
         $vendor_fio = $this->format_fio($_POST['vendor_surname'], $_POST['vendor_name'], $_POST['vendor_patronymic']);
         $buyer_fio = $this->format_fio($_POST['buyer_surname'],$_POST['buyer_name'],$_POST['buyer_patronymic']);
+        $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        //$vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        //$buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        //$buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        //Адрес
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        //Дата
+        $date_of_contract = $this->format_date($_POST['date_of_contract']);
+        $date_of_product = $this->format_date($_POST['date_of_contract']);
+        $vendor_birthday = $this->format_date($result->vendor_birthday);
+        $vendor_passport_date = $this->format_date($result->vendor_passport_date);
+        $buyer_passport_date = $this->format_date($result->buyer_passport_date);
+        $buyer_birthday = $this->format_date($result->buyer_birthday);
+        $payment_date = $this->format_date($result->payment_date);
+        //Джсон
+        $other_documents_car = $this->json_to_string($result->documents);
+        $other_parameters = $this->json_to_string($_POST['documents']);
+        $additional_equip = $this->json_to_string($_POST['additional_devices']);
+
+        $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
+        $accessories = $this->json_to_string($result->accessories);
+        $price_str = $this->num2str($result->price);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
             'buyer_fio' => $buyer_fio,
@@ -742,6 +770,7 @@ class Document_model extends CI_Model
         );
         $header_doc = $this->set_header_doc($_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
 
+
         //Массив данных для канванса
         $data = array
         (
@@ -759,6 +788,12 @@ class Document_model extends CI_Model
             ),
             3 => array
             (
+                'text' => "г. {$_POST['city_contract']}	$date_of_contract",
+                'align' => 'center',
+                'style' => 'normal'
+            ),
+            3 => array
+            (
                 'text' => $header_doc,
                 'align' => 'left',
                 'style' => 'normal'
@@ -771,33 +806,115 @@ class Document_model extends CI_Model
             ),
             5 => array
             (
-                'text' => ' 1.1. Продавец обязуется передать в собственность Покупателя, а Покупатель обязуется принять и оплатить следующее транспортное средство (далее - транспортное средство):
-        - марка, модель: ${mark};
-        - идентификационный номер (VIN): ${vin};
-        - государственный регистрационный знак: ${reg_number};
-        - наименование (тип): ${car_type};
-        - категория (А, В, С, D, М, прицеп): ${category};
-        - год изготовления: ${date_of_product};
-        - модель, N двигателя: ${engine_model};
-        - шасси (рама) N: ${shassi};
-        - кузов (кабина, прицеп) N: ${carcass};
-        - цвет кузова (кабины, прицепа): ${color_carcass};
-        -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): ${other_parameters}.',
+                'text' => " 1.1. Продавец обязуется передать в собственность Покупателя, а Покупатель обязуется принять и оплатить следующее транспортное средство (далее - транспортное средство):
+        - марка, модель: {$_POST['mark']};
+        - идентификационный номер (VIN): {$_POST['vin']};
+        - государственный регистрационный знак: {$_POST['reg_gov_number']};
+        - наименование (тип): {$_POST['car_type']};
+        - категория (А, В, С, D, М, прицеп): {$_POST['category']};
+        - год изготовления: $date_of_product;
+        - модель, N двигателя: {$_POST['engine_model']};
+        - шасси (рама) N: {$_POST['shassi']};
+        - кузов (кабина, прицеп) N: {$_POST['carcass']};
+        - цвет кузова (кабины, прицепа): {$_POST['color_carcass']};
+        -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters",
                 'align' => 'left',
                 'style' => 'normal'
             ),
             6 => array
             (
-                'text' => '',
-                'align' => '',
-                'style' => ''
+                'text' => "1.2. Продавец обязуется передать Покупателю транспортное средство, оснащенное серийным оборудованием и комплектующими изделиями, установленными заводом-изготовителем, а также следующим дополнительным оборудованием: $additional_equip",
+                'align' => 'left',
+                'style' => 'normal'
             ),
             7 => array
             (
-                'text' => '',
-                'align' => '',
-                'style' => ''
-            )
+                'text' => "1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, выданного {$_POST['bywho_serial_car']} {$_POST['date_of_serial_car']}. ",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                 'text' => "1.4. Продавец гарантирует, что передаваемое транспортное средство в споре или под арестом не состоит, не является предметом залога и не обременено другими правами третьих лиц, в розыске не находится.",
+                 'align' => 'left',
+                 'style' => 'normal'
+            ),
+            9 => array
+            (
+                'text' => "Продавец гарантирует, что не заключал с иными лицами договоров реализации транспортного средства.",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "2. Качество транспортного средства",
+                'align' => 'center',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "2.1. Общее состояние транспортного средства: {$_POST['car_allstatus']}.",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "2.2. Последнее техническое обслуживание транспортного средства проведено {$_POST['maintenance_date']}{$_POST['maintenance_bywho']} (организация, проводившая техническое обслуживание либо самостоятельно).",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),
+            8 => array
+            (
+                'text' => "",
+                'align' => 'left',
+                'style' => 'normal'
+            ),8 => array
+            (
+                'text' => ""{$_POST[']}                ']align' => 'left',
+                'style' => 'normal'
+            ),
+
         );
         $data = json_encode($data);
         echo $data;
