@@ -26,34 +26,6 @@ class Document extends CI_Controller
     /*public function test_packset(){
         $this->document_model->testpack();
     }*/
-    public function act_of_reception()  //  в ссылке выглядит так document/name
-    {
-
-        $this->document_model->get_doc_act_of_reception();//вызов нужно функции модели;
-
-    }
-    public function receipt_of_money()  //  в ссылке выглядит так document/name
-    {
-
-        $this->document_model->get_doc_receipt_of_money();//вызов нужно функции модели;
-
-    }
-    public function gibdd()  //  в ссылке выглядит так document/name
-    {
-
-        $this->document_model->get_doc_statement_gibdd();//вызов нужно функции модели;
-
-    }
-    public function marriage()  //  в ссылке выглядит так document/name
-    {
-
-        $this->document_model->get_doc_statement_vendor_marriage();//вызов нужно функции модели;
-
-    }
-    public function json()
-    {
-        $this->document_model->testjson();
-    }
     public function select_from_database()
     {
         echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
@@ -98,5 +70,9 @@ class Document extends CI_Controller
         $this->load->view('user/document_header');
         $this->load->view('user/document');
         $this->load->view('user/footer');
+    }
+    public function data_for_canvas()
+    {
+        $this->document_model->get_data_for_canvas();//Возвращает json массив
     }
 }
