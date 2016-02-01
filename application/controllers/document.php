@@ -7,14 +7,12 @@ class Document extends CI_Controller
      */
     public function __construct()
     {
-
         parent::__construct();
         $this->load->helper(array('html','url'));
         $this->load->model('document_model');
         $this->load->model('user_model');
         $this->load->model('pay_model');
         $this->load->library('form_validation');
-
     }
     public function pay($id)
     {

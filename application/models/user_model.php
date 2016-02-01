@@ -130,7 +130,7 @@ class User_model extends CI_Model
         $this->db->distinct("table");
         $result = $this->db->get("documents");
 
-        $this->db->select("documents.id, documents.date, types.document_name, types.url, payments.type");
+        $this->db->select("documents.doc_id as id, documents.date, types.document_name, types.url, payments.type");
         $this->db->where("documents.user_id", $userID);
         foreach ($result->result_array() as $item) {
             $this->db->join("{$item['table']}","{$item['table']}.id=documents.doc_id");
