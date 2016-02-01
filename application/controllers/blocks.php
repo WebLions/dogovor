@@ -18,14 +18,24 @@ class Blocks extends CI_Controller
     {
             $this->load->view("blocks/{$name}");
     }
+    //Разделение продавца физ/юр/инд
     public function bs_seller_block()
     {
         $this->blocks_model->bs_seller_block();
     }
-    public function bs_block_physical()
+    public function bs_block_physical_seller()
     {
-        $this->blocks_model->bs_block_physical();
+        $this->blocks_model->bs_block_physical_seller();
     }
+    public function bs_block_law_seller()
+    {
+        $this->blocks_model->bs_block_law_seller();
+    }
+    public function bs_block_individual_seller()
+    {
+        $this->blocks_model->bs_block_individual_seller();
+    }
+    //Владение ТС
     public function bs_owned_car()
     {
         $this->blocks_model->bs_owned_car();
@@ -34,6 +44,24 @@ class Blocks extends CI_Controller
     {
         $this->blocks_model->bs_not_owned_car();
     }
+    //Разделение покупателя физ/юр/инд
+    public function bs_buyer_block()
+    {
+        $this->blocks_model->bs_buyer_block();
+    }
+    public function bs_block_physical_buyer()
+    {
+        $this->blocks_model->bs_block_physical_buyer();
+    }
+    public function bs_block_law_buyer()
+    {
+        $this->blocks_model->bs_block_law_buyer();
+    }
+    public function bs_block_individual_buyer()
+    {
+        $this->blocks_model->bs_block_individual_buyer();
+    }
+    //ТС куплен в браке
     public function bs_wife_true()
     {
         $this->blocks_model->bs_wife_true();
@@ -42,4 +70,14 @@ class Blocks extends CI_Controller
     {
         $this->blocks_model->bs_wife_false();
     }
+    //Вызов блока доп.устройств
+    public function bs_additional_devices_yes()
+    {
+        $this->blocks_model->bs_additional_devices_yes();
+    }
+    public function bs_additional_devices_no()
+    {
+        $this->blocks_model->bs_additional_devices_no();
+    }
+
 }

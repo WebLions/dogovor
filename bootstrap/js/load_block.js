@@ -1,8 +1,11 @@
 var credit_true=true,
     accessories_true= true,
     defects_true= true,
-    features_true= true,
-    add_devices_true = true;
+    features_true= true;
+
+var can_delete = false;
+var done = [],
+    loaded = [];
 
 $( document ).ready(function() {
     //ДАТАПИКЕР
@@ -63,45 +66,30 @@ $( document ).ready(function() {
    $('.document').on('change','.ajax-button', function(){
 
         var func_name = $(this).attr('data-name');
+        done.push($(this).attr('data-id'));
+        var clicked_id = $(this).attr('data-id');
 
+        jQuery.each(done, function(id,block_name){
+            if(clicked_id == block_name)can_delete =true;
+            if(can_delete == true){
 
-        $.ajax({
-            url: '/blocks/'+func_name,
-            dataType: "html",
-            success: function (data, textStatus) {
-                $('.document').append(data);
+                $(block_name).remove('.row');
 
             }
+
         });
+       $.ajax({
+           url: '/blocks/'+func_name,
+           dataType: "html",
+           success: function (data, textStatus) {
+               $('.document').append(data);
+
+           }
+       });
+
+        console.log(done);
         });
 
-    /*//INBLOCK FUNCTION
-    $('.document').on('change','.ajax-button', function(){
-
-        var func_name = $(this).attr('data-name');
-
-
-        if($(this).attr('data-block-name')) {
-            var block_name ='#'+$(this).attr('data-block-name');
-            block_name += ' .content-block';
-        }
-
-
-        if(block_name) {
-
-            $.ajax({
-
-                url: '/blocks/' + func_name,
-                dataType: "html",
-                success: function (data, textStatus) {
-                    $(block_name).append(data);
-
-                }
-            });
-        }
-        block_name = '.document';
-
-    });*/
 
     $('.document').on('change','#defects_yes', function() {
 
@@ -122,7 +110,7 @@ $( document ).ready(function() {
         if(credit_true == true) $('#block_payment_date').append('<div class = "content-input-group">'+
                                                                 '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
                                                                 '</div>');
-        credit_true_true=false;
+        credit_true=false;
     });
     $('.document').on('change','#accessories_other', function() {
 
@@ -131,6 +119,7 @@ $( document ).ready(function() {
                                                                     '</div>');
         accessories_true=false;
     });
+
 
 
     $('.document').on('click', '#ready-button', function () {
