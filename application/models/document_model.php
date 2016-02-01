@@ -742,15 +742,15 @@ class Document_model extends CI_Model
         //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         //$buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         //Адрес
-        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
-        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
+        $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
         //Дата
         $date_of_contract = $this->format_date($_POST['date_of_contract']);
         $date_of_product = $this->format_date($_POST['date_of_contract']);
-        $vendor_birthday = $this->format_date($result->vendor_birthday);
-        $vendor_passport_date = $this->format_date($result->vendor_passport_date);
-        $buyer_passport_date = $this->format_date($result->buyer_passport_date);
-        $buyer_birthday = $this->format_date($result->buyer_birthday);
+        $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
+        $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
+        $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
+        $buyer_birthday = $this->format_date($_POST['buyer_birthday']);
         $payment_date = $this->format_date($_POST['payment_date']);
         $date_of_serial_car = $this->format_date($_POST['date_of_serial_car']);
         //Джсон
