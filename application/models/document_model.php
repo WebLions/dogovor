@@ -726,7 +726,7 @@ class Document_model extends CI_Model
         //Отправка данных
         $this->db->insert('buy_sale', $data);
         $doc_id = $this->db->insert_id();
-        return $doc_id;
+        return $doc_id;//
     }
     //------------------------------------------------------------------------------------------------------------------
     public function get_data_for_canvas()
