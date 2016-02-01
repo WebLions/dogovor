@@ -15,10 +15,7 @@
   <?php echo link_tag('bootstrap/css/bootstrap-theme.css'); ?>
   <?php echo link_tag('bootstrap/css/elegant-icons-style.css'); ?>
   <?php echo link_tag('bootstrap/css/font-awesome.min.css'); ?>
-  <?php echo link_tag('bootstrap/css/widgets.css'); ?>
   <?php echo link_tag('bootstrap/css/style-responsive.css'); ?>
-  <?php echo link_tag('bootstrap/css/jquery-ui-1.10.4.min.css'); ?>
-  <?php echo link_tag('bootstrap/css/jquery-jvectormap-1.2.2.css'); ?>
   <?php echo link_tag('bootstrap/css/style.css'); ?>
   <?php echo link_tag('bootstrap/css/content_style.css'); ?>
   <?php echo link_tag('bootstrap/datepicker/css/datepicker.css'); ?>

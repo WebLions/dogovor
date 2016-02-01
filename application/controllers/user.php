@@ -79,7 +79,7 @@ class User extends CI_Controller {
         $this->load->view('user/profile');
         $this->load->view('user/footer');
     }
-    public function wallet()
+    public function subscription()
     {
         if( !$this->data['user_id'] ) {
             redirect('/user/login','refresh');
