@@ -78,7 +78,7 @@ class Document_model extends CI_Model
         return $f5;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function format_date($date)
+    private function format_date($date)
     {
         if(empty($date)){
             return false;
@@ -92,19 +92,19 @@ class Document_model extends CI_Model
         return $date;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function format_adress($city, $street, $house, $flat)
+    private function format_adress($city, $street, $house, $flat)
     {
         $adress = $city .', '. $street .', '. $house .', '. $flat;
         return $adress;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function format_fio($surname, $name, $patronymic)
+    private function format_fio($surname, $name, $patronymic)
     {
         $fio = $surname .' '. $name . ' '. $patronymic;
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function json_to_string($target)
+    private function json_to_string($target)
     {
         json_decode($target);
         $quantity = count($target);
@@ -127,7 +127,7 @@ class Document_model extends CI_Model
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function set_pack_of_documents($giver, $taker, $type_of_document)
+    private function set_pack_of_documents($giver, $taker, $type_of_document)
     {
         if ($type_of_document == 'buy_sell')
         {
@@ -174,44 +174,55 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
-    public function set_header_doc($type_of_vendor, $type_of_buyer, $data_for_header) //law //physical //individual
+    private function set_header_doc($type_of_contract, $type_of_vendor, $type_of_buyer, $data_for_header) //law //physical //individual
     {
+        switch ($type_of_contract)
+        {
+            case 'buy_sell':
+                $first_person = 'Продавец';
+                $second_person = 'Покупатель';
+                break;
+            case 'gift':
+                $first_person = 'Даритель';
+                $second_person = 'Одаряемый';
+
+        }
         if ($type_of_vendor == 'physical' && $type_of_buyer == 'physical')
         {
-            $header = ' Гражданин ' . $data_for_header['vendor_fio'] . ', далее именуемый "Продавец", с одной стороны, и гражданин ' . $data_for_header['buyer_fio'] . ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = ' Гражданин ' . $data_for_header['vendor_fio'] . ', далее именуемый "'.$first_person.'", с одной стороны, и гражданин ' . $data_for_header['buyer_fio'] . ', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'law')
         {
-            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "'.$first_person.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и '.$data_for_header['buyer_law_company_name'].', далее именуемое "'.$second_person.'", в лице' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'physical' && $type_of_buyer == 'law')
         {
-            $header = 'Гражданин' . $data_for_header['vendor_fio']. ', далее именуемый "Продавец", с одной стороны и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = 'Гражданин' . $data_for_header['vendor_fio']. ', далее именуемый "'.$first_person.'", с одной стороны и '.$data_for_header['buyer_law_company_name'].', далее именуемое "'.$second_person.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'physical')
         {
-            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и гражданин '. $data_for_header['buyer_fio']. ', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_law_company_name'].', далее именуемое "'.$first_person.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и гражданин '. $data_for_header['buyer_fio']. ', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'physical' && $type_of_buyer == 'individual')
         {
-            $header =  'Гражданин' . $data_for_header['vendor_fio ']. ', далее именуемый "Продавец", с одной стороны и '.$data_for_header['buyer_ind_fio'].', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header =  'Гражданин' . $data_for_header['vendor_fio ']. ', далее именуемый "'.$first_person.'", с одной стороны и '.$data_for_header['buyer_ind_fio'].', далее именуемый "'.$second_person.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'individual' && $type_of_buyer == 'physical')
         {
-            $header = $data_for_header['vendor_ind_fio'].', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и гражданин '.$data_for_header['buyer_fio'].', далее именуемый "Покупатель", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_ind_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и гражданин '.$data_for_header['buyer_fio'].', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'law' && $type_of_buyer == 'individual')
         {
-            $header = $data_for_header['vendor_law_company_name '].', далее именуемое "Продавец", в лице'. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].'с одной стороны и '.$data_for_header['buyer_ind_fio'].', далее именуемый "Покупатель",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+            $header = $data_for_header['vendor_law_company_name '].', далее именуемое "'.$first_person.'", в лице'. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].'с одной стороны и '.$data_for_header['buyer_ind_fio'].', далее именуемый "'.$second_person.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
         }
         elseif ($type_of_vendor == 'individual' && $type_of_buyer == 'law')
         {
-            $header = $data_for_header['vendor_ind_fio'].', далее именуемый "Продавец", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и '.$data_for_header['buyer_law_company_name'].', далее именуемое "Покупатель", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';        }
+            $header = $data_for_header['vendor_ind_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и '.$data_for_header['buyer_law_company_name'].', далее именуемое "'.$second_person.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';        }
         else $header = 'Incorrect type of vendor/buyer.Type of vendor = '.$type_of_vendor.', Type of buyer = '.$type_of_buyer;
         return $header;
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function get_marriage_info($car_in_marriage, $spouse_fio)
+    private function get_marriage_info($car_in_marriage, $spouse_fio)
     {
         $marriage = array();
         if ($car_in_marriage == true)
@@ -291,7 +302,7 @@ class Document_model extends CI_Model
             'buyer_number_of_certificate' => $result->buyer_number_of_certificate,
             'buyer_date_of_certificate' => $result->buyer_date_of_certificate,
         );
-        $header_doc = $this->set_header_doc($result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_buyer, $data_for_header);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
 
         //Заполнение
@@ -408,7 +419,7 @@ class Document_model extends CI_Model
             'buyer_number_of_certificate' => $result->buyer_number_of_certificate,
             'buyer_date_of_certificate' => $result->buyer_date_of_certificate,
         );
-        $header_doc = $this->set_header_doc($result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract, $result->type_of_giver, $result->type_of_buyer, $data_for_header);
 
         //Заполнение
         $document->setValue('city_contract', $result->place_of_contract);
@@ -783,7 +794,7 @@ class Document_model extends CI_Model
             'buyer_number_of_certificate' => $_POST['buyer_number_of_certificate'],
             'buyer_date_of_certificate' => $_POST['buyer_date_of_certificate']
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
+        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
 
 
         //Массив данных для канванса
