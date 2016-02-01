@@ -15,7 +15,7 @@
                   <div class="col-lg-6">
                       <form method="post" action="/document/go_buy_sale">
                       <div class = "document" id="doc_create">
-                      <div class = "row" id="block_main">>
+                      <div class = "row" id="block_main">
                           <div class = "col-lg-12">
 
                       <div class = "content-block" >

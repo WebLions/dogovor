@@ -1123,14 +1123,15 @@ class Document_model extends CI_Model
 
     }
     //------------------------------------------------------------------------------------------------------------------
-    public function save_info($post = array())
-    {
 
-        $instruments = json_encode($post['instruments']);  //  {key:value,..}
-        /// прочитать защиту sql
-        $instruments = json_decode($instruments);
+    public function add_documents($doc_id,$user_id,$table)
+    {
         $data = array(
-            'name' => $post['name']
+            'doc_id' => $doc_id,
+            'user_id' => $user_id,
+            'table' => $table
         );
+        $this->db->insert('documents',$data);
+        return $this->db->insert_id();
     }
 }

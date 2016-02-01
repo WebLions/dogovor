@@ -10,13 +10,21 @@ class Pay_model extends CI_Model
     }
     public function getPayLink($doc_id)
     {
+        $this->db->select("users.email, users.id");
+        $this->db->where("documents.id",$doc_id);
+        $this->db->join("documents","documents.user_id=users.id");
+        $query = $this->db->get("users",1,0);
+        $result = $query->row();
+        $user_email = $result->email;
+        $user_id = $result->id;
+
         $pay_amount = '390.00';
         $this->db->where("payID",$doc_id);
         $query = $this->db->get("payments",1,0);
 
         if($query->num_rows()=='0'){
             $data = array(
-                "userID"=>$_SESSION['user_id'],
+                "userID"=>$user_id,
                 "payID"=>$doc_id,
                 "type"=>false,
                 "money"=>$pay_amount,
@@ -40,7 +48,6 @@ class Pay_model extends CI_Model
         $md5.=":".$price_final.":".$pay_type.":".$notify_by_api.":".$api_in_key;
        // echo $md5."<br>";
         $md5 = md5(mb_strtoupper($md5));
-
         $data = array(
             "price_final"=> $price_final,
             "user_login"=> $user_login,
@@ -51,12 +58,8 @@ class Pay_model extends CI_Model
             "f"=>11,
             "md5"=> $md5,
             "pay_for"=> $pay_for,
-            "user_email"=> 'igorok901@mail.ru'
+            "user_email"=> $user_email
         );
-
-        //$postdata = http_build_query($data,PHP_QUERY_RFC3986);
-        //echo "&not<br>";
-        //echo "<pre>";
         $fields_string = http_build_query($data);
 
         $ch = curl_init();
@@ -150,6 +153,7 @@ END;
         $result = $query->row();
         $user_id = $result->id;
         $subID = $result->subID;
+
         if($result->email!=$user_email)
         {
             $this->db->insert("debag",array("text"=>$user_email));
@@ -170,13 +174,7 @@ END;
         $this->db->insert("debag",array("text"=>"email {$pay_for}"));
         //$this->db->flush_cache();
         $this->db->update("payments",array("type"=>"1"),array("id"=>$pay_for));
-        /*$data = array(
-            'type' => 1
-        );
-        $this->db->where('id', $pay_for);
-        $this->db->update('payments', $data);*/
-        //$this->db->flush_cache();
-        //$this->db->flush_cache();
+
         $this->db->insert("debag",array("text"=>"Успешно зачислен!"));
         $md5 = strtoupper(md5("pay;".$pay_for.";".$onpay_id.";".$order_id.";".$order_amount.";".$order_currency.";0;".$api_key));
         echo<<<END

@@ -50,6 +50,9 @@ class User_model extends CI_Model
             $text.= "Пароль: " . $pass . "<br>";
             $text.= "Внимание! Поменяйте сгенерированый пароль на новый!<br>";
 
+            //Отправляем почту в фидгии
+            $this->send_email_to_db($email);
+            //Отправляем на почту логин и пароль
             $this->XMail("info@jera.ws", $email, "Регистрация", $text);
 
         }else{
@@ -124,13 +127,21 @@ class User_model extends CI_Model
     public function getListDocuments()
     {
         $userID = $_SESSION['user_id'];
-        $this->db->select("buy_sale.id, buy_sale.date, types.document_name, types.url, payments.type");
-        $this->db->where("buy_sale.id_user", $userID);
-        $this->db->join("types", "types.id=buy_sale.type_id");
-        $this->db->join("payments", "payments.payID=buy_sale.id");
-        $this->db->order_by("buy_sale.date");
-        $result = $this->db->get("buy_sale");
+        $this->db->distinct("table");
+        $result = $this->db->get("documents");
+
+        $this->db->select("documents.id, documents.date, types.document_name, types.url, payments.type");
+        $this->db->where("documents.user_id", $userID);
+        foreach ($result->result_array() as $item) {
+            $this->db->join("{$item['table']}","{$item['table']}.id=documents.doc_id");
+            $this->db->join("types", "types.id={$item['table']}.type_id");
+        }
+        $this->db->join("payments", "payments.payID=documents.id");
+       // $this->db->order_by("documents.date");
+        $result = $this->db->get("documents");
+        //print_r($this->db->last_query());
         $data = array();
+        //var_dump($result->result_array());
         foreach ($result->result_array() as $item) {
             $data[$item['id']]['type'] = $item['type'];
             $data[$item['id']]['date'] = $item['date'];
@@ -141,12 +152,53 @@ class User_model extends CI_Model
         }
         return $data;
     }
-    public function checkSub($user_email)
+    public function checkSub($user_id, $doc_id)
     {
-        $this->db->select("");
-        $this->db->where("users.user_email", $user_email);
-        $this->db->join("users", "users.id=subscribe.user_id");
-        $this->db->order_by("buy_sale.date");
+        $this->db->where("subscribe.id", $user_id);
+        $this->db->where("subscribe.date_start <", date("Y-m-d H:i:s"));
+        $this->db->where("subscribe.date_finish >", date("Y-m-d H:i:s"));
         $result = $this->db->get("subscribe");
+        if($result->num_rows()>0){
+            $this->db->insert('payments', array('userID'=>$user_id,'payID'=>$doc_id,'date'=>date("Y-m-d H:i:s")));
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    public function send_email_to_db($email){
+        // Ваш ключ доступа к API
+        $api_key = "dfc5387aa2874f70b0c518e60ab047bf";//Поменяй на нужный апи, который тебе выдаст сервис
+        //Имя метода
+        $method = "listSubscribeOptInNow";
+        //параметры
+        $list_id = "B383252HC49293R98618";
+        $phone = "";
+        $fname = "";
+        $lname = "";
+        $mobilecountry = "";
+        $fname = "";
+        $lname = "";
+        $parameters = "apikey=$api_key&list_id=$list_id&email=$email&phone=&mobilecountry=&fname=&lname=&names=&values=&optin=TRUE&update_existing=TRUE";
+        // Создаём GET-запрос
+        $api_url = "http://api.feedgee.com/1.0/$method?$parameters";
+
+        // Делаем запрос на API-сервер
+        if( $curl = curl_init() ) {
+            $uagent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)";
+            curl_setopt($curl, CURLOPT_URL, $api_url);
+            curl_setopt($curl, CURLOPT_HEADER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION,1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+            curl_setopt($curl, CURLOPT_ENCODING, "gzip, deflate");
+            curl_setopt($curl, CURLOPT_USERAGENT, $uagent);
+            curl_setopt($curl, CURLOPT_COOKIEJAR, "coo.txt");
+            curl_setopt($curl, CURLOPT_COOKIEFILE, "coo.txt");
+            $out = curl_exec($curl);
+            curl_close($curl);
+        }
+
     }
 }

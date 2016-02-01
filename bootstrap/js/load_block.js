@@ -66,18 +66,9 @@ $( document ).ready(function() {
    $('.document').on('change','.ajax-button', function(){
 
         var func_name = $(this).attr('data-name');
-        var clicked_id = $(this).attr('data-id');
-       done.push($(this).attr('data-id'));
 
-        jQuery.each(done, function(id,block_name){
-            if(clicked_id == block_name)can_delete =true;
-            if(can_delete == true){
+       $( ".document").find(".row" ).slice( $(this).parents("div[class=row]").index()+1 ).remove();
 
-                $(block_name).remove('.row');
-
-            }
-
-        });
        $.ajax({
            url: '/blocks/'+func_name,
            dataType: "html",
@@ -86,9 +77,7 @@ $( document ).ready(function() {
 
            }
        });
-
-        console.log(done);
-        });
+   });
 
 
     $('.document').on('change','#defects_yes', function() {

@@ -76,6 +76,7 @@ class Document extends CI_Controller
     }
     public function go_buy_sale()
     {
+        //Проверяем залогинен ли пользователь
         if( !$this->data['user_id'] ) {
             $this->form_validation->set_rules('email','E-mail','trim|required|xss_clean');
             if($this->form_validation->run() == true)
@@ -83,18 +84,22 @@ class Document extends CI_Controller
                 if( !$this->data['user_id'] ) {
                     $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
                 }
-                $doc_id = $this->document_model->insert_into_database( $this->data['user_id'] );
             }else{
                 redirect('user/login');
             }
-        }else {
-            $doc_id = $this->document_model->insert_into_database($this->data['user_id']);
         }
-        if($this->user_model->checkSub($this->input->post('email'))){
+        $doc_id = $this->document_model->insert_into_database();
+
+        //insert to documents return $doc_id:global
+        $table = "buy_sale";
+        $doc_id = $this->document_model->add_documents($doc_id,$this->data['user_id'],$table);
+
+        if($this->user_model->checkSub( $this->data['user_id'], $doc_id )){
             redirect('user/documents');
+        }else{
+            $link = $this->pay_model->getPayLink($this->data['user_id'], $doc_id);
+            redirect($link);
         }
-        $link = $this->pay_model->getPayLink($doc_id);
-        redirect($link);
     }
     public function create()
     {
