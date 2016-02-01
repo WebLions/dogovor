@@ -1,86 +1,107 @@
-var bs_deal = true,
-    mods_yes= true,
-    mods_no = true,
-    wife_no = true,
-    wife_yes= true,
+var credit_true=true,
+    accessories_true= true,
     defects_true= true,
-    features_true= true;
-    reg_ts  = true;
+    features_true= true,
+    add_devices_true = true;
 
 $( document ).ready(function() {
+    //ДАТАПИКЕР
     $("#doc_create").delegate("#date_of_contract", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD'
         });
     });
-    $('#bs_deal').change(function(){
-         string = "/blocks/load/main_block_bs";
-        if(bs_deal == true)
+    $("#doc_create").delegate("#vendor_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#vendor_passport_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#buyer_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#buyer_passport_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#date_of_product", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#maintenance_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    $("#doc_create").delegate("#marriage_svid_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD'
+        });
+    });
+    //ДАТАПИКЕР
+
+
+    //BLOCK FUNCTION
+   $('.document').on('change','.ajax-button', function(){
+
+        var func_name = $(this).attr('data-name');
+
+
+        $.ajax({
+            url: '/blocks/'+func_name,
+            dataType: "html",
+            success: function (data, textStatus) {
+                $('.document').append(data);
+
+            }
+        });
+        });
+
+    /*//INBLOCK FUNCTION
+    $('.document').on('change','.ajax-button', function(){
+
+        var func_name = $(this).attr('data-name');
+
+
+        if($(this).attr('data-block-name')) {
+            var block_name ='#'+$(this).attr('data-block-name');
+            block_name += ' .content-block';
+        }
+
+
+        if(block_name) {
+
             $.ajax({
-                url: string,
+
+                url: '/blocks/' + func_name,
                 dataType: "html",
                 success: function (data, textStatus) {
-                    $('.document').append(data);
+                    $(block_name).append(data);
 
                 }
             });
-        bs_deal = false;
-        });
+        }
+        block_name = '.document';
 
-        $('.document').on('change','#mods_yes', function() {
-         string = "/blocks/load/mods_bs";
-            if(mods_yes == true)
-                $.ajax({
-                    url: string,
-                    dataType: "html",
-                    success: function (data, textStatus) {
-                        $('.document').append(data);
-                    }
-                });
-            mods_yes = false;
-            });
-
-
-    $('.document').on('change','#mods_no', function() {
-        string = "/blocks/load/main_block_bs_2.php";
-        if(mods_no == true)
-                $.ajax({
-                    url: string,
-                    dataType: "html",
-                    success: function (data, textStatus) {
-                        $('.document').append(data);
-                    }
-                });
-        mods_no = false;
-        });
-
-
-    $('.document').on('change','#wife_no', function() {
-            string = "/blocks/load/main_block_nowife";
-        if(wife_no == true)
-            $.ajax({
-                url: string,
-                dataType: "html",
-                success: function (data, textStatus) {
-                    $('.document').append(data);
-                }
-            });
-        wife_no = false;
-        });
-
-
-    $('.document').on('change','#wife_yes', function() {
-            string = "/blocks/load/main_block_wife";
-        if(wife_yes == true)
-            $.ajax({
-                url: string,
-                dataType: "html",
-                success: function (data, textStatus) {
-                    $('.document').append(data);
-                }
-            });
-        wife_yes = false;
-        });
+    });*/
 
     $('.document').on('change','#defects_yes', function() {
 
@@ -96,6 +117,21 @@ $( document ).ready(function() {
                                                               '</div>');
         features_true=false;
     });
+    $('.document').on('change','#credit', function() {
+
+        if(credit_true == true) $('#block_payment_date').append('<div class = "content-input-group">'+
+                                                                '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
+                                                                '</div>');
+        credit_true_true=false;
+    });
+    $('.document').on('change','#accessories_other', function() {
+
+        if(accessories_true == true) $('#block_accessories').append('<div class = "content-input-group">'+
+                                                                    '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
+                                                                    '</div>');
+        accessories_true=false;
+    });
+
 
     $('.document').on('click', '#ready-button', function () {
         $('#create-doc').trigger("submit");
@@ -106,7 +142,7 @@ $( document ).ready(function() {
            $('.document').find("#myModal").html(data);
         });
     });
-    //swag
+
 });
 
 

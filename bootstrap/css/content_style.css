@@ -37,11 +37,23 @@
     padding-left: 10%;
     padding-bottom: 3%;
 }
+.content-radio-inline{
+
+    text-align:center;
+    padding-left: 10%;
+    padding-bottom: 3%;
+}
 
 .content-input{
 
+    text-align: left;
+
+}
+.content-input-inline{
 
     text-align: center;
+    padding-left: 10%;
+    padding-bottom: 3%;
 
 }
 .content-button{
@@ -65,5 +77,42 @@
 .content-preview{
 
 float:right;
+
+}
+.-content-payment-header{
+
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid;
+    border-radius: 25px;
+    background-color: #2362E1;
+    border-color: #2362E1;
+    margin: 10px;
+    color: #FFFFFF;
+    font-size: 30px;
+    text-align: center;
+    width:95%;
+
+}
+.-content-payment-main-block{
+
+    padding-bottom: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid;
+    border-radius: 25px;
+    background-color: #2362E1;
+    border-color: #2362E1;
+    margin: 10px;
+    color: #FFFFFF;
+    font-size: 18px;
+    text-align: center;
+    width:95%;
+    height: 95%;
+}
+.content-payment-block-group{
+
+    padding-left: 10;
 
 }

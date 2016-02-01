@@ -12,27 +12,41 @@
 
         <div class = "row">
             <div class = "col-lg-12">
-                <table style="width: 100%">
+                <table class="table table-striped">
                     <thead>
-                        <th style="width: 25%">Название документа</th>
-                        <th style="width: 20%">Срок хранения</th>
-                        <th style="width: 20%">Состояние оплаты</th>
-                        <th style="width: 20%">Дата создания</th>
-                        <th style="width: 15%">Действия</th>
+                        <th style="width: 40%">Название документа</th>
+                        <th style="width: 15%">Срок хранения</th>
+                        <th style="width: 15%">Состояние оплаты</th>
+                        <th style="width: 15%">Дата создания</th>
+                        <th style="width: 15%;text-align: center;">Действия</th>
                     </thead>
-                    <? foreach ($documents as $document) {?>
+                    <? foreach ($documents as $key => $document) {
+                        $difference = intval(abs(
+                            strtotime($document['date']) - strtotime(date('Y-m-d H:i:s'))
+                        )); ?>
                     <tr>
-                        <td><?=$document['document_name']?></td>
-                        <td>30 дней</td>
-                        <td>Оплачено</td>
+                        <td>Блок документов: <?=$document['doc'][0]['document_name']?></td>
+                        <td><?= 30 - ceil((time() - strtotime($document['date'])) / 86400);?> дней</td>
+                        <td><?=($document['type']==1)?"Оплаченно":"Не оплаченно"?></td>
                         <td><?=$document['date']?></td>
-                        <td style="float: left">
+                        <td>
                             <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href=""></a>
-                            <a class="glyphicon glyphicon-trash btn btn-danger btn-xs" style="float:right;" href=""></a>
-                            <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" href="">
-                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$document['url']?>/<?=$document['id']?>"></a>
+                            <?if($document['type']==0){?>
+                                <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" target="_blank" href="/payment/doc/<?=$key?>"></a>
+                            <? }?>
                         <td>
                     </tr>
+                        <? foreach($document['doc'] as $doc) {?>
+                    <tr>
+                            <td style="padding-left: 30px">-  <?=$doc['document_name']?></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        <td>
+                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$doc['url']?>/<?=$key?>"></a>
+                        <td>
+                    </tr>
+                        <? } ?>
                     <? } ?>
                 </table>
                 <br>

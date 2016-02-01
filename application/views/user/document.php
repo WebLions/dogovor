@@ -21,16 +21,13 @@
                       <div class = "content-block">
                           <p class = "content-header">Выберите тип договора:</p>
                           <div class = "content-radio-header">
-                              <div class = "content-input">
+                              <div class = "content-input-inlane">
 
-                                  <input id = "bs_deal" type="radio" name="type_of_contract" value="buy_sell">
+                                  <input class="ajax-button" data-name="bs_seller_block" id = "bs_deal" type="radio" name="type_of_contract" value="buy_sell">
                                   <span class = "content-input-align">Договор купли-продажи ТС</span>
 
-                              </div>
 
-                              <div class = "content-input">
-
-                                  <input type="radio" name="type_of_contract" value="gift">
+                                  <input class="ajax-button" data-name="gift_seller_block" type="radio" name="type_of_contract" value="gift">
                                   <span class = "content-input-align">Договор дарения ТС</span>
 
                               </div>
@@ -49,7 +46,10 @@
          <div class="col-lg-6" >
                       <div class = "row">
                           <div class = "col-lg-10">
-                              <div class = "content-block" style="width: 600px;height: 600px;" id="content-preview">
+                              <div class = "content-block" style="width: 600px;height: 600px;" id="content-preview_block">
+                                  <canvas id="content_preview">
+
+                                  </canvas>
 
                               </div>
                           </div>

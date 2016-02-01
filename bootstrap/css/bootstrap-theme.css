@@ -2116,7 +2116,7 @@ fieldset[disabled] .btn-link:focus {
   border-radius: 3px;
 }
 .btn-xs {
-  padding: 1px 5px;
+  padding: 5px;
 }
 .btn-block {
   display: block;

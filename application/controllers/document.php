@@ -12,8 +12,13 @@ class Document extends CI_Controller
         $this->load->helper(array('html','url'));
         $this->load->model('document_model');
         $this->load->model('user_model');
+        $this->load->model('pay_model');
         $this->load->library('form_validation');
 
+    }
+    public function pay($id)
+    {
+        echo $this->pay_model->getPayLink($id);
     }
     public function buy_sale($id)  //  в ссылке выглядит так document/name
     {
@@ -26,6 +31,34 @@ class Document extends CI_Controller
     /*public function test_packset(){
         $this->document_model->testpack();
     }*/
+    public function act_of_reception($id)  //  в ссылке выглядит так document/name
+    {
+
+        $this->data['doc'] = $this->document_model->get_doc_act_of_reception( (int) $id );//вызов нужно функции модели;
+        redirect($this->data['doc']);
+    }
+    public function receipt_of_money()  //  в ссылке выглядит так document/name
+    {
+
+        $this->document_model->get_doc_receipt_of_money();//вызов нужно функции модели;
+
+    }
+    public function gibdd()  //  в ссылке выглядит так document/name
+    {
+
+        $this->document_model->get_doc_statement_gibdd();//вызов нужно функции модели;
+
+    }
+    public function marriage()  //  в ссылке выглядит так document/name
+    {
+
+        $this->document_model->get_doc_statement_vendor_marriage();//вызов нужно функции модели;
+
+    }
+    public function json()
+    {
+        $this->document_model->testjson();
+    }
     public function select_from_database()
     {
         echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
@@ -50,20 +83,18 @@ class Document extends CI_Controller
                 if( !$this->data['user_id'] ) {
                     $this->data['user_id'] = $this->user_model->register($this->input->post('email'));
                 }
-                $this->document_model->insert_into_database( $this->data['user_id'] );
-
-                $link = $this->pay_model->getPayLink();
-                redirect($link);
-
+                $doc_id = $this->document_model->insert_into_database( $this->data['user_id'] );
             }else{
                 redirect('user/login');
             }
-        }else{
-            $this->document_model->insert_into_database( $this->data['user_id'] );
-
-            $link = $this->pay_model->getPayLink();
-            redirect($link);
+        }else {
+            $doc_id = $this->document_model->insert_into_database($this->data['user_id']);
         }
+        if($this->user_model->checkSub($this->input->post('email'))){
+            redirect('user/documents');
+        }
+        $link = $this->pay_model->getPayLink($doc_id);
+        redirect($link);
     }
     public function create()
     {
