@@ -29,7 +29,7 @@ class Document_model extends CI_Model
         echo '</pre>';
     }
     //------------------------------------------------------------------------------------------------------------------
-    function num2str($num)
+    public function num2str($num)
     {
         $nul='ноль';
         $ten=array(
@@ -68,7 +68,7 @@ class Document_model extends CI_Model
         //$out[] = $kop.' '.morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
         return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
     }
-    function morph($n, $f1, $f2, $f5)
+    public function morph($n, $f1, $f2, $f5)
     {
         $n = abs(intval($n)) % 100;
         if ($n>10 && $n<20) return $f5;
@@ -77,12 +77,70 @@ class Document_model extends CI_Model
         if ($n==1) return $f1;
         return $f5;
     }
+    public function get_month_from_number($number)
+    {
+        switch ($number) {
+            case '01':
+                $result = 'января';
+                break;
+
+            case '02':
+                $result = 'февраля';
+                break;
+
+            case '03':
+                $result = 'марта';
+                break;
+
+            case '04':
+                $result = 'апреля';
+                break;
+
+            case '05':
+                $result = 'мая';
+                break;
+
+            case '06':
+                $result = 'июня';
+                break;
+
+            case '07':
+                $result = 'июля';
+                break;
+
+            case '08':
+                $result = 'августа';
+                break;
+
+            case '09':
+                $result = 'сентября';
+                break;
+
+            case '10':
+                $result = 'октября';
+                break;
+
+            case '11':
+                $result = 'ноября';
+                break;
+
+            case '12':
+                $result = 'декабря';
+                break;
+
+            default:
+                $result = 'Ошибка. Введенно неверное число месяца';
+                break;
+        }
+        return $result;
+    }
     //------------------------------------------------------------------------------------------------------------------
     public function format_date($date)
     {
         $date = DateTime::createFromFormat('d.m.Y', $date);
         $day = $date->format('d');
         $month = $date->format('m');
+        $month = $this->get_month_from_number($month);
         $year = $date->format('Y');
         $date = '"'. $day . '" ' . $month . ' ' . $year . 'г.';
         return $date;
@@ -632,7 +690,6 @@ class Document_model extends CI_Model
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract']);
         $data = array
         (
-            'id_user' => $id_user,
             'date' => date("Y-m-d H:I:s"),
             'type_of_contract' => $_POST['type_of_contract'],
             'place_of_contract' => $_POST['place_of_contract'],
@@ -737,15 +794,15 @@ class Document_model extends CI_Model
         //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         //$buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         //Адрес
-        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
-        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
+        $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
         //Дата
         $date_of_contract = $this->format_date($_POST['date_of_contract']);
         $date_of_product = $this->format_date($_POST['date_of_contract']);
-        $vendor_birthday = $this->format_date($result->vendor_birthday);
-        $vendor_passport_date = $this->format_date($result->vendor_passport_date);
-        $buyer_passport_date = $this->format_date($result->buyer_passport_date);
-        $buyer_birthday = $this->format_date($result->buyer_birthday);
+        $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
+        $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
+        $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
+        $buyer_birthday = $this->format_date($_POST['buyer_birthday']);
         $payment_date = $this->format_date($_POST['payment_date']);
         $date_of_serial_car = $this->format_date($_POST['date_of_serial_car']);
         //Джсон
@@ -754,7 +811,7 @@ class Document_model extends CI_Model
         $additional_equip = $this->json_to_string($_POST['additional_devices']);
 
         $marriage = $this->get_marriage_info($_POST['car_in_marriage'], $spouse_fio);
-        $accessories = $this->json_to_string($result->accessories);
+        $accessories = $this->json_to_string($_POST['accessories']);
         $price_str = $this->num2str($_POST['price_car']);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
@@ -948,7 +1005,7 @@ class Document_model extends CI_Model
             ),
             25 => array
             (
-                'text' => "4.3. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие инструменты и принадлежности: {$_POST['accessories']} {$marriage['info']}",
+                'text' => "4.3. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие инструменты и принадлежности: {$accessories} {$marriage['info']}",
                 'align' => 'left',
                 'style' => 'normal'
             ),
