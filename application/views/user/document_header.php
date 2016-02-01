@@ -29,7 +29,7 @@
 
 
   <header class="header dark-bg">
-
+    <h2><?=$_SESSION['user_email']?></h2>
   </header>
   <!--header end-->
 
