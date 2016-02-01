@@ -85,6 +85,98 @@ END;
     {
 
         echo <<<END
+         <div class="row" id="block_seller_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe продавца:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="seller_individual_actor_surname"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="seller_individual_actor_name "  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="seller_individual_actor_patronymic"  placeholder="Отчество:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="seller_individual_company_name"  placeholder="Наименование: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="seller_individual_actor_position"  placeholder="В лице: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="seller_individual_document_osn"  placeholder="Действующего на основании:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="seller_birthday" class="form-control datatimepicker" type="text"  name="seller_individual_proxy_date"  placeholder="Дата выдачи доверенности:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="seller_individual_proxy_number"  placeholder="Номер доверенности: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="props_inn"  placeholder="Номер паспорта:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="seller_passport_date" class = "form-control" type="text" name="props_ogrn"  placeholder="Дата выдачи паспорта:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="props_inn"  placeholder="ИНН:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="props_ogrn "  placeholder="ОГРН:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="props_individual_adress"  placeholder="Юридический адрес: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="props_phone"  placeholder="Телефон:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="props_bank_acc"  placeholder="Расчетный счет">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="props_bank_name"  placeholder="Наименование банка:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="props_korr_acc "  placeholder="Корр.счет:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="props_bik"  placeholder="БИК:">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+<div class="row" id="block_seller">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Покупатель транспортного средства:</p>
+            <div class = "content-radio-group">
+                <div class = "content-radio">
+
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_physical_buyer" type="radio" name="type_of_giver" value="physical">
+                    <span class = "content-input-align">Физическое лицо</span>
+                </div>
+                <div class = "content-radio">
+
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_law_buyer" type="radio" name="type_of_giver" value="law">
+                    <span class = "content-input-align">Юридическое лицо</span>
+
+                </div>
+                <div class = "content-radio">
+
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_individual_buyer" type="radio" name="type_of_giver" value="individual">
+                    <span class = "content-input-align">Индивидуальный предприниматель</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 END;
     }
     public function bs_block_law_seller()
@@ -94,7 +186,7 @@ END;
          <div class="row" id="block_seller_info">
 <div class="col-lg-12">
     <div class = "content-block">
-        <p class = "content-header">Введите данныe покупателя:</p>
+        <p class = "content-header">Введите данныe продавца:</p>
         <div class = "content-radio">
 
             <div class = "content-input">
@@ -157,106 +249,28 @@ END;
         </div>
     </div>
 </div>
-<div class="row" id="block_ts_info">
+<div class="row" id="block_seller">
     <div class="col-lg-12">
         <div class = "content-block">
-            <p class = "content-header">Сведения о траспортном средстве:</p>
-            <div class = "content-radio">
+            <p class = "content-header">Покупатель транспортного средства:</p>
+            <div class = "content-radio-group">
+                <div class = "content-radio">
 
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="mark"  placeholder="Модель,марка:">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_physical_buyer" type="radio" name="type_of_giver" value="physical">
+                    <span class = "content-input-align">Физическое лицо</span>
                 </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vin"  placeholder="Идентификационный номер (VIN):">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="reg_gov_number"  placeholder="Государственный регистрационный знак:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text"  name="car_type"  placeholder="Наименование(тип):">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="category"  placeholder="Категория:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="date_of_product" class="form-control datetimepicker" type="text" name="date_of_product"  placeholder="Год изготовления:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="engime_model"  placeholder="Модель, номер двигателя:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="shassi"  placeholder="Номер рамы,шасси:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="carcass"  placeholder="Кузов(кабина,прицеп):">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="color_carcass"  placeholder="Цвет кузова,кабины,прицепа:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="other_parametrs"  placeholder="Иные индивидуальные признаки:">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                <div class = "content-radio">
 
-<div class="row" id="block_serial_car">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Сведения о паспорте транспортного средства(ПТС):</p>
-
-            <div class = "content-input-group">
-                <input class="form-control" type="text"  name="serial_car"  placeholder="Серия:">
-            </div>
-            <div class = "content-input-group">
-                <input class = "form-control" type="text" name="number_of_serial_car"  placeholder="Номер:">
-            </div>
-            <div class = "content-input-group">
-                <input id="date_of_serial_car" class="form-control datetimepicker" type="text" name="date_of_serial_car"  placeholder="Дата выдачи:">
-            </div>
-            <div class = "content-input-group">
-                <input class = "form-control" type="text" name="bywho_serial_car"  placeholder="Кем выдан">
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-
-<div class="row" id="block_car_price">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Стоимость транспортного средства по договору:</p>
-
-            <div style="width:100%"class = "content-input-group">
-                   <input style="width:80%;float:left;"class="form-control" type="text"  name="price_car"  placeholder="Стоимость:">
-                <select style="width:15%" class="form-control" name="currency">
-                    <option value="RUB">RUB</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                </select>
-            </div>
-
-
-        </div>
-    </div>
-</div>
-
-<div class="row" id="block_additional_devices" >
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Серийное и дополнительное оборудование, установленное на ТС(Указать?):</p>
-            <div class = "content-radio-inline">
-                <div class = "content-input-inlane">
-
-                    <input class="ajax-button" data-name="bs_additional_devices_yes" id = "mods_yes" type="radio" name="additional_devices" value="true">
-                    <span class = "content-input-align">Да</span>
-
-                    <input class="ajax-button" data-name="bs_additional_devices_no" id = "mods_no"  type="radio" name="additional_devices" value="false">
-                    <span class = "content-input-align">Нет</span>
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_law_buyer" type="radio" name="type_of_giver" value="law">
+                    <span class = "content-input-align">Юридическое лицо</span>
 
                 </div>
+                <div class = "content-radio">
 
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_individual_buyer" type="radio" name="type_of_giver" value="individual">
+                    <span class = "content-input-align">Индивидуальный предприниматель</span>
+
+                </div>
             </div>
         </div>
     </div>
@@ -318,7 +332,7 @@ END;
             </div>
         </div>
 
-        <div class="row" id="block_seller">
+        <div class="row" id="block_buyer">
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Покупатель транспортного средства:</p>
@@ -941,9 +955,11 @@ END;
             <div class = "content-input-group">
                 <input class="form-control" type="text"  name="oil_in_car"  placeholder="Залитое в двигатель масло">
             </div>
+
             <div class="row">
                 <div class="col-lg-6">
                     <div class = "content-radio-group">
+
                         <div class = "content-input">
                             <input type="checkbox" name="additional_devices_array[]" value="Левый руль">
                             <span class = "content-input-align">Левый руль</span>
@@ -1076,10 +1092,13 @@ END;
                             <input type="checkbox" name="additional_devices_array[]" value="Полный привод">
                             <span class = "content-input-align">Полный привод</span>
                         </div>
+
                     </div>
                 </div>
+
                 <div class="col-lg-6">
                     <div class = "content-radio">
+
                         <div class = "content-input">
                             <input type="checkbox" name="additional_devices_array[]" value="Антиблокировочная тормозная система">
                             <span class = "content-input-align">Антиблокировочная тормозная система</span>
@@ -1212,9 +1231,11 @@ END;
                             <input type="checkbox" name="additional_devices_array[]" value="Парктроник">
                             <span class = "content-input-align">Парктроник</span>
                         </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -1223,6 +1244,7 @@ END;
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Общее состояние транспортного средства:</p>
+
             <div class = "content-radio-group">
                 <div class = "content-radio">
                     <input type="radio" name="car_allstatus" value="greate">
@@ -1254,6 +1276,7 @@ END;
                     <span class = "content-input-align">Восстановлению не подлежит</span>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -1270,6 +1293,7 @@ END;
             <div class = "content-input-group">
                 <input class = "form-control" type="text" name="maintenance_bywho"  placeholder="Кем проведено:">
             </div>
+
         </div>
     </div>
 </div>
@@ -1278,6 +1302,7 @@ END;
     <div class="col-lg-12">
         <div class = "content-block" id="defects_block">
             <p class = "content-header">Неустраненные повреждения и эксплуатационные дефекты:</p>
+
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
                     <input id="defects_yes" type="radio" name="defects" value="true">
@@ -1287,6 +1312,7 @@ END;
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -1295,6 +1321,7 @@ END;
     <div class="col-lg-12">
         <div class = "content-block" id="features_block">
             <p class = "content-header">Особенности, которые не влияют на безопасность ТС:</p>
+
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
                     <input id="features_yes" type="radio" name="features" value="true">
@@ -1304,15 +1331,17 @@ END;
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 
 <div class="row" id="block_payment_date" data-id="16">
     <div class="col-lg-12">
-        <div class = "content-block">
+        <div class = "content-block" id="payment_data">
             <p class = "content-header">Сроки оплаты:</p>
             <div class = "content-radio-group">
+
                 <div class = "content-radio">
                     <input type="radio" name="payment_date" value="before">
                     <span class = "content-input-align">До подписания настоящего договора</span>
@@ -1327,6 +1356,7 @@ END;
                     <input id="credit" type="radio" name="payment_date" value="credit">
                     <span class = "content-input-align">В рассрочку по следующему графику:</span>
                 </div>
+
             </div>
         </div>
     </div>
@@ -1337,6 +1367,7 @@ END;
         <div class = "content-block content-seller-doc">
             <p class = "content-header">Продавец передает Покупателю следующие документы(Выберите из списка):</p>
             <div class = "content-radio-group">
+
                 <div class = "content-input">
                     <input type="checkbox" name="documents[]" value="Свидетельство о регистрации транспортного средства">
                     <span class = "content-input-align">Свидетельство о регистрации транспортного средства:</span>
@@ -1361,12 +1392,13 @@ END;
                     <input type="checkbox" name="documents[]" value="Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование">
                     <span class = "content-input-align">Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование</span>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
-<div class="row" id="block_accessories" data-id="18">
+<div class="row" id="block_accessories_other" data-id="18">
     <div class="col-lg-12">
         <div class = "content-block" id="block_accessories">
             <p class = "content-header">Продавец передает Покупателю следующие инструменты и принадлежности:</p>
@@ -1401,21 +1433,23 @@ END;
                     <input type="radio" id="accessories_other">
                     <span class = "content-input-align">Иное:</span>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 
-<div class="row" id="block_car_in_marriage">
+<div class="row" id="block_car_in_marriage" data-id="19">
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Автомобиль приобретен в период брака?</p>
             <div class = "content-radio-header">
+
                 <div class = "content-input-inlane">
-                    <input data-id="block_car_in_marriage" class="ajax-button" data-name="bs_wife_true" id = "wife_yes" type="radio" name="car_in_marriage" value="true">
+                    <input  class="ajax-button" data-name="bs_wife_true" id = "wife_yes" type="radio" name="car_in_marriage" value="true">
                     <span class = "content-input-align">Да</span>
 
-                    <input data-id="block_car_in_marriage" class="ajax-button" data-name="bs_wife_false" id = "wife_no" type="radio" name="car_in_marriage" value="false">
+                    <input  class="ajax-button" data-name="bs_wife_false" id = "wife_no" type="radio" name="car_in_marriage" value="false">
                     <span class = "content-input-align">Нет</span>
                 </div>
 
@@ -1643,6 +1677,24 @@ END;
     public function bs_wife_true()
     {
         echo <<<END
+        <div class="row" id="block_car_in_marriage" data-id="19">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Автомобиль приобретен в период брака?</p>
+            <div class = "content-radio-header">
+
+                <div class = "content-input-inlane">
+                    <input class="ajax-button" data-name="bs_wife_true" id = "wife_yes" type="radio" name="car_in_marriage" value="true" checked>
+                    <span class = "content-input-align">Да</span>
+
+                    <input  class="ajax-button" data-name="bs_wife_false" id = "wife_no" type="radio" name="car_in_marriage" value="false">
+                    <span class = "content-input-align">Нет</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
         <div class="row" id="block_spouse" data-id="20">
     <div class="col-lg-12">
         <div class = "content-block">
@@ -1697,6 +1749,7 @@ END;
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="marriage_svid_bywho"  placeholder="Kем выдано свидетельство о браке:">
                 </div>
+
             </div>
         </div>
     </div>
@@ -1707,6 +1760,7 @@ END;
         <div class = "content-block">
             <p class = "content-header">Размер неустойки по договору</p>
             <div class = "content-radio-header">
+
                 <div class = "content-input-inlane">
                     <input type="radio" name="penalty" value="0,02%">
                     <span class = "content-input-align">0,02%</span>
@@ -1717,6 +1771,7 @@ END;
                     <input type="radio" name="penalty" value="0,1%">
                     <span class = "content-input-align">0,1%</span>
                 </div>
+
             </div>
         </div>
     </div>
@@ -1741,6 +1796,25 @@ END;
     public function bs_wife_false()
     {
         echo <<<END
+        <div class="row" id="block_car_in_marriage" data-id="19">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Автомобиль приобретен в период брака?</p>
+            <div class = "content-radio-header">
+
+                <div class = "content-input-inlane">
+                    <input class="ajax-button" data-name="bs_wife_true" id = "wife_yes" type="radio" name="car_in_marriage" value="true" >
+                    <span class = "content-input-align">Да</span>
+
+                    <input  class="ajax-button" data-name="bs_wife_false" id = "wife_no" type="radio" name="car_in_marriage" value="false" checked>
+                    <span class = "content-input-align">Нет</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
         <div class="row" id="block_penalty" data-id="21">
     <div class="col-lg-12">
         <div class = "content-block">

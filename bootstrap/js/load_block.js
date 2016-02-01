@@ -65,9 +65,10 @@ $( document ).ready(function() {
     //BLOCK FUNCTION
    $('.document').on('change','.ajax-button', function(){
 
-        var func_name = $(this).attr('data-name');
+       var func_name = $(this).attr('data-name');
 
-       $( ".document").find(".row" ).slice( $(this).parents("div[class=row]").index()+1 ).remove();
+       $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
+       console.log($(this).parents("div[class=row]").index());
 
        $.ajax({
            url: '/blocks/'+func_name,
@@ -94,14 +95,14 @@ $( document ).ready(function() {
                                                               '</div>');
         features_true=false;
     });
-    $('.document').on('change','#credit', function() {
+    $('.document').on('change','#block_payment_date', function() {
 
-        if(credit_true == true) $('#block_payment_date').append('<div class = "content-input-group">'+
+        if(credit_true == true) $('#payment_date').append('<div class = "content-input-group">'+
                                                                 '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
                                                                 '</div>');
         credit_true=false;
     });
-    $('.document').on('change','#accessories_other', function() {
+    $('.document').on('change','#block_accessories_other', function() {
 
         if(accessories_true == true) $('#block_accessories').append('<div class = "content-input-group">'+
                                                                     '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
