@@ -66,8 +66,8 @@ $( document ).ready(function() {
    $('.document').on('change','.ajax-button', function(){
 
         var func_name = $(this).attr('data-name');
-        done.push($(this).attr('data-id'));
         var clicked_id = $(this).attr('data-id');
+       done.push($(this).attr('data-id'));
 
         jQuery.each(done, function(id,block_name){
             if(clicked_id == block_name)can_delete =true;

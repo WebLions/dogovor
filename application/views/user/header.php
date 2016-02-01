@@ -9,15 +9,11 @@
     <link rel="shortcut icon" href="img/favicon.png">
 
     <title>Admin panel</title>
-
     <?php echo link_tag('bootstrap/css/bootstrap.min.css'); ?>    
     <?php echo link_tag('bootstrap/css/bootstrap-theme.css'); ?>
     <?php echo link_tag('bootstrap/css/elegant-icons-style.css'); ?>
     <?php echo link_tag('bootstrap/css/font-awesome.min.css'); ?>
-    <?php echo link_tag('bootstrap/css/widgets.css'); ?>
     <?php echo link_tag('bootstrap/css/style-responsive.css'); ?>
-    <?php echo link_tag('bootstrap/css/jquery-ui-1.10.4.min.css'); ?>
-    <?php echo link_tag('bootstrap/css/jquery-jvectormap-1.2.2.css'); ?>
     <?php echo link_tag('bootstrap/css/style.css'); ?>
     <?php echo link_tag('bootstrap/css/content_style.css'); ?>
     <?php echo link_tag('bootstrap/datepicker/css/datepicker.css'); ?>
@@ -88,9 +84,9 @@
           </li>
 
           <li>
-            <a class="" href="/user/wallet">
+            <a class="" href="/user/subscription">
               <i class="glyphicon glyphicon-usd"></i>
-              <span>Кошелёк</span>
+              <span>Подписка</span>
             </a>
           </li>
 
