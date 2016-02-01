@@ -143,11 +143,12 @@ END;
         }
         $this->db->insert("debag",array("text"=>"md5 успешно!"));
 
-        $this->db->select("users.email, payments.subID");
+        $this->db->select("users.email, payments.subID, users.id");
         $this->db->join("payments","payments.userID=users.id");
         $this->db->where("payments.id",$pay_for);
         $query = $this->db->get("users",1,0);
         $result = $query->row();
+        $user_id = $result->id;
         $subID = $result->subID;
         if($result->email!=$user_email)
         {
@@ -175,7 +176,6 @@ END;
         $this->db->where('id', $pay_for);
         $this->db->update('payments', $data);*/
         //$this->db->flush_cache();
-        $this->db->insert("debag",array("text"=>$this->db->last_query()));
         //$this->db->flush_cache();
         $this->db->insert("debag",array("text"=>"Успешно зачислен!"));
         $md5 = strtoupper(md5("pay;".$pay_for.";".$onpay_id.";".$order_id.";".$order_amount.";".$order_currency.";0;".$api_key));
@@ -192,20 +192,27 @@ END;
 END;
         if($subID>0)
         {
-            $this->setSub($pay_for);
+            $this->db->insert("debag",array("text"=>"sub-{$pay_for}"));
+            $this->setSub($pay_for, $user_id);
         }
         return true;
     }
-    public function setSub($pay_id)
+    public function setSub($pay_id, $user_id)
     {
-        $user_id = $_SESSION['user_id'];
+        $this->db->where("pay_id",$pay_id);
+        $query = $this->db->get("subscribe",1,0);
+        if($query->num_rows()>0)
+        {
+            return false;
+        }
+
         $this->db->where("user_id",$user_id);
-        $this->db->order_by("date", "desc");
+        $this->db->order_by("date_finish", "desc");
         $query = $this->db->get("subscribe",1,0);
         $result = $query->row();
-        if($result->num_row()>0)
+
+        if($query->num_rows()>0)
         {
-            $first_date = $result->date_start;
             $last_date = $result->date_finish;
             $this->db->select("subscribe_type.mouth");
             $this->db->where("payments.id", $pay_id);
@@ -213,9 +220,26 @@ END;
             $query = $this->db->get("payments",1,0);
             $result = $query->row();
             $srok = $result->mouth;
-            $data = DataTime::createFromFormat('Y-m-d H:i:s',$last_date);
-            $first_date = $data->modify("+3 mouth");
+            $data = DateTime::createFromFormat('Y-m-d H:i:s',$last_date);
+            $data->modify("+{$srok} month");
+            $second_date = $data->format('Y-m-d H:i:s');
+            $this->db->insert("debag",array("text"=>"re_sub"));
+            $this->db->insert('subscribe',array('pay_id'=>$pay_id,'user_id'=>$user_id,'date_start'=>$last_date,'date_finish'=>$second_date));
+            return true;
         }
+        $this->db->insert("debag",array("text"=>"pre"));
+        $this->db->select("subscribe_type.mouth");
+        $this->db->where("payments.id", $pay_id);
+        $this->db->join("subscribe_type","subscribe_type.id=payments.subID");
+        $query = $this->db->get("payments",1,0);
+        $result = $query->row();
+        $srok = $result->mouth;
+        $last_date = date("Y-m-d H:i:s");
+        $data = DateTime::createFromFormat('Y-m-d H:i:s',$last_date);
+        $data->modify("+{$srok} month");
+        $second_date = $data->format('Y-m-d H:i:s');
+        $this->db->insert('subscribe',array('pay_id'=>$pay_id,'user_id'=>$user_id,'date_start'=>$last_date,'date_finish'=>$second_date));
+        $this->db->insert("debag",array("text"=>"yes"));
     }
     public function getPaySubLink($sub_id)
     {
