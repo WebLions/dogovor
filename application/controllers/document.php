@@ -63,9 +63,9 @@ class Document extends CI_Controller
         echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
         $this->document_model->select_from_database();
     }
-    public function insert_into_database()
+    public function insert_into_database_buysale()
     {
-        $this->document_model->insert_into_database();
+        $this->document_model->insert_into_database_buysale();
     }
     public function check_post()
     {
@@ -87,7 +87,7 @@ class Document extends CI_Controller
                 redirect('user/login');
             }
         }
-        $doc_id = $this->document_model->insert_into_database();
+        $doc_id = $this->document_model->insert_into_database_buysale();
 
         //insert to documents return $doc_id:global
         $table = "buy_sale";
