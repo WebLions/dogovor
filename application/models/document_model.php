@@ -1129,7 +1129,8 @@ class Document_model extends CI_Model
         $data = array(
             'doc_id' => $doc_id,
             'user_id' => $user_id,
-            'table' => $table
+            'table' => $table,
+            'date' => date('Y-m-d H:i:s')
         );
         $this->db->insert('documents',$data);
         return $this->db->insert_id();
