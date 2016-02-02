@@ -69,10 +69,10 @@
               <span>Главная</span>
             </a>
           </li>
-          <li class="sub-menu">
+          <li class="sub-menu" style="background: #DC143C;">
             <a href="/document/create" class="">
               <i class="glyphicon glyphicon-plus"></i>
-              <span>Создать</span>
+              <span>Создать документ</span>
             </a>
           </li>
           <li class="sub-menu">
