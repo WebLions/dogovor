@@ -24,7 +24,7 @@ class Document extends CI_Controller
             redirect('/','refresh');
         }
         $this->data['doc'] = $this->document_model->get_doc_buy_sale( (int) $id );//вызов нужно функции модели;
-        echo $this->data['doc'];
+
         redirect($this->data['doc']);
     }
     /*public function test_packset(){
