@@ -1,14 +1,6 @@
 <section id="main-content">
     <section class="wrapper">
         <!--overview start-->
-        <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a href="main">Главная страница</a></li>
-                    <li><i class="fa fa-laptop"></i>Список документов</li>
-                </ol>
-            </div>
-        </div>
 
         <div class = "row">
             <div class = "col-lg-12">
@@ -49,15 +41,7 @@
                         <? } ?>
                     <? } ?>
                 </table>
-                <br>
                 <div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class = "content-button">
-                                <button type="button" class="btn btn-success">Что-либо</button>
-                            </div>
-                        </div>
-                    </div>
             </div>
         </div>
 

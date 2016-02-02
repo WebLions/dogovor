@@ -26,6 +26,12 @@
 
 
     <header class="header dark-bg">
+      <div class="toggle-nav">
+        <div class="icon-reorder tooltips"><i class="icon_menu"></i></div>
+      </div>
+      <a href="/" class="logo">
+        <span style="color:#dc143c;font-family:'cooper black';font-size:29px;"><strong>Cars</strong></span><span style="color:#4169e1;font-family:'cooper black';font-size:29px;"><strong>Doc</strong></span>
+      </a>
       <ul class="dropdown-menu extended logout">
               <div class="log-arrow-up"></div>
               <li class="eborder-top">

@@ -5,7 +5,11 @@
               <div class="row">
                 <div class="col-lg-12">
                     <ol class="breadcrumb">
+                        <?if(isset($_SESSION['user_id'])){?>
+                        <li><i class="fa fa-home"></i><a href="/user/profile">Профиль</a></li>
+                        <?}else{?>
                         <li><i class="fa fa-home"></i><a href="/">Главная страница</a></li>
+                        <?}?>
                         <li><i class="fa fa-laptop"></i>Создание документа</li>
                     </ol>
                 </div>
@@ -32,37 +36,22 @@
 
                               </div>
                           </div>
-
-                          <br>
                       </div>
-
- </div>
-
-        </div>
-      </div>
-                      </form>
-
-      </div>
-         <div class="col-lg-6" >
-                      <div class = "row">
-                          <div class = "col-lg-10">
-                              <div class = "content-block" style="width: 600px;height: 600px;" id="content-preview_block">
-                                  <canvas id="content_preview">
-
-                                  </canvas>
-
-                              </div>
                           </div>
                       </div>
-         </div>
+                      </div>
+                      </form>
 
+                </div>
+                  <div id="sticky-anchor"></div>
+                  <div class="col-lg-6" id="sticky">
+                      <div class = "content-block" style="height: 600px;" id="content-preview_block">
+                          <canvas id="content_preview">
 
-     </div>
-
-
-
-
-
+                          </canvas>
+                      </div>
+                  </div>
+          </div>
           </section>
       </section>
       <!--main content end-->

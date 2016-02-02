@@ -201,4 +201,57 @@ class User_model extends CI_Model
         print_r($out);
 
     }
+    public function userInfo($user_id){
+        $this->db->select("*");
+        $this->db->where("users.id",$user_id);
+        $query = $this->db->get("users",1,0);
+        return $query->row();
+    }
+    public function userGlobalInfo($user_id){
+
+        $this->db->where("user_id",$user_id);
+        $data['doc_create'] = $this->db->count_all_results("documents");
+
+        $this->db->select("subscribe.date_finish");
+        $this->db->where("subscribe.user_id", $user_id);
+        $this->db->where("subscribe.date_finish > NOW()");
+        $result = $this->db->get("subscribe",1,0);
+        $query = $result->row();
+        if($result->num_rows()>0){
+            $dif = 31 - ceil((time() - strtotime($query->date_finish)) / 86400);
+            $data['subscribe'] = $dif;
+        }else{
+            $data['subscribe'] = "<a href='/user/subscription'>Оформить</a>";
+        }
+
+        $this->db->where("user_id",$user_id);
+        $this->db->join("payments","payments.payID=documents.id");
+        $data['doc_pay'] = $this->db->count_all_results("documents");
+        $this->db->flush_cache();
+        $data['doc_all'] = $this->db->count_all("documents");
+
+
+        return $data;
+    }
+    public function saveProfile($post, $user_id)
+    {
+        $this->db->where("email",$post['email']);
+        $this->db->where("id <>", $user_id);
+        if($this->db->count_all_results("users"))
+        {
+            return false;
+        }
+
+        $this->db->where("id",$user_id);
+        $this->db->set("fio",$post['fio']);
+        $this->db->set("email",$post['email']);
+        $this->db->set("login",$post['email']);
+        if(!empty($post['password'])){
+            $password = md5($post['password'] . 'soult228');
+            $this->db->set("password",$password);
+        }
+        $this->db->set("about",$post['about']);
+        $this->db->update("users");
+        return true;
+    }
 }

@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-//error_reporting (0);
+error_reporting (0);
 
 class Document_model extends CI_Model
 {

@@ -8,8 +8,49 @@ class Blocks_model extends CI_Model
         parent::__construct();
         $this->load->database();//Работа с бд
     }
-
+    public function block_deal(){
+        echo <<<END
+<div class="row" id="block_deal" data-id="1">
+    <div class="col-lg-12 ">
+        <div class = "content-block">
+            <div class = "content-input-group">
+                <input class = "form-control" type="text" name="place_of_contract"  placeholder="Место заключения договора:">
+            </div>
+            <div class = "content-input-group">
+                <input id="date_of_contract" class="form-control datetimepicker"  name="date_of_contract"  placeholder="Дата заключения договора:">
+            </div>
+        </div>
+    </div>
+</div>
+END;
+    }
+    public function block_seller(){
+        echo <<<END
+<div class="row" id="block_seller">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Продавец транспортного средства:</p>
+            <div class = "content-radio-group">
+                <div class = "content-radio">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_physical_seller" type="radio" name="type_of_giver" value="physical">
+                    <span class = "content-input-align">Физическое лицо</span>
+                </div>
+                <div class = "content-radio">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_law_seller" type="radio" name="type_of_giver" value="law">
+                    <span class = "content-input-align">Юридическое лицо</span>
+                </div>
+                <div class = "content-radio">
+                    <input class="ajax-button" data-name="bs_block_individual_seller" type="radio" name="type_of_giver" value="individual">
+                    <span class = "content-input-align">Индивидуальный предприниматель</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+END;
+    }
     //Базовые блоки продавца
+  /*
     public function bs_seller_block()
     {
 
@@ -54,12 +95,12 @@ class Blocks_model extends CI_Model
     </div>
 </div>
 END;
-    }
+    }*/
     public function bs_block_physical_seller()
     {
 
         echo <<<END
-        <div class="row" id="block_seller_info">
+<div class="row" id="block_seller_info">
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Статус продавца:</p>
@@ -85,68 +126,68 @@ END;
     {
 
         echo <<<END
-         <div class="row" id="block_seller_info">
-<div class="col-lg-12">
-    <div class = "content-block">
-        <p class = "content-header">Введите данныe продавца:</p>
-        <div class = "content-radio">
+<div class="row" id="block_seller_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Введите данныe продавца:</p>
+            <div class = "content-radio">
 
-            <div class = "content-input">
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="seller_individual_actor_surname"  placeholder="Фамилия:">
+                <div class = "content-input">
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="seller_individual_actor_surname"  placeholder="Фамилия:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class="form-control" type="text" name="seller_individual_actor_name "  placeholder="Имя:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="seller_individual_actor_patronymic"  placeholder="Отчество:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="seller_individual_company_name"  placeholder="Наименование: ">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class="form-control" type="text" name="seller_individual_actor_position"  placeholder="В лице: ">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="seller_individual_document_osn"  placeholder="Действующего на основании:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input id="seller_birthday" class="form-control datatimepicker" type="text"  name="seller_individual_proxy_date"  placeholder="Дата выдачи доверенности:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="seller_individual_proxy_number"  placeholder="Номер доверенности: ">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class="form-control" type="text" name="props_inn"  placeholder="Номер паспорта:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input id="seller_passport_date" class = "form-control" type="text" name="props_ogrn"  placeholder="Дата выдачи паспорта:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class="form-control" type="text" name="props_inn"  placeholder="ИНН:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class="form-control" type="text" name="props_ogrn "  placeholder="ОГРН:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class="form-control" type="text" name="props_individual_adress"  placeholder="Юридический адрес: ">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="props_phone"  placeholder="Телефон:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="props_bank_acc"  placeholder="Расчетный счет">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="props_bank_name"  placeholder="Наименование банка:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class = "form-control" type="text" name="props_korr_acc "  placeholder="Корр.счет:">
+                    </div>
+                    <div class = "content-input-group">
+                        <input class="form-control" type="text" name="props_bik"  placeholder="БИК:">
+                    </div>
                 </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="seller_individual_actor_name "  placeholder="Имя:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="seller_individual_actor_patronymic"  placeholder="Отчество:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="seller_individual_company_name"  placeholder="Наименование: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="seller_individual_actor_position"  placeholder="В лице: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="seller_individual_document_osn"  placeholder="Действующего на основании:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="seller_birthday" class="form-control datatimepicker" type="text"  name="seller_individual_proxy_date"  placeholder="Дата выдачи доверенности:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="seller_individual_proxy_number"  placeholder="Номер доверенности: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_inn"  placeholder="Номер паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="seller_passport_date" class = "form-control" type="text" name="props_ogrn"  placeholder="Дата выдачи паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_inn"  placeholder="ИНН:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_ogrn "  placeholder="ОГРН:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_individual_adress"  placeholder="Юридический адрес: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_phone"  placeholder="Телефон:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_bank_acc"  placeholder="Расчетный счет">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_bank_name"  placeholder="Наименование банка:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_korr_acc "  placeholder="Корр.счет:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_bik"  placeholder="БИК:">
-                </div>
-            </div>
            </div>
         </div>
     </div>
@@ -368,35 +409,33 @@ END;
     {
 
         echo <<<END
-        <div class="row" id="for_agent_block">
-            <div class="col-lg-12">
-            <div class = "content-block">
-
-             <p class = "content-header">Введите данныe довереного лица:</p>
-                <div class = "content-input">
-                <div class = "content-input-group">
-                <input class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:">
-                </div>
-                <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_vendor_name"  placeholder="Имя:">
-                </div>
-                <div class = "content-input-group">
-                <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
-                </div>
-                <div class = "content-input-group">
-                <input class = "form-control" type="text" name="proxy_number"  placeholder="Довереность №:">
-                </div>
-                <div class = "content-input-group">
-                <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="proxy_date"  placeholder="Дата выдачи:">
-                </div>
-                <div class = "content-input-group">
-                <input class="form-control" type="text" name="proxy_notary"  placeholder="Нотариус:">
-                </div>
-                </div>
-
-                </div>
-             </div>
-        </div>
+<div class="row" id="for_agent_block">
+    <div class="col-lg-12">
+           <div class = "content-block">
+            <p class = "content-header">Введите данныe довереного лица:</p>
+               <div class = "content-input">
+                   <div class = "content-input-group">
+                   <input class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:">
+                   </div>
+                   <div class = "content-input-group">
+                   <input class="form-control" type="text" name="for_agent_vendor_name"  placeholder="Имя:">
+                   </div>
+                   <div class = "content-input-group">
+                   <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
+                   </div>
+                   <div class = "content-input-group">
+                   <input class = "form-control" type="text" name="proxy_number"  placeholder="Довереность №:">
+                   </div>
+                   <div class = "content-input-group">
+                   <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="proxy_date"  placeholder="Дата выдачи:">
+                   </div>
+                   <div class = "content-input-group">
+                   <input class="form-control" type="text" name="proxy_notary"  placeholder="Нотариус:">
+                   </div>
+               </div>
+               </div>
+            </div>
+       </div>
 
 <div class="row" id="block_buyer">
     <div class="col-lg-12">

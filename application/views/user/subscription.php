@@ -1,20 +1,12 @@
 <section id="main-content">
     <section class="wrapper">
         <!--overview start-->
-        <div class="row">
-            <div class="col-lg-12">
-                <ol class="breadcrumb">
-                    <li><i class="fa fa-home"></i><a href="main">Главная страница</a></li>
-                    <li><i class="fa fa-laptop"></i>Подписка</li>
-                </ol>
-            </div>
-        </div>
 
         <div class = "row">
             <div class="col-lg-5 col-lg-offset-1">
                 <div class = "content-block">
                     <div class="content-payment-header">
-                        <span> 1 месяц</span>
+                        <span> 1 месяц - 820руб</span>
                     </div>
                     <div class="content-payment-main-block">
 
@@ -36,7 +28,7 @@
             <div class="col-lg-5">
                 <div class = "content-block">
                     <div class="content-payment-header">
-                        <span> 3 месяца</span>
+                        <span> 3 месяца - 1510руб</span>
                     </div>
                     <div class="content-payment-main-block">
 

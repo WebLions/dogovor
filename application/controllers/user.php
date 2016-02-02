@@ -72,8 +72,10 @@ class User extends CI_Controller {
         if( !$this->data['user_id'] ) {
             redirect('/user/login','refresh');
         }
+        $this->data['user'] = $this->user_model->userInfo($this->data['user_id']);
+        $this->data['info'] = $this->user_model->userGlobalInfo($this->data['user_id']);
         $this->load->view('user/header');
-        $this->load->view('user/profile');
+        $this->load->view('user/profile',$this->data);
         $this->load->view('user/footer');
     }
     public function subscription()
@@ -97,5 +99,18 @@ class User extends CI_Controller {
         $this->load->view('user/payment_history', $this->data);
         $this->load->view('user/footer');
     }
-
+    public function save_profile()
+    {
+        if( !$this->data['user_id'] ) {
+            redirect('/user/login','refresh');
+        }
+        $this->form_validation->set_rules('fio','FIO','trim|required|xss_clean');
+        $this->form_validation->set_rules('about','About','trim|required|xss_clean');
+        $this->form_validation->set_rules('email','email','trim|required|xss_clean');
+        if( $this->form_validation->run() == TRUE )
+        {
+            $this->user_model->saveProfile( $this->input->post(), $this->data['user_id'] );
+        }
+        redirect('user/profile');
+    }
 }
