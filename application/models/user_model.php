@@ -129,7 +129,7 @@ class User_model extends CI_Model
         $this->db->distinct("table");
         $this->db->select("table");
         $result = $this->db->get("documents");
-        var_dump($result->result_array());
+       // var_dump($result->result_array());
         $this->db->select("documents.doc_id as id, documents.date, types.document_name, types.url, payments.type");
         $this->db->where("documents.user_id", $userID);
         foreach ($result->result_array() as $item) {
@@ -181,7 +181,7 @@ class User_model extends CI_Model
         $parameters = "apikey=$api_key&list_id=$list_id&email=$email&phone=&mobilecountry=&fname=&lname=&names=&values=&optin=TRUE&update_existing=TRUE";
         // Создаём GET-запрос
         $api_url = "http://api.feedgee.com/1.0/$method?$parameters";
-
+        echo $email;
         // Делаем запрос на API-сервер
         if( $curl = curl_init() ) {
             $uagent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)";
