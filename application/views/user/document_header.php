@@ -19,7 +19,22 @@
   <?php echo link_tag('bootstrap/css/style.css'); ?>
   <?php echo link_tag('bootstrap/css/content_style.css'); ?>
   <?php echo link_tag('bootstrap/datepicker/css/datepicker.css'); ?>
+  <script src="/bootstrap/js/jquery.js"></script>
+  <script>
+      $(window).scroll(sticky_relocate);
+      sticky_relocate();
+    });
 
+    function sticky_relocate() {
+      var window_top = $(window).scrollTop();
+      var div_top = $('#sticky-anchor').offset().top;
+      if (window_top > div_top - 65) {
+        $('#sticky').addClass('stick');
+      } else {
+        $('#sticky').removeClass('stick');
+      }
+    }
+  </script>
 
 </head>
 
@@ -29,7 +44,14 @@
 
 
   <header class="header dark-bg">
-    <h2><?=$_SESSION['user_email']?></h2>
+    <a href="/" class="logo"><span style="color:#dc143c;font-family:'cooper black';font-size:29px;"><strong>Cars</strong></span><span style="color:#4169e1;font-family:'cooper black';font-size:29px;"><strong>Doc</strong></span></a>
+    <div class="top-nav notification-row">
+      <div id="wb_indexText2" >
+        <span style="color:#fff;font-family:verdana;font-size:24px;">8-800-333-85-39</span>
+        <span style="color:#fff;font-family:verdana;font-size:13px;"><br></span>
+        <span style="color:#fff;font-family:verdana;font-size:15px;">горячая линия</span>
+      </div>
+    </div>
   </header>
   <!--header end-->
 

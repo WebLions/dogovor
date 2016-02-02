@@ -19,10 +19,14 @@ class Blocks extends CI_Controller
             $this->load->view("blocks/{$name}");
     }
     //Разделение продавца физ/юр/инд
+    //---Пример
     public function bs_seller_block()
     {
-        $this->blocks_model->bs_seller_block();
+        $this->blocks_model->block_deal();
+        $this->blocks_model->block_seller();
     }
+    //--------
+
     public function bs_block_physical_seller()
     {
         $this->blocks_model->bs_block_physical_seller();

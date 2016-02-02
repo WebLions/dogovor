@@ -12,6 +12,13 @@ Website: http://geekslabs.com/
 :-webkit-input-placeholder { /* Safari, Chrome and Opera */
     color: orange;
 }
+#sticky {
+}
+#sticky.stick {
+    position: fixed;
+    left: 50%;
+    top: 65px;
+}
 
 
 body {
