@@ -36,12 +36,6 @@ class User extends CI_Controller {
         }
     }
 
-    public function payment_history()
-    {
-        $this->load->view('user/header');
-        $this->load->view('user/payment_history');
-        $this->load->view('user/footer');
-    }
     public function documents()
     {
         if( !$this->data['user_id'] ) {
@@ -89,15 +83,15 @@ class User extends CI_Controller {
         $this->load->view('user/footer');
     }
 
-    public function payments()
+    public function payment_history()
     {
         if( !$this->data['user_id'] ) {
             redirect('/user/login','refresh');
         }
-        $this->data['payments'] = $this->user_model->get_my_documents();
+        $this->data['payments'] = $this->user_model->getUserPayments($this->data['user_id']);
 
         $this->load->view('user/header');
-        $this->load->view('user/myDocuments', $this->data);
+        $this->load->view('user/payment_history', $this->data);
         $this->load->view('user/footer');
     }
 

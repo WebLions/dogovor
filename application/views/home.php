@@ -821,6 +821,7 @@
 	</div>
 	<div id="wb_indexText2" style="position:absolute;left:640px;top:22px;width:300px;height:47px;text-align:right;z-index:7;">
 		<span style="color:#000000;font-family:verdana;font-size:24px;">8-800-333-85-39</span><span style="color:#000000;font-family:verdana;font-size:13px;"><br></span><span style="color:#000000;font-family:verdana;font-size:15px;">горячая линия</span>
+		<br><span style="color:#000000;font-family:verdana;font-size:15px;"><a href="/user/login">Личный кабинет</a></span>
 	</div>
 	<div id="wb_indexImage1" style="position:absolute;left:40px;top:20px;width:150px;height:100px;z-index:8;">
 		<img src="images/img0001.png" id="indexImage1" alt="" style="width:150px;height:100px;">
@@ -1015,7 +1016,7 @@
 		<span style="color:#ffffff;font-family:verdana;font-size:37px;">3</span>
 	</div>
 	<div id="wb_indexImage16" style="position:absolute;left:240px;top:3000px;width:493px;height:148px;z-index:72;">
-		<a href="/user/main"><img src="images/snapshot-3.jpg" id="indexImage16" alt="" style="width:493px;height:148px;"></a>
+		<a href="/document/create"><img src="images/snapshot-3.jpg" id="indexImage16" alt="" style="width:493px;height:148px;"></a>
 	</div>
 	<div id="wb_indexText41" style="position:absolute;left:230px;top:3250px;width:520px;height:52px;text-align:center;z-index:73;">
 		<span style="color:#404040;font-family:verdana;font-size:43px;">Получите бесплатно:</span>
@@ -1084,7 +1085,7 @@
 		<span style="color:#696969;font-family:verdana;font-size:24px;">Выберите свой вариант. Введите данные. Договор готов.</span>
 	</div>
 	<div id="wb_indexImage26" style="position:absolute;left:220px;top:4640px;width:493px;height:148px;z-index:95;">
-		<a href="/user/main"><img src="images/snapshot-1.jpg" id="indexImage26" alt="" style="width:493px;height:148px;"></a>
+		<a href="/document/create"><img src="images/snapshot-1.jpg" id="indexImage26" alt="" style="width:493px;height:148px;"></a>
 	</div>
 	<div id="wb_footer" style="position:absolute;left:0px;top:4810px;width:970px;height:320px;z-index:96;">
 		<img src="images/blur.jpg" id="footer" alt="" style="width:970px;height:320px;">
@@ -1103,7 +1104,7 @@
 		<span style="color:#ffffff;font-family:arial;font-size:13px;">Наши координаты<br>ООО &quot;Гермес&quot;<br>620144, г.Екатеринбург, ул.Уктусская, д.31-б, к.29-41<br>ИНН 7447194623<br>ОГРН 1117447010988<br>т.83512364099</span>
 	</div>
 	<div id="wb_indexText57" style="position:absolute;left:170px;top:5080px;width:610px;height:18px;z-index:100;text-align:left;">
-		<span style="color:#ffffff;font-family:arial;font-size:15px;"><a href="http://carsdoc.ru/index.html">&#0169; CarsDoc.ru - Конструктор договоров для купли-продажи, аренды автомобилей.</a></span>
+		<span style="color:#ffffff;font-family:arial;font-size:15px;"><a href="/">&#0169; CarsDoc.ru - Конструктор договоров для купли-продажи, аренды автомобилей.</a></span>
 	</div>
 	<div id="indexHtml1" style="position:absolute;left:57px;top:5014px;width:843px;height:46px;z-index:101">
 </div>

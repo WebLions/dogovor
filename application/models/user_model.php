@@ -77,11 +77,12 @@ class User_model extends CI_Model
         $head     .= "Reply-To: $from\n";
         $head     .= "Mime-Version: 1.0\n";
         $head     .= "Content-Type:text/html; charset=utf-8;\r\n";
+        /*
         $head     .= "boundary=\"----------".$un."\"\n\n";
-        $zag       = "------------".$un."\nContent-Type:text/html;\n";
-        $zag      .= "Content-Transfer-Encoding: 8bit\n\n$text\n\n";
-        $zag      .= "------------".$un."\n";
-        $zag      .= "Content-Type: application/octet-stream;";
+        $zag       = "------------".$un."\nContent-Type:text/html;\n";*/
+        $zag      = "\n\n$text\n\n";
+       /* $zag      .= "------------".$un."\n";
+        $zag      .= "Content-Type: application/octet-stream;";*/
         /*$zag      .= "name=\"".basename($filename)."\"\n";
         $zag      .= "Content-Transfer-Encoding:base64\n";
         $zag      .= "Content-Disposition:attachment;";
@@ -116,12 +117,10 @@ class User_model extends CI_Model
         }
         return $pass;
     }
-    public function get_my_documents()
+    public function getUserPayments($user_id)
     {
-        $userID = $_SESSION['user_id'];
-        $this->db->select("id, type, payment, date");
-        $this->db->where("id_user", $userID);
-        $result = $this->db->get("documents");
+        $this->db->where("userID", $user_id);
+        $result = $this->db->get("payments");
         return $result->result_array();
     }
     public function getListDocuments()
@@ -199,6 +198,7 @@ class User_model extends CI_Model
             $out = curl_exec($curl);
             curl_close($curl);
         }
+        print_r($out);
 
     }
 }
