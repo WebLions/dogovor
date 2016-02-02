@@ -128,8 +128,9 @@ class User_model extends CI_Model
     {
         $userID = $_SESSION['user_id'];
         $this->db->distinct("table");
+        $this->db->select("table");
         $result = $this->db->get("documents");
-
+        var_dump($result->result_array());
         $this->db->select("documents.doc_id as id, documents.date, types.document_name, types.url, payments.type");
         $this->db->where("documents.user_id", $userID);
         foreach ($result->result_array() as $item) {
@@ -154,12 +155,12 @@ class User_model extends CI_Model
     }
     public function checkSub($user_id, $doc_id)
     {
-        $this->db->where("subscribe.id", $user_id);
-        $this->db->where("subscribe.date_start <", date("Y-m-d H:i:s"));
-        $this->db->where("subscribe.date_finish >", date("Y-m-d H:i:s"));
-        $result = $this->db->get("subscribe");
+        $this->db->where("subscribe.user_id", $user_id);
+        $this->db->where("subscribe.date_start < NOW()");
+        $this->db->where("subscribe.date_finish > NOW()");
+        $result = $this->db->get("subscribe",1,0);
         if($result->num_rows()>0){
-            $this->db->insert('payments', array('userID'=>$user_id,'payID'=>$doc_id,'date'=>date("Y-m-d H:i:s")));
+            $this->db->insert('payments', array('userID'=>$user_id,'payID'=>$doc_id,'date'=>date("Y-m-d H:i:s"),'type'=>1));
             return true;
         }else{
             return false;
