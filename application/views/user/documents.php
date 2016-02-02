@@ -26,7 +26,7 @@
                         )); ?>
                     <tr>
                         <td>Блок документов: <?=$document['doc'][0]['document_name']?></td>
-                        <td><?= 30 - ceil((time() - strtotime($document['date'])) / 86400);?> дней</td>
+                        <td><?= 31 - ceil((time() - strtotime($document['date'])) / 86400);?> дней</td>
                         <td><?=($document['type']==1)?"Оплаченно":"Не оплаченно"?></td>
                         <td><?=$document['date']?></td>
                         <td>

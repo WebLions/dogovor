@@ -96,7 +96,7 @@ class Document extends CI_Controller
         if($this->user_model->checkSub( $this->data['user_id'], $doc_id )){
             redirect('user/documents');
         }else{
-            $link = $this->pay_model->getPayLink($this->data['user_id'], $doc_id);
+            $link = $this->pay_model->getPayLink($doc_id);
             redirect($link);
         }
     }
