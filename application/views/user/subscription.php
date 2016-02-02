@@ -28,7 +28,7 @@
 
 
                     <div class="content-payment-header btn">
-                        <span> Подключить</span>
+                        <a href="/payment/subscribe/1" target="_blank"> Подключить</a>
                     </div>
 
                 </div>
@@ -40,17 +40,17 @@
                     </div>
                     <div class="content-payment-main-block">
 
-                        <p class="glyphicon glyphicon-ok"><span>Создание документа на основе многофункционального шаблона</span></p><br>
-                        <p class="glyphicon glyphicon-ok"><span>Автоматическое ведение базы документооборта</span></p><br>
-                        <p class="glyphicon glyphicon-ok"><span>Хранение и учёт документов в личном кабинете</span></p><br>
-                        <p class="glyphicon glyphicon-ok"><span>Доступ к документам и их сохранению по ссылке</span></p><br>
-                        <p class="glyphicon glyphicon-ok"><span>Создание собственного многоваринтного шаблона</span></p><br>
+                        <p class="glyphicon glyphicon-ok"><span> Создание документа на основе многофункционального шаблона</span></p><br>
+                        <p class="glyphicon glyphicon-ok"><span> Автоматическое ведение базы документооборта</span></p><br>
+                        <p class="glyphicon glyphicon-ok"><span> Хранение и учёт документов в личном кабинете</span></p><br>
+                        <p class="glyphicon glyphicon-ok"><span> Доступ к документам и их сохранению по ссылке</span></p><br>
+                        <p class="glyphicon glyphicon-ok"><span> Создание собственного многоваринтного шаблона</span></p><br>
 
                     </div>
 
 
                     <div class="content-payment-header btn">
-                        <span> Подключить</span>
+                        <a href="/payment/subscribe/2" target="_blank"> Подключить</a>
                     </div>
 
                 </div>

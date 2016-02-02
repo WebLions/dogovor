@@ -80,4 +80,21 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_additional_devices_no();
     }
 
+    //Дарение ТС
+    public function gift_seller_block()
+    {
+        $this->blocks_model->gift_seller_block();
+    }
+    public function gift_block_physical_seller()
+    {
+        $this->blocks_model->gift_block_physical_seller();
+    }
+    public function gift_block_law_seller()
+    {
+        $this->blocks_model->gift_block_law_seller();
+    }
+    public function gift_block_individual_seller()
+    {
+        $this->blocks_model->gift_block_individual_seller();
+    }
 }
