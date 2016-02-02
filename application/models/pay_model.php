@@ -205,13 +205,17 @@ END;
         }
 
         $this->db->where("user_id",$user_id);
+        $this->db->where("date_finish > NOW()");
         $this->db->order_by("date_finish", "desc");
         $query = $this->db->get("subscribe",1,0);
         $result = $query->row();
 
-        if($query->num_rows()>0)
-        {
+        if($query->num_rows()>0) {
             $last_date = $result->date_finish;
+        }else {
+            $last_date = date("Y-m-d H:i:s");
+        }
+
             $this->db->select("subscribe_type.mouth");
             $this->db->where("payments.id", $pay_id);
             $this->db->join("subscribe_type","subscribe_type.id=payments.subID");
@@ -221,23 +225,8 @@ END;
             $data = DateTime::createFromFormat('Y-m-d H:i:s',$last_date);
             $data->modify("+{$srok} month");
             $second_date = $data->format('Y-m-d H:i:s');
-            $this->db->insert("debag",array("text"=>"re_sub"));
             $this->db->insert('subscribe',array('pay_id'=>$pay_id,'user_id'=>$user_id,'date_start'=>$last_date,'date_finish'=>$second_date));
-            return true;
-        }
-        $this->db->insert("debag",array("text"=>"pre"));
-        $this->db->select("subscribe_type.mouth");
-        $this->db->where("payments.id", $pay_id);
-        $this->db->join("subscribe_type","subscribe_type.id=payments.subID");
-        $query = $this->db->get("payments",1,0);
-        $result = $query->row();
-        $srok = $result->mouth;
-        $last_date = date("Y-m-d H:i:s");
-        $data = DateTime::createFromFormat('Y-m-d H:i:s',$last_date);
-        $data->modify("+{$srok} month");
-        $second_date = $data->format('Y-m-d H:i:s');
-        $this->db->insert('subscribe',array('pay_id'=>$pay_id,'user_id'=>$user_id,'date_start'=>$last_date,'date_finish'=>$second_date));
-        $this->db->insert("debag",array("text"=>"yes"));
+
     }
     public function getPaySubLink($sub_id)
     {
