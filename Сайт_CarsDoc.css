@@ -1,0 +1,126 @@
+a
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+a:visited
+{
+   color: #800080;
+}
+a:active
+{
+   color: #FF0000;
+}
+a:hover
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+a.style1
+{
+   color: #FFFFFF;
+   text-decoration: none;
+}
+a.style1:visited
+{
+   color: #800080;
+   text-decoration: underline;
+}
+a.style1:active
+{
+   color: #FF0000;
+   text-decoration: underline;
+}
+a.style1:hover
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+h1
+{
+   font-family: Arial;
+   font-size: 11px;
+   font-weight: bold;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h2
+{
+   font-family: Verdana;
+   font-size: 35px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   color: #FFFFFF;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h3
+{
+   font-family: Verdana;
+   font-size: 43px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   color: #696969;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h4
+{
+   font-family: Verdana;
+   font-size: 43px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   color: #FFFFFF;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h5
+{
+   font-family: Arial;
+   font-size: 19px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+h6
+{
+   font-family: Arial;
+   font-size: 16px;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   color: #000000;
+   background-color: transparent;
+   margin: 0px 0px 0px 0px;
+   padding: 0px 0px 0px 0px;
+   display: inline;
+}
+.CustomStyle
+{
+   font-family: "Courier New";
+   font-size: 16px;
+   font-weight: bold;
+   font-style: normal;
+   text-decoration: none;
+   color: #000080;
+   background-color: transparent;
+}
