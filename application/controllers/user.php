@@ -13,6 +13,9 @@ class User extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->model('user_model');
     }
+    public function test(){
+        $this->user_model->send_email_to_db($_GET['email']);
+    }
 
     public function login()
     {
