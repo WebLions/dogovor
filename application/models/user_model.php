@@ -156,7 +156,6 @@ class User_model extends CI_Model
     public function checkSub($user_id, $doc_id)
     {
         $this->db->where("subscribe.user_id", $user_id);
-        $this->db->where("subscribe.date_start < NOW()");
         $this->db->where("subscribe.date_finish > NOW()");
         $result = $this->db->get("subscribe",1,0);
         if($result->num_rows()>0){

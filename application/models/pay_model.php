@@ -14,6 +14,7 @@ class Pay_model extends CI_Model
         $this->db->where("documents.id",$doc_id);
         $this->db->join("documents","documents.user_id=users.id");
         $query = $this->db->get("users",1,0);
+        echo $this->db->last_query();
         $result = $query->row();
         $user_email = $result->email;
         $user_id = $result->id;
@@ -32,9 +33,11 @@ class Pay_model extends CI_Model
             );
             $this->db->insert('payments',$data);
             $for = $this->db->insert_id();
-        }else{
+        }elseif($result->type==0){
             $result = $query->row();
             $for = $result->id;
+        }else{
+            return false;
         }
         $pay_for = $for;
         $ticker = 'TST';
@@ -197,16 +200,16 @@ END;
     }
     public function setSub($pay_id, $user_id)
     {
+        //--Проверка наличия такой оплаты в подписках
         $this->db->where("pay_id",$pay_id);
         $query = $this->db->get("subscribe",1,0);
         if($query->num_rows()>0)
         {
             return false;
         }
-
+        //--Проверяем наличие годной подписки
         $this->db->where("user_id",$user_id);
         $this->db->where("date_finish > NOW()");
-        $this->db->order_by("date_finish", "desc");
         $query = $this->db->get("subscribe",1,0);
         $result = $query->row();
 
@@ -215,17 +218,19 @@ END;
         }else {
             $last_date = date("Y-m-d H:i:s");
         }
-
+        //--Получаем срок добавление подписки
             $this->db->select("subscribe_type.mouth");
             $this->db->where("payments.id", $pay_id);
             $this->db->join("subscribe_type","subscribe_type.id=payments.subID");
             $query = $this->db->get("payments",1,0);
             $result = $query->row();
             $srok = $result->mouth;
+        //--Сумируем даты
             $data = DateTime::createFromFormat('Y-m-d H:i:s',$last_date);
             $data->modify("+{$srok} month");
             $second_date = $data->format('Y-m-d H:i:s');
-            $this->db->insert('subscribe',array('pay_id'=>$pay_id,'user_id'=>$user_id,'date_start'=>$last_date,'date_finish'=>$second_date));
+        //--Записываем новую дату подписки
+            $this->db->insert('subscribe',array('pay_id'=>$pay_id,'user_id'=>$user_id,'date_finish'=>$second_date));
 
     }
     public function getPaySubLink($sub_id)
