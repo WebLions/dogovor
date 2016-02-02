@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-error_reporting (0);
+//error_reporting (0);
 
 class Document_model extends CI_Model
 {
@@ -23,10 +23,10 @@ class Document_model extends CI_Model
         $result = $query->row();
 
         //Тестовый вывод содержимого результата
-        echo '<pre>';
+       /* echo '<pre>';
         print_r($result);
-        //echo $result->place_of_contract;
-        echo '</pre>';
+        //echo $result->place_o*f_contract;
+        echo '</pre>';*/
     }
     //------------------------------------------------------------------------------------------------------------------
     private  function num2str($num)
@@ -78,12 +78,71 @@ class Document_model extends CI_Model
         return $f5;
     }
     //------------------------------------------------------------------------------------------------------------------
+    private function get_month_from_number($number)
+    {
+        switch ($number)
+        {
+            case '01':
+                $result = 'января';
+                break;
+
+            case '02':
+                $result = 'февраля';
+                break;
+
+            case '03':
+                $result = 'марта';
+                break;
+
+            case '04':
+                $result = 'апреля';
+                break;
+
+            case '05':
+                $result = 'мая';
+                break;
+
+            case '06':
+                $result = 'июня';
+                break;
+
+            case '07':
+                $result = 'июля';
+                break;
+
+            case '08':
+                $result = 'августа';
+                break;
+
+            case '09':
+                $result = 'сентября';
+                break;
+
+            case '10':
+                $result = 'октября';
+                break;
+
+            case '11':
+                $result = 'ноября';
+                break;
+
+            case '12':
+                $result = 'декабря';
+                break;
+
+            default:
+                $result = 'Ошибка. Введенно неверное число месяца';
+                break;
+        }
+        return $result;
+    }
+    //------------------------------------------------------------------------------------------------------------------
     private function format_date($date)
     {
         if(empty($date)){
             return false;
         }
-        $date = DateTime::createFromFormat('d.m.Y', $date);
+        $date = DateTime::createFromFormat('Y-m-d', $date);
         $day = $date->format('d');
         $month = $date->format('m');
         $month = $this->get_month_from_number($month);
@@ -272,7 +331,7 @@ class Document_model extends CI_Model
         $vendor_passport_date = $this->format_date($result->vendor_passport_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
-        $payment_date = $this->format_date($result->payment_date);
+        //$payment_date = $this->format_date($result->payment_date);
         //Джсон
         $other_documents_car = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string($result->accessories);
@@ -348,7 +407,7 @@ class Document_model extends CI_Model
         $document->setValue('features', $result->features);
         $document->setValue('price', $result->price_car);
         $document->setValue('price_str', $price_str);
-        $document->setValue('date_of_pay', $payment_date);
+        $document->setValue('date_of_pay', $result->payment_date);
         $document->setValue('other_documents_car', $other_documents_car);
         $document->setValue('accessories', $accessories);
         $document->setValue('marriage_info', $marriage['info']);
@@ -356,11 +415,11 @@ class Document_model extends CI_Model
         $document->setValue('penalty', $result->penalty);
 
         // Сохранение результатов
-        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
+        $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/id'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
         $document->save($name_of_file,true); // Сохранение документа
 
 
-        $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.docx';
+        $name_for_server = '/documents/buy_sale/id'.$id.'buy_sale_deal.docx';
         return $name_for_server;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -644,7 +703,7 @@ class Document_model extends CI_Model
 
     }*/
     //------------------------------------------------------------------------------------------------------------------
-    public function insert_into_database($id_user)
+    public function insert_into_database_buysale()
     {
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract']);
         $data = array
@@ -736,6 +795,167 @@ class Document_model extends CI_Model
         }*/
         //Отправка данных
         $this->db->insert('buy_sale', $data);
+        $doc_id = $this->db->insert_id();
+        return $doc_id;//
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    public function insert_into_database_gift()
+    {
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract']);
+        $data = array
+        (
+            'date' => date("Y-m-d H:I:s"),
+            'type_of_contract' => $_POST['type_of_contract'],
+            'place_of_contract' => $_POST['place_of_contract'],
+            'date_of_contract' => $_POST['date_of_contract'],
+            'type_of_giver' => $_POST['type_of_giver'],
+            'giver_is_owner_car' => $_POST['giver_is_owner_car'],
+            'vendor_surname' => $_POST['vendor_surname'],
+            'vendor_name' => $_POST['vendor_name'],
+            'vendor_patronymic' => $_POST['vendor_patronymic'],
+            'vendor_birthday' => $_POST['vendor_birthday'],
+            'vendor_passport_serial' => $_POST['vendor_passport_serial'],
+            'vendor_passport_number' => $_POST['vendor_passport_number'],
+            'vendor_passport_date' => $_POST['vendor_passport_date'],
+            'vendor_passport_bywho' => $_POST['vendor_passport_bywho'],
+            'vendor_city' => $_POST['vendor_city'],
+            'vendor_street' => $_POST['vendor_street'],
+            'vendor_house' => $_POST['vendor_house'],
+            'vendor_flat' => $_POST['vendor_flat'],
+            'vendor_phone' => $_POST['vendor_phone'],
+            'vendor_law_company_name' => $_POST['vendor_law_company_name'],
+            'vendor_law_actor_position' => $_POST['vendor_law_actor_position'],
+            'vendor_law_actor_name' => $_POST['vendor_law_actor_name'],
+            'vendor_law_actor_surname' => $_POST['vendor_law_actor_surname'],
+            'vendor_law_actor_patronymic' => $_POST['vendor_law_actor_patronymic'],
+            'vendor_law_document_osn' => $_POST['vendor_law_document_osn'],
+            'vendor_law_proxy_number' => $_POST['vendor_law_proxy_number'],
+            'vendor_law_proxy_date' => $_POST['vendor_law_proxy_date'],
+            'vendor_law_inn' => $_POST['vendor_law_inn'],
+            'vendor_law_ogrn' => $_POST['vendor_law_ogrn'],
+            'vendor_law_city' => $_POST['vendor_law_city'],
+            'vendor_law_street' => $_POST['vendor_law_street'],
+            'vendor_law_house' => $_POST['vendor_law_house'],
+            'vendor_law_flat' => $_POST['vendor_law_flat'],
+            'vendor_law_phone' => $_POST['vendor_law_phone'],
+            'vendor_law_acc' => $_POST['vendor_law_acc'],
+            'vendor_law_bank_name' => $_POST['vendor_law_bank_name'],
+            'vendor_law_korr_acc' => $_POST['vendor_law_korr_acc'],
+            'vendor_law_bik' => $_POST['vendor_law_bik'],
+            'vendor_ind_surname' => $_POST['vendor_ind_surname'],
+            'vendor_ind_name' => $_POST['vendor_ind_name'],
+            'vendor_ind_patronymic' => $_POST['vendor_ind_patronymic'],
+            'vendor_ind_number_of_certificate' => $_POST['vendor_ind_number_of_certificate'],
+            'vendor_ind_date_of_certificate' => $_POST['vendor_ind_date_of_certificate'],
+            'vendor_ind_birthday' => $_POST['vendor_ind_birthday'],
+            'vendor_ind_passport_serial' => $_POST['vendor_ind_passport_serial'],
+            'vendor_ind_passport_number' => $_POST['vendor_ind_passport_number'],
+            'vendor_ind_passport_date' => $_POST['vendor_ind_passport_date'],
+            'vendor_ind_passport_bywho' => $_POST['vendor_ind_passport_bywho'],
+            'vendor_ind_city' => $_POST['vendor_ind_city'],
+            'vendor_ind_street' => $_POST['vendor_ind_street'],
+            'vendor_ind_house' => $_POST['vendor_ind_house'],
+            'vendor_ind_flat' => $_POST['vendor_ind_flat'],
+            'vendor_ind_phone' => $_POST['vendor_ind_phone'],
+            'vendor_ind_bank_acc' => $_POST['vendor_ind_bank_acc'],
+            'vendor_ind_bank_name' => $_POST['vendor_ind_bank_name'],
+            'vendor_ind_korr_acc' => $_POST['vendor_ind_korr_acc'],
+            'vendor_ind_bik' => $_POST['vendor_ind_bik'],
+            'for_agent_vendor_surname' => $_POST['for_agent_vendor_surname'],
+            'for_agent_vendor_name' => $_POST['for_agent_vendor_name'],
+            'for_agent_vendor_patronymic' => $_POST['for_agent_vendor_patronymic'],
+            'for_agent_vendor_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
+            'for_agent_vendor_proxy_date' => $_POST['for_agent_vendor_proxy_date'],
+            'for_agent_vendor_proxy_notary' => $_POST['for_agent_vendor_proxy_notary'],
+            'type_of_taker' => $_POST['type_of_taker'],
+            'buyer_surname' => $_POST['buyer_surname'],
+            'buyer_name' => $_POST['buyer_name'],
+            'buyer_patronymic' => $_POST['buyer_patronymic'],
+            'buyer_birthday' => $_POST['buyer_birthday'],
+            'buyer_passport_serial' => $_POST['buyer_passport_serial'],
+            'buyer_passport_number' => $_POST['buyer_passport_number'],
+            'buyer_passport_date' => $_POST['buyer_passport_date'],
+            'buyer_passport_bywho' => $_POST['buyer_passport_bywho'],
+            'buyer_city' => $_POST['buyer_city'],
+            'buyer_street' => $_POST['buyer_street'],
+            'buyer_house' => $_POST['buyer_house'],
+            'buyer_flat' => $_POST['buyer_flat'],
+            'buyer_phone' => $_POST['buyer_phone'],
+            'buyer_law_company_name' => $_POST['buyer_law_company_name'],
+            'buyer_law_actor_position' => $_POST['buyer_law_actor_position'],
+            'buyer_law_actor_name' => $_POST['buyer_law_actor_name'],
+            'buyer_law_actor_surname' => $_POST['buyer_law_actor_surname'],
+            'buyer_law_actor_patronymic' => $_POST['buyer_law_actor_patronymic'],
+            'buyer_law_document_osn' => $_POST['buyer_law_document_osn'],
+            'buyer_law_proxy_number' => $_POST['buyer_law_proxy_number'],
+            'buyer_law_proxy_date' => $_POST['buyer_law_proxy_date'],
+            'buyer_law_inn' => $_POST['buyer_law_inn'],
+            'buyer_law_ogrn' => $_POST['buyer_law_ogrn'],
+            'buyer_law_city' => $_POST['buyer_law_city'],
+            'buyer_law_street' => $_POST['buyer_law_street'],
+            'buyer_law_house' => $_POST['buyer_law_house'],
+            'buyer_law_flat' => $_POST['buyer_law_flat'],
+            'buyer_law_phone' => $_POST['buyer_law_phone'],
+            'buyer_law_acc' => $_POST['buyer_law_acc'],
+            'buyer_law_bank_name' => $_POST['buyer_law_bank_name'],
+            'buyer_law_korr_acc' => $_POST['buyer_law_korr_acc'],
+            'buyer_law_bik' => $_POST['buyer_law_bik'],
+            'buyer_ind_surname' => $_POST['buyer_ind_surname'],
+            'buyer_ind_name' => $_POST['buyer_ind_name'],
+            'buyer_ind_patronymic' => $_POST['buyer_ind_patronymic'],
+            'buyer_ind_number_of_certificate' => $_POST['buyer_ind_number_of_certificate'],
+            'buyer_ind_date_of_certificate' => $_POST['buyer_ind_date_of_certificate'],
+            'buyer_ind_birthday' => $_POST['buyer_ind_birthday'],
+            'buyer_ind_passport_serial' => $_POST['buyer_ind_passport_serial'],
+            'buyer_ind_passport_number' => $_POST['buyer_ind_passport_number'],
+            'buyer_ind_passport_date' => $_POST['buyer_ind_passport_date'],
+            'buyer_ind_passport_bywho' => $_POST['buyer_ind_passport_bywho'],
+            'buyer_ind_city' => $_POST['buyer_ind_city'],
+            'buyer_ind_street' => $_POST['buyer_ind_street'],
+            'buyer_ind_house' => $_POST['buyer_ind_house'],
+            'buyer_ind_flat' => $_POST['buyer_ind_flat'],
+            'buyer_ind_phone' => $_POST['buyer_ind_phone'],
+            'buyer_ind_bank_acc' => $_POST['buyer_ind_bank_acc'],
+            'buyer_ind_bank_name' => $_POST['buyer_ind_bank_name'],
+            'buyer_ind_korr_acc' => $_POST['buyer_ind_korr_acc'],
+            'buyer_ind_bik' => $_POST['buyer_ind_bik'],
+            'for_agent_buyer_surname' => $_POST['for_agent_buyer_surname'],
+            'for_agent_buyer_name' => $_POST['for_agent_buyer_name'],
+            'for_agent_buyer_patronymic' => $_POST['for_agent_buyer_patronymic'],
+            'for_agent_buyer_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
+            'for_agent_buyer_proxy_date' => $_POST['for_agent_buyer_proxy_date'],
+            'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
+            'mark' => $_POST['mark'],
+            'vin' => $_POST['vin'],
+            'reg_gov_number' => $_POST['reg_gov_number'],
+            'car_type' => $_POST['car_type'],
+            'category' => $_POST['category'],
+            'date_of_product' => $_POST['date_of_product'],
+            'engine_model' => $_POST['engine_model'],
+            'shassi' => $_POST['shassi'],
+            'carcass' => $_POST['carcass'],
+            'color_carcass' => $_POST['color_carcass'],
+            'other_parametrs' => $_POST['other_parametrs'],
+            'serial_car' => $_POST['serial_car'],
+            'number_of_serial_car' => $_POST['number_of_serial_car'],
+            'date_of_serial_car' => $_POST['date_of_serial_car'],
+            'bywho_serial_car' => $_POST['bywho_serial_car'],
+            'gibdd_act' => $_POST['gibdd_act'],
+            'gibdd_reg_name' => $_POST['gibdd_reg_name'],
+            'gibdd_inn' => $_POST['gibdd_inn'],
+            'gibdd_power_ingine' => $_POST['gibdd_power_ingine'],
+            'gibdd_eco_class' => $_POST['gibdd_eco_class'],
+            'ibdd_max_mass' => $_POST['ibdd_max_mass'],
+            'gibdd_min_mass' => $_POST['gibdd_min_mass'],
+            'type_id' => $type_id
+        );
+        //Бизопаснасть
+        /*foreach ($data as $key)
+        {
+            mysql_real_escape_string($key);
+        }*/
+        //Отправка данных
+        $this->db->insert('gift', $data);
         $doc_id = $this->db->insert_id();
         return $doc_id;//
     }
