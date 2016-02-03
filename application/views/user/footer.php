@@ -1,11 +1,9 @@
 
 
 
-  </body>
   <script src="/bootstrap/js/jquery.js"></script>
-  <script src="/bootstrap/js/jquery.sticky.js"></script>
-  <script src="/js/jquery.knob.js"></script>
   <script src="/js/jquery.nicescroll.js"></script>
+  <script src="/js/jquery.knob.js"></script>
 
   <script src="/js/app.js"></script>
 
@@ -15,10 +13,5 @@
   <link href="/datepicker/bootstrap-datetimepicker.css" rel="stylesheet">
   <script src="/datepicker/moment-with-locales.js"></script>
   <script src="/datepicker/bootstrap-datetimepicker.js"></script>
-
-  <script>
-      $(document).ready(function(){
-          $("#sticky").sticky({topSpacing:50});
-      });
-  </script>
+  </body>
 </html>
