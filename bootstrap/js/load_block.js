@@ -1,8 +1,3 @@
-var credit_true=true,
-    accessories_true= true,
-    defects_true= true,
-    features_true= true;
-
 var can_delete = false;
 var done = [],
     loaded = [];
@@ -121,8 +116,8 @@ $( document ).ready(function() {
            $('.document').find("#myModal").html(data);
         });
     });
-/*
-    $.getJSON( "/document/data_for_canvas", function( data ) {
+
+    /*$.getJSON( "/document/data_for_canvas", function( data ) {
         var items = $.parseJSON(data);
 
        alert(items.name)

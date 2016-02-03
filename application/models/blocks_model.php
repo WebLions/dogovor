@@ -27,7 +27,7 @@ class Blocks_model extends CI_Model
 </div>
 END;
     }
-    public function bs_block_seller()
+    public function bs_block_vendor()
     {
 
         echo <<<END
@@ -38,14 +38,8 @@ END;
             <div class = "content-radio-group">
                 <div class = "content-radio">
 
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_physical_seller" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_physical_state" type="radio" name="type_of_giver" value="physical">
                     <span class = "content-input-align">Физическое лицо</span>
-                </div>
-                <div class = "content-radio">
-
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_law_seller" type="radio" name="type_of_giver" value="law">
-                    <span class = "content-input-align">Юридическое лицо</span>
-
                 </div>
                 <div class = "content-radio">
 
@@ -59,7 +53,7 @@ END;
 </div>
 END;
     }
-    public function bs_block_seller_info()
+    public function bs_block_vendor_state()
     {
         echo <<<END
 <div class="row" id="block_seller_info">
@@ -69,12 +63,12 @@ END;
             <div class="content-radio-group">
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_seller_info" data-name="bs_owned_car" type="radio" name="vendor_is_owner_car" value="own_car">
+                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_vendor_info_owner" type="radio" name="vendor_is_owner_car" value="own_car">
                     <span class = "content-input-align">Продавец является собственником ТС</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_seller_info" data-name="bs_not_owned_car" type="radio" name="vendor_is_owner_car" value="not_own_car">
+                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_vendor_info_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
                     <span class = "content-input-align">Продавец не является собственником ТС и действует по доверенности</span>
                 </div>
             </div>
@@ -331,10 +325,10 @@ END;
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
 
-                    <input data-id="block_additional_devices" class="ajax-button" data-name="bs_additional_devices_yes" id = "mods_yes" type="radio" name="additional_devices" value="true">
+                    <input data-id="block_additional_devices" class="ajax-button" data-name="bs_block_additional_devices_yes" id = "mods_yes" type="radio" name="additional_devices" value="true">
                     <span class = "content-input-align">Да</span>
 
-                    <input data-id="block_additional_devices" class="ajax-button" data-name="bs_additional_devices_no" id = "mods_no"  type="radio" name="additional_devices" value="false">
+                    <input data-id="block_additional_devices" class="ajax-button" data-name="bs_block_additional_devices_no" id = "mods_no"  type="radio" name="additional_devices" value="false">
                     <span class = "content-input-align">Нет</span>
 
                 </div>
@@ -758,7 +752,7 @@ END;
         echo <<<END
 <div class="row" id="block_payment_date" data-id="16">
     <div class="col-lg-12">
-        <div class = "content-block" id="payment_data">
+        <div class = "content-block" id="payment_date">
             <p class = "content-header">Сроки оплаты:</p>
             <div class = "content-radio-group">
 
@@ -788,7 +782,7 @@ END;
     public function bs_block_documents()
     {
         echo <<<END
-<div class="row" id="documents" data-id="17">
+<div class="row" id="block_documents" data-id="17">
     <div class="col-lg-12">
         <div class = "content-block content-seller-doc">
             <p class = "content-header">Продавец передает Покупателю следующие документы(Выберите из списка):</p>
@@ -875,17 +869,17 @@ END;
     public function bs_block_car_in_marriage()
     {
         echo <<<END
-<div class="row" id="block_car_in_marriage" data-id="19">
+<div class="row" id="block_car_in_marriage">
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Автомобиль приобретен в период брака?</p>
             <div class = "content-radio-header">
 
                 <div class = "content-input-inlane">
-                    <input  class="ajax-button" data-name="bs_wife_true" id = "wife_yes" type="radio" name="car_in_marriage" value="true">
+                    <input  class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
                     <span class = "content-input-align">Да</span>
 
-                    <input  class="ajax-button" data-name="bs_wife_false" id = "wife_no" type="radio" name="car_in_marriage" value="false">
+                    <input  class="ajax-button" data-name="bs_block_car_in_marriage_no" type="radio" name="car_in_marriage" value="false">
                     <span class = "content-input-align">Нет</span>
                 </div>
 
