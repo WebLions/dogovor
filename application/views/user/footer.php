@@ -2,7 +2,7 @@
 
 
   <script src="/bootstrap/js/jquery.js"></script>
-
+  <script src="/js/jquery.nicescroll.js"></script>
   <script src="/js/jquery.knob.js"></script>
 
   <script src="/js/app.js"></script>

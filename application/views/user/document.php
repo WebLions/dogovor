@@ -15,7 +15,7 @@
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row" style="min-height: 620px;">
                   <div class="col-lg-6">
                       <form method="post" action="/document/go_buy_sale">
                       <div class = "document" id="doc_create">
