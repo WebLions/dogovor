@@ -476,15 +476,24 @@ class Document_model extends CI_Model
         {
             case 'physical':
                 $data_output['giver_name']= $this->format_fio($data['vendor_surname'],$data['vendor_name'],$data['vendor_patronymic']);
-                $data_output['documnet']="";
+                $data_output['giver_date'] =$data['vendor_birthday'];
+                $data_output['giver_documnet']="Серия {$data['vendor_passport_serial']} {$data['vendor_passport_number']} выданый {$data['vendor_passport_bywho']} от {$data['vendor_passport_date']}";
+                $data_output['giver_adress']=$this->format_adress($data['vendor_city'],$data['vendor_street'],$data['vendor_house'],$data['vendor_flat']);
+                $data_output['giver_phone'] = $data['vendor_phone'];
                 break;
             case 'law':
                 $data_output['giver_name']= $data['vendor_law_company_name'];
-                $data_output['documnet']="";
+                $data_output['giver_date'] =$data['vendor_law_proxy_date'];
+                $data_output['giver_documnet']="";
+                $data_output['giver_adress']=$this->format_adress($data['vendor_law_city'],$data['vendor_law_street'],$data['vendor_law_house'],$data['vendor_law_flat']);
+                $data_output['giver_phone'] = $data['vendor_law_phone'];
                 break;
             case 'individual':
                 $data_output['giver_name']= $this->format_fio($data['vendor_ind_surname'], $data['vendor_ind_name'], $data['vendor_ind_patromymic']);
-                $data_output['documnet']="";
+                $data_output['giver_date'] =$data['vendor_ind_birthday'];
+                $data_output['giver_documnet']="Серия {$data['vendor_ind_passport_serial']} {$data['vendor_ind_passport_number']} выданый {$data['vendor_ind_passport_bywho']} от {$data['vendor_ind_passport_date']}";
+                $data_output['giver_adress']=$this->format_adress($data['vendor_ind_city'],$data['vendor_ind_street'],$data['vendor_ind_house'],$data['vendor_ind_flat']);
+                $data_output['giver_phone'] = $data['vendor_ind_phone'];
                 break;
         }
         return $data_output;
@@ -504,8 +513,42 @@ class Document_model extends CI_Model
         //Массив для инф о собтсвеннике тс
         $data_for_giver = array
         (
+            'vendor_surname' => $result->vendor_surname,
+            'vendor_name' => $result->vendor_name,
+            'vendor_patronymic' => $result->vendor_patronymic,
+            'vendor_passport_serial' => $result->vendor_passport_serial,
+            'vendor_passport_number' => $result->vendor_passport_number,
+            'vendor_passport_bywho' => $result->vendor_passport_bywho,
+            'vendor_passport_date' => $this->format_date($result->vendor_passport_date),
+            'vendor_city' => $result->vendor_city,
+            'vendor_street' => $result->vendor_street,
+            'vendor_house' => $result->vendor_house,
+            'vendor_flat' => $result->vendor_flat,
+            'vendor_phone' => $result->vendor_phone,
+            'vendor_law_company_name' => $result->vendor_law_company_name,
+            'vendor_law_city' => $result->vendor_law_city,
+            'vendor_law_street' => $result->vendor_law_street,
+            'vendor_law_house' => $result->vendor_law_house,
+            'vendor_law_flat' => $result->vendor_law_flat,
+            'vendor_law_phone' => $result->vendor_law_phone,
+            'vendor_ind_surname' => $result->vendor_ind_surname,
+            'vendor_ind_name' => $result->vendor_ind_name,
+            'vendor_ind_patromymic' => $result->vendor_ind_patromymic,
+            'vendor_ind_passport_serial' => $result->vendor_ind_passport_serial,
+            'vendor_ind_passport_number' => $result->vendor_ind_passport_number,
+            'vendor_ind_passport_bywho' => $result->vendor_ind_passport_bywho,
+            'vendor_ind_passport_date' => $this->format_date($result->vendor_passport_date),
+            'vendor_ind_city' => $result->vendor_ind_city,
+            'vendor_ind_street' => $result->vendor_ind_street,
+            'vendor_ind_house' => $result->vendor_ind_house,
+            'vendor_ind_flat' => $result->vendor_ind_flat,
+            'vendor_ind_phone' => $result->vendor_ind_phone,
+            'vendor_birthday' => $this->format_date($result->vendor_birthday),
+            'vendor_law_proxy_date' => $this->format_date($result->vendor_law_proxy_date),
+            'vendor_ind_birthday' => $this->format_date($result->vendor_ind_birthday)
 
         );
+        $giver_data = $this->get_info_for_gibbd($result->type_of_giver, $data_for_giver);
         //Форматирование
         $giver_fio = $this->format_fio($result->buyer_surname, $result->buyer_name, $result->buyer_patronymic);
         $for_agent_vendor_fio = $this->format_fio($result->for_agent_vendor_surname, $result->for_agent_vendor_name, $result->for_agent_vendor_patronymic);
@@ -522,12 +565,12 @@ class Document_model extends CI_Model
         $document->setValue('date_of_product', $date_of_contract);
         $document->setValue('vin', $result->vin);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
-        //$document->setValue('giver', $giver);
-        //$document->setValue('giver_date', $giver_date);
-        //$document->setValue('giver_pass', $giver_pass);
+        $document->setValue('giver', $giver_data['giver_name']);
+        $document->setValue('giver_date', $giver_data['giver_date']);
+        $document->setValue('giver_document', $giver_data['giver_document']);
         $document->setValue('gibdd_inn', $result->gibdd_inn);
-        //$document->setValue('giver_adress', $giver_adress);
-        //$document->setValue('giver_phone', $giver_phone);
+        $document->setValue('giver_adress', $giver_data['giver_adress']);
+        $document->setValue('giver_phone', $giver_data['giver_phone']);
         $document->setValue('for_agent_vendor_fio', $for_agent_vendor_fio);
         $document->setValue('for_agent_vendor_document', $for_agent_vendor_document);
         $document->setValue('for_agent_vendor_adress', $for_agent_vendor_adress);
@@ -1275,7 +1318,7 @@ class Document_model extends CI_Model
                 'align' => 'center',
                 'style' => 'normal'
             ),
-            3 => array
+            2 => array
             (
                 'text' => "г. {$_POST['city_contract']}	$date_of_contract",
                 'align' => 'center',
