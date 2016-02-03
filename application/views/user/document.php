@@ -43,9 +43,9 @@
                       </form>
 
                 </div>
-                  <div id="sticky-anchor"></div>
-                  <div class="col-lg-6" id="sticky">
-                      <div class = "content-block" style="height: 600px;" id="content-preview_block">
+                  <div class="col-lg-6">
+                      <div id="sticky-anchor"></div>
+                      <div class="content-block" style="height: 600px;"  id="sticky">
                           <canvas id="content_preview">
 
                           </canvas>
