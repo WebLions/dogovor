@@ -122,6 +122,12 @@ $( document ).ready(function() {
         });
     });
 
+    $.getJSON( "/document/data_for_canvas", function( data ) {
+        var items = $.parseJSON(data);
+
+       alert(items.name)
+    });
+
 });
 
 
