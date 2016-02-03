@@ -22,8 +22,8 @@ class Blocks extends CI_Controller
     //---Пример
     public function bs_seller_block()
     {
-        $this->blocks_model->block_deal();
-        $this->blocks_model->block_seller();
+        $this->blocks_model->bs_block_deal();
+        $this->blocks_model->bs_block_seller();
     }
     //--------
 

@@ -447,7 +447,7 @@ class Document_model extends CI_Model
         $vendor_birthday = $this->format_date($result->vendor_birthday);
         $vendor_passport_date = $this->format_date($result->vendor_passport_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
-        $buyer_birthday = $this->format_date($result->buyer_birthday);*/
+        $buyer_birthday = $this->format_date($result->buyer_birthday);
         //Иное
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,

@@ -20,20 +20,20 @@
   <?php echo link_tag('bootstrap/css/content_style.css'); ?>
   <?php echo link_tag('bootstrap/datepicker/css/datepicker.css'); ?>
   <script src="/bootstrap/js/jquery.js"></script>
-  <script>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
       $(window).scroll(sticky_relocate);
       sticky_relocate();
-    });
-
-    function sticky_relocate() {
-      var window_top = $(window).scrollTop();
-      var div_top = $('#sticky-anchor').offset().top;
-      if (window_top > div_top - 65) {
-        $('#sticky').addClass('stick');
-      } else {
-        $('#sticky').removeClass('stick');
+      function sticky_relocate() {
+        var window_top = $(window).scrollTop();
+        var div_top = $('#sticky-anchor').offset().top;
+        if (window_top > div_top - 65) {
+          $('#sticky').addClass('stick');
+        } else {
+          $('#sticky').removeClass('stick');
+        }
       }
-    }
+    });
   </script>
 
 </head>

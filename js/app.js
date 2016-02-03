@@ -77,10 +77,7 @@ function initializeJS() {
             jQuery("#container").removeClass("sidebar-closed");
         }
     });
-
-
 }
-
 jQuery(document).ready(function(){
     setInterval(function(){
         var d = new Date();
@@ -89,4 +86,5 @@ jQuery(document).ready(function(){
     }, 1000);
     initializeJS();
 });
+
 
