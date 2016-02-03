@@ -121,12 +121,12 @@ $( document ).ready(function() {
            $('.document').find("#myModal").html(data);
         });
     });
-
+/*
     $.getJSON( "/document/data_for_canvas", function( data ) {
         var items = $.parseJSON(data);
 
        alert(items.name)
-    });
+    });*/
 
 });
 

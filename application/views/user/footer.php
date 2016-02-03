@@ -16,11 +16,4 @@
   <script src="/datepicker/moment-with-locales.js"></script>
   <script src="/datepicker/bootstrap-datetimepicker.js"></script>
 
-
-
-  <script>
-      $(document).ready(function(){
-          $("#content-preview").sticky({topSpacing:50});
-      });
-  </script>
 </html>
