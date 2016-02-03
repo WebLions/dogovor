@@ -1,4 +1,3 @@
-var can_delete = false;
 var done = [],
     loaded = [];
 
