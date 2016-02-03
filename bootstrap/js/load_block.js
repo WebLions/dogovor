@@ -69,6 +69,18 @@ $( document ).ready(function() {
        $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
        console.log($(this).parents("div[class=row]").index());
 
+       $.getJSON( "/document/data_for_canvas", function( data ) {
+
+           $.each( data , function(key , val){
+
+               //console.log(val['text']);
+
+           })
+
+        });
+
+
+
        $.ajax({
            url: '/blocks/'+func_name,
            dataType: "html",
@@ -126,11 +138,8 @@ $( document ).ready(function() {
         });
     });
 
-    /*$.getJSON( "/document/data_for_canvas", function( data ) {
-        var items = $.parseJSON(data);
 
-       alert(items.name)
-    });*/
+
 
 });
 
