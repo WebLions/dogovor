@@ -27,7 +27,7 @@
 <!-- container section start -->
 <section id="container" class="">
 
-<!--
+
   <header class="header dark-bg">
     <a href="/" class="logo"><span style="color:#dc143c;font-family:'cooper black';font-size:29px;"><strong>Cars</strong></span><span style="color:#4169e1;font-family:'cooper black';font-size:29px;"><strong>Doc</strong></span></a>
     <div class="top-nav notification-row">
