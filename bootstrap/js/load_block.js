@@ -1,11 +1,10 @@
-var credit_true=true,
-    accessories_true= true,
-    defects_true= true,
-    features_true= true;
-
-var can_delete = false;
 var done = [],
     loaded = [];
+
+var defects = true,
+    features = true,
+    accessories = true,
+    credit = true;
 
 $( document ).ready(function() {
     //ДАТАПИКЕР
@@ -81,33 +80,38 @@ $( document ).ready(function() {
    });
 
 
+
+
     $('.document').on('change','#defects_yes', function() {
 
-        if(defects_true == true) $('#defects_block').append('<div class = "content-input-group">'+
+        if(defects == true) $('#defects_block').append('<div id="defects_additional_block" class = "content-input-group">'+
                                                             '<input class="form-control" type="text"  name="defects[]"  placeholder="Дефекты">'+
                                                             '</div>');
-        defects_true=false;
+        defects=false;
     });
+
+
     $('.document').on('change','#features_yes', function() {
 
-        if(features_true == true) $('#features_block').append('<div class = "content-input-group">'+
+        if(features == true) $('#features_block').append('<div id="features_additional_block" class = "content-input-group">'+
                                                               '<input class="form-control" type="text"  name="features[]"  placeholder="Особенности">'+
                                                               '</div>');
-        features_true=false;
+        features=false;
     });
+
     $('.document').on('change','#block_payment_date', function() {
 
-        if(credit_true == true) $('#payment_date').append('<div class = "content-input-group">'+
-                                                                '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
+        if(credit == true) $('#payment_date').append('<div class = "content-input-group">'+
+                                                     '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
                                                                 '</div>');
-        credit_true=false;
+        credit=false;
     });
     $('.document').on('change','#block_accessories_other', function() {
 
-        if(accessories_true == true) $('#block_accessories').append('<div class = "content-input-group">'+
+        if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
                                                                     '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
                                                                     '</div>');
-        accessories_true=false;
+        accessories=false;
     });
 
 
@@ -121,6 +125,12 @@ $( document ).ready(function() {
            $('.document').find("#myModal").html(data);
         });
     });
+
+    /*$.getJSON( "/document/data_for_canvas", function( data ) {
+        var items = $.parseJSON(data);
+
+       alert(items.name)
+    });*/
 
 });
 

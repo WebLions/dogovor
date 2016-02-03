@@ -14,8 +14,7 @@
                     </ol>
                 </div>
               </div>
-
-              <div class="row">
+              <div class="row" style="min-height: 625px;">
                   <div class="col-lg-6">
                       <form method="post" action="/document/go_buy_sale">
                       <div class = "document" id="doc_create">
@@ -27,11 +26,11 @@
                           <div class = "content-radio-header">
                               <div class = "content-input-inlane">
 
-                                  <input data-id="block_main" class="ajax-button" data-name="bs_seller_block" id = "bs_deal" type="radio" name="type_of_contract" value="buy_sell">
+                                  <input data-id="block_main" class="ajax-button" data-name="bs_vendor_block" id = "bs_deal" type="radio" name="type_of_contract" value="buy_sell">
                                   <span class = "content-input-align">Договор купли-продажи ТС</span>
 
 
-                                  <input data-id="block_main" class="ajax-button" data-name="gift_seller_block" type="radio" name="type_of_contract" value="gift">
+                                  <input data-id="block_main" class="ajax-button" data-name="gift_vendor_block" type="radio" name="type_of_contract" value="gift">
                                   <span class = "content-input-align">Договор дарения ТС</span>
 
                               </div>
@@ -45,8 +44,8 @@
                 </div>
                   <div id="sticky-anchor"></div>
                   <div class="col-lg-6" id="sticky">
-                      <div class = "content-block" style="height: 600px;" id="content-preview_block">
-                          <canvas id="content_preview">
+                      <div class="content-block" style="height: 600px;">
+                          <canvas>
 
                           </canvas>
                       </div>

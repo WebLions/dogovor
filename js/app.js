@@ -9,14 +9,6 @@ function initializeJS() {
     //popovers
     jQuery('.popovers').popover();
 
-    //custom scrollbar
-    //for html
-    jQuery("html").niceScroll({styler:"fb",cursorcolor:"#007AFF", cursorwidth: '6', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: '', zindex: '1000'});
-    //for sidebar
-    jQuery("#sidebar").niceScroll({styler:"fb",cursorcolor:"#007AFF", cursorwidth: '3', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: ''});
-    // for scroll panel
-    jQuery(".scroll-panel").niceScroll({styler:"fb",cursorcolor:"#007AFF", cursorwidth: '3', cursorborderradius: '10px', background: '#F7F7F7', cursorborder: ''});
-
     //sidebar dropdown menu
     jQuery('#sidebar .sub-menu > a').click(function () {
         var last = jQuery('.sub-menu.open', jQuery('#sidebar'));
@@ -77,10 +69,7 @@ function initializeJS() {
             jQuery("#container").removeClass("sidebar-closed");
         }
     });
-
-
 }
-
 jQuery(document).ready(function(){
     setInterval(function(){
         var d = new Date();
@@ -89,4 +78,6 @@ jQuery(document).ready(function(){
     }, 1000);
     initializeJS();
 });
+
+
 
