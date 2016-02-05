@@ -300,6 +300,42 @@ class Document_model extends CI_Model
         return $marriage;
     }
     //------------------------------------------------------------------------------------------------------------------
+    private function get_requisites($data)
+    {
+        switch ($data['type_of_side'])
+        {
+            case 'physical':
+                $output =  "{$data['fio']} <w:br/>";
+                $output .="Дата рождения : {$data['date']} <w:br/>";
+                $output .="Паспорт: Серия {$data['document']['serial']} №{$data['document']['number']} выдан {$data['document']['bywho']} {$data['document']['date']}  <w:br/>";
+                $output .="Место жительства: {$data['adress']} <w:br/>";
+                $output .="Телефон: {$data['phone']} ";
+                break;
+            case 'law':
+                $output = "{$data['name']} <w:br/>";
+                $output .= "ИНН: {$data['inn']} <w:br/>";
+                $output .= "ОГРН: {$data['ogrn']}<w:br/>";
+                $output .= "Юридический адрес:{$data['adress']} <w:br/>";
+                $output .= "Телефон: {$data['phone']} <w:br/>";
+                $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
+                $output .= "Корр. счет: {$data['korr_acc']} <w:br/>";
+                $output .= "БИК: {$data['bik']}";
+                break;
+            case 'individual':
+                $output = "{$data['fio']} <w:br/>";
+                $output .= "Свидетельство №{$data['number_certificate']} от {$data['date_of_certificate']} <w:br/>";
+                $output .="Дата рождения : {$data['date']} <w:br/>";
+                $output .="Паспорт: Серия {$data['document']['serial']} №{$data['document']['number']} выдан {$data['document']['bywho']} {$data['document']['date']}  <w:br/>";
+                $output .="Место жительства: {$data['adress']} <w:br/>";
+                $output .="Телефон: {$data['phone']} ";
+                $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
+                $output .= "Корр. счет: {$data['korr_acc']} <w:br/>";
+                $output .= "БИК: {$data['bik']}";
+                break;
+        }
+        return $output;
+    }
+    //------------------------------------------------------------------------------------------------------------------
     //договор дарения
     public function get_gift_doc($id)
     {
