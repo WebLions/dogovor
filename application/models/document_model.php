@@ -327,7 +327,7 @@ class Document_model extends CI_Model
                 $output .="Дата рождения : {$data['date']} <w:br/>";
                 $output .="Паспорт: Серия {$data['document']['serial']} №{$data['document']['number']} выдан {$data['document']['bywho']} {$data['document']['date']}  <w:br/>";
                 $output .="Место жительства: {$data['adress']} <w:br/>";
-                $output .="Телефон: {$data['phone']} ";
+                $output .= "Телефон: {$data['phone']} ";
                 $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
                 $output .= "Корр. счет: {$data['korr_acc']} <w:br/>";
                 $output .= "БИК: {$data['bik']}";
@@ -359,6 +359,17 @@ class Document_model extends CI_Model
         $date_of_contract = $this->format_date($result->date_of_contract);
         $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car= $this->format_date($result->date_of_serial_car);
+        $vendor_birthday = $this->format_date($result->vendor_birthday);
+        $buyer_birthday = $this->format_date($result->buyer_birthday);
+        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
+        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
+        //Адрес
+        $vendor_adrees = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $vendor_law_adress = $this->format_adress($result->vendor_law_city, $result->vendor_law_street, $result->vendor_law_flat, $result->vendor_law_flat);
+        $vendor_ind_adress = $this->format_adress($result->vendor_ind_city, $result->vendor_ind_street, $result->vendor_ind_house, $result->vendor_ind_flat);
+        $buyer_adrees = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
+        $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
         //Иное
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
@@ -383,6 +394,108 @@ class Document_model extends CI_Model
             'buyer_date_of_certificate' => $result->buyer_date_of_certificate,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        unset($data_for_header);
+        //Реквизиты
+        //Даритель
+        switch ($result->type_of_giver)
+        {
+            case 'physical':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
+                    $data_for_req_giver['fio'] = $vendor_fio,
+                    $data_for_req_giver['date'] = $vendor_birthday,
+                    $data_for_req_giver['document']['serial'] = $result->vendor_passport_serial,
+                    $data_for_req_giver['document']['number'] = $result->vendor_passport_number,
+                    $data_for_req_giver['document']['bywho'] = $result->vendor_passport_bywho,
+                    $data_for_req_giver['document']['date'] = $result->vendor_passport_date,
+                    $data_for_req_giver['adress'] = $vendor_adrees,
+                    $data_for_req_giver['phone'] = $result->vendor_phone
+                );
+                break;
+            case 'law':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
+                    $data_for_req_giver['name']= $result->vendor_law_company_name,
+                    $data_for_req_giver['inn']= $result->vendor_law_inn,
+                    $data_for_req_giver['ogrn']= $result->vendor_law_ogrn,
+                    $data_for_req_giver['adress']= $vendor_law_adress,
+                    $data_for_req_giver['phone']= $result->vendor_law_phone,
+                    $data_for_req_giver['acc']= $result->vendor_law_acc,
+                    $data_for_req_giver['bank_name']= $result->vendor_law_bank_name,
+                    $data_for_req_giver['korr_acc']= $result->vendor_law_korr_acc,
+                    $data_for_req_giver['bik']= $result->vendor_law_bik,
+                );
+                break;
+            case 'individual':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
+                    $data_for_req_giver['fio']= $vendor_ind_fio,
+                    $data_for_req_giver['date']= $vendor_ind_birthday,
+                    $data_for_req_giver['document']['serial']= $result->vendor_ind_passport_serial,
+                    $data_for_req_giver['document']['number']= $result->vendor_ind_passport_number,
+                    $data_for_req_giver['document']['bywho']= $result->vendor_ind_passport_bywho,
+                    $data_for_req_giver['document']['date']= $result->vendor_ind_passport_date,
+                    $data_for_req_giver['adress']= $vendor_ind_adress,
+                    $data_for_req_giver['phone']= $result->vendor_ind_phone,
+                    $data_for_req_giver['acc']= $result->vendor_ind_bank_acc,
+                    $data_for_req_giver['bank_name']= $result->vendor_ind_bank_name,
+                    $data_for_req_giver['korr_acc']= $result->vendor_ind_korr_acc,
+                    $data_for_req_giver['bik']= $result->vendor_ind_bik
+                );
+                break;
+        }
+        //Одаряемый
+        switch ($result->type_of_taker)
+        {
+            case 'physical':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
+                    $data_for_req_taker['fio'] = $buyer_fio,
+                    $data_for_req_taker['date'] = $buyer_birthday,
+                    $data_for_req_taker['document']['serial'] = $result->buyer_passport_serial,
+                    $data_for_req_taker['document']['number'] = $result->buyer_passport_number,
+                    $data_for_req_taker['document']['bywho'] = $result->buyer_passport_bywho,
+                    $data_for_req_taker['document']['date'] = $result->buyer_passport_date,
+                    $data_for_req_taker['adress'] = $buyer_adrees,
+                    $data_for_req_taker['phone'] = $result->buyer_phone
+                );
+                break;
+            case 'law':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
+                    $data_for_req_taker['name']= $result->buyer_law_company_name,
+                    $data_for_req_taker['inn']= $result->buyer_law_inn,
+                    $data_for_req_taker['ogrn']= $result->buyer_law_ogrn,
+                    $data_for_req_taker['adress']= $buyer_law_adress,
+                    $data_for_req_taker['phone']= $result->buyer_law_phone,
+                    $data_for_req_taker['acc']= $result->buyer_law_acc,
+                    $data_for_req_taker['bank_name']= $result->buyer_law_bank_name,
+                    $data_for_req_taker['korr_acc']= $result->buyer_law_korr_acc,
+                    $data_for_req_taker['bik']= $result->buyer_law_bik,
+                );
+                break;
+            case 'individual':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
+                    $data_for_req_taker['fio']= $buyer_ind_fio,
+                    $data_for_req_taker['date']= $buyer_ind_birthday,
+                    $data_for_req_taker['document']['serial']= $result->buyer_ind_passport_serial,
+                    $data_for_req_taker['document']['number']= $result->buyer_ind_passport_number,
+                    $data_for_req_taker['document']['bywho']= $result->buyer_ind_passport_bywho,
+                    $data_for_req_taker['document']['date']= $result->buyer_ind_passport_date,
+                    $data_for_req_taker['adress']= $buyer_ind_adress,
+                    $data_for_req_taker['phone']= $result->buyer_ind_phone,
+                    $data_for_req_taker['acc']= $result->buyer_ind_bank_acc,
+                    $data_for_req_taker['bank_name']= $result->buyer_ind_bank_name,
+                    $data_for_req_taker['korr_acc']= $result->buyer_ind_korr_acc,
+                    $data_for_req_taker['bik']= $result->buyer_ind_bik
+                );
+                break;
+        }
+        $firstside_requisites = $this->get_requisites($data_for_req_giver);
+        $secondside_requisites = $this->get_requisites($data_for_req_taker);
+
+
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/gift/patterns/gift.docx');
 
         //Заполнение
@@ -403,6 +516,8 @@ class Document_model extends CI_Model
         $document->setValue('number_of_serial_car', $result->number_of_serial_car);
         $document->setValue('date_of_serial_car', $date_of_serial_car);
         $document->setValue('bywho_serial_car', $result->bywho_serial_car);
+        $document->setValue('firstside_requisites', $firstside_requisites);
+        $document->setValue('secondside_requisites', $secondside_requisites);
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'gift.docx';//Имя файла и путь к нему
@@ -436,6 +551,17 @@ class Document_model extends CI_Model
         $date_of_contract = $this->format_date($result->date_of_contract);
         $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car= $this->format_date($result->date_of_serial_car);
+        $vendor_birthday = $this->format_date($result->vendor_birthday);
+        $buyer_birthday = $this->format_date($result->buyer_birthday);
+        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
+        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
+        //Адрес
+        $vendor_adrees = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $vendor_law_adress = $this->format_adress($result->vendor_law_city, $result->vendor_law_street, $result->vendor_law_flat, $result->vendor_law_flat);
+        $vendor_ind_adress = $this->format_adress($result->vendor_ind_city, $result->vendor_ind_street, $result->vendor_ind_house, $result->vendor_ind_flat);
+        $buyer_adrees = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
+        $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
             'buyer_fio' => $buyer_fio,
@@ -459,6 +585,105 @@ class Document_model extends CI_Model
             'buyer_date_of_certificate' => $result->buyer_date_of_certificate,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract, $result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        //Реквизиты
+        //Даритель
+        switch ($result->type_of_giver)
+        {
+            case 'physical':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
+                    $data_for_req_giver['fio'] = $vendor_fio,
+                    $data_for_req_giver['date'] = $vendor_birthday,
+                    $data_for_req_giver['document']['serial'] = $result->vendor_passport_serial,
+                    $data_for_req_giver['document']['number'] = $result->vendor_passport_number,
+                    $data_for_req_giver['document']['bywho'] = $result->vendor_passport_bywho,
+                    $data_for_req_giver['document']['date'] = $result->vendor_passport_date,
+                    $data_for_req_giver['adress'] = $vendor_adrees,
+                    $data_for_req_giver['phone'] = $result->vendor_phone
+                );
+                break;
+            case 'law':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
+                    $data_for_req_giver['name']= $result->vendor_law_company_name,
+                    $data_for_req_giver['inn']= $result->vendor_law_inn,
+                    $data_for_req_giver['ogrn']= $result->vendor_law_ogrn,
+                    $data_for_req_giver['adress']= $vendor_law_adress,
+                    $data_for_req_giver['phone']= $result->vendor_law_phone,
+                    $data_for_req_giver['acc']= $result->vendor_law_acc,
+                    $data_for_req_giver['bank_name']= $result->vendor_law_bank_name,
+                    $data_for_req_giver['korr_acc']= $result->vendor_law_korr_acc,
+                    $data_for_req_giver['bik']= $result->vendor_law_bik,
+                );
+                break;
+            case 'individual':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
+                    $data_for_req_giver['fio']= $vendor_ind_fio,
+                    $data_for_req_giver['date']= $vendor_ind_birthday,
+                    $data_for_req_giver['document']['serial']= $result->vendor_ind_passport_serial,
+                    $data_for_req_giver['document']['number']= $result->vendor_ind_passport_number,
+                    $data_for_req_giver['document']['bywho']= $result->vendor_ind_passport_bywho,
+                    $data_for_req_giver['document']['date']= $result->vendor_ind_passport_date,
+                    $data_for_req_giver['adress']= $vendor_ind_adress,
+                    $data_for_req_giver['phone']= $result->vendor_ind_phone,
+                    $data_for_req_giver['acc']= $result->vendor_ind_bank_acc,
+                    $data_for_req_giver['bank_name']= $result->vendor_ind_bank_name,
+                    $data_for_req_giver['korr_acc']= $result->vendor_ind_korr_acc,
+                    $data_for_req_giver['bik']= $result->vendor_ind_bik
+                );
+                break;
+        }
+        //Одаряемый
+        switch ($result->type_of_taker)
+        {
+            case 'physical':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
+                    $data_for_req_taker['fio'] = $buyer_fio,
+                    $data_for_req_taker['date'] = $buyer_birthday,
+                    $data_for_req_taker['document']['serial'] = $result->buyer_passport_serial,
+                    $data_for_req_taker['document']['number'] = $result->buyer_passport_number,
+                    $data_for_req_taker['document']['bywho'] = $result->buyer_passport_bywho,
+                    $data_for_req_taker['document']['date'] = $result->buyer_passport_date,
+                    $data_for_req_taker['adress'] = $buyer_adrees,
+                    $data_for_req_taker['phone'] = $result->buyer_phone
+                );
+                break;
+            case 'law':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
+                    $data_for_req_taker['name']= $result->buyer_law_company_name,
+                    $data_for_req_taker['inn']= $result->buyer_law_inn,
+                    $data_for_req_taker['ogrn']= $result->buyer_law_ogrn,
+                    $data_for_req_taker['adress']= $buyer_law_adress,
+                    $data_for_req_taker['phone']= $result->buyer_law_phone,
+                    $data_for_req_taker['acc']= $result->buyer_law_acc,
+                    $data_for_req_taker['bank_name']= $result->buyer_law_bank_name,
+                    $data_for_req_taker['korr_acc']= $result->buyer_law_korr_acc,
+                    $data_for_req_taker['bik']= $result->buyer_law_bik,
+                );
+                break;
+            case 'individual':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
+                    $data_for_req_taker['fio']= $buyer_ind_fio,
+                    $data_for_req_taker['date']= $buyer_ind_birthday,
+                    $data_for_req_taker['document']['serial']= $result->buyer_ind_passport_serial,
+                    $data_for_req_taker['document']['number']= $result->buyer_ind_passport_number,
+                    $data_for_req_taker['document']['bywho']= $result->buyer_ind_passport_bywho,
+                    $data_for_req_taker['document']['date']= $result->buyer_ind_passport_date,
+                    $data_for_req_taker['adress']= $buyer_ind_adress,
+                    $data_for_req_taker['phone']= $result->buyer_ind_phone,
+                    $data_for_req_taker['acc']= $result->buyer_ind_bank_acc,
+                    $data_for_req_taker['bank_name']= $result->buyer_ind_bank_name,
+                    $data_for_req_taker['korr_acc']= $result->buyer_ind_korr_acc,
+                    $data_for_req_taker['bik']= $result->buyer_ind_bik
+                );
+                break;
+        }
+        $firstside_requisites = $this->get_requisites($data_for_req_giver);
+        $secondside_requisites = $this->get_requisites($data_for_req_taker);
 
         //Заполнение
         $document->setValue('city_contract', $result->place_of_contract);
@@ -484,21 +709,9 @@ class Document_model extends CI_Model
         $document->setValue('oil_in_car', $result->oil_in_car);
         $document->setValue('defects', $result->defects);
         $document->setValue('features', $result->features);
+        $document->setValue('firstside_requisites', $firstside_requisites);
+        $document->setValue('secondside_requisites', $secondside_requisites);
 
-        /*$document->setValue('vendor_birthday', $vendor_birthday);
-        $document->setValue('vendor_passport_serial', $result->vendor_passport_serial);
-        $document->setValue('vendor_passport_number', $result->vendor_passport_number);
-        $document->setValue('vendor_passport_bywho', $result->vendor_passport_bywho);
-        $document->setValue('vendor_passport_date', $vendor_passport_date);
-        $document->setValue('vendor_adress', $vendor_adress);
-        $document->setValue('vendor_phone', $result->vendor_phone);
-        $document->setValue('buyer_birthday', $buyer_birthday);
-        $document->setValue('buyer_passport_serial', $result->buyer_passport_serial);
-        $document->setValue('buyer_passport_number', $result->buyer_passport_number);
-        $document->setValue('buyer_passport_bywho', $result->buyer_passport_bywho);
-        $document->setValue('buyer_passport_date', $buyer_passport_date);
-        $document->setValue('buyer_adress', $buyer_adress);
-        $document->setValue('buyer_phone', $result->buyer_phone);*/
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'act_of_reception.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
