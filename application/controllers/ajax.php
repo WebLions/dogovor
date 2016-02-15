@@ -18,4 +18,8 @@ class Ajax extends CI_Controller {
     {
         $this->load->view('blocks/modal_pay',$this->data);
     }
+    public function personal_data()
+    {
+        $this->load->view('blocks/personal_data',$this->data);
+    }
 }

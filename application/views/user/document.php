@@ -45,64 +45,8 @@
                   <div id="sticky-anchor"></div>
                   <div class="col-lg-6" id="sticky">
                       <div class="content-block" style="height: 600px;">
-                          <canvas id="canvas" width="550" height="800">
-                              <script>
+                          <canvas id="canvas" width="550" height="1000">
 
-
-
-                                  $.getJSON( "/document/data_for_canvas", function( data ) {
-
-                                      $.each( data , function(key , val){
-
-                                          var canvas = document.getElementById("canvas");
-                                          var context = canvas.getContext("2d");
-                                          var text = val['text'];
-                                          context.textBaseline = val['align'] ;
-                                          context.font = "13pt "+val['style'];
-
-                                          function wrapText(context, text, marginLeft, marginTop, maxWidth, lineHeight)
-                                          {
-                                              var words = text.split(" ");
-                                              var countWords = words.length;
-                                              var line = "";
-                                              for (var n = 0; n < countWords; n++) {
-                                                  var testLine = line + words[n] + " ";
-                                                  var testWidth = context.measureText(testLine).width;
-                                                  if (testWidth > maxWidth) {
-                                                      context.fillText(line, marginLeft, marginTop);
-                                                      line = words[n] + " ";
-                                                      marginTop += lineHeight;
-                                                  }
-                                                  else {
-                                                      line = testLine;
-                                                  }
-                                              }
-                                              context.fillText(line, marginLeft, marginTop);
-                                          }
-
-                                          var maxWidth = 500; //размер поле, где выводится текст
-                                          var lineHeight = 15;
-                                          /*если мы знаем высоту текста, то мы можем
-                                           предположить, что высота строки должна быть именно такой*/
-                                          var marginLeft = 20;
-                                          var marginTop = 40;
-
-
-
-                                          context.font = " Calibri";
-                                          context.fillStyle = "#000";
-
-                                          wrapText(context, text, marginLeft, marginTop, maxWidth, lineHeight);
-
-
-                                      })
-
-                                  });
-
-
-
-
-                             </script>
                           </canvas>
                       </div>
                   </div>

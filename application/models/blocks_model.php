@@ -27,34 +27,6 @@ class Blocks_model extends CI_Model
 </div>
 END;
     }
-    public function bs_block_vendor()
-    {
-
-        echo <<<END
-<div class="row" id="block_seller">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Продавец транспортного средства:</p>
-            <div class = "content-radio-group">
-                <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="physical">
-                    <span class = "content-input-align">Физическое лицо</span>
-                </div>
-                <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_law_state" type="radio" name="type_of_giver" value="physical">
-                    <span class = "content-input-align">Юридическое лицо</span>
-                </div>
-                <div class = "content-radio">
-                    <input class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="individual">
-                    <span class = "content-input-align">Индивидуальный предприниматель</span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-END;
-    }
     public function bs_block_vendor_state()
 {
     echo <<<END
@@ -81,32 +53,6 @@ END;
 </div>
 END;
 }
-    public function bs_block_buyer_state()
-    {
-        echo <<<END
-<div class="row" id="block_seller_info">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Статус продавца:</p>
-            <div class="content-radio-group">
-
-                <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_buyer_info_owner" type="radio" name="vendor_is_owner_car" value="own_car">
-                    <span class = "content-input-align">Продавец является собственником ТС</span>
-                </div>
-
-
-                <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_buyer_info_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
-                    <span class = "content-input-align">Продавец не является собственником ТС и действует по доверенности</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-END;
-    }
     public function bs_block_vendor_info()
     {
         echo <<<END
@@ -1048,7 +994,7 @@ END;
 <div class="row" id="block_ready">
     <div class="col-lg-12">
         <div class = "content-button">
-            <button type="button" id="modal_pay" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            <button type="button" id="modal_ready" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                 Оплатить и скачать
             </button>
             <!-- Modal -->
@@ -1215,6 +1161,43 @@ END;
 
     }
 
+    public function block_police()
+    {
+        echo <<<END
+        <div class="row" id="block_police" >
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Заявление в ГИББД</p>
+            <div class = "content-radio-header">
+
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:">
+              </div>
+
+            </div>
+            <p class = "content-header">Сведения из ПТС транспортного средства:</p>
+            <div class = "content-radio-header">
+
+             <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:">
+              </div>
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder=""Экологический класс:">
+              </div>
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_max_mass"  placeholder="Разрешенная максимальная масса:">
+              </div>
+               <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_min_mass"  placeholder="Разрешенная минимальная  масса:">
+              </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+END;
+    }
+
 
     //Дарение ТС
     public function gift_block_vendor()
@@ -1255,19 +1238,128 @@ END;
             <p class = "content-header">Одаряемый транспортного средства:</p>
             <div class = "content-radio-group">
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="physical">
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_law_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_law_state" type="radio" name="type_of_giver" value="physical">
                     <span class = "content-input-align">Юридическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="individual">
+                    <input class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
 
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+END;
+    }
+    public function gift_block_vendor_info()
+    {
+        echo <<<END
+         <div class="row" id="vendor_info">
+            <div class="col-lg-12">
+            <div class = "content-block">
+             <p class = "content-header">Введите данныe дарителя:</p>
+                <div class = "content-input">
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_surname"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_name"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_patronymic"  placeholder="Отчество:">
+                </div>
+                <div class = "content-input-group">
+                <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_passport_serial"  placeholder="Серия паспорта:">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_passport_number"  placeholder="Номер паспорта:">
+                </div>
+                <div class = "content-input-group">
+                <input id="vendor_passport_date" class = "form-control datetimepicker" type="text" name="vendor_passport_date"  placeholder="Дата выдачи паспорта:">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_passport_bywho"  placeholder="Кем выдан паспорт:">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_city"  placeholder="Город (адрес регистрации):">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_street"  placeholder="Улица:">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_house"  placeholder="№ Дома:">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_flat"  placeholder="Квартира:">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_phone"  placeholder="Телефон:">
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+END;
+    }
+    public function gift_block_buyer_info()
+    {
+        echo <<<END
+        <div class="row" id="block_buyer_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe одаряемого:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_surname"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_name"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_patronymic"  placeholder="Отчество:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_passport_serial"  placeholder="Серия паспорта:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_passport_number"  placeholder="Номер паспорта:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_passport_date" class = "form-control datetimepicker" type="text" name="buyer_passport_date"  placeholder="Дата выдачи паспорта:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_passport_bywho"  placeholder="Кем выдан паспорт:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_city"  placeholder="Город (адрес регистрации):">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_street"  placeholder="Улица:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_house"  placeholder="№ Дома:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_flat"  placeholder="Квартира:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_phone"  placeholder="Телефон">
+                </div>
+            </div>
+           </div>
         </div>
     </div>
 </div>
@@ -1279,44 +1371,18 @@ END;
 <div class="row" id="block_seller_info">
     <div class="col-lg-12">
         <div class = "content-block">
-            <p class = "content-header">Статус продавца:</p>
+            <p class = "content-header">Статус дарителя:</p>
             <div class="content-radio-group">
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_vendor_info_owner" type="radio" name="vendor_is_owner_car" value="own_car">
-                    <span class = "content-input-align">Продавец является собственником ТС</span>
+                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="gift_block_vendor_info_owner" type="radio" name="vendor_is_owner_car" value="own_car">
+                    <span class = "content-input-align">Даритель является собственником ТС</span>
                 </div>
 
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_vendor_info_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
-                    <span class = "content-input-align">Продавец не является собственником ТС и действует по доверенности</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-END;
-    }
-    public function gift_block_buyer_state()
-    {
-        echo <<<END
-<div class="row" id="block_seller_info">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Статус продавца:</p>
-            <div class="content-radio-group">
-
-                <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_vendor_info_owner" type="radio" name="vendor_is_owner_car" value="own_car">
-                    <span class = "content-input-align">Продавец является собственником ТС</span>
-                </div>
-
-
-                <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_block_vendor_info_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
-                    <span class = "content-input-align">Продавец не является собственником ТС и действует по доверенности</span>
+                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="gift_block_vendor_info_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
+                    <span class = "content-input-align">Даритель не является собственником ТС и действует по доверенности</span>
                 </div>
             </div>
 
@@ -1326,273 +1392,9 @@ END;
 END;
     }
 
-    public function gift_vendor_block()
-    {
 
-        echo <<<END
-<div class="row" id="block_deal" data-id="1">
-    <div class="col-lg-12 ">
-        <div class = "content-block">
-            <div class = "content-input-group">
-                <input class = "form-control" type="text" name="place_of_contract"  placeholder="Место заключения договора:">
-            </div>
-            <div class = "content-input-group">
-                <input id="date_of_contract" class="form-control datetimepicker"  name="date_of_contract"  placeholder="Дата заключения договора:">
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="row" id="block_vendor">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Продавец транспортного средства:</p>
-            <div class = "content-radio-group">
-                <div class = "content-radio">
 
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_physical_vendor" type="radio" name="type_of_giver" value="physical">
-                    <span class = "content-input-align">Физическое лицо</span>
-                </div>
-                <div class = "content-radio">
-
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_law_vendor" type="radio" name="type_of_giver" value="law">
-                    <span class = "content-input-align">Юридическое лицо</span>
-
-                </div>
-                <div class = "content-radio">
-
-                    <input class="ajax-button" data-name="bs_block_individual_vendor" type="radio" name="type_of_giver" value="individual">
-                    <span class = "content-input-align">Индивидуальный предприниматель</span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-END;
-    }
-    public function gift_block_physical_vendor()
-    {
-
-        echo <<<END
-        <div class="row" id="block_vendor_info">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Статус продавца:</p>
-            <div class="content-radio-group">
-
-                <div class = "content-radio">
-                    <input data-id="block_vendor_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_owned_car" type="radio" name="vendor_is_owner_car" value="own_car">
-                    <span class = "content-input-align">Продавец является собственником ТС</span>
-                </div>
-
-                <div class = "content-radio">
-                    <input data-id="block_vendor_info" class="ajax-button" data-block-name="block_vendor_info" data-name="bs_not_owned_car" type="radio" name="vendor_is_owner_car" value="not_own_car">
-                    <span class = "content-input-align">Продавец не является собственником ТС и действует по доверенности</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-END;
-    }
-    public function gift_block_individual_vendor()
-    {
-
-        echo <<<END
-         <div class="row" id="block_vendor_info">
-<div class="col-lg-12">
-    <div class = "content-block">
-        <p class = "content-header">Введите данныe продавца:</p>
-        <div class = "content-radio">
-
-            <div class = "content-input">
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_actor_surname"  placeholder="Фамилия:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_individual_actor_name "  placeholder="Имя:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_actor_patronymic"  placeholder="Отчество:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_company_name"  placeholder="Наименование: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_individual_actor_position"  placeholder="В лице: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_document_osn"  placeholder="Действующего на основании:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_individual_proxy_date"  placeholder="Дата выдачи доверенности:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_proxy_number"  placeholder="Номер доверенности: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_inn"  placeholder="Номер паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="vendor_passport_date" class = "form-control" type="text" name="props_ogrn"  placeholder="Дата выдачи паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_inn"  placeholder="ИНН:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_ogrn "  placeholder="ОГРН:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_individual_adress"  placeholder="Юридический адрес: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_phone"  placeholder="Телефон:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_bank_acc"  placeholder="Расчетный счет">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_bank_name"  placeholder="Наименование банка:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_korr_acc "  placeholder="Корр.счет:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_bik"  placeholder="БИК:">
-                </div>
-            </div>
-           </div>
-        </div>
-    </div>
-</div>
-<div class="row" id="block_vendor">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Покупатель транспортного средства:</p>
-            <div class = "content-radio-group">
-                <div class = "content-radio">
-
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_physical_buyer" type="radio" name="type_of_giver" value="physical">
-                    <span class = "content-input-align">Физическое лицо</span>
-                </div>
-                <div class = "content-radio">
-
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_law_buyer" type="radio" name="type_of_giver" value="law">
-                    <span class = "content-input-align">Юридическое лицо</span>
-
-                </div>
-                <div class = "content-radio">
-
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_individual_buyer" type="radio" name="type_of_giver" value="individual">
-                    <span class = "content-input-align">Индивидуальный предприниматель</span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-END;
-    }
-    public function gift_block_law_vendor()
-    {
-
-        echo <<<END
-         <div class="row" id="block_vendor_info">
-<div class="col-lg-12">
-    <div class = "content-block">
-        <p class = "content-header">Введите данныe продавца:</p>
-        <div class = "content-radio">
-
-            <div class = "content-input">
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_law_actor_surname"  placeholder="Фамилия:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_law_actor_name "  placeholder="Имя:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_law_actor_patronymic"  placeholder="Отчество:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_law_actor_position"  placeholder="В лице: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_law_proxy_date"  placeholder="Дата выдачи доверенности:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_law_proxy_number"  placeholder="Номер доверенности: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_inn"  placeholder="Номер паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="vendor_passport_date" class = "form-control" type="text" name="props_ogrn"  placeholder="Дата выдачи паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_inn"  placeholder="ИНН:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_ogrn "  placeholder="ОГРН:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_law_adress"  placeholder="Юридический адрес: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_phone"  placeholder="Телефон:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_bank_acc"  placeholder="Расчетный счет">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_bank_name"  placeholder="Наименование банка:">
-                </div>
-                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="props_korr_acc "  placeholder="Корр.счет:">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="props_bik"  placeholder="БИК:">
-                </div>
-            </div>
-           </div>
-        </div>
-    </div>
-</div>
-<div class="row" id="block_vendor">
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Покупатель транспортного средства:</p>
-            <div class = "content-radio-group">
-                <div class = "content-radio">
-
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_physical_buyer" type="radio" name="type_of_giver" value="physical">
-                    <span class = "content-input-align">Физическое лицо</span>
-                </div>
-                <div class = "content-radio">
-
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_law_buyer" type="radio" name="type_of_giver" value="law">
-                    <span class = "content-input-align">Юридическое лицо</span>
-
-                </div>
-                <div class = "content-radio">
-
-                    <input data-id="block_vendor" class="ajax-button" data-name="bs_block_individual_buyer" type="radio" name="type_of_giver" value="individual">
-                    <span class = "content-input-align">Индивидуальный предприниматель</span>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-END;
-    }
 
 }
 
