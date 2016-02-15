@@ -10,52 +10,52 @@ $( document ).ready(function() {
     //ДАТАПИКЕР
     $("#doc_create").delegate("#date_of_contract", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#vendor_birthday", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#vendor_passport_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#buyer_birthday", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#buyer_passport_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#date_of_product", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#maintenance_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     $("#doc_create").delegate("#marriage_svid_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD', locale: ru
         });
     });
     //ДАТАПИКЕР
@@ -68,18 +68,6 @@ $( document ).ready(function() {
 
        $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
        console.log($(this).parents("div[class=row]").index());
-
-       $.getJSON( "/document/data_for_canvas", function( data ) {
-
-           $.each( data , function(key , val){
-
-               //console.log(val['text']);
-
-           })
-
-        });
-
-
 
        $.ajax({
            url: '/blocks/'+func_name,
@@ -128,13 +116,25 @@ $( document ).ready(function() {
 
 
 
-    $('.document').on('click', '#ready-button', function () {
+    /*$('.document').on('click', '#ready-button', function () {
         $('#create-doc').trigger("submit");
-    });
+    });*/
 
     $('.document').on('click', '#modal_pay', function () {
         $.post('/ajax/modal_pay',function(data){
            $('.document').find("#myModal").html(data);
+        });
+    });
+
+    $('.document').on('change', '.personal', function () {
+        $.post('/ajax/personal_data',function(data){
+            $('.document').find("#myPersonal").html(data);
+        });
+    });
+
+    $('.document').on('change', '#modal_ready', function () {
+        $.post('/ajax/personal_data',function(data){
+            $('.document').find("#myModal").html(data);
         });
     });
 
