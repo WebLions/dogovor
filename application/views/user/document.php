@@ -16,7 +16,7 @@
               </div>
               <div class="row" style="min-height: 625px;">
                   <div class="col-lg-6">
-                      <form method="post" action="/document/go_buy_sale">
+                      <form id="document_form" method="post" action="/document/go_buy_sale">
                       <div class = "document" id="doc_create">
                       <div class = "row" id="block_main">
                           <div class = "col-lg-12">
@@ -44,8 +44,10 @@
                 </div>
                   <div id="sticky-anchor"></div>
                   <div class="col-lg-6" id="sticky">
-                      <div class="content-block" style="height: 600px;">
+                      <div class="content-block" style="height: 1000px;">
                           <canvas id="canvas" width="550" height="1000">
+
+
 
                           </canvas>
                       </div>
@@ -55,4 +57,7 @@
       </section>
       <!--main content end-->
   </section>
+
+
+
 

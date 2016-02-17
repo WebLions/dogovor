@@ -1,65 +1,50 @@
+function canvas_render(){
 
-$.getJSON( "/document/data_for_canvas", function( data ) {
+
 
     var lineHeightCounter;
-    var canvas = document.getElementById("canvas");
-    var context = canvas.getContext("2d");
+    var text;
     var maxWidth = 525; //размер поле, где выводится текст
     var lineHeight = 15;
+    var Header = 200;
     var marginLeft = 15;
     var marginTop = 40;
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
 
+    context.clearRect(0, 0, canvas.width, canvas.height);
 
-    $.each( data , function(key , val){
+    $.post( "/document/data_for_canvas",$('#document_form').serialize(),function( data ) {
 
-        var text = val['text'];
-        context.textBaseline = val['align'] ;
-        context.font = "13pt "+val['style'];
-        context.font = " Calibri";
-        context.fillStyle = "#000";
+        $.each( data , function(key , val){
 
-        printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight);
+            text += val['text'];
 
+            context.font = "11pt Calibri";
+            context.fillStyle = "#000";
+
+        })
 
         function printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight)
         {
-            context.fillText(text,marginLef,lineHeightCounter);
+            var words = text.split(" ");
+            var wordsLength = words.length;
+            var line = "";
+            for(var i = 0; i < wordsLength; i++){
 
-            lineHeightCounter += lineHeight;
-
-
+                var checkLine = line + words[i] + " ";
+                var checkWidth = context.measureText(checkLine).width;
+                if(checkWidth > maxWidth){
+                    context.fillText(line,marginLeft,marginTop)
+                    line = words[i] + " ";
+                    marginTop += lineHeight;
+                }
+                else{
+                    line = checkLine;
+                }
+            }
         }
-
-
-
-        /*function wrapText(context, text, marginLeft, marginTop, maxWidth, lineHeight)
-         {
-         var words = text.split(" ");
-         var countWords = words.length;
-         var line = "";
-         for (var n = 0; n < countWords; n++) {
-         var testLine = line + words[n] + " ";
-         var testWidth = context.measureText(testLine).width;
-         if (testWidth > maxWidth) {
-         context.fillText(line, marginLeft, marginTop);
-         line = words[n] + " ";
-         marginTop += lineHeight;
-         }
-         else {
-         line = testLine;
-         }
-         }
-         context.fillText(line, marginLeft, marginTop);
-         }*/
-
-        //wrapText(context, text, marginLeft, marginTop, maxWidth, lineHeight);
-
-
-
-
-
-    })
-
-
-
-});
+        printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight);
+    },"json"
+    );
+}
