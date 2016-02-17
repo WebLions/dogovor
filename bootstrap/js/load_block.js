@@ -4,7 +4,11 @@ var done = [],
 var defects = true,
     features = true,
     accessories = true,
-    credit = true;
+    credit = true,
+    police = true;;
+
+var vendor_state,
+    buyer_state;
 
 $( document ).ready(function() {
     //ДАТАПИКЕР
@@ -65,6 +69,52 @@ $( document ).ready(function() {
    $('.document').on('change','.ajax-button', function(){
 
        var func_name = $(this).attr('data-name');
+       var state_name = $(this).attr('name');
+
+
+       if(state_name == 'type_of_recipient') buyer_state = $(this).val();
+       if(state_name == 'type_of_giver') vendor_state = $(this).val();
+
+       if(state_name == 'buyer_is_owner_car')
+       {
+           $.ajax({
+                    method:"GET",
+                    url: '/blocks/'+func_name,
+                    dataType: "html",
+                    data:{buyer_state:buyer_state},
+                    success: function (data, textStatus) {
+                                                            $('.document').append(data);
+
+                    }
+           });
+           return false;
+       }
+       if(state_name == 'vendor_is_owner_car')
+       {
+           $.ajax({
+                   method:"GET",
+                   url: '/blocks/'+func_name,
+                   dataType: "html",
+                   data:{vendor_state:vendor_state},
+                   success: function (data, textStatus) {
+                                                            $('.document').append(data);
+                   }
+           });
+           return false;
+
+       }
+       //BLOCK MODAL FUNCTION
+       $('.modal-dialog').on('change','.ajax-button', function() {
+
+           $.ajax({
+               method: "GET",
+               url: '/blocks/' + func_name,
+               dataType: "html",
+               success: function (data, textStatus) {
+                   $('.modal-dialog').append(data);
+               }
+           });
+       });
 
        $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
        console.log($(this).parents("div[class=row]").index());
@@ -77,6 +127,7 @@ $( document ).ready(function() {
 
            }
        });
+
    });
 
 
@@ -108,11 +159,12 @@ $( document ).ready(function() {
     });
     $('.document').on('change','#block_accessories_other', function() {
 
-        if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
+        if(accessories == true) $('#block_accessories').pre('<div class = "content-input-group">'+
                                                                     '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
                                                                     '</div>');
         accessories=false;
     });
+
 
 
 
@@ -132,11 +184,15 @@ $( document ).ready(function() {
         });
     });
 
-    $('.document').on('change', '#modal_ready', function () {
+    $('.document').on('change', '#ready_button', function () {
         $.post('/ajax/personal_data',function(data){
-            $('.document').find("#myModal").html(data);
+            $('.document').find("#modal_ready").html(data);
         });
     });
+
+    $('.document').on('change','input', function(){
+        canvas_render();
+        });
 
 
 
