@@ -1039,8 +1039,6 @@ class Document_model extends CI_Model
         $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
-        //$vendor_passport_date = $this->format_date($result->vendor_passport_date);
-        //$buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
@@ -1281,8 +1279,6 @@ class Document_model extends CI_Model
         $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
-        //$vendor_passport_date = $this->format_date($result->vendor_passport_date);
-        //$buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
