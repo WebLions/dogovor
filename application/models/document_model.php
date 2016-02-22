@@ -1709,37 +1709,87 @@ class Document_model extends CI_Model
         $result = $query->row();
 
         //Подготовка
-        $buyer_fio = $this->format_fio($result->buyer_surname, $result->buyer_name, $result->buyer_patronymic);
-        $giver = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        //Фио
+        $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
+        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        //Адрес
         $giver_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
-        $giver_agent_adress = $this->format_adress($result->giver_agent_city,$result->giver_agent_street,$result->giver_agent_house,$result->giver_agent_flat);
+        $buyer_agent_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
+        //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
+        $date_of_product = $this->format_date($result->date_of_product);
         $giver_date = $this->format_date($result->vendor_birthday);
-        $giver_pass = "Паспорт: серия $result->vendor_serial_ch № $result->vendor_number_ser выдан $result->vendor_ser_bywho $result->vendor_bywho_date";
+        $for_agent_proxy_pass_date = $this->format_date($result->vendor_birthday);
+        //Иное
+        $buyer_agent_pass = "Паспорт: серия $result->for_agent_proxy_pass_serial № $result->for_agent_proxy_pass_number выдан $result->for_agent_proxy_pass_bywho от  $for_agent_proxy_pass_date";
+        //Имя заявителя
+        $namedata = array
+        (
+            'phys_name' => $buyer_fio,
+            'law_name' => $buyer_law_fio,
+            'ind_name' => $buyer_ind_fio,
+            'agent_name' => $buyer_agent_fio
+        );
+        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $namedata);
 
-    $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/gibdd.docx');
+        $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/gibdd.docx');
         //Заполнение
         $document->setValue('gibdd_reg_name', $result->gibdd_reg_name);
-        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('buyer_name', $buyer_name);
         $document->setValue('mark', $result->mark);
-        $document->setValue('date_of_product', $date_of_contract);
+        $document->setValue('date_of_product', $date_of_product);
         $document->setValue('vin', $result->vin);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
-        $document->setValue('giver', $giver);
-        $document->setValue('giver_date', $giver_date);
-        $document->setValue('giver_pass', $giver_pass);
+        //Определяем тип заявителя
+        switch ($result->type_of_taker)
+        {
+            case 'physical':
+                $giver['name'] = $result->buyer_fio;
+                $giver['date'] = $result->buyer_fio;
+                $giver['pass'] = $result->buyer_fio;
+                $giver['adress'] = $result->buyer_fio;
+                $giver['phone'] = $result->buyer_fio;
+                break;
+            case 'law':
+                $giver['name'] = $result->buyer_fio;
+                $giver['date'] = $result->buyer_fio;
+                $giver['pass'] = $result->buyer_fio;
+                $giver['adress'] = $result->buyer_fio;
+                $giver['phone'] = $result->buyer_fio;
+                break;
+            case 'individual':
+                $giver['name'] = $result->buyer_fio;
+                $giver['date'] = $result->buyer_fio;
+                $giver['pass'] = $result->buyer_fio;
+                $giver['adress'] = $result->buyer_fio;
+                $giver['phone'] = $result->buyer_fio;
+                break;
+        }
+        $document->setValue('giver_name', $giver['name']);
+        $document->setValue('giver_date', $giver['date']);
+        $document->setValue('giver_pass', $giver['pass']);
         $document->setValue('gibdd_inn', $result->gibdd_inn);
-        $document->setValue('giver_adress', $giver_adress);
-        $document->setValue('giver_phone', $result->vendor_phone);
-        $document->setValue('giver_agent', $result->giver_agent);
-        $document->setValue('giver_agent_pass', $result->giver_agent_pass);
-        $document->setValue('giver_agent_adress', $giver_agent_adress);
-        $document->setValue('giver_agent_phone', $result->giver_agent_phone);
+        $document->setValue('giver_adress',  $giver['adress']);
+        $document->setValue('giver_phone', $giver['phone']);
+        //
+        if ($result->buyer_is_owner_car)
+        {
+            $document->setValue('buyer_agent_fio', $buyer_agent_fio);
+            $document->setValue('buyer_agent_pass', $buyer_agent_pass);
+            $document->setValue('buyer_agent_adress', $buyer_agent_adress);
+            $document->setValue('buyer_agent_phone', $result->for_agent_proxy_phone);
+        }
         $document->setValue('mark', $result->mark);
         $document->setValue('car_type', $result->car_type);
         $document->setValue('carcass', $result->carcass);
         $document->setValue('color_carcass', $result->color_carcass);
-        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('vin', $result->vin);
         $document->setValue('carcass', $result->carcass);
         $document->setValue('shassi', $result->shassi);
@@ -1747,7 +1797,6 @@ class Document_model extends CI_Model
         $document->setValue('gibdd_eco_class', $result->gibdd_eco_class);
         $document->setValue('gibdd_max_mass', $result->gibdd_max_mass);
         $document->setValue('gibdd_min_mass', $result->gibdd_min_mass);
-
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'gibdd.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
@@ -1930,6 +1979,16 @@ class Document_model extends CI_Model
             'buyer_ind_bank_name' => $_POST['buyer_ind_bank_name'],
             'buyer_ind_korr_acc' => $_POST['buyer_ind_korr_acc'],
             'buyer_ind_bik' => $_POST['buyer_ind_bik'],
+            //Для модального окна
+            'for_agent_proxy_pass_serial' => $_POST['for_agent_proxy_pass_serial'],
+            'for_agent_proxy_pass_number' => $_POST['for_agent_proxy_pass_number'],
+            'for_agent_proxy_pass_date' => $_POST['for_agent_proxy_pass_date'],
+            'for_agent_proxy_pass_bywho' => $_POST['for_agent_proxy_pass_bywho'],
+            'for_agent_proxy_city' => $_POST['for_agent_proxy_city'],
+            'for_agent_proxy_street' => $_POST['for_agent_proxy_street'],
+            'for_agent_proxy_house' => $_POST['for_agent_proxy_house'],
+            'for_agent_proxy_flat' => $_POST['for_agent_proxy_flat'],
+            'for_agent_proxy_phone' => $_POST['for_agent_proxy_phone'],
             //New info end
             'vendor_surname' => $_POST['vendor_surname'],
             'vendor_name' => $_POST['vendor_name'],
