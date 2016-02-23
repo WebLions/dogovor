@@ -1818,32 +1818,48 @@ class Document_model extends CI_Model
         $result = $query->row();
 
         //Подготовка
+        //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
-        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        //Адрес
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $spouse_adress = $this->format_adress($result->spouse_city,$result->spouse_street,$result->spouse_house,$result->spouse_flat);
-        $price_str = $this->num2str($result->price);
+        //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
         $vendor_passport_date = $this->format_date($result->vendor_passport_date);
         $date_of_product = $this->format_date($result->date_of_product);
         $spouse_pass_date = $this->format_date($result->spouse_pass_date);
         $marriage_svid_date = $this->format_date($result->marriage_svid_date);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
+        $vendor_birthday = $this->format_date($result->vendor_birthday);
+        //Имена сторон
+        $buyer_namedata = array
+        (
+            'phys_name' => $buyer_fio,
+            'law_name' => $buyer_law_fio,
+            'ind_name' => $buyer_ind_fio,
+            'agent_name' => $buyer_agent_fio
+        );
+        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
 
+        $price_str = $this->num2str($result->price);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
 
         $document->setValue('date_of_contract', $date_of_contract);
-        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('buyer_name', $buyer_name);
         $document->setValue('vendor_fio', $vendor_fio);
-        $document->setValue('vendor_birthday', $result->vendor_birthday);
-        $document->setValue('vendor_serial', $result->vendor_passport_serial);
-        $document->setValue('vendor_numbers', $result->vendor_passport_number);
+        $document->setValue('vendor_birthday', $vendor_birthday);
+        $document->setValue('vendor_passport_serial', $result->vendor_passport_serial);
+        $document->setValue('vendor_passport_number', $result->vendor_passport_number);
         $document->setValue('vendor_passport_bywho', $result->vendor_passport_bywho);
         $document->setValue('vendor_passport_date', $vendor_passport_date);
         $document->setValue('vendor_adress', $vendor_adress);
         $document->setValue('place_of_contract', $result->place_of_contract);
-        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('vin', $result->vin);
         $document->setValue('date_of_product', $date_of_product);
         $document->setValue('engine_model', $result->engine_model);
