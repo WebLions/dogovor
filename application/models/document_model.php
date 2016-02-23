@@ -1710,23 +1710,25 @@ class Document_model extends CI_Model
 
         //Подготовка
         //Фио
-        $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
         $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
-        $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
-        $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Адрес
-        $giver_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_agent_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
+        $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
+        $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
         //Дата
-        $date_of_contract = $this->format_date($result->date_of_contract);
         $date_of_product = $this->format_date($result->date_of_product);
-        $giver_date = $this->format_date($result->vendor_birthday);
+        $buyer_date = $this->format_date($result->buyer_birthday);
+        $buyer_ind_date = $this->format_date($result->buyer_ind_birthday);
+        $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $for_agent_proxy_pass_date = $this->format_date($result->vendor_birthday);
-        //Иное
+        $buyer_passport_date = $this->format_date($result->buyer_passport_date);
+        $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
+        //Паспорта
+        $buyer_pass = "Паспорт: серия $result->buyer_passport_serial № $result->buyer_passport_number выдан $result->buyer_passport_bywho от  $buyer_passport_date";
+        $buyer_ind_pass = "Паспорт: серия $result->buyer_ind_passport_serial № $result->buyer_ind_passport_number выдан $result->buyer_ind_passport_bywho от  $buyer_ind_passport_date";
         $buyer_agent_pass = "Паспорт: серия $result->for_agent_proxy_pass_serial № $result->for_agent_proxy_pass_number выдан $result->for_agent_proxy_pass_bywho от  $for_agent_proxy_pass_date";
         //Имя заявителя
         $namedata = array
@@ -1750,25 +1752,25 @@ class Document_model extends CI_Model
         switch ($result->type_of_taker)
         {
             case 'physical':
-                $giver['name'] = $result->buyer_fio;
-                $giver['date'] = $result->buyer_fio;
-                $giver['pass'] = $result->buyer_fio;
-                $giver['adress'] = $result->buyer_fio;
-                $giver['phone'] = $result->buyer_fio;
+                $giver['name'] = $buyer_fio;
+                $giver['date'] = $buyer_date;
+                $giver['pass'] = $buyer_pass;
+                $giver['adress'] = $buyer_adress;
+                $giver['phone'] = $result->buyer_phone;
                 break;
             case 'law':
-                $giver['name'] = $result->buyer_fio;
-                $giver['date'] = $result->buyer_fio;
-                $giver['pass'] = $result->buyer_fio;
-                $giver['adress'] = $result->buyer_fio;
-                $giver['phone'] = $result->buyer_fio;
+                $giver['name'] = $result->buyer_law_company_name;
+                $giver['date'] = $buyer_law_proxy_date ;
+//                $giver['pass'] = $result->buyer_fio;
+                $giver['adress'] = $result->buyer_law_adress;
+                $giver['phone'] = $result->buyer_law_phone;
                 break;
             case 'individual':
-                $giver['name'] = $result->buyer_fio;
-                $giver['date'] = $result->buyer_fio;
-                $giver['pass'] = $result->buyer_fio;
-                $giver['adress'] = $result->buyer_fio;
-                $giver['phone'] = $result->buyer_fio;
+                $giver['name'] = $buyer_ind_fio;
+                $giver['date'] = $buyer_ind_date;
+                $giver['pass'] = $buyer_ind_pass;
+                $giver['adress'] = $buyer_ind_adress;
+                $giver['phone'] = $result->buyer_ind_phone;
                 break;
         }
         $document->setValue('giver_name', $giver['name']);
