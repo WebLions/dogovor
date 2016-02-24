@@ -1818,32 +1818,48 @@ class Document_model extends CI_Model
         $result = $query->row();
 
         //Подготовка
+        //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
-        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        //Адрес
+        $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $spouse_adress = $this->format_adress($result->spouse_city,$result->spouse_street,$result->spouse_house,$result->spouse_flat);
-        $price_str = $this->num2str($result->price);
+        //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
         $vendor_passport_date = $this->format_date($result->vendor_passport_date);
         $date_of_product = $this->format_date($result->date_of_product);
         $spouse_pass_date = $this->format_date($result->spouse_pass_date);
         $marriage_svid_date = $this->format_date($result->marriage_svid_date);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
+        $vendor_birthday = $this->format_date($result->vendor_birthday);
+        //Имена сторон
+        $buyer_namedata = array
+        (
+            'phys_name' => $buyer_fio,
+            'law_name' => $buyer_law_fio,
+            'ind_name' => $buyer_ind_fio,
+            'agent_name' => $buyer_agent_fio
+        );
+        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
 
+        $price_str = $this->num2str($result->price);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
 
         $document->setValue('date_of_contract', $date_of_contract);
-        $document->setValue('buyer_fio', $buyer_fio);
+        $document->setValue('buyer_name', $buyer_name);
         $document->setValue('vendor_fio', $vendor_fio);
-        $document->setValue('vendor_birthday', $result->vendor_birthday);
-        $document->setValue('vendor_serial', $result->vendor_passport_serial);
-        $document->setValue('vendor_numbers', $result->vendor_passport_number);
+        $document->setValue('vendor_birthday', $vendor_birthday);
+        $document->setValue('vendor_passport_serial', $result->vendor_passport_serial);
+        $document->setValue('vendor_passport_number', $result->vendor_passport_number);
         $document->setValue('vendor_passport_bywho', $result->vendor_passport_bywho);
         $document->setValue('vendor_passport_date', $vendor_passport_date);
         $document->setValue('vendor_adress', $vendor_adress);
         $document->setValue('place_of_contract', $result->place_of_contract);
-        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('vin', $result->vin);
         $document->setValue('date_of_product', $date_of_product);
         $document->setValue('engine_model', $result->engine_model);
@@ -2246,13 +2262,19 @@ class Document_model extends CI_Model
         $vendor_fio = $this->format_fio($_POST['vendor_surname'], $_POST['vendor_name'], $_POST['vendor_patronymic']);
         $buyer_fio = $this->format_fio($_POST['buyer_surname'],$_POST['buyer_name'],$_POST['buyer_patronymic']);
         $spouse_fio = $this->format_fio($_POST['spouse_surname'],$_POST['spouse_name'],$_POST['spouse_patronymic']);
-        //$vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
-        //$buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
-        //$vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
-        //$buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $vendor_law_fio = $this->format_fio($_POST['vendor_law_surname'],$_POST['vendor_law_name'],$_POST['vendor_law_patronymic']);
+        $buyer_law_fio = $this->format_fio($_POST['buyer_law_surname'],$_POST['buyer_law_name'],$_POST['buyer_law_patronymic']);
+        $vendor_ind_fio = $this->format_fio($_POST['vendor_ind_surname'],$_POST['vendor_ind_name'],$_POST['vendor_ind_patronymic']);
+        $buyer_ind_fio = $this->format_fio($_POST['buyer_ind_surname'],$_POST['buyer_ind_name'],$_POST['buyer_ind_patronymic']);
+        $vendor_agent_fio = $this->format_fio($_POST['vendor_agent_surname'],$_POST['vendor_agent_name'],$_POST['vendor_agent_patronymic']);
+        $buyer_agent_fio = $this->format_fio($_POST['buyer_agent_surname'],$_POST['buyer_agent_name'],$_POST['buyer_agent_patronymic']);
+
         //Адрес
         $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
         $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
+        $vendor_ind_adress = $this->format_adress($_POST['vendor_ind_city'],$_POST['vendor_ind_street'],$_POST['vendor_ind_house'],$_POST['vendor_ind_flat']);
+        $buyer_ind_adress = $this->format_adress($_POST['buyer_ind_city'],$_POST['buyer_ind_street'],$_POST['buyer_ind_house'],$_POST['buyer_ind_flat']);
+
         //Дата
         $date_of_contract = $this->format_date($_POST['date_of_contract']);
         $date_of_product = $this->format_date($_POST['date_of_contract']);
@@ -2260,16 +2282,155 @@ class Document_model extends CI_Model
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
         $buyer_birthday = $this->format_date($_POST['buyer_birthday']);
+        $vendor_ind_birthday= $this->format_date($_POST['vendor_ind_birthday']);
+        $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date']);
+        $for_agent_buyer_proxy_date = $this->format_date($_POST['for_agent_buyer_proxy_date']);
         $payment_date = $this->format_date($_POST['payment_date']);
         $date_of_serial_car = $this->format_date($_POST['date_of_serial_car']);
+        $for_agent_vendor_proxy_date = $this->format_date($_POST['for_agent_vendor_proxy_date']);
+        $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday']);
+        $buyer_ind_passport_date = $this->format_date($_POST['buyer_ind_passport_date']);
+
         //Джсон
         $documents = $this->json_to_string($_POST['documents']);
         $other_parameters = $this->json_to_string($_POST['other_parameters']);
         $additional_equip = $this->json_to_string($_POST['additional_devices']);
-
+        //Иное
         $marriage = $this->get_marriage_info($_POST['car_in_marriage'], $spouse_fio);
         $accessories = $this->json_to_string($_POST['accessories']);
         $price_str = $this->num2str($_POST['price_car']);
+        //Реквизиты
+        //Продавец
+        switch ($_POST['type_of_giver'])
+        {
+            case 'physical':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $_POST['type_of_giver'],
+                    $data_for_req_giver['fio'] = $vendor_fio,
+                    $data_for_req_giver['date'] = $vendor_birthday,
+                    $data_for_req_giver['document']['serial'] = $_POST['vendor_passport_serial'],
+                    $data_for_req_giver['document']['number'] = $_POST['vendor_passport_number'],
+                    $data_for_req_giver['document']['bywho'] = $_POST['vendor_passport_bywho'],
+                    $data_for_req_giver['document']['date'] = $vendor_passport_date,
+                    $data_for_req_giver['adress'] = $vendor_adress,
+                    $data_for_req_giver['phone'] = $_POST['vendor_phone'],
+                    $data_for_req_giver['owner_car'] = $_POST['vendor_is_owner_car'],
+                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
+                    $data_for_req_giver['agent_proxy_number'] = $_POST['for_agent_vendor_proxy_number'],
+                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
+                    $data_for_req_giver['agent_proxy_notary'] = $_POST['for_agent_vendor_proxy_notary']
+                );
+                break;
+            case 'law':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $_POST['type_of_giver'],
+                    $data_for_req_giver['name']= $_POST['vendor_law_company_name'],
+                    $data_for_req_giver['inn']= $_POST['vendor_law_inn'],
+                    $data_for_req_giver['ogrn']= $_POST['vendor_law_ogrn'],
+                    $data_for_req_giver['adress']= $_POST['vendor_law_adress'],
+                    $data_for_req_giver['phone']= $_POST['vendor_law_phone'],
+                    $data_for_req_giver['acc']= $_POST['vendor_law_acc'],
+                    $data_for_req_giver['bank_name']= $_POST['vendor_law_bank_name'],
+                    $data_for_req_giver['korr_acc']= $_POST['vendor_law_korr_acc'],
+                    $data_for_req_giver['bik']= $_POST['vendor_law_bik'],
+                    $data_for_req_giver['owner_car'] = $_POST['vendor_is_owner_car'],
+                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
+                    $data_for_req_giver['agent_proxy_number'] = $_POST['for_agent_vendor_proxy_number'],
+                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
+                    $data_for_req_giver['agent_proxy_notary'] = $_POST['for_agent_vendor_proxy_notary']
+                );
+                break;
+            case 'individual':
+                $data_for_req_giver = array(
+                    $data_for_req_giver['type_of_side'] = $_POST['type_of_giver'],
+                    $data_for_req_giver['fio']= $vendor_ind_fio,
+                    $data_for_req_giver['date']= $vendor_ind_birthday,
+                    $data_for_req_giver['document']['serial']= $_POST['vendor_ind_passport_serial'],
+                    $data_for_req_giver['document']['number']= $_POST['vendor_ind_passport_number'],
+                    $data_for_req_giver['document']['bywho']= $_POST['vendor_ind_passport_bywho'],
+                    $data_for_req_giver['document']['date']= $vendor_ind_passport_date,
+                    $data_for_req_giver['adress']= $vendor_ind_adress,
+                    $data_for_req_giver['phone']= $_POST['vendor_ind_phone'],
+                    $data_for_req_giver['acc']= $_POST['vendor_ind_bank_acc'],
+                    $data_for_req_giver['bank_name']= $_POST['vendor_ind_bank_name'],
+                    $data_for_req_giver['korr_acc']= $_POST['vendor_ind_korr_acc'],
+                    $data_for_req_giver['bik']= $_POST['vendor_ind_bik'],
+                    $data_for_req_giver['owner_car'] = $_POST['vendor_is_owner_car'],
+                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
+                    $data_for_req_giver['agent_proxy_number'] = $_POST['for_agent_vendor_proxy_number'],
+                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
+                    $data_for_req_giver['agent_proxy_notary'] = $_POST['for_agent_vendor_proxy_notary']
+                );
+                break;
+        }
+        //Покупатель
+        switch ($_POST['type_of_taker'])
+        {
+            case 'physical':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $_POST['type_of_taker'],
+                    $data_for_req_taker['fio'] = $buyer_fio,
+                    $data_for_req_taker['date'] = $buyer_birthday,
+                    $data_for_req_taker['document']['serial'] = $_POST['buyer_passport_serial'],
+                    $data_for_req_taker['document']['number'] = $_POST['buyer_passport_number'],
+                    $data_for_req_taker['document']['bywho'] = $_POST['buyer_passport_bywho'],
+                    $data_for_req_taker['document']['date'] = $buyer_passport_date,
+                    $data_for_req_taker['adress'] = $buyer_adress,
+                    $data_for_req_taker['phone'] = $_POST['buyer_phone'],
+                    //
+                    $data_for_req_taker['owner_car'] = $_POST['buyer_is_owner_car'],
+                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
+                    $data_for_req_taker['agent_proxy_number'] = $_POST['for_agent_buyer_proxy_number'],
+                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
+                    $data_for_req_taker['agent_proxy_notary'] = $_POST['for_agent_buyer_proxy_notary']
+                );
+                break;
+            case 'law':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $_POST['type_of_taker'],
+                    $data_for_req_taker['name']= $_POST['buyer_law_company_name'],
+                    $data_for_req_taker['inn']= $_POST['buyer_law_inn'],
+                    $data_for_req_taker['ogrn']= $_POST['buyer_law_ogrn'],
+                    $data_for_req_taker['adress']= $_POST['buyer_law_adress'],
+                    $data_for_req_taker['phone']= $_POST['buyer_law_phone'],
+                    $data_for_req_taker['acc']= $_POST['buyer_law_acc'],
+                    $data_for_req_taker['bank_name']= $_POST['buyer_law_bank_name'],
+                    $data_for_req_taker['korr_acc']= $_POST['buyer_law_korr_acc'],
+                    $data_for_req_taker['bik']= $_POST['buyer_law_bik'],
+                    //
+                    $data_for_req_taker['owner_car'] = $_POST['buyer_is_owner_car'],
+                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
+                    $data_for_req_taker['agent_proxy_number'] = $_POST['for_agent_buyer_proxy_number'],
+                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
+                    $data_for_req_taker['agent_proxy_notary'] = $_POST['for_agent_buyer_proxy_notary']
+                );
+                break;
+            case 'individual':
+                $data_for_req_taker = array(
+                    $data_for_req_taker['type_of_side'] = $_POST['type_of_taker'],
+                    $data_for_req_taker['fio']= $buyer_ind_fio,
+                    $data_for_req_taker['date']= $buyer_ind_birthday,
+                    $data_for_req_taker['document']['serial']= $_POST['buyer_ind_passport_serial'],
+                    $data_for_req_taker['document']['number']= $_POST['buyer_ind_passport_number'],
+                    $data_for_req_taker['document']['bywho']= $_POST['buyer_ind_passport_bywho'],
+                    $data_for_req_taker['document']['date']= $buyer_ind_passport_date,
+                    $data_for_req_taker['adress']= $buyer_ind_adress,
+                    $data_for_req_taker['phone']= $_POST['buyer_ind_phone'],
+                    $data_for_req_taker['acc']= $_POST['buyer_ind_bank_acc'],
+                    $data_for_req_taker['bank_name']= $_POST['buyer_ind_bank_name'],
+                    $data_for_req_taker['korr_acc']= $_POST['buyer_ind_korr_acc'],
+                    $data_for_req_taker['bik']= $_POST['buyer_ind_bik'],
+                    //
+                    $data_for_req_taker['owner_car'] = $_POST['buyer_is_owner_car'],
+                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
+                    $data_for_req_taker['agent_proxy_number'] = $_POST['for_agent_buyer_proxy_number'],
+                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
+                    $data_for_req_taker['agent_proxy_notary'] = $_POST['for_agent_buyer_proxy_notary']
+                );
+                break;
+        }
+        $firstside_requisites = $this->get_requisites($data_for_req_giver);
+        $secondside_requisites = $this->get_requisites($data_for_req_taker);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
             'buyer_fio' => $buyer_fio,
@@ -2301,331 +2462,315 @@ class Document_model extends CI_Model
             0 => array
             (
                 'text' => 'ДОГОВОР',
-                'align' => 'center',
-                'style' => 'bold'
+                'text-type' => 'title'
+
             ),
             1 => array
             (
                 'text' => 'КУПЛИ-ПРОДАЖИ ТРАНСПОРТНОГО СРЕДСТВА',
-                'align' => 'center',
-                'style' => 'normal'
+                'text-type' => 'title'
             ),
             2 => array
             (
                 'text' => "г. {$_POST['city_contract']}	$date_of_contract",
-                'align' => 'center',
-                'style' => 'normal'
+                'text-type' => 'columns'
             ),
             3 => array
             (
                 'text' => $header_doc,
-                'align' => 'left',
-                'style' => 'normal'
+                'text-type' => 'paragraph'
             ),
             4 => array
             (
                 'text' => '1. Предмет Договора',
-                'align' => 'center',
-                'style' => 'normal'
+                'text-type' => 'title'
             ),
             5 => array
             (
-                'text' => " 1.1. Продавец обязуется передать в собственность Покупателя, а Покупатель обязуется принять и оплатить следующее транспортное средство (далее - транспортное средство):
-        - марка, модель: {$_POST['mark']};
-        - идентификационный номер (VIN): {$_POST['vin']};
-        - государственный регистрационный знак: {$_POST['reg_gov_number']};
-        - наименование (тип): {$_POST['car_type']};
-        - категория (А, В, С, D, М, прицеп): {$_POST['category']};
-        - год изготовления: $date_of_product;
-        - модель, N двигателя: {$_POST['engine_model']};
-        - шасси (рама) N: {$_POST['shassi']};
-        - кузов (кабина, прицеп) N: {$_POST['carcass']};
-        - цвет кузова (кабины, прицепа): {$_POST['color_carcass']};
-        -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => " 1.1. Продавец обязуется передать в собственность Покупателя, а Покупатель обязуется принять и оплатить следующее транспортное средство (далее - транспортное средство):",
+                'text-type' => 'paragraph',
             ),
             6 => array
             (
-                'text' => "1.2. Продавец обязуется передать Покупателю транспортное средство, оснащенное серийным оборудованием и комплектующими изделиями, установленными заводом-изготовителем, а также следующим дополнительным оборудованием: $additional_equip",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- марка, модель: {$_POST['mark']};",
+                'text-type' => 'list',
             ),
             7 => array
             (
-                'text' => "1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, выданного {$_POST['bywho_serial_car']} {$_POST['date_of_serial_car']}. ",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- идентификационный номер (VIN): {$_POST['vin']};",
+                'text-type' => 'list',
             ),
             8 => array
             (
-                 'text' => "1.4. Продавец гарантирует, что передаваемое транспортное средство в споре или под арестом не состоит, не является предметом залога и не обременено другими правами третьих лиц, в розыске не находится.",
-                 'align' => 'left',
-                 'style' => 'normal'
+                'text' => "- государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "Продавец гарантирует, что не заключал с иными лицами договоров реализации транспортного средства.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- наименование (тип): {$_POST['car_type']};",
+                'text-type' => 'list',
             ),
             10 => array
             (
-                'text' => "2. Качество транспортного средства",
-                'align' => 'center',
-                'style' => 'normal'
+                'text' => "- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text-type' => 'list',
             ),
             11 => array
             (
-                'text' => "2.1. Общее состояние транспортного средства: {$_POST['car_allstatus']}.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- год изготовления: $date_of_product;",
+                'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => "2.2. Последнее техническое обслуживание транспортного средства проведено {$_POST['maintenance_date']}{$_POST['maintenance_bywho']} (организация, проводившая техническое обслуживание либо самостоятельно).",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- модель, N двигателя: {$_POST['engine_model']};",
+                'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => "2.3. Повреждения и эксплуатационные дефекты",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- шасси (рама) N: {$_POST['shassi']};",
+                'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => "2.3.1. В период владения Продавцом транспортное средство получило следующие механические повреждения и эксплуатационные дефекты: {$_POST['defects']}",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text-type' => 'list',
             ),
             15 => array
             (
-                'text' => "2.3.2. Транспортное средство передается Покупателю со следующими неустраненными повреждениями и эксплуатационными дефектами: {$_POST['defects']}",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text-type' => 'list',
             ),
             16 => array
             (
-                'text' => "2.4. Транспортное средство имеет следующие особенности, которые не влияют на безопасность товара и не являются недостатками: {$_POST['features']} (например, вибрация при эксплуатации, визг тормозов, превышение нормы потребления моторного масла, толчки при переключении трансмиссии и т.д.).",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => " -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters",
+                'text-type' => 'list',
             ),
             17 => array
             (
-                'text' => "3. Цена, срок и порядок оплаты",
-                'align' => 'center',
-                'style' => 'normal'
+                'text' => "1.2. Продавец обязуется передать Покупателю транспортное средство, оснащенное серийным оборудованием и комплектующими изделиями, установленными заводом-изготовителем, а также следующим дополнительным оборудованием: $additional_equip",
+                'text-type' => 'paragraph',
             ),
             18 => array
             (
-                'text' => "3.1. По соглашению Сторон цена транспортного средства составляет {$_POST['price_car']} ($price_str) руб.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, выданного {$_POST['bywho_serial_car']} {$_POST['date_of_serial_car']}. ",
+                'text-type' => 'paragraph',
             ),
             19 => array
             (
-                'text' => "3.2. Стоимость указанных в Договоре инструментов и принадлежностей, а также дополнительно установленного оборудования включена в цену транспортного средства.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "1.4. Продавец гарантирует, что передаваемое транспортное средство в споре или под арестом не состоит, не является предметом залога и не обременено другими правами третьих лиц, в розыске не находится.",
+                'text-type' => 'paragraph',
             ),
             20 => array
             (
-                'text' => "3.3. Покупатель оплачивает стоимость транспортного средства путем передачи наличных денег Продавцу не позднее $payment_date. При получении денежных средств Продавец в соответствии с п. 2 ст. 408 ГК РФ выдает расписку.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "Продавец гарантирует, что не заключал с иными лицами договоров реализации транспортного средства.",
+                'text-type' => 'paragraph',
             ),
             21 => array
             (
-                'text' => "3.4. Цена транспортного средства не включает расходы, связанные с оформлением Договора. Такие расходы Покупатель несет дополнительно.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "2. Качество транспортного средства",
+                'text-type' => 'title',
             ),
             22 => array
             (
-                'text' => "4. Срок и условия передачи транспортного средства",
-                'align' => 'center',
-                'style' => 'normal'
+                'text' => "2.1. Общее состояние транспортного средства: {$_POST['car_allstatus']}.",
+                'text-type' => 'paragraph',
             ),
             23 => array
             (
-                'text' => "4.1. Продавец передает Покупателю соответствующее условиям Договора транспортное средство со всеми принадлежностями после исполнения Покупателем обязанности по оплате.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "2.2. Последнее техническое обслуживание транспортного средства проведено {$_POST['maintenance_date']}{$_POST['maintenance_bywho']} (организация, проводившая техническое обслуживание либо самостоятельно).",
+                'text-type' => 'paragraph',
             ),
             24 => array
             (
-                'text' => "4.2. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие документы:
-- паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "2.3. Повреждения и эксплуатационные дефекты",
+                'text-type' => 'paragraph',
             ),
             25 => array
             (
-                'text' => "4.3. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие инструменты и принадлежности: {$accessories} {$marriage['info']}",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "2.3.1. В период владения Продавцом транспортное средство получило следующие механические повреждения и эксплуатационные дефекты: {$_POST['defects']}",
+                'text-type' => 'paragraph',
             ),
             26 => array
             (
-                'text' => "4.{$marriage['number']}. Право собственности на транспортное средство, а также риск его случайной гибели и случайного повреждения переходит к Покупателю в момент передачи транспортного средства.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "2.3.2. Транспортное средство передается Покупателю со следующими неустраненными повреждениями и эксплуатационными дефектами: {$_POST['defects']}",
+                'text-type' => 'paragraph',
             ),
             27 => array
             (
-                'text' => "5. Приемка транспортного средства",
-                'align' => 'center',
-                'style' => 'normal'
+                'text' => "2.4. Транспортное средство имеет следующие особенности, которые не влияют на безопасность товара и не являются недостатками: {$_POST['features']} (например, вибрация при эксплуатации, визг тормозов, превышение нормы потребления моторного масла, толчки при переключении трансмиссии и т.д.).",
+                'text-type' => 'paragraph',
             ),
             28 => array
             (
-                'text' => "5.1. Приемка транспортного средства осуществляется в месте его передачи Покупателю. Во время приемки производятся идентификация, осмотр и проверка транспортного средства по качеству и комплектности.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "3. Цена, срок и порядок оплаты",
+                'text-type' => 'title',
             ),
             29 => array
             (
-                'text' => "5.2. Покупатель проверяет наличие документов на транспортное средство.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "3.1. По соглашению Сторон цена транспортного средства составляет {$_POST['price_car']} ($price_str) руб.",
+                'text-type' => 'paragraph',
             ),
             30 => array
             (
-                'text' => "5.3. Идентификация транспортного средства заключается в проверке соответствия фактических данных сведениям, содержащимся в ПТС.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "3.2. Стоимость указанных в Договоре инструментов и принадлежностей, а также дополнительно установленного оборудования включена в цену транспортного средства.",
+                'text-type' => 'paragraph',
             ),
             31 => array
             (
-                'text' => "5.4. Осмотр транспортного средства должен проводиться в светлое время суток либо при искусственном освещении, позволяющем провести такой осмотр.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "3.3. Покупатель оплачивает стоимость транспортного средства путем передачи наличных денег Продавцу не позднее $payment_date. При получении денежных средств Продавец в соответствии с п. 2 ст. 408 ГК РФ выдает расписку.",
+                'text-type' => 'paragraph',
             ),
             32 => array
             (
-                'text' => "5.5. Все обнаруженные при приемке недостатки, в том числе по комплектности, заносятся в акт приема-передачи транспортного средства.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "3.4. Цена транспортного средства не включает расходы, связанные с оформлением Договора. Такие расходы Покупатель несет дополнительно.",
+                'text-type' => 'paragraph',
             ),
             33 => array
             (
-                'text' => "5.6. Покупатель обязан в течение 10 (десяти) суток после подписания акта приема-передачи транспортного средства изменить регистрационные данные о собственнике транспортного средства, обратившись с соответствующим заявлением в регистрационное подразделение ГИБДД.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "4. Срок и условия передачи транспортного средства",
+                'text-type' => 'title',
             ),
             34 => array
             (
-                'text' => "5.7. В случае подачи заявления в регистрирующий орган о сохранении регистрационных знаков, Продавец должен сообщить об этом Покупателю в день подачи заявления.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "4.1. Продавец передает Покупателю соответствующее условиям Договора транспортное средство со всеми принадлежностями после исполнения Покупателем обязанности по оплате.",
+                'text-type' => 'paragraph',
             ),
             35 => array
             (
-                'text' => "6. Ответственность Сторон",
-                'align' => 'center',
-                'style' => 'normal'
-            ),
+                'text' => "4.2. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие документы:",
+                'text-type' => 'paragraph',
+             ),
             36 => array
             (
-                'text' => "6.1. За нарушение сроков оплаты стоимости транспортного средства Продавец вправе требовать с Покупателя уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от неуплаченной суммы за каждый день просрочки.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "- паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
+                'text-type' => 'list',
             ),
             37 => array
             (
-                'text' => "6.2. За нарушение сроков передачи транспортного средства Покупатель вправе требовать с Продавца уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от стоимости транспортного средства за каждый день просрочки.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "4.3. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие инструменты и принадлежности: {$accessories} {$marriage['info']}",
+                'text-type' => 'paragraph',
             ),
             38 => array
             (
-                'text' => "6.3. При нарушении предусмотренных Договором гарантий Продавца Покупатель вправе требовать с Продавца уплаты неустойки (штрафа) в размере {$_POST['penalty']} процентов от установленной Договором цены транспортного средства.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "4.{$marriage['number']}. Право собственности на транспортное средство, а также риск его случайной гибели и случайного повреждения переходит к Покупателю в момент передачи транспортного средства.",
+                'text-type' => 'paragraph',
             ),
             39 => array
             (
-                'text' => "6.4. При изъятии транспортного средства у Покупателя третьими лицами по основаниям, возникшим до исполнения Договора, Продавец обязан возместить Покупателю понесенные им убытки.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "5. Приемка транспортного средства",
+                'text-type' => 'title',
             ),
             40 => array
             (
-                'text' => "7. Расторжение Договора",
-                'align' => 'center',
-                'style' => 'normal'
+                'text' => "5.1. Приемка транспортного средства осуществляется в месте его передачи Покупателю. Во время приемки производятся идентификация, осмотр и проверка транспортного средства по качеству и комплектности.",
+                'text-type' => 'paragraph',
             ),
             41 => array
             (
-                'text' => "7.1. Договор может быть расторгнут по требованию Покупателя в судебном порядке в случае выявления после подписания акта приема-передачи транспортного средства хотя бы одного из следующих фактов:",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "5.2. Покупатель проверяет наличие документов на транспортное средство.",
+                'text-type' => 'paragraph',
             ),
             42 => array
             (
-                'text' => "- обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "5.3. Идентификация транспортного средства заключается в проверке соответствия фактических данных сведениям, содержащимся в ПТС.",
+                'text-type' => 'paragraph',
             ),
             43 => array
             (
-                'text' => "- в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
-                'align' => 'left',
-                'style' => 'normal'
-            ),
-            41 => array
-            (
-                'text' => "8. Заключительные положения",
-                'align' => 'center',
-                'style' => 'normal'
-            ),
-            42 => array
-            (
-                'text' => "8.1. Договор вступает в силу с момента его подписания и действует до исполнения Сторонами своих обязательств.",
-                'align' => 'left',
-                'style' => 'normal'
-            ),
-            43 => array
-            (
-                'text' => "8.2. Договор составлен в 3 (трех) экземплярах, имеющих равную юридическую силу, по одному для каждой Стороны и один для регистрирующего органа.",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "5.4. Осмотр транспортного средства должен проводиться в светлое время суток либо при искусственном освещении, позволяющем провести такой осмотр.",
+                'text-type' => 'paragraph',
             ),
             44 => array
             (
-                'text' => "9. Адреса и реквизиты Сторон",
-                'align' => 'center',
-                'style' => 'normal'
+                'text' => "5.5. Все обнаруженные при приемке недостатки, в том числе по комплектности, заносятся в акт приема-передачи транспортного средства.",
+                'text-type' => 'paragraph',
             ),
             45 => array
             (
-                'text' => "Продавец:
-    ФИО $vendor_fio
-    Дата рождения $vendor_birthday
-    Паспорт: серия {$_POST['vendor_passport_serial']} № {$_POST['vendor_passport_number']} выдан {$_POST['vendor_passport_bywho']} $vendor_passport_date
-    Место жительства: г.$vendor_adress
-    Телефон: {$_POST['vendor_phone']}
-    Подпись:
-    _____________________
-    $vendor_fio",
-                'align' => 'left',
-                'style' => 'normal'
+                'text' => "5.6. Покупатель обязан в течение 10 (десяти) суток после подписания акта приема-передачи транспортного средства изменить регистрационные данные о собственнике транспортного средства, обратившись с соответствующим заявлением в регистрационное подразделение ГИБДД.",
+                'text-type' => 'paragraph',
             ),
             46 => array
             (
-                'text' => "Покупатель:
-    ФИО $buyer_fio
-    Дата рождения $buyer_birthday
-    Паспорт: серия {$_POST['buyer_passport_serial']} № {$_POST['buyer_passport_number']} выдан {$_POST['buyer_passport_bywho']} $buyer_passport_date
-    Место жительства: г.$buyer_adress
-    Телефон: {$_POST['buyer_phone']}
-    Подпись:
-    _____________________
-    $buyer_fio",
-                'align' => 'right',
-                'style' => 'normal'
-            ));
+                'text' => "5.7. В случае подачи заявления в регистрирующий орган о сохранении регистрационных знаков, Продавец должен сообщить об этом Покупателю в день подачи заявления.",
+                'text-type' => 'paragraph',
+            ),
+            47 => array
+            (
+                'text' => "6. Ответственность Сторон",
+                'text-type' => 'title',
+            ),
+            48 => array
+            (
+                'text' => "6.1. За нарушение сроков оплаты стоимости транспортного средства Продавец вправе требовать с Покупателя уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от неуплаченной суммы за каждый день просрочки.",
+                'text-type' => 'paragraph',
+            ),
+            49 => array
+            (
+                'text' => "6.2. За нарушение сроков передачи транспортного средства Покупатель вправе требовать с Продавца уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от стоимости транспортного средства за каждый день просрочки.",
+                'text-type' => 'paragraph',
+            ),
+            50 => array
+            (
+                'text' => "6.3. При нарушении предусмотренных Договором гарантий Продавца Покупатель вправе требовать с Продавца уплаты неустойки (штрафа) в размере {$_POST['penalty']} процентов от установленной Договором цены транспортного средства.",
+                'text-type' => 'paragraph',
+            ),
+            51 => array
+            (
+                'text' => "6.4. При изъятии транспортного средства у Покупателя третьими лицами по основаниям, возникшим до исполнения Договора, Продавец обязан возместить Покупателю понесенные им убытки.",
+                'text-type' => 'paragraph',
+            ),
+            52 => array
+            (
+                'text' => "7. Расторжение Договора",
+                'text-type' => 'title',
+            ),
+            53 => array
+            (
+                'text' => "7.1. Договор может быть расторгнут по требованию Покупателя в судебном порядке в случае выявления после подписания акта приема-передачи транспортного средства хотя бы одного из следующих фактов:",
+                'text-type' => 'paragraph',
+            ),
+            54 => array
+            (
+                'text' => "- обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
+                'text-type' => 'list',
+            ),
+            55 => array
+            (
+                'text' => "- в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
+                'text-type' => 'list',
+            ),
+            56 => array
+            (
+                'text' => "8. Заключительные положения",
+                'text-type' => 'title',
+            ),
+            57 => array
+            (
+                'text' => "8.1. Договор вступает в силу с момента его подписания и действует до исполнения Сторонами своих обязательств.",
+                'text-type' => 'paragraph',
+            ),
+            58 => array
+            (
+                'text' => "8.2. Договор составлен в 3 (трех) экземплярах, имеющих равную юридическую силу, по одному для каждой Стороны и один для регистрирующего органа.",
+                'text-type' => 'paragraph',
+            ),
+            59 => array
+            (
+                'text' => "9. Адреса и реквизиты Сторон",
+                'text-type' => 'paragraph',
+            ),
+            60 => array
+            (
+                'text' => "Продавец: Покупатель:",
+                'text-type' => 'columns',
+            ),
+            61 => array
+            (
+                'text' => "$firstside_requisites $secondside_requisites",
+                'text-type' => 'columns',
+            )
+        );
         $data = json_encode($data);
         echo $data;
         return true;
