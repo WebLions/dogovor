@@ -146,6 +146,21 @@ $( document ).ready(function() {
 
     });
 
+    //BLOCK MODAL FUNCTION
+    $('.modal-dialog').on('change','.ajax-button', function(e) {
+
+        var func_name = $(this).attr('data-name');
+
+        $.ajax({
+            url: '/blocks/' + func_name,
+            dataType: "html",
+            success: function (data, textStatus) {
+                $('.modal-dialog').append(data);
+            }
+        });
+        return false;
+        e.preventDefault();
+    });
 
 
 

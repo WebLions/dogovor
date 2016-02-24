@@ -9,10 +9,10 @@
            Хотите дополнительно оформить заявление в ГИБДД?(Это совершенно бесплатно).
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
-                    <input  class="ajax-button" data-name="bs_block_police_yes" id = "bs_deal" type="radio" name="police_form" value="buy_sell">
+                    <input  class="ajax-button" data-name="bs_block_police_yes" type="radio" >
                     <span class = "content-input-align">Да</span>
 
-                    <input  class="ajax-button" data-name="bs_block_police_no" type="radio" name="police_form" value="gift">
+                    <input  class="ajax-button" data-name="bs_block_police_no" type="radio">
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>

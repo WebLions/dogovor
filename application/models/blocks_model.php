@@ -1142,6 +1142,7 @@ END;
         echo <<<END
 <div class="row">
     <div class="col-lg-12">
+    <div class = "content-block">
         <div class = "content-input">
              <div class = "content-input-group">
                 <input class="form-control" type="text" name="for_agent_proxy_pass_serial"  placeholder="Серия паспорта">
@@ -1170,6 +1171,7 @@ END;
              <div class = "content-input-group">
                 <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон">
              </div>
+        </div>
         </div>
     </div>
 </div>
