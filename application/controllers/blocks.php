@@ -199,9 +199,33 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_ready();
     }
 
-    public function bs_block_police_yes(){
-
-        $this->blocks_model->$bs_block_police();
+    public function police_yes(){
+        //заполняем заяву в гибдд
+        $this->blocks_model->bs_block_police_yes();
+    }
+    public function police_no(){
+        //кнопка сохранить
+        $email = false;
+        if( !$this->data['user_id'] ) {
+            $email = true;
+        }
+        $this->blocks_model->bs_block_police_no($email);
+    }
+    public function statement_buy(){
+        //заяву несет представитель
+        $email = false;
+        if( !$this->data['user_id'] ) {
+            $email = true;
+        }
+        $this->blocks_model->bs_block_statement_no($email);
+    }
+    public function statement_repres(){
+        //заяву несет собственник
+        $email = false;
+        if( !$this->data['user_id'] ) {
+            $email = true;
+        }
+        $this->blocks_model->bs_block_statement_gibdd($email);
     }
 
     //Дарение

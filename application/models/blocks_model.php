@@ -1100,17 +1100,19 @@ END;
            Хотите дополнительно оформить заявление в ГИБДД?(Это совершенно бесплатно).
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
-                    <input  class="ajax-button" data-name="police_yes" id = "bs_deal" type="radio" name="police_form" value="buy_sell">
+                    <input  class="modal-button" data-type="final" data-name="police_yes" id = "bs_deal" type="radio" name="police_form">
                     <span class = "content-input-align">Да</span>
 
-                    <input  class="ajax-button" data-name="police_no" type="radio" name="police_form" value="gift">
+                    <input  class="modal-button" data-type="final" data-name="police_no" type="radio" name="police_form" >
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>
+            <div class="modal-body-final"></div>
+            <div class="modal-body-statement"></div>
         </div>
 
         <div class="modal-footer" style="text-align: center">
-            <button id="ready_button" type="submit" class="btn btn-success">Сохранить и оплатить</button>
+
         </div>
     </div>
 </div>
@@ -1119,6 +1121,65 @@ END;
         </div>
     </div>
 </div>
+END;
+
+    }
+
+    public function bs_block_statement_no($email)
+    {
+        echo <<<END
+        <div class="row" >
+            {$this->getEmailInput($email)}
+            <div class="col-lg-12">
+                <button id="final_button" type="submit" class="btn btn-success">Сохранить и оплатить</button>
+            </div>
+        </div>
+END;
+    }
+
+    public function bs_block_statement_gibdd($email)
+    {
+        echo <<<END
+<div class="row">
+    <div class="col-lg-12">
+        <div class = "content-input">
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_pass_serial"  placeholder="Серия паспорта">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_pass_number"  placeholder="Номер паспорта">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_pass_bywho"  placeholder="Кем выдан">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_city"  placeholder="Адрес (Город)">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Квартира)">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)">
+             </div>
+             <div class = "content-input-group">
+                <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон">
+             </div>
+        </div>
+    </div>
+</div>
+    <div class="row">
+            {$this->getEmailInput($email)}
+            <div class="col-lg-12">
+                <button id="ready_button" type="submit" class="btn btn-success">Сохранить и оплатить</button>
+            </div>
+     </div>
+
 END;
 
     }
@@ -1411,7 +1472,19 @@ END;
 END;
     }
 
-    public function bs_block_police()
+    public function bs_block_police_no($email)
+    {
+        echo <<<END
+        <div class="row" id="block_police" >
+            {$this->getEmailInput($email)}
+            <div class="col-lg-12">
+                <button id="ready_button" type="submit" class="btn btn-success">Сохранить и оплатить</button>
+            </div>
+        </div>
+END;
+    }
+
+    public function bs_block_police_yes()
     {
         echo <<<END
         <div class="row" id="block_police" >
@@ -1423,7 +1496,6 @@ END;
               <div class = "content-input-group">
                     <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:">
               </div>
-
             </div>
             <p class = "content-header">Сведения из ПТС транспортного средства:</p>
             <div class = "content-radio-header">
@@ -1443,6 +1515,18 @@ END;
 
             </div>
         </div>
+    </div>
+    <div class="col-lg-12">
+        Кто несет заявление в ГИБДД?
+            <div class = "content-radio-header">
+                <div class = "content-input-inlane">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form">
+                    <span class = "content-input-align">Покупатель лично</span>
+
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" >
+                    <span class = "content-input-align">Представитель</span>
+                </div>
+            </div>
     </div>
 </div>
 END;
@@ -1643,6 +1727,18 @@ END;
     }
 
 
+    private function getEmailInput($email){
+
+        if($email)
+            return <<<END
+    <div class="col-lg-12">
+        <h4>Введите ваш E-mail, после оплаты документа вам прийдет пароль от собственного аккаунта где вы сможете скачать документ</h4>
+        <div class = "content-input-group">
+            <input type="text" name="email" required>
+        </div>
+    </div>
+END;
+    }
 
 
 

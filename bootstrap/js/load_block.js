@@ -103,18 +103,6 @@ $( document ).ready(function() {
            return false;
 
        }
-       //BLOCK MODAL FUNCTION
-       $('.modal-dialog').on('change','.ajax-button', function() {
-
-           $.ajax({
-               method: "GET",
-               url: '/blocks/' + func_name,
-               dataType: "html",
-               success: function (data, textStatus) {
-                   $('.modal-dialog').append(data);
-               }
-           });
-       });
 
        $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
        console.log($(this).parents("div[class=row]").index());
@@ -129,6 +117,15 @@ $( document ).ready(function() {
        });
 
    });
+    //BLOCK MODAL FUNCTION
+    $('.document').on('change','.modal-button', function() {
+
+        if($(this).attr('data-type')=='final')
+            $('.document').find('.modal-body-statement').empty();
+
+        $('.document').find('.modal-body-' + $(this).attr('data-type')).load('/blocks/' + $(this).attr('data-name'));
+
+    });
 
 
 
@@ -184,10 +181,8 @@ $( document ).ready(function() {
         });
     });
 
-    $('.document').on('change', '#ready_button', function () {
-        $.post('/ajax/personal_data',function(data){
-            $('.document').find("#modal_ready").html(data);
-        });
+    $('.document').on('click', '#final_button', function () {
+        $('#document_form').submit();
     });
 
     $('.document').on('change','input', function(){

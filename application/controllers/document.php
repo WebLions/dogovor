@@ -73,8 +73,8 @@ class Document extends CI_Controller
         print_r($_POST);
         echo '</pre>';
     }
-    public function go_buy_sale()
-    {
+
+    public function save(){
         //Проверяем залогинен ли пользователь
         if( !$this->data['user_id'] ) {
             $this->form_validation->set_rules('email','E-mail','trim|required|xss_clean');
@@ -87,7 +87,11 @@ class Document extends CI_Controller
                 redirect('user/login');
             }
         }
-        $doc_id = $this->document_model->insert_into_database_buysale();
+
+        if($_POST['type_of_contract']=='buy_sell')
+            $doc_id = $this->document_model->insert_into_database_buysale();
+        if($_POST['type_of_contract']=='gift')
+            $doc_id = $this->document_model->insert_into_database_gift();
 
         //insert to documents return $doc_id:global
         $table = "buy_sale";
@@ -99,7 +103,19 @@ class Document extends CI_Controller
             $link = $this->pay_model->getPayLink($doc_id);
             redirect($link);
         }
+
     }
+    public function check_login_user()
+    {
+
+        if( $this->data['user_id'] ) {
+            // go_buy_sale()
+
+        }else{
+            //вывод формы ввода емаил
+        }
+    }
+
     public function create()
     {
         $this->load->view('user/document_header');
