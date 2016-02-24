@@ -17,6 +17,9 @@ class Blocks_model extends CI_Model
     <div class="col-lg-12 ">
         <div class = "content-block">
             <div class = "content-input-group">
+                <p style="text-align:justify;">Персональные данные, указанные Вами в конструкторе договора на нашем сайте, недоступны другим пользователям, и используются для генерации видимого только Вам текста договора. Данные передаются через защищенное шифрованием соединение, что подтверждает SSL сертификат Thawte. Мы уделяем серьезное внимание информационной безопасности наших серверов и конфиденциальности персональных данных наших клиентов.</p>
+            </div>
+            <div class = "content-input-group">
                 <input class = "form-control" type="text" name="place_of_contract"  placeholder="Место заключения договора:">
             </div>
             <div class = "content-input-group">
@@ -1504,7 +1507,7 @@ END;
                     <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:">
               </div>
               <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder=""Экологический класс:">
+                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:">
               </div>
               <div class = "content-input-group">
                     <input class = "form-control" type="text" name="gibdd_max_mass"  placeholder="Разрешенная максимальная масса:">
