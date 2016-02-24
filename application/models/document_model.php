@@ -1927,7 +1927,7 @@ class Document_model extends CI_Model
             'vendor_law_actor_position' => $_POST['vendor_law_actor_position'],
             'vendor_law_actor_name' => $_POST['vendor_law_actor_name'],
             'vendor_law_actor_surname' => $_POST['vendor_law_actor_surname'],
-            'vendor_law_company_patronymic' => $_POST['vendor_law_company_patronymic'],
+            'vendor_law_actor_patronymic' => $_POST['vendor_law_actor_patronymic'],
             'vendor_law_document_osn' => $_POST['vendor_law_document_osn'],
             'vendor_law_proxy_number' => $_POST['vendor_law_proxy_number'],
             'vendor_law_proxy_date' => $_POST['vendor_law_proxy_date'],
