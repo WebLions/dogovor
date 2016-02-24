@@ -5,12 +5,31 @@ var defects = true,
     features = true,
     accessories = true,
     credit = true,
-    police = true;;
+    police = true;
+    consent = false;
 
 var vendor_state,
     buyer_state;
 
+
 $( document ).ready(function() {
+
+    $('input[name=type_of_contract]').change(function(e){
+        documunt_type = $(this).attr('data-name');
+        if(consent==false){
+            $('#consent').modal('show');
+            e.preventDefault();
+            return false;
+        }
+    });
+    $('#yes_consent').change(function(e){
+        consent = true;
+        $('#consent').modal('hide');
+        $('input[data-name='+documunt_type+']').trigger('change');
+        e.preventDefault();
+        return false;
+    });
+
     //ДАТАПИКЕР
     $("#doc_create").delegate("#date_of_contract", "focusin", function(){
         $(this).datetimepicker({
@@ -127,6 +146,21 @@ $( document ).ready(function() {
 
     });
 
+    //BLOCK MODAL FUNCTION
+    $('.modal-dialog').on('change','.ajax-button', function(e) {
+
+        var func_name = $(this).attr('data-name');
+
+        $.ajax({
+            url: '/blocks/' + func_name,
+            dataType: "html",
+            success: function (data, textStatus) {
+                $('.modal-dialog').append(data);
+            }
+        });
+        return false;
+        e.preventDefault();
+    });
 
 
 
@@ -187,7 +221,7 @@ $( document ).ready(function() {
 
     $('.document').on('change','input', function(){
         canvas_render();
-        });
+    });
 
 
 
