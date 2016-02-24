@@ -14,7 +14,7 @@ function canvas_render(){
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    $.post( "/document/data_for_canvas",$('#document_form').serialize(),function( data ) {
+    $.post( "/document/data_for_canvas_buysale",$('#document_form').serialize(),function( data ) {
 
         $.each( data , function(key , val){
 
