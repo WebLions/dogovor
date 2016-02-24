@@ -1,10 +1,7 @@
 function canvas_render(){
-
-
-
     var lineHeightCounter;
     var text;
-    var maxWidth = 525; //размер поле, где выводится текст
+    var maxWidth = 524; //размер поле, где выводится текст
     var lineHeight = 15;
     var Header = 200;
     var marginLeft = 15;
@@ -14,7 +11,41 @@ function canvas_render(){
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    $.post( "/document/data_for_canvas_buysale",$('#document_form').serialize(),function( data ) {
+    function title(){
+
+        context.font = "18pt Arial"
+        context.fillStyle = "#000";
+        marginLeft = maxWidth / 2 - 60;
+
+    }
+    function paragraph() {
+
+        context.font = "11pt Arial"
+        context.fillStyle = "#000";
+        marginLeft = 15;
+    }
+    function list(){
+
+        context.font = "18pt Arial"
+        context.fillStyle = "#000";
+        marginLeft = maxWidth / 2 - 60;
+
+    }
+    function colunms(){
+
+        context.font = "18pt Arial"
+        context.fillStyle = "#000";
+        marginLeft = maxWidth / 2 - 60;
+
+    }
+
+    function get_text_type(){
+
+
+    }
+
+
+        $.post( "/document/data_for_canvas_buysale",$('#document_form').serialize(),function( data ) {
 
         $.each( data , function(key , val){
 
