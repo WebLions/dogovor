@@ -22,7 +22,8 @@ $( document ).ready(function() {
             return false;
         }
     });
-    $('#yes_consent').change(function(e){
+
+    $('#yes_consent').click(function(e){
         consent = true;
         $('#consent').modal('hide');
         $('input[data-name='+documunt_type+']').trigger('change');
