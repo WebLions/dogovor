@@ -122,8 +122,12 @@ class Document extends CI_Controller
         $this->load->view('user/document');
         $this->load->view('user/footer');
     }
-    public function data_for_canvas()
+    public function data_for_canvas_buysale()
     {
-        $this->document_model->get_data_for_canvas();//Возвращает json массив
+        $this->document_model->get_data_for_canvas_buysale();//Возвращает json массив
+    }
+    public function data_for_canvas_gift()
+    {
+        $this->document_model->get_data_for_canvas_gift();//Возвращает json массив
     }
 }
