@@ -148,7 +148,7 @@ $( document ).ready(function() {
     $('.document').on('change','#defects_yes', function() {
 
         if(defects == true) $('#defects_block').append('<div id="defects_additional_block" class = "content-input-group">'+
-                                                            '<input class="form-control" type="text"  name="defects[]"  placeholder="Дефекты">'+
+                                                            '<input class="form-control" type="text"  name="defects"  placeholder="Дефекты">'+
                                                             '</div>');
         defects=false;
     });
@@ -157,7 +157,7 @@ $( document ).ready(function() {
     $('.document').on('change','#features_yes', function() {
 
         if(features == true) $('#features_block').append('<div id="features_additional_block" class = "content-input-group">'+
-                                                              '<input class="form-control" type="text"  name="features[]"  placeholder="Особенности">'+
+                                                              '<input class="form-control" type="text"  name="features"  placeholder="Особенности">'+
                                                               '</div>');
         features=false;
     });
@@ -171,7 +171,7 @@ $( document ).ready(function() {
     });
     $('.document').on('change','#block_accessories_other', function() {
 
-        if(accessories == true) $('#block_accessories').pre('<div class = "content-input-group">'+
+        if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
                                                                     '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
                                                                     '</div>');
         accessories=false;
