@@ -5,7 +5,6 @@ function canvas_render(){
     var maxWidth = 524; //размер поле, где выводится текст
     var lineHeight = 15;
     var marginLeft = 15;
-
     var marginTop = 40;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
@@ -17,6 +16,7 @@ function canvas_render(){
         context.font = "13pt Arial";
         context.fillStyle = "#000";
         marginLeft = maxWidth / 2 - 60;
+        lineHeight = 25;
 
     }
     function paragraph() {
@@ -24,12 +24,14 @@ function canvas_render(){
         context.font = "11pt Arial";
         context.fillStyle = "#000";
         marginLeft = 30;
+        lineHeight = 16;
     }
     function list(){
 
         context.font = "11pt Arial";
         context.fillStyle = "#000";
         marginLeft = 80;
+        lineHeight = 16;
 
     }
     function columns(){
@@ -37,6 +39,7 @@ function canvas_render(){
         context.font = "11pt Arial";
         context.fillStyle = "#000";
         marginLeft = 50;
+        lineHeight = 16;
 
     }
 
@@ -51,7 +54,10 @@ function canvas_render(){
 
     function printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight)
     {
-        var words = text.split(" ");
+
+
+
+        var words = text.split("");
         var wordsLength = words.length;
         var line = "";
         for(var i = 0; i < wordsLength; i++){
@@ -77,8 +83,8 @@ function canvas_render(){
 
         $.each( data , function(key , val){
 
+            console.log(val['text-type']);
             console.log(val['text']);
-
 
             text = val['text'];
             text_type = val['text-type'];

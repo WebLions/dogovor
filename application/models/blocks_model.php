@@ -776,32 +776,32 @@ END;
 
             <div class = "content-radio-group">
                 <div class = "content-radio">
-                    <input type="radio" name="car_allstatus" value="greate">
+                    <input type="radio" name="car_allstatus" value="Отличное">
                     <span class = "content-input-align">Отличное</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="car_allstatus" value="good">
+                    <input type="radio" name="car_allstatus" value="Хорошее">
                     <span class = "content-input-align">Хорошее</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="car_allstatus" value="passable">
+                    <input type="radio" name="car_allstatus" value="Удовлетворительное">
                     <span class = "content-input-align">Удовлетворительное</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="car_allstatus" value="need_to_fix">
+                    <input type="radio" name="car_allstatus" value="Не на ходу">
                     <span class = "content-input-align">Не на ходу</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="car_allstatus" value="after_dtp">
+                    <input type="radio" name="car_allstatus" value="После ДТП">
                     <span class = "content-input-align">После ДТП</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="car_allstatus" value="trash">
+                    <input type="radio" name="car_allstatus" value="Восстановлению не подлежит">
                     <span class = "content-input-align">Восстановлению не подлежит</span>
                 </div>
             </div>
@@ -888,17 +888,17 @@ END;
             <div class = "content-radio-group">
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="before">
+                    <input type="radio" name="payment_date" value="До подписания настоящего договора">
                     <span class = "content-input-align">До подписания настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="after">
+                    <input type="radio" name="payment_date" value="При подписании настоящего договора">
                     <span class = "content-input-align">При подписании настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input id="credit" type="radio" name="payment_date" value="credit">
+                    <input id="credit" type="radio" name="payment_date" value="В рассрочку по следующему графику">
                     <span class = "content-input-align">В рассрочку по следующему графику:</span>
                 </div>
 
