@@ -14,7 +14,7 @@ var vendor_state,
 $( document ).ready(function() {
 
     $('.document').on('change', 'input[name="additional_devices_array[]"]', function(e){
-        if($(this).prop('checked'))
+        if($(this).prop('checked')==false)
             return false;
         var name = $(this).attr('data-name');
         $('.document').find('input[data-name='+name+']').each(function(){
