@@ -1,11 +1,11 @@
 function canvas_render(){
-    var start = true;
+
     var text_type;
     var text;
     var maxWidth = 524; //размер поле, где выводится текст
     var lineHeight = 15;
     var marginLeft = 15;
-    var defaultTop = 55;
+
     var marginTop = 40;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
@@ -14,7 +14,7 @@ function canvas_render(){
 
     function title(){
 
-        context.font = "12pt Arial"
+        context.font = "13pt Arial"
         context.fillStyle = "#000";
         marginLeft = maxWidth / 2 - 60;
 
@@ -32,7 +32,7 @@ function canvas_render(){
         marginLeft = 50
 
     }
-    function colunms(){
+    function columns(){
 
         context.font = "11pt Arial"
         context.fillStyle = "#000";
@@ -45,7 +45,7 @@ function canvas_render(){
         if(text_type == 'title') title();
         if(text_type == 'paragraph') paragraph();
         if(text_type == 'list') list();
-        if(text_type == 'columns') colunms();
+        if(text_type == 'columns') columns();
 
     }
 
@@ -76,15 +76,16 @@ function canvas_render(){
 
         $.each( data , function(key , val){
 
-            if(start == true) {
-                marginTop += defaultTop;
-                start = false;
-            }
+            console.log(val['text']);
+
+            /*
+            text = val['text'];
             text_type = val['text-type'];
             get_text_type(text_type);
 
-            text = val['text'];
+
             marginTop = printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight);
+            */
 
         });
     },"json"
