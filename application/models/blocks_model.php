@@ -9,16 +9,47 @@ class Blocks_model extends CI_Model
         $this->load->database();//Работа с бд
     }
 
+    public function bs_consent(){
+        echo <<<END
+<div class="row" id="block_consent" data-id="1">
+     <div class="col-lg-12 ">
+        <div class = "content-block">
+            <div class = "content-input-group">
+    		    <input class="" data-name="bs_vendor_block" type="checkbox" id="pact">Заполнить персональные данные сторон и адрес объекта
+    		</div>
+    	</div>
+     </div>
+</div>
+END;
+    }
+    public function gift_consent(){
+        echo <<<END
+<div class="row" id="block_consent" data-id="1">
+     <div class="col-lg-12 ">
+        <div class = "content-block">
+            <div class = "content-input-group">
+    		    <input class="" data-name="gift_vendor_block" type="checkbox" id="pact">Заполнить персональные данные сторон и адрес объекта
+    		</div>
+    	</div>
+     </div>
+</div>
+END;
+    }
+
     //Базовые блоки продавца
     public function bs_block_deal()
     {
         echo <<<END
         <div class="row" id="block_deal" data-id="1">
-    <div class="col-lg-12 ">
+     <div class="col-lg-12 ">
         <div class = "content-block">
             <div class = "content-input-group">
                 <p style="text-align:justify;">Персональные данные, указанные Вами в конструкторе договора на нашем сайте, недоступны другим пользователям, и используются для генерации видимого только Вам текста договора. Данные передаются через защищенное шифрованием соединение, что подтверждает SSL сертификат Thawte. Мы уделяем серьезное внимание информационной безопасности наших серверов и конфиденциальности персональных данных наших клиентов.</p>
             </div>
+        </div>
+     </div>
+    <div class="col-lg-12 ">
+        <div class = "content-block">
             <div class = "content-input-group">
                 <input class = "form-control" type="text" name="place_of_contract"  placeholder="Место заключения договора:">
             </div>

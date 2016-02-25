@@ -6,7 +6,6 @@ var defects = true,
     accessories = true,
     credit = true,
     police = true;
-    consent = false;
 
 var vendor_state,
     buyer_state;
@@ -14,19 +13,26 @@ var vendor_state,
 
 $( document ).ready(function() {
 
-    $('input[name=type_of_contract]').change(function(e){
+    $('.document').on('change','#pact',function(e){
         documunt_type = $(this).attr('data-name');
-        if(consent==false){
+        if($(this).prop('checked')){
             $('#consent').modal('show');
-            e.preventDefault();
-            return false;
+            $(".document").find('#pact').prop('checked', false);
+        }else{
+            $(".document").find('#pact').prop('checked', false);
+            console.log('2');
+            $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
         }
+        e.preventDefault();
+        return false;
     });
 
     $('#yes_consent').click(function(e){
-        consent = true;
         $('#consent').modal('hide');
-        $('input[data-name='+documunt_type+']').trigger('change');
+        $('.document').find('#pact').addClass('ajax-button');
+        $('.document').find('#pact').trigger('change');
+        $('.document').find('#pact').removeClass('ajax-button');
+        $(".document").find('#pact').prop('checked', true);
         e.preventDefault();
         return false;
     });
@@ -34,7 +40,7 @@ $( document ).ready(function() {
     //ДАТАПИКЕР
     $("#doc_create").delegate("#date_of_contract", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#vendor_birthday", "focusin", function(){
