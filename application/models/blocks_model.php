@@ -246,18 +246,18 @@ END;
             <div class = "content-radio-group">
                 <div class = "content-radio">
 
-                    <input data-id="block_buyer" class="ajax-button" data-name="bs_block_buyer_state" type="radio" name="type_of_recipient" value="physical">
+                    <input data-id="block_buyer" class="ajax-button" data-name="bs_block_buyer_state" type="radio" name="type_of_taker" value="physical">
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
 
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_buyer_state" type="radio" name="type_of_recipient" value="law">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_buyer_state" type="radio" name="type_of_taker" value="law">
                     <span class = "content-input-align">Юридическое лицо</span>
 
                 </div>
                 <div class = "content-radio">
 
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_buyer_state"" type="radio" name="type_of_recipient" value="individual">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_buyer_state"" type="radio" name="type_of_taker" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
 
                 </div>
