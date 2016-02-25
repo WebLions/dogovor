@@ -339,7 +339,7 @@ END;
 
 
                 <div class = "content-radio">
-                    <input data-id="block_buyer_info" class="ajax-button" data-block-name="block_buyer_info" data-name="bs_block_buyer_selected_not_owner" type="radio" name="buyer_is_owner_car" value="not_own_car">
+                    <input data-id="block_buyer_info" class="ajax-button" data-block-name="block_buyer_info" data-name="bs_block_buyer_selected_not_owner" type="radio" name="buyer_is_not_owner_car" value="not_own_car">
                     <span class = "content-input-align">Покупатель не является новым собственником ТС и действует по доверенности</span>
                 </div>
             </div>
