@@ -80,7 +80,8 @@ class PHPWord_Template {
         $this->_documentXML = $this->_objZip->getFromName('word/document.xml');
         $this->_footerXML = $this->_objZip->getFromName('word/footer1.xml');
     }
-    
+
+
     /**
      * Set a Template value
      * 
