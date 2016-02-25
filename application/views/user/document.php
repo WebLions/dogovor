@@ -26,11 +26,11 @@
                           <div class = "content-radio-header">
                               <div class = "content-input-inlane">
 
-                                  <input data-id="block_main" class="ajax-button" data-name="bs_vendor_block" id = "bs_deal" type="radio" name="type_of_contract" value="buy_sell">
+                                  <input data-id="block_main" class="ajax-button" data-name="bs_consent_vendor_block" id = "bs_deal" type="radio" name="type_of_contract" value="buy_sell">
                                   <span class = "content-input-align">Договор купли-продажи ТС</span>
 
 
-                                  <input data-id="block_main" class="ajax-button" data-name="gift_vendor_block" type="radio" name="type_of_contract" value="gift">
+                                  <input data-id="block_main" class="ajax-button" data-name="gift_consent_vendor_block" type="radio" name="type_of_contract" value="gift">
                                   <span class = "content-input-align">Договор дарения ТС</span>
 
                               </div>
