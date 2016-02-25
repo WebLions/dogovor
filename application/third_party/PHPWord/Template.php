@@ -55,7 +55,13 @@ class PHPWord_Template {
      * @var string
      */
     private $_documentXML;
-    
+
+    /**
+     * Document XML
+     *
+     * @var string
+     */
+    private $_footerXML;
     
     /**
      * Create a new Template Object
@@ -72,6 +78,7 @@ class PHPWord_Template {
         $this->_objZip->open($this->_tempFileName);
         
         $this->_documentXML = $this->_objZip->getFromName('word/document.xml');
+        $this->_footerXML = $this->_objZip->getFromName('word/footer1.xml');
     }
     
     /**
@@ -95,6 +102,16 @@ class PHPWord_Template {
           }
           $this->_documentXML = str_replace($search, $replace, $this->_documentXML);
 
+             preg_match_all('/\$[^\$]+?}/', $this->_footerXML, $matches);
+             for ($i=0;$i<count($matches[0]);$i++){
+                 $matches_new[$i] = preg_replace('/(<[^<]+?>)/','', $matches[0][$i]);
+                 $this->_footerXML = str_replace(
+                     $matches[0][$i],
+                     $matches_new[$i],
+                     $this->_footerXML);
+             }
+             $this->_footerXML = str_replace($search, $replace, $this->_footerXML);
+
          }
     
     /**
@@ -108,7 +125,7 @@ class PHPWord_Template {
         }
         
         $this->_objZip->addFromString('word/document.xml', $this->_documentXML);
-        
+        $this->_objZip->addFromString('word/footer1.xml', $this->_footerXML);
         // Close zip file
         if($this->_objZip->close() === false) {
             throw new Exception('Could not close zip file.');
