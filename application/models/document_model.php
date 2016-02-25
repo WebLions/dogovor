@@ -41,7 +41,7 @@ class Document_model extends CI_Model
         $hundred=array('','сто','двести','триста','четыреста','пятьсот','шестьсот', 'семьсот','восемьсот','девятьсот');
         $unit=array( // Units
             array('десятая' ,'десятых' ,'десятых',	 1),
-            array('целая'   ,'целых'   ,'целых'    ,0),
+           // array('целая'   ,'целых'   ,'целых'    ,0),
             array('тысяча'  ,'тысячи'  ,'тысяч'     ,1),
             array('миллион' ,'миллиона','миллионов' ,0),
             array('миллиард','милиарда','миллиардов',0),
@@ -64,7 +64,7 @@ class Document_model extends CI_Model
             } //foreach
         }
         else $out[] = $nul;
-        $out[] = $this->morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
+        //$out[] = $this->morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
         //$out[] = $kop.' '.morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
         return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
     }
@@ -200,8 +200,6 @@ class Document_model extends CI_Model
             }
             $string .= ", " . $target[$last_element] . ".";
         }
-        else $string = "Error, Quantity <0";
-
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -270,7 +268,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = ' Гражданин ' . $data_for_header['vendor_fio'] . ', далее именуемый "'.$first_person.'", с одной стороны, ';
+                    $header = ' Гражданин ' . $data_for_header['vendor_fio'] . ', далее именуемый "'.$first_person.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -462,7 +460,7 @@ class Document_model extends CI_Model
         {
             case 'physical':
                 $output =  "{$data['fio']} <w:br/>";
-                if ($data['owner_car'] == 'own_car')
+                if ($data['owner_car'] == 'not_own_car')
                 {
                     $output = "{$data['agent_fio']} <w:br/>";
                     $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
@@ -476,7 +474,7 @@ class Document_model extends CI_Model
                 break;
             case 'law':
                 $output = "{$data['name']} <w:br/>";
-                if ($data['owner_car'] == 'own_car')
+                if ($data['owner_car'] == 'not_own_car')
                 {
                     $output .= "{$data['agent_fio']} <w:br/>";
                     $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
@@ -1042,10 +1040,6 @@ class Document_model extends CI_Model
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
-        if ($result->vendor_is_owner_car == 'own_car')
-            $vendor_fio = $vendor_agent_fio;
-        if ($result->buyer_is_owner_car == 'own car')
-            $buyer_fio = $buyer_agent_fio;
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -1061,7 +1055,6 @@ class Document_model extends CI_Model
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
-        $payment_date = $this->format_date($result->payment_date);
         //
         $vendor_date_of_certificate = $result->vendor_date_of_certificate;
         $buyer_date_of_certificate = $result->buyer_date_of_certificate;
@@ -1075,9 +1068,10 @@ class Document_model extends CI_Model
         $buyer_law_proxy_date = $result->buyer_law_proxy_date;
         $vendor_law_proxy_date = $result->vendor_law_proxy_date;
         //Джсон
-        $documents = $this->json_to_string($result->documents);
-        $accessories = $this->json_to_string($result->accessories);
-        $other_parameters = $this->json_to_string($result->other_parameters);
+//        $documents = $this->json_to_string($result->documents);
+//        $accessories = $this->json_to_string($result->accessories);
+//        $other_parameters = $this->json_to_string($result->other_parameters);
+//        $additional_devices_array = $this->json_to_string($result->additional_devices_array);
         //Иные
         $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
         $price_str = $this->num2str($result->price_car);
@@ -1113,7 +1107,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
         );
-        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
         //Продавец
         switch ($result->type_of_giver)
@@ -1255,7 +1249,7 @@ class Document_model extends CI_Model
             'ind_name' => $vendor_ind_fio,
             'agent_name' => $vendor_agent_fio
         );
-        $vendor_name = $this->get_side_name($result->type_of_vendor, $result->vendor_is_owner_car, $vendor_namedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
         //Покупатель
         $buyer_namedata = array
         (
@@ -1264,7 +1258,7 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
 
         //Заполнение
@@ -1283,8 +1277,8 @@ class Document_model extends CI_Model
         $document->setValue('shassi', $result->shassi);
         $document->setValue('carcass', $result->carcass);
         $document->setValue('color_carcass', $result->color_carcass);
-        $document->setValue('other_parameters', $other_parameters);
-        $document->setValue('additional_devices', $result->additional_devices);
+//        $document->setValue('other_parameters', $other_parameters);
+//        $document->setValue('additional_devices_array', $additional_devices_array);
         $document->setValue('serial_car', $result->serial_car);
         $document->setValue('number_of_serial_car', $result->number_of_serial_car);
         $document->setValue('bywho_serial_car', $result->bywho_serial_car);
@@ -1296,9 +1290,9 @@ class Document_model extends CI_Model
         $document->setValue('features', $result->features);
         $document->setValue('price', $result->price_car);
         $document->setValue('price_str', $price_str);
-        $document->setValue('payment_date', $payment_date);
-        $document->setValue('documents', $documents);
-        $document->setValue('accessories', $accessories);
+        $document->setValue('payment_date', $result->payment_date);
+//        $document->setValue('documents', $documents);
+//        $document->setValue('accessories', $accessories);
         $document->setValue('marriage_info', $marriage['info']);
         $document->setValue('marriage_number', $marriage['number']);
         $document->setValue('penalty', $result->penalty);
@@ -1396,7 +1390,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
         );
-        $header_doc = $this->set_header_doc($result->type_of_contract, $result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract, $result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
         //Продавец
         switch ($result->type_of_giver)
@@ -1538,7 +1532,7 @@ class Document_model extends CI_Model
             'ind_name' => $vendor_ind_fio,
             'agent_name' => $vendor_agent_fio
         );
-        $vendor_name = $this->get_side_name($result->type_of_vendor, $result->vendor_is_owner_car, $vendor_namedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
         //Покупатель
         $buyer_namedata = array
         (
@@ -1547,7 +1541,7 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
 
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/act_of_reception.docx');
 
@@ -1678,7 +1672,7 @@ class Document_model extends CI_Model
             'ind_name' => $vendor_ind_fio,
             'agent_name' => $vendor_agent_fio
         );
-        $vendor_name = $this->get_side_name($result->type_of_vendor, $result->vendor_is_owner_car, $namedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $namedata);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/receipt_of_money.docx');
         //Заполнение
         $document->setValue('city_contract', $result->city_contract);
@@ -1738,7 +1732,7 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $namedata);
 
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/gibdd.docx');
         //Заполнение
@@ -1844,7 +1838,7 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
 
         $price_str = $this->num2str($result->price);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
@@ -2021,10 +2015,11 @@ class Document_model extends CI_Model
             'vendor_house' => $_POST['vendor_house'],
             'vendor_flat' => $_POST['vendor_flat'],
             'vendor_phone' => $_POST['vendor_phone'],
-            'type_of_buyer' => $_POST['type_of_taker'],
+            'type_of_taker' => $_POST['type_of_taker'],
             'buyer_surname' => $_POST['buyer_surname'],
             'buyer_name' => $_POST['buyer_name'],
             'buyer_patronymic' => $_POST['buyer_patronymic'],
+            'buyer_is_owner_car' => $_POST['buyer_is_owner_car'],
             'buyer_birthday' => $_POST['buyer_birthday'],
             'buyer_passport_serial' => $_POST['buyer_passport_serial'],
             'buyer_passport_number' => $_POST['buyer_passport_number'],
@@ -2052,7 +2047,8 @@ class Document_model extends CI_Model
             'bywho_serial_car' => $_POST['bywho_serial_car'],
             'price_car' => $_POST['price_car'],
             'currency' => $_POST['currency'],
-            'additional_devices' => json_encode($_POST['additional_devices']),
+            'additional_devices' => ($_POST['additional_devices']),
+            'additional_devices_array' => json_encode($_POST['additional_devices_array']),
             'oil_in_car' => $_POST['oil_in_car'],
             'car_allstatus' => $_POST['car_allstatus'],
             'maintenance_date' => $_POST['maintenance_date'],
@@ -2277,7 +2273,7 @@ class Document_model extends CI_Model
 
         //Дата
         $date_of_contract = $this->format_date($_POST['date_of_contract']);
-        $date_of_product = $this->format_date($_POST['date_of_contract']);
+        $date_of_product = $this->format_date($_POST['date_of_product']);
         $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
@@ -2467,7 +2463,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
+        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header);
 
 
         //Массив данных для канванса
@@ -2506,52 +2502,52 @@ class Document_model extends CI_Model
             ),
             6 => array
             (
-                'text' => "-марка, модель: {$_POST['mark']};",
+                'text' => "- марка, модель: {$_POST['mark']};",
                 'text-type' => 'list',
             ),
             7 => array
             (
-                'text' => "-идентификационный номер (VIN): {$_POST['vin']};",
+                'text' => "- идентификационный номер (VIN): {$_POST['vin']};",
                 'text-type' => 'list',
             ),
             8 => array
             (
-                'text' => "-государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text' => "- государственный регистрационный знак: {$_POST['reg_gov_number']};",
                 'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "-наименование (тип): {$_POST['car_type']};",
+                'text' => "- наименование (тип): {$_POST['car_type']};",
                 'text-type' => 'list',
             ),
             10 => array
             (
-                'text' => "-категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text' => "- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
                 'text-type' => 'list',
             ),
             11 => array
             (
-                'text' => "-год изготовления: $date_of_product;",
+                'text' => "- год изготовления: $date_of_product;",
                 'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => "-модель, N двигателя: {$_POST['engine_model']};",
+                'text' => "- модель, N двигателя: {$_POST['engine_model']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => " -шасси (рама) N: {$_POST['shassi']}; ",
+                'text' => "- шасси (рама) N: {$_POST['shassi']};",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => " -кузов (кабина, прицеп) N: {$_POST['carcass']}; ",
+                'text' => "- кузов (кабина, прицеп) N: {$_POST['carcass']};",
                 'text-type' => 'list',
             ),
             15 => array
             (
-                'text' => " -цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text' => "- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
                 'text-type' => 'list',
             ),
             16 => array
@@ -2656,7 +2652,7 @@ class Document_model extends CI_Model
              ),
             36 => array
             (
-                'text' => "-паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
+                'text' => "- паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
                 'text-type' => 'list',
             ),
             37 => array
@@ -2746,12 +2742,12 @@ class Document_model extends CI_Model
             ),
             54 => array
             (
-                'text' => "-обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
+                'text' => "- обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
                 'text-type' => 'list',
             ),
             55 => array
             (
-                'text' => "-в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
+                'text' => "- в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
                 'text-type' => 'list',
             ),
             56 => array
@@ -2982,7 +2978,7 @@ class Document_model extends CI_Model
             'buyer_number_of_certificate' => $_POST['buyer_number_of_certificate'],
             'buyer_date_of_certificate' => $_POST['buyer_date_of_certificate']
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
+        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header);
 
 
         //Массив данных для канванса
@@ -3016,57 +3012,57 @@ class Document_model extends CI_Model
             ),
             5 => array
             (
-                'text' => "-марка, модель: {$_POST['mark']};",
+                'text' => "- марка, модель: {$_POST['mark']};",
                 'text-type' => 'list',
             ),
             6 => array
             (
-                'text' => "-идентификационный номер (VIN): {$_POST['vin']};",
+                'text' => "- идентификационный номер (VIN): {$_POST['vin']};",
                 'text-type' => 'list',
             ),
             7 => array
             (
-                'text' => "-государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text' => "- государственный регистрационный знак: {$_POST['reg_gov_number']};",
                 'text-type' => 'list',
             ),
             8 => array
             (
-                'text' => "-наименование (тип): {$_POST['car_type']};",
+                'text' => "- наименование (тип): {$_POST['car_type']};",
                 'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "-категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text' => "- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
                 'text-type' => 'list',
             ),
             10 => array
             (
-                'text' => "-год изготовления: $date_of_product;",
+                'text' => "- год изготовления: $date_of_product;",
                 'text-type' => 'list',
             ),
             11 => array
             (
-                'text' => "-модель, N двигателя: {$_POST['engine_model']};",
+                'text' => "- модель, N двигателя: {$_POST['engine_model']};",
                 'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => " -шасси (рама) N: {$_POST['shassi']};",
+                'text' => "- шасси (рама) N: {$_POST['shassi']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => " -кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text' => "- кузов (кабина, прицеп) N: {$_POST['carcass']};",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => " -цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text' => "- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
                 'text-type' => 'list',
             ),
             15 => array
             (
-                'text' => "-иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters, далее по тексту именуемый - \"Автомобиль\".",
+                'text' => " -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters, далее по тексту именуемый - \"Автомобиль\".",
                 'text-type' => 'list',
             ),
             17 => array
