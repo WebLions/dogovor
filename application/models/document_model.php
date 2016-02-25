@@ -2506,52 +2506,52 @@ class Document_model extends CI_Model
             ),
             6 => array
             (
-                'text' => "- марка, модель: {$_POST['mark']};",
+                'text' => "-марка, модель: {$_POST['mark']};",
                 'text-type' => 'list',
             ),
             7 => array
             (
-                'text' => "- идентификационный номер (VIN): {$_POST['vin']};",
+                'text' => "-идентификационный номер (VIN): {$_POST['vin']};",
                 'text-type' => 'list',
             ),
             8 => array
             (
-                'text' => "- государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text' => "-государственный регистрационный знак: {$_POST['reg_gov_number']};",
                 'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "- наименование (тип): {$_POST['car_type']};",
+                'text' => "-наименование (тип): {$_POST['car_type']};",
                 'text-type' => 'list',
             ),
             10 => array
             (
-                'text' => "- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text' => "-категория (А, В, С, D, М, прицеп): {$_POST['category']};",
                 'text-type' => 'list',
             ),
             11 => array
             (
-                'text' => "- год изготовления: $date_of_product;",
+                'text' => "-год изготовления: $date_of_product;",
                 'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => "- модель, N двигателя: {$_POST['engine_model']};",
+                'text' => "-модель, N двигателя: {$_POST['engine_model']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => "- шасси (рама) N: {$_POST['shassi']};",
+                'text' => "-шасси (рама) N: {$_POST['shassi']};",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => "- кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text' => "-кузов (кабина, прицеп) N: {$_POST['carcass']};",
                 'text-type' => 'list',
             ),
             15 => array
             (
-                'text' => "- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text' => "-цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
                 'text-type' => 'list',
             ),
             16 => array
@@ -2656,7 +2656,7 @@ class Document_model extends CI_Model
              ),
             36 => array
             (
-                'text' => "- паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
+                'text' => "-паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
                 'text-type' => 'list',
             ),
             37 => array
@@ -2746,12 +2746,12 @@ class Document_model extends CI_Model
             ),
             54 => array
             (
-                'text' => "- обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
+                'text' => "-обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
                 'text-type' => 'list',
             ),
             55 => array
             (
-                'text' => "- в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
+                'text' => "-в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
                 'text-type' => 'list',
             ),
             56 => array
@@ -3016,52 +3016,52 @@ class Document_model extends CI_Model
             ),
             5 => array
             (
-                'text' => "- марка, модель: {$_POST['mark']};",
+                'text' => "-марка, модель: {$_POST['mark']};",
                 'text-type' => 'list',
             ),
             6 => array
             (
-                'text' => "- идентификационный номер (VIN): {$_POST['vin']};",
+                'text' => "-идентификационный номер (VIN): {$_POST['vin']};",
                 'text-type' => 'list',
             ),
             7 => array
             (
-                'text' => "- государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text' => "-государственный регистрационный знак: {$_POST['reg_gov_number']};",
                 'text-type' => 'list',
             ),
             8 => array
             (
-                'text' => "- наименование (тип): {$_POST['car_type']};",
+                'text' => "-наименование (тип): {$_POST['car_type']};",
                 'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text' => "-категория (А, В, С, D, М, прицеп): {$_POST['category']};",
                 'text-type' => 'list',
             ),
             10 => array
             (
-                'text' => "- год изготовления: $date_of_product;",
+                'text' => "-год изготовления: $date_of_product;",
                 'text-type' => 'list',
             ),
             11 => array
             (
-                'text' => "- модель, N двигателя: {$_POST['engine_model']};",
+                'text' => "-модель, N двигателя: {$_POST['engine_model']};",
                 'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => "- шасси (рама) N: {$_POST['shassi']};",
+                'text' => "-шасси (рама) N: {$_POST['shassi']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => "- кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text' => "-кузов (кабина, прицеп) N: {$_POST['carcass']};",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => "- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text' => " -цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
                 'text-type' => 'list',
             ),
             15 => array

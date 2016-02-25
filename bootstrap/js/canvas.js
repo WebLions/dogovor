@@ -14,29 +14,29 @@ function canvas_render(){
 
     function title(){
 
-        context.font = "13pt Arial"
+        context.font = "13pt Arial";
         context.fillStyle = "#000";
         marginLeft = maxWidth / 2 - 60;
 
     }
     function paragraph() {
 
-        context.font = "11pt Arial"
+        context.font = "11pt Arial";
         context.fillStyle = "#000";
         marginLeft = 30;
     }
     function list(){
 
-        context.font = "11pt Arial"
+        context.font = "11pt Arial";
         context.fillStyle = "#000";
-        marginLeft = 50
+        marginLeft = 80;
 
     }
     function columns(){
 
-        context.font = "11pt Arial"
+        context.font = "11pt Arial";
         context.fillStyle = "#000";
-        marginLeft = 50
+        marginLeft = 50;
 
     }
 
@@ -68,6 +68,7 @@ function canvas_render(){
                 line = checkLine;
             }
         }
+        marginTop += lineHeight;
         return marginTop;
     }
 
@@ -78,14 +79,14 @@ function canvas_render(){
 
             console.log(val['text']);
 
-            /*
+
             text = val['text'];
             text_type = val['text-type'];
             get_text_type(text_type);
 
 
             marginTop = printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight);
-            */
+
 
         });
     },"json"

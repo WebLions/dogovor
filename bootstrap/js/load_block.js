@@ -55,47 +55,47 @@ $( document ).ready(function() {
     });
     $("#doc_create").delegate("#vendor_birthday", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#vendor_passport_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#buyer_birthday", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#buyer_passport_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#date_of_product", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#maintenance_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("#marriage_svid_date", "focusin", function(){
         $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: ru
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     $("#doc_create").delegate("input[name=for_agent_proxy_pass_date]", "focusin", function(){
@@ -113,7 +113,7 @@ $( document ).ready(function() {
        var state_name = $(this).attr('name');
 
 
-       if(state_name == 'type_of_recipient') buyer_state = $(this).val();
+       if(state_name == 'type_of_taker') buyer_state = $(this).val();
        if(state_name == 'type_of_giver') vendor_state = $(this).val();
 
        if(state_name == 'buyer_is_owner_car')
