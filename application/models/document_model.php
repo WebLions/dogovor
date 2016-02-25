@@ -2541,17 +2541,17 @@ class Document_model extends CI_Model
             ),
             13 => array
             (
-                'text' => "-шасси (рама) N: {$_POST['shassi']};",
+                'text' => " -шасси (рама) N: {$_POST['shassi']}; ",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => "-кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text' => " -кузов (кабина, прицеп) N: {$_POST['carcass']}; ",
                 'text-type' => 'list',
             ),
             15 => array
             (
-                'text' => "-цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text' => " -цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
                 'text-type' => 'list',
             ),
             16 => array
@@ -3051,12 +3051,12 @@ class Document_model extends CI_Model
             ),
             12 => array
             (
-                'text' => "-шасси (рама) N: {$_POST['shassi']};",
+                'text' => " -шасси (рама) N: {$_POST['shassi']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => "-кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text' => " -кузов (кабина, прицеп) N: {$_POST['carcass']};",
                 'text-type' => 'list',
             ),
             14 => array
@@ -3066,7 +3066,7 @@ class Document_model extends CI_Model
             ),
             15 => array
             (
-                'text' => " -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters, далее по тексту именуемый - \"Автомобиль\".",
+                'text' => "-иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters, далее по тексту именуемый - \"Автомобиль\".",
                 'text-type' => 'list',
             ),
             17 => array
