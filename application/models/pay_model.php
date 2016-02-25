@@ -14,7 +14,7 @@ class Pay_model extends CI_Model
         $this->db->where("documents.id",$doc_id);
         $this->db->join("documents","documents.user_id=users.id");
         $query = $this->db->get("users",1,0);
-        echo $this->db->last_query();
+        //echo $this->db->last_query();
         $result = $query->row();
         $user_email = $result->email;
         $user_id = $result->id;

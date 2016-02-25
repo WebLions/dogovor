@@ -654,12 +654,12 @@ END;
                         </div>
 
                         <div class = "content-input">
-                            <input type="checkbox" name="additional_devices_array[]" value="Диски легкосплавные">
+                            <input type="checkbox" data-name="disk" name="additional_devices_array[]" value="Диски легкосплавные">
                             <span class = "content-input-align">Диски легкосплавные</span>
                         </div>
 
                         <div class = "content-input">
-                            <input type="checkbox" name="additional_devices_array[]" value="Диски штампованные">
+                            <input type="checkbox" data-name="disk" name="additional_devices_array[]" value="Диски штампованные">
                             <span class = "content-input-align">Диски штампованные</span>
                         </div>
 
