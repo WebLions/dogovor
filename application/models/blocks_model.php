@@ -377,7 +377,7 @@ END;
                     <input id="date_of_product" class="form-control datetimepicker" type="text" name="date_of_product"  placeholder="Год изготовления:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="engime_model"  placeholder="Модель, номер двигателя:">
+                    <input class = "form-control" type="text" name="engine_model"  placeholder="Модель, номер двигателя:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="shassi"  placeholder="Номер рамы,шасси:">
@@ -389,7 +389,7 @@ END;
                     <input class = "form-control" type="text" name="color_carcass"  placeholder="Цвет кузова,кабины,прицепа:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="other_parametrs"  placeholder="Иные индивидуальные признаки:">
+                    <input class="form-control" type="text" name="other_parameters"  placeholder="Иные индивидуальные признаки:">
                 </div>
             </div>
         </div>

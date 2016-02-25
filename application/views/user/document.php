@@ -45,7 +45,7 @@
                   <div id="sticky-anchor"></div>
                   <div class="col-lg-6" id="sticky">
                       <div class="content-block" style="height: 1000px;">
-                          <canvas id="canvas" width="550" height="1000">
+                          <canvas id="canvas" width="800" height="1000">
 
 
 
