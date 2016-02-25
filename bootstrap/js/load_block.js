@@ -198,7 +198,7 @@ $( document ).ready(function() {
     $('.document').on('change','#block_accessories_other', function() {
 
         if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
-                                                                    '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
+                                                                    '<input class="form-control" type="text"  name="accessories"  placeholder="Дополнительные принадлежности:">'+
                                                                     '</div>');
         accessories=false;
     });

@@ -6,7 +6,7 @@ function canvas_render(){
     var lineHeight = 15;
     var marginLeft = 15;
     var defaultTop = 55;
-    var marginTop;
+    var marginTop = 40;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
 
@@ -14,7 +14,7 @@ function canvas_render(){
 
     function title(){
 
-        context.font = "11pt Arial"
+        context.font = "12pt Arial"
         context.fillStyle = "#000";
         marginLeft = maxWidth / 2 - 60;
 
@@ -23,7 +23,7 @@ function canvas_render(){
 
         context.font = "11pt Arial"
         context.fillStyle = "#000";
-        marginLeft = 15;
+        marginLeft = 30;
     }
     function list(){
 
@@ -36,6 +36,7 @@ function canvas_render(){
 
         context.font = "11pt Arial"
         context.fillStyle = "#000";
+        marginLeft = 50
 
     }
 
@@ -60,11 +61,8 @@ function canvas_render(){
             if(checkWidth > maxWidth){
                 context.fillText(line,marginLeft,marginTop)
                 line = words[i] + " ";
-                if(start == true) {
-                    marginTop += defaultTop;
-                    start = false;
-                }
-                else marginTop += lineHeight;
+                marginTop += lineHeight;
+
             }
             else{
                 line = checkLine;
@@ -78,11 +76,15 @@ function canvas_render(){
 
         $.each( data , function(key , val){
 
+            if(start == true) {
+                marginTop += defaultTop;
+                start = false;
+            }
             text_type = val['text-type'];
             get_text_type(text_type);
 
             text = val['text'];
-            printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight);
+            marginTop = printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight);
 
         });
     },"json"
