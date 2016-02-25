@@ -20,6 +20,11 @@ class Blocks extends CI_Controller
             $this->load->view("blocks/{$name}");
     }
 
+    public function bs_consent_vendor_block()
+    {
+        $this->blocks_model->bs_consent();
+    }
+
     public function bs_vendor_block()
     {
         $this->blocks_model->bs_block_deal();
@@ -229,7 +234,10 @@ class Blocks extends CI_Controller
     }
 
     //Дарение
-
+    public function gift_consent_vendor_block()
+    {
+        $this->blocks_model->gift_consent();
+    }
     public function gift_vendor_block()
     {
         $this->blocks_model->bs_block_deal();
