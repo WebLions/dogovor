@@ -13,6 +13,16 @@ var vendor_state,
 
 $( document ).ready(function() {
 
+    $('.document').on('change', 'input[name="additional_devices_array[]"]', function(e){
+        if($(this).prop('checked'))
+            return false;
+        var name = $(this).attr('data-name');
+        $('.document').find('input[data-name='+name+']').each(function(){
+           $(this).prop('checked',false);
+        });
+        $(this).prop('checked',true);
+    });
+
     $('.document').on('change','#pact',function(e){
         documunt_type = $(this).attr('data-name');
         if($(this).prop('checked')){
@@ -86,6 +96,11 @@ $( document ).ready(function() {
     $("#doc_create").delegate("#marriage_svid_date", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: ru
+        });
+    });
+    $("#doc_create").delegate("input[name=for_agent_proxy_pass_date]", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
     //ДАТАПИКЕР
