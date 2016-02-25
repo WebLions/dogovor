@@ -203,6 +203,8 @@ $( document ).ready(function() {
         accessories=false;
     });
 
+    //render
+
 
 
 
