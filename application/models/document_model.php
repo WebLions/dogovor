@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-error_reporting (0);
+error_reporting (E_ALL);
 
 class Document_model extends CI_Model
 {
@@ -12,21 +12,17 @@ class Document_model extends CI_Model
     }
     //------------------------------------------------------------------------------------------------------------------
     // Запрос и присвание переменных с базы
-    public function select_from_database()//Возможно нужно будет разбить для каждого документа свой запрос. Но тогда будет дублироваться запрос одинаковых полей.
+    public function select_from_database()
     {
         $this->db->select();
-        //$id_user = $_SESSION['id_user'] = 1;
-        //$id_document = $_SESSION['id_document'] = 1;
-        //$where = "id_user = '$id_user' AND id_document = '$id_document'";
-        //$this->db->where($where);
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
         //Тестовый вывод содержимого результата
-       /* echo '<pre>';
+        echo '<pre>';
         print_r($result);
         //echo $result->place_o*f_contract;
-        echo '</pre>';*/
+        echo '</pre>';
     }
     //------------------------------------------------------------------------------------------------------------------
     private  function num2str($num)
@@ -172,13 +168,19 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function format_adress($city, $street, $house, $flat)
     {
-        $adress = $city .', '. $street .', '. $house .', '. $flat;
+        $adress =   "г.$city, ул.$street, д.$house, кв.$flat";
         return $adress;
     }
     //------------------------------------------------------------------------------------------------------------------
     private function format_fio($surname, $name, $patronymic)
     {
         $fio = $surname .' '. $name . ' '. $patronymic;
+        return $fio;
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    public function format_shortfio($surname, $name, $patronymic)
+    {
+        $fio = $surname .' '. $name{0} . '. '. $patronymic{0}.'.';
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -456,6 +458,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function get_requisites($data)
     {
+//        $output = ""; //Строка вывода
         switch ($data['type_of_side'])
         {
             case 'physical':
@@ -467,8 +470,8 @@ class Document_model extends CI_Model
                     $output .= "Дата выдачи: {$data['agent_proxy_date']} <w:br/>";
                     $output .= "Нотариус: {$data['agent_proxy_notary']} <w:br/>";
                 }
-                $output .= "Дата рождения : {$data['date']} <w:br/>";
-                $output .= "Паспорт: Серия {$data['document']['serial']} №{$data['document']['number']} выдан {$data['document']['bywho']} {$data['document']['date']}  <w:br/>";
+                $output .= "Дата рождения: {$data['date']} <w:br/>";
+                $output .= "Паспорт: серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  <w:br/>";
                 $output .= "Место жительства: {$data['adress']} <w:br/>";
                 $output .= "Телефон: {$data['phone']} ";
                 break;
@@ -491,7 +494,7 @@ class Document_model extends CI_Model
                 break;
             case 'individual':
                 $output = "{$data['fio']} <w:br/>";
-                if ($data['owner_car'] == 'own_car')
+                if ($data['owner_car'] == 'not_own_car')
                 {
                     $output = "{$data['agent_fio']} <w:br/>";
                     $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
@@ -500,7 +503,7 @@ class Document_model extends CI_Model
                 }
                 $output .= "Свидетельство №{$data['number_certificate']} от {$data['date_of_certificate']} <w:br/>";
                 $output .="Дата рождения : {$data['date']} <w:br/>";
-                $output .="Паспорт: Серия {$data['document']['serial']} №{$data['document']['number']} выдан {$data['document']['bywho']} {$data['document']['date']}  <w:br/>";
+                $output .="Паспорт: Серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  <w:br/>";
                 $output .="Место жительства: {$data['adress']} <w:br/>";
                 $output .= "Телефон: {$data['phone']} ";
                 $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
@@ -1031,15 +1034,15 @@ class Document_model extends CI_Model
         $result = $query->row();
         // Подготовка данных для работы с документов
         //Фио
-        $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
-        $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
-        $vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
-        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
-        $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
-        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
-        $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
-        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        $vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        $buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $spouse_fio = $this->format_shortfio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        $vendor_law_fio = $this->format_shortfio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        $buyer_law_fio = $this->format_shortfio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $vendor_ind_fio = $this->format_shortfio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        $buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
+        $buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -1076,33 +1079,33 @@ class Document_model extends CI_Model
         $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
         $price_str = $this->num2str($result->price_car);
         $data_for_header = array(
-            'vendor_fio' => $vendor_fio,
-            'buyer_fio' => $buyer_fio,
+            'vendor_fio' =>$this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic),
+            'buyer_fio' =>$this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic),
             'vendor_law_company_name' => $result->vendor_law_company_name,
             'vendor_law_actor_position' => $result->vendor_law_actor_position,
-            'vendor_law_fio' => $vendor_law_fio,
+            'vendor_law_fio' =>$this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic),
             'vendor_law_document_osn' => $result->vendor_law_document_osn,
             'vendor_law_proxy_number' => $result->vendor_law_proxy_number,
             'vendor_law_proxy_date' => $vendor_law_proxy_date,
             'buyer_law_company_name' => $result->buyer_law_company_name,
             'buyer_law_actor_position' => $result->buyer_law_actor_position,
-            'buyer_law_fio' => $buyer_law_fio,
+            'buyer_law_fio' =>$this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic),
             'buyer_law_document_osn' => $result->buyer_law_document_osn,
             'buyer_law_proxy_number' => $result->buyer_law_proxy_number,
             'buyer_law_proxy_date' => $buyer_law_proxy_date,
-            'vendor_ind_fio' => $vendor_ind_fio,
+            'vendor_ind_fio' =>$this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic),
             'vendor_number_of_certificate' => $result->vendor_number_of_certificate,
             'vendor_date_of_certificate' => $vendor_date_of_certificate,
-            'buyer_ind_fio' => $buyer_ind_fio,
+            'buyer_ind_fio' =>$this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic),
             'buyer_number_of_certificate' => $result->buyer_number_of_certificate,
             'buyer_date_of_certificate' => $buyer_date_of_certificate,
             'vendor_is_owner_car' => $result->vendor_is_owner_car,
             'buyer_is_owner_car' => $result->buyer_is_owner_car,
-            'vendor_agent_fio' => $vendor_agent_fio,
+            'vendor_agent_fio' =>$this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic),
             'for_agent_vendor_proxy_number' => $result->for_agent_vendor_proxy_number,
             'for_agent_vendor_proxy_date' => $for_agent_vendor_proxy_date,
             'for_agent_vendor_proxy_notary' => $result->for_agent_vendor_proxy_notary,
-            'buyer_agent_fio' => $buyer_agent_fio,
+            'buyer_agent_fio' =>$this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic),
             'for_agent_buyer_proxy_number' => $result->for_agent_buyer_proxy_number,
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
@@ -1113,62 +1116,63 @@ class Document_model extends CI_Model
         switch ($result->type_of_giver)
         {
             case 'physical':
-                $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
-                    $data_for_req_giver['fio'] = $vendor_fio,
-                    $data_for_req_giver['date'] = $vendor_birthday,
-                    $data_for_req_giver['document']['serial'] = $result->vendor_passport_serial,
-                    $data_for_req_giver['document']['number'] = $result->vendor_passport_number,
-                    $data_for_req_giver['document']['bywho'] = $result->vendor_passport_bywho,
-                    $data_for_req_giver['document']['date'] = $vendor_passport_date,
-                    $data_for_req_giver['adress'] = $vendor_adress,
-                    $data_for_req_giver['phone'] = $result->vendor_phone,
-                    $data_for_req_giver['owner_car'] = $result->vendor_is_owner_car,
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $result->for_agent_vendor_proxy_number,
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $result->for_agent_vendor_proxy_notary
+                $data_for_req_giver = array
+                (
+                    'type_of_side' => $result->type_of_giver,
+                    'fio' => $vendor_fio,
+                    'date' => $vendor_birthday,
+                    'document_serial' => $result->vendor_passport_serial,
+                    'document_number' => $result->vendor_passport_number,
+                    'document_bywho' => $result->vendor_passport_bywho,
+                    'document_date' => $vendor_passport_date,
+                    'adress' => $vendor_adress,
+                    'phone' => $result->vendor_phone,
+                    'owner_car' => $result->vendor_is_owner_car,
+                    'agent_fio' => $vendor_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_vendor_proxy_number,
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_vendor_proxy_notary
                 );
                 break;
             case 'law':
                 $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
-                    $data_for_req_giver['name']= $result->vendor_law_company_name,
-                    $data_for_req_giver['inn']= $result->vendor_law_inn,
-                    $data_for_req_giver['ogrn']= $result->vendor_law_ogrn,
-                    $data_for_req_giver['adress']= $result->vendor_law_adress,
-                    $data_for_req_giver['phone']= $result->vendor_law_phone,
-                    $data_for_req_giver['acc']= $result->vendor_law_acc,
-                    $data_for_req_giver['bank_name']= $result->vendor_law_bank_name,
-                    $data_for_req_giver['korr_acc']= $result->vendor_law_korr_acc,
-                    $data_for_req_giver['bik']= $result->vendor_law_bik,
-                    $data_for_req_giver['owner_car'] = $result->vendor_is_owner_car,
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $result->for_agent_vendor_proxy_number,
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $result->for_agent_vendor_proxy_notary
+                    'type_of_side' => $result->type_of_giver,
+                    'name'=> $result->vendor_law_company_name,
+                    'inn'=> $result->vendor_law_inn,
+                    'ogrn'=> $result->vendor_law_ogrn,
+                    'adress'=> $result->vendor_law_adress,
+                    'phone'=> $result->vendor_law_phone,
+                    'acc'=> $result->vendor_law_acc,
+                    'bank_name'=> $result->vendor_law_bank_name,
+                    'korr_acc'=> $result->vendor_law_korr_acc,
+                    'bik'=> $result->vendor_law_bik,
+                    'owner_car'=> $result->vendor_is_owner_car,
+                    'agent_fio'=> $vendor_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_vendor_proxy_number,
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_vendor_proxy_notary
                 );
                 break;
             case 'individual':
                 $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
-                    $data_for_req_giver['fio']= $vendor_ind_fio,
-                    $data_for_req_giver['date']= $vendor_ind_birthday,
-                    $data_for_req_giver['document']['serial']= $result->vendor_ind_passport_serial,
-                    $data_for_req_giver['document']['number']= $result->vendor_ind_passport_number,
-                    $data_for_req_giver['document']['bywho']= $result->vendor_ind_passport_bywho,
-                    $data_for_req_giver['document']['date']= $vendor_ind_passport_date,
-                    $data_for_req_giver['adress']= $vendor_ind_adress,
-                    $data_for_req_giver['phone']= $result->vendor_ind_phone,
-                    $data_for_req_giver['acc']= $result->vendor_ind_bank_acc,
-                    $data_for_req_giver['bank_name']= $result->vendor_ind_bank_name,
-                    $data_for_req_giver['korr_acc']= $result->vendor_ind_korr_acc,
-                    $data_for_req_giver['bik']= $result->vendor_ind_bik,
-                    $data_for_req_giver['owner_car'] = $result->vendor_is_owner_car,
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $result->for_agent_vendor_proxy_number,
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $result->for_agent_vendor_proxy_notary
+                    'type_of_side' => $result->type_of_giver,
+                    'fio'=> $vendor_ind_fio,
+                    'date'=> $vendor_ind_birthday,
+                    'document_serial' => $result->vendor_ind_passport_serial,
+                    'document_number' => $result->vendor_ind_passport_number,
+                    'document_bywho' => $result->vendor_ind_passport_bywho,
+                    'document_date' => $vendor_ind_passport_date,
+                    'adress'=> $vendor_ind_adress,
+                    'phone'=> $result->vendor_ind_phone,
+                    'acc'=> $result->vendor_ind_bank_acc,
+                    'bank_name'=> $result->vendor_ind_bank_name,
+                    'korr_acc'=> $result->vendor_ind_korr_acc,
+                    'bik'=> $result->vendor_ind_bik,
+                    'owner_car' => $result->vendor_is_owner_car,
+                    'agent_fio' => $vendor_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_vendor_proxy_number,
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_vendor_proxy_notary
                 );
                 break;
         }
@@ -1176,65 +1180,63 @@ class Document_model extends CI_Model
         switch ($result->type_of_taker)
         {
             case 'physical':
-                $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
-                    $data_for_req_taker['fio'] = $buyer_fio,
-                    $data_for_req_taker['date'] = $buyer_birthday,
-                    $data_for_req_taker['document']['serial'] = $result->buyer_passport_serial,
-                    $data_for_req_taker['document']['number'] = $result->buyer_passport_number,
-                    $data_for_req_taker['document']['bywho'] = $result->buyer_passport_bywho,
-                    $data_for_req_taker['document']['date'] = $buyer_passport_date,
-                    $data_for_req_taker['adress'] = $buyer_adress,
-                    $data_for_req_taker['phone'] = $result->buyer_phone,
-                    //
-                    $data_for_req_taker['owner_car'] = $result->buyer_is_owner_car,
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $result->for_agent_buyer_proxy_number,
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $result->for_agent_buyer_proxy_notary
+                $data_for_req_taker = array
+                (
+                    'type_of_side' => $result->type_of_taker,
+                    'fio' => $buyer_fio,
+                    'date' => $buyer_birthday,
+                    'document_serial' => $result->buyer_passport_serial,
+                    'document_number' => $result->buyer_passport_number,
+                    'document_bywho' => $result->buyer_passport_bywho,
+                    'document_date' => $buyer_passport_date,
+                    'adress' => $buyer_adress,
+                    'phone' => $result->buyer_phone,
+                    'owner_car' => $result->buyer_is_owner_car,
+                    'agent_fio' => $buyer_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary
                 );
                 break;
             case 'law':
                 $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
-                    $data_for_req_taker['name']= $result->buyer_law_company_name,
-                    $data_for_req_taker['inn']= $result->buyer_law_inn,
-                    $data_for_req_taker['ogrn']= $result->buyer_law_ogrn,
-                    $data_for_req_taker['adress']= $result->buyer_law_adress,
-                    $data_for_req_taker['phone']= $result->buyer_law_phone,
-                    $data_for_req_taker['acc']= $result->buyer_law_acc,
-                    $data_for_req_taker['bank_name']= $result->buyer_law_bank_name,
-                    $data_for_req_taker['korr_acc']= $result->buyer_law_korr_acc,
-                    $data_for_req_taker['bik']= $result->buyer_law_bik,
-                    //
-                    $data_for_req_taker['owner_car'] = $result->buyer_is_owner_car,
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $result->for_agent_buyer_proxy_number,
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $result->for_agent_buyer_proxy_notary
+                    'type_of_side' => $result->type_of_taker,
+                    'name'=> $result->buyer_law_company_name,
+                    'inn'=> $result->buyer_law_inn,
+                    'ogrn'=> $result->buyer_law_ogrn,
+                    'adress'=> $result->buyer_law_adress,
+                    'phone'=> $result->buyer_law_phone,
+                    'acc'=> $result->buyer_law_acc,
+                    'bank_name'=> $result->buyer_law_bank_name,
+                    'korr_acc'=> $result->buyer_law_korr_acc,
+                    'bik'=> $result->buyer_law_bik,
+                    'owner_car'=> $result->buyer_is_owner_car,
+                    'agent_fio'=> $buyer_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary
                 );
                 break;
             case 'individual':
                 $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
-                    $data_for_req_taker['fio']= $buyer_ind_fio,
-                    $data_for_req_taker['date']= $buyer_ind_birthday,
-                    $data_for_req_taker['document']['serial']= $result->buyer_ind_passport_serial,
-                    $data_for_req_taker['document']['number']= $result->buyer_ind_passport_number,
-                    $data_for_req_taker['document']['bywho']= $result->buyer_ind_passport_bywho,
-                    $data_for_req_taker['document']['date']= $buyer_ind_passport_date,
-                    $data_for_req_taker['adress']= $buyer_ind_adress,
-                    $data_for_req_taker['phone']= $result->buyer_ind_phone,
-                    $data_for_req_taker['acc']= $result->buyer_ind_bank_acc,
-                    $data_for_req_taker['bank_name']= $result->buyer_ind_bank_name,
-                    $data_for_req_taker['korr_acc']= $result->buyer_ind_korr_acc,
-                    $data_for_req_taker['bik']= $result->buyer_ind_bik,
-                    //
-                    $data_for_req_taker['owner_car'] = $result->buyer_is_owner_car,
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $result->for_agent_buyer_proxy_number,
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $result->for_agent_buyer_proxy_notary
+                    'type_of_side' => $result->type_of_taker,
+                    'fio'=> $buyer_ind_fio,
+                    'date'=> $buyer_ind_birthday,
+                    'document_serial' => $result->buyer_ind_passport_serial,
+                    'document_number' => $result->buyer_ind_passport_number,
+                    'document_bywho' => $result->buyer_ind_passport_bywho,
+                    'document_date' => $buyer_ind_passport_date,
+                    'adress'=> $buyer_ind_adress,
+                    'phone'=> $result->buyer_ind_phone,
+                    'acc'=> $result->buyer_ind_bank_acc,
+                    'bank_name'=> $result->buyer_ind_bank_name,
+                    'korr_acc'=> $result->buyer_ind_korr_acc,
+                    'bik'=> $result->buyer_ind_bik,
+                    'owner_car' => $result->buyer_is_owner_car,
+                    'agent_fio' => $buyer_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary
                 );
                 break;
         }
@@ -1303,7 +1305,7 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
         $document->save($name_of_file,true); // Сохранение документа
         $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.docx';
-        return $name_for_server;
+        return $name_for_server ;
     }
     //------------------------------------------------------------------------------------------------------------------
     //акт приема-передачи автомобиля
