@@ -79,13 +79,13 @@ END;
                 </div>
                 <div class = "content-radio">
 
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="law">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_law_state" type="radio" name="type_of_giver" value="law">
                     <span class = "content-input-align">Юридическое лицо</span>
 
                 </div>
                 <div class = "content-radio">
 
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state"" type="radio" name="type_of_giver" value="individual">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_individual_state"" type="radio" name="type_of_giver" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
 
                 </div>
@@ -1258,28 +1258,28 @@ END;
                     <input id="vendor_passport_date" class = "form-control" type="text" name="vendor_props_ogrn"  placeholder="Дата выдачи паспорта:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_inn"  placeholder="ИНН:">
+                    <input class="form-control" type="text" name="vendor_law_inn"  placeholder="ИНН:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_ogrn "  placeholder="ОГРН:">
+                    <input class="form-control" type="text" name="vendor_law_ogrn "  placeholder="ОГРН:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_law_adress"  placeholder="Юридический адрес: ">
+                    <input class="form-control" type="text" name="vendor_law_adress"  placeholder="Юридический адрес: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_phone"  placeholder="Телефон:">
+                    <input class = "form-control" type="text" name="vendor_law_phone"  placeholder="Телефон:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_bank_acc"  placeholder="Расчетный счет">
+                    <input class = "form-control" type="text" name="vendor_law_acc"  placeholder="Расчетный счет">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_bank_name"  placeholder="Наименование банка:">
+                    <input class = "form-control" type="text" name="vendor_law_bank_name"  placeholder="Наименование банка:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_korr_acc "  placeholder="Корр.счет:">
+                    <input class = "form-control" type="text" name="vendor_law_korr_acc "  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_bik"  placeholder="БИК:">
+                    <input class="form-control" type="text" name="vendor_law_bik "  placeholder="БИК:">
                 </div>
             </div>
            </div>
@@ -1300,55 +1300,58 @@ END;
 
             <div class = "content-input">
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_actor_surname"  placeholder="Фамилия:">
+                    <input class = "form-control" type="text" name="vendor_ind_surname"  placeholder="Фамилия:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_individual_actor_name "  placeholder="Имя:">
+                    <input class="form-control" type="text" name="vendor_ind_name "  placeholder="Имя:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_actor_patronymic"  placeholder="Отчество:">
+                    <input class = "form-control" type="text" name="vendor_ind_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_company_name"  placeholder="Наименование: ">
+                    <input class = "form-control" type="text" name="vendor_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_individual_actor_position"  placeholder="В лице: ">
+                    <input class="form-control datatimepicker" type="text" name="vendor_ ind_date_of_certificate"  placeholder="Дата выдачи: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_document_osn"  placeholder="Действующего на основании:">
+                    <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_individual_proxy_date"  placeholder="Дата выдачи доверенности:">
+                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_ind_birthday "  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_individual_proxy_number"  placeholder="Номер доверенности: ">
+                    <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_inn"  placeholder="Номер паспорта:">
+                    <input class="form-control datatimepicker" type="text" name="vendor_ind_passport_date "  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_passport_date" class = "form-control" type="text" name="vendor_props_ogrn"  placeholder="Дата выдачи паспорта:">
+                    <input id="vendor_passport_date" class = "form-control" type="text" name="vendor_ind_passport_giver"  placeholder="Кем выдан:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_inn"  placeholder="ИНН:">
+                    <input class="form-control" type="text" name="vendor_ind_city "  placeholder="Адрес регистрации:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_ogrn "  placeholder="ОГРН:">
+                    <input class="form-control" type="text" name="vendor_ind_street  "  placeholder="Улица:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_individual_adress"  placeholder="Юридический адрес: ">
+                    <input class="form-control" type="text" name="vendor_ind_house"  placeholder="№ дома: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_phone"  placeholder="Телефон:">
+                    <input class = "form-control" type="text" name="vendor_ind_flat"  placeholder="Номер квартиры:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_bank_acc"  placeholder="Расчетный счет">
+                    <input class = "form-control" type="text" name="vendor_ind_phone"  placeholder="Телефон">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_bank_name"  placeholder="Наименование банка:">
+                    <input class = "form-control" type="text" name="vendor_ind_bank_acc"  placeholder="Расчетный счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_props_korr_acc "  placeholder="Корр.счет:">
+                    <input class = "form-control" type="text" name="vendor_ind_bank_name"  placeholder="В банке:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_korr_acc "  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_props_bik"  placeholder="БИК:">
