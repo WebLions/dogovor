@@ -1803,12 +1803,19 @@ class Document_model extends CI_Model
         $document->setValue('giver_adress',  $giver['adress']);
         $document->setValue('giver_phone', $giver['phone']);
         //
-        if ($result->buyer_is_owner_car)
+        if ($result->buyer_is_owner_car == 'not_own_car')
         {
             $document->setValue('buyer_agent_fio', $buyer_agent_fio);
             $document->setValue('buyer_agent_pass', $buyer_agent_pass);
             $document->setValue('buyer_agent_adress', $buyer_agent_adress);
             $document->setValue('buyer_agent_phone', $result->for_agent_proxy_phone);
+        }
+        else
+        {
+            $document->setValue('buyer_agent_fio', 'отсутсвует');
+            $document->setValue('buyer_agent_pass', 'отсутсвует');
+            $document->setValue('buyer_agent_adress', 'отсутсвует');
+            $document->setValue('buyer_agent_phone', 'отсутсвует');
         }
         $document->setValue('mark', $result->mark);
         $document->setValue('car_type', $result->car_type);
@@ -2057,6 +2064,11 @@ class Document_model extends CI_Model
             'for_agent_proxy_house' => $_POST['for_agent_proxy_house'],
             'for_agent_proxy_flat' => $_POST['for_agent_proxy_flat'],
             'for_agent_proxy_phone' => $_POST['for_agent_proxy_phone'],
+            //Гибдд
+            'gibdd_power_ingine' => $_POST['gibdd_power_ingine'],
+            'gibdd_eco_class' => $_POST['gibdd_eco_class'],
+            'gibdd_max_mass' => $_POST['gibdd_max_mass'],
+            'gibdd_min_mass' => $_POST['gibdd_min_mass'],
             //New info end
             'vendor_surname' => $_POST['vendor_surname'],
             'vendor_name' => $_POST['vendor_name'],
