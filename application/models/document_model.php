@@ -1047,7 +1047,6 @@ class Document_model extends CI_Model
         //Короткое фио
         $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $short_spouse_fio = $this->format_shortfio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
         $short_vendor_law_fio = $this->format_shortfio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
         $short_buyer_law_fio = $this->format_shortfio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
         $short_vendor_ind_fio = $this->format_shortfio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
@@ -1302,6 +1301,7 @@ class Document_model extends CI_Model
         $document->setValue('features', $result->features);
         $document->setValue('price', $result->price_car);
         $document->setValue('price_str', $price_str);
+        $document->setValue('currency', $result->currency);
         $document->setValue('payment_date', $result->payment_date);
         $document->setValue('documents', $documents);
         $document->setValue('accessories', $accessories);
@@ -1612,8 +1612,9 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "id_user = '$id_user' AND id = '$id '";
+        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
+        $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
@@ -1702,7 +1703,7 @@ class Document_model extends CI_Model
         $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $namedata);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/receipt_of_money.docx');
         //Заполнение
-        $document->setValue('city_contract', $result->city_contract);
+        $document->setValue('place_of_contract', $result->place_of_contract);
         $document->setValue('date_of_contract', $date_of_contract);
         $document->setValue('vendor_data', $vendor_data);
         $document->setValue('buyer_data', $buyer_data);
@@ -1724,8 +1725,9 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "id_user = '$id_user' AND id = '$id '";
+        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
+        $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
@@ -1833,19 +1835,33 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "id_user = '$id_user' AND id = '$id '";
+        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
+        $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
         //Подготовка
-        //Фио
+       //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
-        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
-        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        $vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
+        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        //Короткое фио
+        $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $short_spouse_fio = $this->format_shortfio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        $short_vendor_law_fio = $this->format_shortfio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        $short_buyer_law_fio = $this->format_shortfio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $short_vendor_ind_fio = $this->format_shortfio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        $short_buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $short_vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
+        $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $spouse_adress = $this->format_adress($result->spouse_city,$result->spouse_street,$result->spouse_house,$result->spouse_flat);
@@ -1865,14 +1881,25 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
+        $vendor_namedata = array
+        (
+            'phys_name' => $short_vendor_fio
+        );
+        $spouse_namedata = array
+        (
+            'phys_name' => $short_spouse_fio
+        );
         $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
+        $spouse_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $spouse_namedata);
 
-        $price_str = $this->num2str($result->price);
+        $price_str = $this->num2str($result->price_car);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
 
         $document->setValue('date_of_contract', $date_of_contract);
         $document->setValue('buyer_name', $buyer_name);
         $document->setValue('vendor_fio', $vendor_fio);
+        $document->setValue('vendor_name', $vendor_name);
         $document->setValue('vendor_birthday', $vendor_birthday);
         $document->setValue('vendor_passport_serial', $result->vendor_passport_serial);
         $document->setValue('vendor_passport_number', $result->vendor_passport_number);
@@ -1890,6 +1917,7 @@ class Document_model extends CI_Model
         $document->setValue('bywho_serial_car', $result->bywho_serial_car);
         $document->setValue('date_of_serial_car', $date_of_serial_car);
         $document->setValue('spouse_fio', $spouse_fio);
+        $document->setValue('spouse_name', $spouse_name);
         $document->setValue('spouse_pass_serial', $result->spouse_pass_serial);
         $document->setValue('spouse_pass_number', $result->spouse_pass_number);
         $document->setValue('spouse_pass_bywho', $result->spouse_pass_bywho);
@@ -1899,8 +1927,9 @@ class Document_model extends CI_Model
         $document->setValue('marriage_svid_number', $result->marriage_svid_number);
         $document->setValue('marriage_svid_bywho', $result->marriage_svid_bywho);
         $document->setValue('marriage_svid_date', $marriage_svid_date);
-        $document->setValue('price', $result->price);
+        $document->setValue('price_car', $result->price_car);
         $document->setValue('price_str', $price_str);
+        $document->setValue('currency', $result->currency);
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'statement_vendor_marriage.docx';//Имя файла и путь к нему
