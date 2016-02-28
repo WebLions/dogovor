@@ -42,7 +42,7 @@ class Document extends CI_Controller
         $this->data['doc'] = $this->document_model->get_doc_receipt_of_money($id);//вызов нужно функции модели;
         redirect($this->data['doc']);
     }
-    public function gibdd($id)  //  в ссылке выглядит так document/name
+    public function statement_gibdd($id)  //  в ссылке выглядит так document/name
     {
 
         $this->data['doc'] = $this->document_model->get_doc_statement_gibdd($id);//вызов нужно функции модели;
