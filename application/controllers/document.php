@@ -36,23 +36,23 @@ class Document extends CI_Controller
         $this->data['doc'] = $this->document_model->get_doc_act_of_reception( (int) $id );//вызов нужно функции модели;
         redirect($this->data['doc']);
     }
-    public function receipt_of_money()  //  в ссылке выглядит так document/name
+    public function receipt_of_money($id)  //  в ссылке выглядит так document/name
     {
 
-        $this->document_model->get_doc_receipt_of_money();//вызов нужно функции модели;
-
+        $this->data['doc'] = $this->document_model->get_doc_receipt_of_money($id);//вызов нужно функции модели;
+        redirect($this->data['doc']);
     }
-    public function gibdd()  //  в ссылке выглядит так document/name
+    public function gibdd($id)  //  в ссылке выглядит так document/name
     {
 
-        $this->document_model->get_doc_statement_gibdd();//вызов нужно функции модели;
-
+        $this->data['doc'] = $this->document_model->get_doc_statement_gibdd($id);//вызов нужно функции модели;
+        redirect($this->data['doc']);
     }
-    public function marriage()  //  в ссылке выглядит так document/name
+    public function marriage($id)  //  в ссылке выглядит так document/name
     {
 
-        $this->document_model->get_doc_statement_vendor_marriage();//вызов нужно функции модели;
-
+        $this->data['doc'] = $this->document_model->get_doc_statement_vendor_marriage($id);//вызов нужно функции модели;
+        redirect($this->data['doc']);
     }
     public function json()
     {
