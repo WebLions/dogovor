@@ -14,9 +14,11 @@ class Blocks_model extends CI_Model
 <div class="row" id="block_consent" data-id="1">
      <div class="col-lg-12 ">
         <div class = "content-block">
-            <div class = "content-input-group">
-    		    <input class="" data-name="bs_vendor_block" type="checkbox" id="pact">Заполнить персональные данные сторон и адрес объекта
+        <div class = "content-radio-header"
+            <div class = "content-input-inline">
+    		    <input class="content-input-align" data-name="bs_vendor_block" type="checkbox" id="pact">Заполнить персональные данные сторон и адрес объекта
     		</div>
+    	</div>
     	</div>
      </div>
 </div>
