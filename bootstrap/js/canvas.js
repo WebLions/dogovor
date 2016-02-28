@@ -105,6 +105,7 @@ function canvas_render(){
             get_text_type(text_type,prev_text_type);
             marginTop = printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight,text_type);
         });
+
     },"json"
     );
 }
