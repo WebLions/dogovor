@@ -12,21 +12,17 @@ class Document_model extends CI_Model
     }
     //------------------------------------------------------------------------------------------------------------------
     // Запрос и присвание переменных с базы
-    public function select_from_database()//Возможно нужно будет разбить для каждого документа свой запрос. Но тогда будет дублироваться запрос одинаковых полей.
+    public function select_from_database()
     {
         $this->db->select();
-        //$id_user = $_SESSION['id_user'] = 1;
-        //$id_document = $_SESSION['id_document'] = 1;
-        //$where = "id_user = '$id_user' AND id_document = '$id_document'";
-        //$this->db->where($where);
         $query = $this->db->get('buy_sale');
         $result = $query->row();
 
         //Тестовый вывод содержимого результата
-       /* echo '<pre>';
+        echo '<pre>';
         print_r($result);
         //echo $result->place_o*f_contract;
-        echo '</pre>';*/
+        echo '</pre>';
     }
     //------------------------------------------------------------------------------------------------------------------
     private  function num2str($num)
@@ -41,7 +37,7 @@ class Document_model extends CI_Model
         $hundred=array('','сто','двести','триста','четыреста','пятьсот','шестьсот', 'семьсот','восемьсот','девятьсот');
         $unit=array( // Units
             array('десятая' ,'десятых' ,'десятых',	 1),
-            array('целая'   ,'целых'   ,'целых'    ,0),
+           // array('целая'   ,'целых'   ,'целых'    ,0),
             array('тысяча'  ,'тысячи'  ,'тысяч'     ,1),
             array('миллион' ,'миллиона','миллионов' ,0),
             array('миллиард','милиарда','миллиардов',0),
@@ -64,7 +60,7 @@ class Document_model extends CI_Model
             } //foreach
         }
         else $out[] = $nul;
-        $out[] = $this->morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
+        //$out[] = $this->morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
         //$out[] = $kop.' '.morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
         return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
     }
@@ -172,13 +168,19 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function format_adress($city, $street, $house, $flat)
     {
-        $adress = $city .', '. $street .', '. $house .', '. $flat;
+        $adress =   "г.$city, ул.$street, д.$house, кв.$flat";
         return $adress;
     }
     //------------------------------------------------------------------------------------------------------------------
     private function format_fio($surname, $name, $patronymic)
     {
         $fio = $surname .' '. $name . ' '. $patronymic;
+        return $fio;
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    private function format_shortfio($surname=string, $name=string, $patronymic=string)
+    {
+        $fio = $surname .' '. mb_substr($name, 0,1) . '. '. mb_substr($patronymic,0,1).'.';
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -200,8 +202,6 @@ class Document_model extends CI_Model
             }
             $string .= ", " . $target[$last_element] . ".";
         }
-        else $string = "Error, Quantity <0";
-
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -254,6 +254,8 @@ class Document_model extends CI_Model
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
     private function set_header_doc($type_of_contract, $type_of_vendor, $type_of_buyer,$data_for_header) //law //physical //individual
     {
+        $bold_start = '<w:rPr><w:b/></w:rPr>';
+        $bold_end = '</w:t></w:r><w:r><w:t>';
         switch ($type_of_contract)
         {
             case 'buy_sell':
@@ -270,19 +272,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = ' Гражданин ' . $data_for_header['vendor_fio'] . ', далее именуемый "'.$first_person.'", с одной стороны, ';
+                    $header = $bold_start. 'Гражданин  ' . $data_for_header['vendor_fio']. $bold_end . ', далее именуемый "'.$bold_start. $first_person.$bold_end.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= 'гражданин ' . $data_for_header['buyer_fio'] . ', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.'гражданин ' . $data_for_header['buyer_fio'] .$bold_end. ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -291,19 +293,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $data_for_header['vendor_law_company_name'].', далее именуемое "'.$first_person.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $data_for_header['buyer_law_company_name'].', далее именуемое "'.$second_person.'", в лице' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -312,19 +314,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = 'Гражданин' . $data_for_header['vendor_fio']. ', далее именуемый "'.$first_person.'", с одной стороны и ';
+                    $header = $bold_start.'Гражданин' . $data_for_header['vendor_fio']. $bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $data_for_header['buyer_law_company_name'].', далее именуемое "'.$second_person.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -333,19 +335,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $data_for_header['vendor_law_company_name'].', далее именуемое "'.$first_person.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= 'гражданин ' . $data_for_header['buyer_fio']. ', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.'гражданин ' . $data_for_header['buyer_fio'].$bold_end. ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -354,19 +356,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header =  'Гражданин' . $data_for_header['vendor_fio ']. ', далее именуемый "'.$first_person.'", с одной стороны и ';
+                    $header =  $bold_start.'Гражданин' . $data_for_header['vendor_fio '].$bold_end. ', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $data_for_header['buyer_ind_fio'].', далее именуемый "'.$second_person.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -375,19 +377,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $data_for_header['vendor_ind_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= 'гражданин '.$data_for_header['buyer_fio'].', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.'гражданин '.$data_for_header['buyer_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -396,19 +398,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $data_for_header['vendor_law_company_name '].', далее именуемое "'.$first_person.'", в лице'. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name '].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице'. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $data_for_header['buyer_ind_fio'].', далее именуемый "'.$second_person.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -417,23 +419,22 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $data_for_header['vendor_ind_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $data_for_header['vendor_agent_fio'].', далее именуемый "'.$first_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $data_for_header['buyer_law_company_name'].', далее именуемое "'.$second_person.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $data_for_header['buyer_agent_fio'].', далее именуемый "'.$second_person.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
-        else $header = '';
         return $header;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -458,25 +459,26 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function get_requisites($data)
     {
+//        $output = ""; //Строка вывода
         switch ($data['type_of_side'])
         {
             case 'physical':
                 $output =  "{$data['fio']} <w:br/>";
-                if ($data['owner_car'] == 'own_car')
+                if ($data['owner_car'] == 'not_own_car')
                 {
                     $output = "{$data['agent_fio']} <w:br/>";
                     $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
                     $output .= "Дата выдачи: {$data['agent_proxy_date']} <w:br/>";
                     $output .= "Нотариус: {$data['agent_proxy_notary']} <w:br/>";
                 }
-                $output .= "Дата рождения : {$data['date']} <w:br/>";
-                $output .= "Паспорт: Серия {$data['document']['serial']} №{$data['document']['number']} выдан {$data['document']['bywho']} {$data['document']['date']}  <w:br/>";
+                $output .= "Дата рождения: {$data['date']} <w:br/>";
+                $output .= "Паспорт: серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  <w:br/>";
                 $output .= "Место жительства: {$data['adress']} <w:br/>";
                 $output .= "Телефон: {$data['phone']} ";
                 break;
             case 'law':
                 $output = "{$data['name']} <w:br/>";
-                if ($data['owner_car'] == 'own_car')
+                if ($data['owner_car'] == 'not_own_car')
                 {
                     $output .= "{$data['agent_fio']} <w:br/>";
                     $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
@@ -493,7 +495,7 @@ class Document_model extends CI_Model
                 break;
             case 'individual':
                 $output = "{$data['fio']} <w:br/>";
-                if ($data['owner_car'] == 'own_car')
+                if ($data['owner_car'] == 'not_own_car')
                 {
                     $output = "{$data['agent_fio']} <w:br/>";
                     $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
@@ -502,7 +504,7 @@ class Document_model extends CI_Model
                 }
                 $output .= "Свидетельство №{$data['number_certificate']} от {$data['date_of_certificate']} <w:br/>";
                 $output .="Дата рождения : {$data['date']} <w:br/>";
-                $output .="Паспорт: Серия {$data['document']['serial']} №{$data['document']['number']} выдан {$data['document']['bywho']} {$data['document']['date']}  <w:br/>";
+                $output .="Паспорт: Серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  <w:br/>";
                 $output .="Место жительства: {$data['adress']} <w:br/>";
                 $output .= "Телефон: {$data['phone']} ";
                 $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
@@ -1042,10 +1044,16 @@ class Document_model extends CI_Model
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
-        if ($result->vendor_is_owner_car == 'own_car')
-            $vendor_fio = $vendor_agent_fio;
-        if ($result->buyer_is_owner_car == 'own car')
-            $buyer_fio = $buyer_agent_fio;
+        //Короткое фио
+        $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
+        $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $short_spouse_fio = $this->format_shortfio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        $short_vendor_law_fio = $this->format_shortfio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
+        $short_buyer_law_fio = $this->format_shortfio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $short_vendor_ind_fio = $this->format_shortfio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
+        $short_buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $short_vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
+        $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -1061,7 +1069,6 @@ class Document_model extends CI_Model
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
-        $payment_date = $this->format_date($result->payment_date);
         //
         $vendor_date_of_certificate = $result->vendor_date_of_certificate;
         $buyer_date_of_certificate = $result->buyer_date_of_certificate;
@@ -1075,106 +1082,108 @@ class Document_model extends CI_Model
         $buyer_law_proxy_date = $result->buyer_law_proxy_date;
         $vendor_law_proxy_date = $result->vendor_law_proxy_date;
         //Джсон
-        $documents = $this->json_to_string($result->documents);
-        $accessories = $this->json_to_string($result->accessories);
-        $other_parameters = $this->json_to_string($result->other_parameters);
+//        $documents = $this->json_to_string($result->documents);
+//        $accessories = $this->json_to_string($result->accessories);
+//        $other_parameters = $this->json_to_string($result->other_parameters);
+//        $additional_devices_array = $this->json_to_string($result->additional_devices_array);
         //Иные
         $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
         $price_str = $this->num2str($result->price_car);
         $data_for_header = array(
-            'vendor_fio' => $vendor_fio,
-            'buyer_fio' => $buyer_fio,
+            'vendor_fio' =>$vendor_fio,
+            'buyer_fio' =>$buyer_fio,
             'vendor_law_company_name' => $result->vendor_law_company_name,
             'vendor_law_actor_position' => $result->vendor_law_actor_position,
-            'vendor_law_fio' => $vendor_law_fio,
+            'vendor_law_fio' =>$vendor_law_fio,
             'vendor_law_document_osn' => $result->vendor_law_document_osn,
             'vendor_law_proxy_number' => $result->vendor_law_proxy_number,
             'vendor_law_proxy_date' => $vendor_law_proxy_date,
             'buyer_law_company_name' => $result->buyer_law_company_name,
             'buyer_law_actor_position' => $result->buyer_law_actor_position,
-            'buyer_law_fio' => $buyer_law_fio,
+            'buyer_law_fio' =>$buyer_law_fio,
             'buyer_law_document_osn' => $result->buyer_law_document_osn,
             'buyer_law_proxy_number' => $result->buyer_law_proxy_number,
             'buyer_law_proxy_date' => $buyer_law_proxy_date,
-            'vendor_ind_fio' => $vendor_ind_fio,
+            'vendor_ind_fio' =>$vendor_ind_fio,
             'vendor_number_of_certificate' => $result->vendor_number_of_certificate,
             'vendor_date_of_certificate' => $vendor_date_of_certificate,
-            'buyer_ind_fio' => $buyer_ind_fio,
+            'buyer_ind_fio' =>$buyer_ind_fio,
             'buyer_number_of_certificate' => $result->buyer_number_of_certificate,
             'buyer_date_of_certificate' => $buyer_date_of_certificate,
             'vendor_is_owner_car' => $result->vendor_is_owner_car,
             'buyer_is_owner_car' => $result->buyer_is_owner_car,
-            'vendor_agent_fio' => $vendor_agent_fio,
+            'vendor_agent_fio' =>$vendor_agent_fio,
             'for_agent_vendor_proxy_number' => $result->for_agent_vendor_proxy_number,
             'for_agent_vendor_proxy_date' => $for_agent_vendor_proxy_date,
             'for_agent_vendor_proxy_notary' => $result->for_agent_vendor_proxy_notary,
-            'buyer_agent_fio' => $buyer_agent_fio,
+            'buyer_agent_fio' =>$buyer_agent_fio,
             'for_agent_buyer_proxy_number' => $result->for_agent_buyer_proxy_number,
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
         );
-        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
         //Продавец
         switch ($result->type_of_giver)
         {
             case 'physical':
-                $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
-                    $data_for_req_giver['fio'] = $vendor_fio,
-                    $data_for_req_giver['date'] = $vendor_birthday,
-                    $data_for_req_giver['document']['serial'] = $result->vendor_passport_serial,
-                    $data_for_req_giver['document']['number'] = $result->vendor_passport_number,
-                    $data_for_req_giver['document']['bywho'] = $result->vendor_passport_bywho,
-                    $data_for_req_giver['document']['date'] = $vendor_passport_date,
-                    $data_for_req_giver['adress'] = $vendor_adress,
-                    $data_for_req_giver['phone'] = $result->vendor_phone,
-                    $data_for_req_giver['owner_car'] = $result->vendor_is_owner_car,
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $result->for_agent_vendor_proxy_number,
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $result->for_agent_vendor_proxy_notary
+                $data_for_req_giver = array
+                (
+                    'type_of_side' => $result->type_of_giver,
+                    'fio' => $vendor_fio,
+                    'date' => $vendor_birthday,
+                    'document_serial' => $result->vendor_passport_serial,
+                    'document_number' => $result->vendor_passport_number,
+                    'document_bywho' => $result->vendor_passport_bywho,
+                    'document_date' => $vendor_passport_date,
+                    'adress' => $vendor_adress,
+                    'phone' => $result->vendor_phone,
+                    'owner_car' => $result->vendor_is_owner_car,
+                    'agent_fio' => $vendor_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_vendor_proxy_number,
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_vendor_proxy_notary
                 );
                 break;
             case 'law':
                 $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
-                    $data_for_req_giver['name']= $result->vendor_law_company_name,
-                    $data_for_req_giver['inn']= $result->vendor_law_inn,
-                    $data_for_req_giver['ogrn']= $result->vendor_law_ogrn,
-                    $data_for_req_giver['adress']= $result->vendor_law_adress,
-                    $data_for_req_giver['phone']= $result->vendor_law_phone,
-                    $data_for_req_giver['acc']= $result->vendor_law_acc,
-                    $data_for_req_giver['bank_name']= $result->vendor_law_bank_name,
-                    $data_for_req_giver['korr_acc']= $result->vendor_law_korr_acc,
-                    $data_for_req_giver['bik']= $result->vendor_law_bik,
-                    $data_for_req_giver['owner_car'] = $result->vendor_is_owner_car,
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $result->for_agent_vendor_proxy_number,
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $result->for_agent_vendor_proxy_notary
+                    'type_of_side' => $result->type_of_giver,
+                    'name'=> $result->vendor_law_company_name,
+                    'inn'=> $result->vendor_law_inn,
+                    'ogrn'=> $result->vendor_law_ogrn,
+                    'adress'=> $result->vendor_law_adress,
+                    'phone'=> $result->vendor_law_phone,
+                    'acc'=> $result->vendor_law_acc,
+                    'bank_name'=> $result->vendor_law_bank_name,
+                    'korr_acc'=> $result->vendor_law_korr_acc,
+                    'bik'=> $result->vendor_law_bik,
+                    'owner_car'=> $result->vendor_is_owner_car,
+                    'agent_fio'=> $vendor_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_vendor_proxy_number,
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_vendor_proxy_notary
                 );
                 break;
             case 'individual':
                 $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $result->type_of_giver,
-                    $data_for_req_giver['fio']= $vendor_ind_fio,
-                    $data_for_req_giver['date']= $vendor_ind_birthday,
-                    $data_for_req_giver['document']['serial']= $result->vendor_ind_passport_serial,
-                    $data_for_req_giver['document']['number']= $result->vendor_ind_passport_number,
-                    $data_for_req_giver['document']['bywho']= $result->vendor_ind_passport_bywho,
-                    $data_for_req_giver['document']['date']= $vendor_ind_passport_date,
-                    $data_for_req_giver['adress']= $vendor_ind_adress,
-                    $data_for_req_giver['phone']= $result->vendor_ind_phone,
-                    $data_for_req_giver['acc']= $result->vendor_ind_bank_acc,
-                    $data_for_req_giver['bank_name']= $result->vendor_ind_bank_name,
-                    $data_for_req_giver['korr_acc']= $result->vendor_ind_korr_acc,
-                    $data_for_req_giver['bik']= $result->vendor_ind_bik,
-                    $data_for_req_giver['owner_car'] = $result->vendor_is_owner_car,
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $result->for_agent_vendor_proxy_number,
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $result->for_agent_vendor_proxy_notary
+                    'type_of_side' => $result->type_of_giver,
+                    'fio'=> $vendor_ind_fio,
+                    'date'=> $vendor_ind_birthday,
+                    'document_serial' => $result->vendor_ind_passport_serial,
+                    'document_number' => $result->vendor_ind_passport_number,
+                    'document_bywho' => $result->vendor_ind_passport_bywho,
+                    'document_date' => $vendor_ind_passport_date,
+                    'adress'=> $vendor_ind_adress,
+                    'phone'=> $result->vendor_ind_phone,
+                    'acc'=> $result->vendor_ind_bank_acc,
+                    'bank_name'=> $result->vendor_ind_bank_name,
+                    'korr_acc'=> $result->vendor_ind_korr_acc,
+                    'bik'=> $result->vendor_ind_bik,
+                    'owner_car' => $result->vendor_is_owner_car,
+                    'agent_fio' => $vendor_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_vendor_proxy_number,
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_vendor_proxy_notary
                 );
                 break;
         }
@@ -1182,65 +1191,63 @@ class Document_model extends CI_Model
         switch ($result->type_of_taker)
         {
             case 'physical':
-                $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
-                    $data_for_req_taker['fio'] = $buyer_fio,
-                    $data_for_req_taker['date'] = $buyer_birthday,
-                    $data_for_req_taker['document']['serial'] = $result->buyer_passport_serial,
-                    $data_for_req_taker['document']['number'] = $result->buyer_passport_number,
-                    $data_for_req_taker['document']['bywho'] = $result->buyer_passport_bywho,
-                    $data_for_req_taker['document']['date'] = $buyer_passport_date,
-                    $data_for_req_taker['adress'] = $buyer_adress,
-                    $data_for_req_taker['phone'] = $result->buyer_phone,
-                    //
-                    $data_for_req_taker['owner_car'] = $result->buyer_is_owner_car,
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $result->for_agent_buyer_proxy_number,
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $result->for_agent_buyer_proxy_notary
+                $data_for_req_taker = array
+                (
+                    'type_of_side' => $result->type_of_taker,
+                    'fio' => $buyer_fio,
+                    'date' => $buyer_birthday,
+                    'document_serial' => $result->buyer_passport_serial,
+                    'document_number' => $result->buyer_passport_number,
+                    'document_bywho' => $result->buyer_passport_bywho,
+                    'document_date' => $buyer_passport_date,
+                    'adress' => $buyer_adress,
+                    'phone' => $result->buyer_phone,
+                    'owner_car' => $result->buyer_is_owner_car,
+                    'agent_fio' => $buyer_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary
                 );
                 break;
             case 'law':
                 $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
-                    $data_for_req_taker['name']= $result->buyer_law_company_name,
-                    $data_for_req_taker['inn']= $result->buyer_law_inn,
-                    $data_for_req_taker['ogrn']= $result->buyer_law_ogrn,
-                    $data_for_req_taker['adress']= $result->buyer_law_adress,
-                    $data_for_req_taker['phone']= $result->buyer_law_phone,
-                    $data_for_req_taker['acc']= $result->buyer_law_acc,
-                    $data_for_req_taker['bank_name']= $result->buyer_law_bank_name,
-                    $data_for_req_taker['korr_acc']= $result->buyer_law_korr_acc,
-                    $data_for_req_taker['bik']= $result->buyer_law_bik,
-                    //
-                    $data_for_req_taker['owner_car'] = $result->buyer_is_owner_car,
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $result->for_agent_buyer_proxy_number,
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $result->for_agent_buyer_proxy_notary
+                    'type_of_side' => $result->type_of_taker,
+                    'name'=> $result->buyer_law_company_name,
+                    'inn'=> $result->buyer_law_inn,
+                    'ogrn'=> $result->buyer_law_ogrn,
+                    'adress'=> $result->buyer_law_adress,
+                    'phone'=> $result->buyer_law_phone,
+                    'acc'=> $result->buyer_law_acc,
+                    'bank_name'=> $result->buyer_law_bank_name,
+                    'korr_acc'=> $result->buyer_law_korr_acc,
+                    'bik'=> $result->buyer_law_bik,
+                    'owner_car'=> $result->buyer_is_owner_car,
+                    'agent_fio'=> $buyer_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary
                 );
                 break;
             case 'individual':
                 $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $result->type_of_taker,
-                    $data_for_req_taker['fio']= $buyer_ind_fio,
-                    $data_for_req_taker['date']= $buyer_ind_birthday,
-                    $data_for_req_taker['document']['serial']= $result->buyer_ind_passport_serial,
-                    $data_for_req_taker['document']['number']= $result->buyer_ind_passport_number,
-                    $data_for_req_taker['document']['bywho']= $result->buyer_ind_passport_bywho,
-                    $data_for_req_taker['document']['date']= $buyer_ind_passport_date,
-                    $data_for_req_taker['adress']= $buyer_ind_adress,
-                    $data_for_req_taker['phone']= $result->buyer_ind_phone,
-                    $data_for_req_taker['acc']= $result->buyer_ind_bank_acc,
-                    $data_for_req_taker['bank_name']= $result->buyer_ind_bank_name,
-                    $data_for_req_taker['korr_acc']= $result->buyer_ind_korr_acc,
-                    $data_for_req_taker['bik']= $result->buyer_ind_bik,
-                    //
-                    $data_for_req_taker['owner_car'] = $result->buyer_is_owner_car,
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $result->for_agent_buyer_proxy_number,
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $result->for_agent_buyer_proxy_notary
+                    'type_of_side' => $result->type_of_taker,
+                    'fio'=> $buyer_ind_fio,
+                    'date'=> $buyer_ind_birthday,
+                    'document_serial' => $result->buyer_ind_passport_serial,
+                    'document_number' => $result->buyer_ind_passport_number,
+                    'document_bywho' => $result->buyer_ind_passport_bywho,
+                    'document_date' => $buyer_ind_passport_date,
+                    'adress'=> $buyer_ind_adress,
+                    'phone'=> $result->buyer_ind_phone,
+                    'acc'=> $result->buyer_ind_bank_acc,
+                    'bank_name'=> $result->buyer_ind_bank_name,
+                    'korr_acc'=> $result->buyer_ind_korr_acc,
+                    'bik'=> $result->buyer_ind_bik,
+                    'owner_car' => $result->buyer_is_owner_car,
+                    'agent_fio' => $buyer_agent_fio,
+                    'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary
                 );
                 break;
         }
@@ -1250,21 +1257,21 @@ class Document_model extends CI_Model
         //Продавец
         $vendor_namedata = array
         (
-            'phys_name' => $vendor_fio,
-            'law_name' => $vendor_law_fio,
-            'ind_name' => $vendor_ind_fio,
-            'agent_name' => $vendor_agent_fio
+            'phys_name' => $short_vendor_fio,
+            'law_name' => $short_vendor_law_fio,
+            'ind_name' => $short_vendor_ind_fio,
+            'agent_name' => $short_vendor_agent_fio
         );
-        $vendor_name = $this->get_side_name($result->type_of_vendor, $result->vendor_is_owner_car, $vendor_namedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
         //Покупатель
         $buyer_namedata = array
         (
-            'phys_name' => $buyer_fio,
-            'law_name' => $buyer_law_fio,
-            'ind_name' => $buyer_ind_fio,
-            'agent_name' => $buyer_agent_fio
+            'phys_name' => $short_buyer_fio,
+            'law_name' => $short_buyer_law_fio,
+            'ind_name' => $short_buyer_ind_fio,
+            'agent_name' => $short_buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/buy_sale_deal.docx');
 
         //Заполнение
@@ -1283,8 +1290,8 @@ class Document_model extends CI_Model
         $document->setValue('shassi', $result->shassi);
         $document->setValue('carcass', $result->carcass);
         $document->setValue('color_carcass', $result->color_carcass);
-        $document->setValue('other_parameters', $other_parameters);
-        $document->setValue('additional_devices', $result->additional_devices);
+//        $document->setValue('other_parameters', $other_parameters);
+//        $document->setValue('additional_devices_array', $additional_devices_array);
         $document->setValue('serial_car', $result->serial_car);
         $document->setValue('number_of_serial_car', $result->number_of_serial_car);
         $document->setValue('bywho_serial_car', $result->bywho_serial_car);
@@ -1296,9 +1303,9 @@ class Document_model extends CI_Model
         $document->setValue('features', $result->features);
         $document->setValue('price', $result->price_car);
         $document->setValue('price_str', $price_str);
-        $document->setValue('payment_date', $payment_date);
-        $document->setValue('documents', $documents);
-        $document->setValue('accessories', $accessories);
+        $document->setValue('payment_date', $result->payment_date);
+//        $document->setValue('documents', $documents);
+//        $document->setValue('accessories', $accessories);
         $document->setValue('marriage_info', $marriage['info']);
         $document->setValue('marriage_number', $marriage['number']);
         $document->setValue('penalty', $result->penalty);
@@ -1309,7 +1316,7 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
         $document->save($name_of_file,true); // Сохранение документа
         $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.docx';
-        return $name_for_server;
+        return $name_for_server ;
     }
     //------------------------------------------------------------------------------------------------------------------
     //акт приема-передачи автомобиля
@@ -1396,7 +1403,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
         );
-        $header_doc = $this->set_header_doc($result->type_of_contract, $result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract, $result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
         //Продавец
         switch ($result->type_of_giver)
@@ -1538,7 +1545,7 @@ class Document_model extends CI_Model
             'ind_name' => $vendor_ind_fio,
             'agent_name' => $vendor_agent_fio
         );
-        $vendor_name = $this->get_side_name($result->type_of_vendor, $result->vendor_is_owner_car, $vendor_namedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
         //Покупатель
         $buyer_namedata = array
         (
@@ -1547,7 +1554,7 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
 
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/act_of_reception.docx');
 
@@ -1678,7 +1685,7 @@ class Document_model extends CI_Model
             'ind_name' => $vendor_ind_fio,
             'agent_name' => $vendor_agent_fio
         );
-        $vendor_name = $this->get_side_name($result->type_of_vendor, $result->vendor_is_owner_car, $namedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $namedata);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/receipt_of_money.docx');
         //Заполнение
         $document->setValue('city_contract', $result->city_contract);
@@ -1738,7 +1745,7 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $namedata);
 
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/gibdd.docx');
         //Заполнение
@@ -1844,7 +1851,7 @@ class Document_model extends CI_Model
             'ind_name' => $buyer_ind_fio,
             'agent_name' => $buyer_agent_fio
         );
-        $buyer_name = $this->get_side_name($result->type_of_buyer, $result->buyer_is_owner_car, $buyer_namedata);
+        $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
 
         $price_str = $this->num2str($result->price);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
@@ -2021,10 +2028,11 @@ class Document_model extends CI_Model
             'vendor_house' => $_POST['vendor_house'],
             'vendor_flat' => $_POST['vendor_flat'],
             'vendor_phone' => $_POST['vendor_phone'],
-            'type_of_buyer' => $_POST['type_of_taker'],
+            'type_of_taker' => $_POST['type_of_taker'],
             'buyer_surname' => $_POST['buyer_surname'],
             'buyer_name' => $_POST['buyer_name'],
             'buyer_patronymic' => $_POST['buyer_patronymic'],
+            'buyer_is_owner_car' => $_POST['buyer_is_owner_car'],
             'buyer_birthday' => $_POST['buyer_birthday'],
             'buyer_passport_serial' => $_POST['buyer_passport_serial'],
             'buyer_passport_number' => $_POST['buyer_passport_number'],
@@ -2052,7 +2060,8 @@ class Document_model extends CI_Model
             'bywho_serial_car' => $_POST['bywho_serial_car'],
             'price_car' => $_POST['price_car'],
             'currency' => $_POST['currency'],
-            'additional_devices' => json_encode($_POST['additional_devices']),
+            'additional_devices' => ($_POST['additional_devices']),
+            'additional_devices_array' => json_encode($_POST['additional_devices_array']),
             'oil_in_car' => $_POST['oil_in_car'],
             'car_allstatus' => $_POST['car_allstatus'],
             'maintenance_date' => $_POST['maintenance_date'],
@@ -2467,7 +2476,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
+        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header);
 
 
         //Массив данных для канванса
@@ -2476,7 +2485,7 @@ class Document_model extends CI_Model
             0 => array
             (
                 'text' => 'ДОГОВОР',
-                'text-type' => 'header'
+                'text-type' => 'title'
 
             ),
             1 => array
@@ -2486,309 +2495,303 @@ class Document_model extends CI_Model
             ),
             2 => array
             (
-                'text' => "г. {$_POST['place_of_contract']}",
-                'text-type' => 'columns-left'
+                'text' => "г. {$_POST['city_contract']}	$date_of_contract",
+                'text-type' => 'columns'
             ),
             3 => array
-            (
-                'text' => "$date_of_contract",
-                'text-type' => 'columns-right'
-            ),
-            4 => array
             (
                 'text' => $header_doc,
                 'text-type' => 'paragraph'
             ),
-            5 => array
+            4 => array
             (
                 'text' => '1. Предмет Договора',
                 'text-type' => 'title'
             ),
-            6 => array
+            5 => array
             (
                 'text' => " 1.1. Продавец обязуется передать в собственность Покупателя, а Покупатель обязуется принять и оплатить следующее транспортное средство (далее - транспортное средство):",
                 'text-type' => 'paragraph',
             ),
+            6 => array
+            (
+                'text' => "- марка, модель: {$_POST['mark']};",
+                'text-type' => 'list',
+            ),
             7 => array
             (
-                'text' => "-марка, модель: {$_POST['mark']};",
+                'text' => "- идентификационный номер (VIN): {$_POST['vin']};",
                 'text-type' => 'list',
             ),
             8 => array
             (
-                'text' => "-идентификационный номер (VIN): {$_POST['vin']};",
+                'text' => "- государственный регистрационный знак: {$_POST['reg_gov_number']};",
                 'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "-государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text' => "- наименование (тип): {$_POST['car_type']};",
                 'text-type' => 'list',
             ),
             10 => array
             (
-                'text' => "-наименование (тип): {$_POST['car_type']};",
+                'text' => "- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
                 'text-type' => 'list',
             ),
             11 => array
             (
-                'text' => "-категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text' => "- год изготовления: $date_of_product;",
                 'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => "-год изготовления: $date_of_product;",
+                'text' => "- модель, N двигателя: {$_POST['engine_model']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => "-модель, N двигателя: {$_POST['engine_model']};",
+                'text' => "- шасси (рама) N: {$_POST['shassi']};",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => "-шасси (рама) N: {$_POST['shassi']}; ",
+                'text' => "- кузов (кабина, прицеп) N: {$_POST['carcass']};",
                 'text-type' => 'list',
             ),
             15 => array
             (
-                'text' => "-кузов (кабина, прицеп) N: {$_POST['carcass']}; ",
+                'text' => "- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
                 'text-type' => 'list',
             ),
             16 => array
             (
-                'text' => "-цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text' => " -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters",
                 'text-type' => 'list',
             ),
             17 => array
             (
-                'text' => " -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters",
-                'text-type' => 'list',
-            ),
-            18 => array
-            (
                 'text' => "1.2. Продавец обязуется передать Покупателю транспортное средство, оснащенное серийным оборудованием и комплектующими изделиями, установленными заводом-изготовителем, а также следующим дополнительным оборудованием: $additional_equip",
                 'text-type' => 'paragraph',
             ),
-            19 => array
+            18 => array
             (
                 'text' => "1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, выданного {$_POST['bywho_serial_car']} {$_POST['date_of_serial_car']}. ",
                 'text-type' => 'paragraph',
             ),
-            20 => array
+            19 => array
             (
                 'text' => "1.4. Продавец гарантирует, что передаваемое транспортное средство в споре или под арестом не состоит, не является предметом залога и не обременено другими правами третьих лиц, в розыске не находится.",
                 'text-type' => 'paragraph',
             ),
-            21 => array
+            20 => array
             (
                 'text' => "Продавец гарантирует, что не заключал с иными лицами договоров реализации транспортного средства.",
                 'text-type' => 'paragraph',
             ),
-            22 => array
+            21 => array
             (
                 'text' => "2. Качество транспортного средства",
                 'text-type' => 'title',
             ),
-            23 => array
+            22 => array
             (
                 'text' => "2.1. Общее состояние транспортного средства: {$_POST['car_allstatus']}.",
                 'text-type' => 'paragraph',
             ),
-            24 => array
+            23 => array
             (
                 'text' => "2.2. Последнее техническое обслуживание транспортного средства проведено {$_POST['maintenance_date']}{$_POST['maintenance_bywho']} (организация, проводившая техническое обслуживание либо самостоятельно).",
                 'text-type' => 'paragraph',
             ),
-            25 => array
+            24 => array
             (
                 'text' => "2.3. Повреждения и эксплуатационные дефекты",
                 'text-type' => 'paragraph',
             ),
-            26 => array
+            25 => array
             (
                 'text' => "2.3.1. В период владения Продавцом транспортное средство получило следующие механические повреждения и эксплуатационные дефекты: {$_POST['defects']}",
                 'text-type' => 'paragraph',
             ),
-            27 => array
+            26 => array
             (
                 'text' => "2.3.2. Транспортное средство передается Покупателю со следующими неустраненными повреждениями и эксплуатационными дефектами: {$_POST['defects']}",
                 'text-type' => 'paragraph',
             ),
-            28 => array
+            27 => array
             (
                 'text' => "2.4. Транспортное средство имеет следующие особенности, которые не влияют на безопасность товара и не являются недостатками: {$_POST['features']} (например, вибрация при эксплуатации, визг тормозов, превышение нормы потребления моторного масла, толчки при переключении трансмиссии и т.д.).",
                 'text-type' => 'paragraph',
             ),
-            29 => array
+            28 => array
             (
                 'text' => "3. Цена, срок и порядок оплаты",
                 'text-type' => 'title',
             ),
-            30 => array
+            29 => array
             (
                 'text' => "3.1. По соглашению Сторон цена транспортного средства составляет {$_POST['price_car']} ($price_str) руб.",
                 'text-type' => 'paragraph',
             ),
-            31 => array
+            30 => array
             (
                 'text' => "3.2. Стоимость указанных в Договоре инструментов и принадлежностей, а также дополнительно установленного оборудования включена в цену транспортного средства.",
                 'text-type' => 'paragraph',
             ),
-            32 => array
+            31 => array
             (
                 'text' => "3.3. Покупатель оплачивает стоимость транспортного средства путем передачи наличных денег Продавцу не позднее $payment_date. При получении денежных средств Продавец в соответствии с п. 2 ст. 408 ГК РФ выдает расписку.",
                 'text-type' => 'paragraph',
             ),
-            33 => array
+            32 => array
             (
                 'text' => "3.4. Цена транспортного средства не включает расходы, связанные с оформлением Договора. Такие расходы Покупатель несет дополнительно.",
                 'text-type' => 'paragraph',
             ),
-            34 => array
+            33 => array
             (
                 'text' => "4. Срок и условия передачи транспортного средства",
                 'text-type' => 'title',
             ),
-            35 => array
+            34 => array
             (
                 'text' => "4.1. Продавец передает Покупателю соответствующее условиям Договора транспортное средство со всеми принадлежностями после исполнения Покупателем обязанности по оплате.",
                 'text-type' => 'paragraph',
             ),
-            36 => array
+            35 => array
             (
                 'text' => "4.2. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие документы:",
                 'text-type' => 'paragraph',
              ),
-            37 => array
+            36 => array
             (
-                'text' => "-паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
+                'text' => "- паспорт транспортного средства серия {$_POST['serial_car']} N {$_POST['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
                 'text-type' => 'list',
             ),
-            38 => array
+            37 => array
             (
                 'text' => "4.3. Одновременно с передачей транспортного средства Продавец передает Покупателю следующие инструменты и принадлежности: {$accessories} {$marriage['info']}",
                 'text-type' => 'paragraph',
             ),
-            39 => array
+            38 => array
             (
                 'text' => "4.{$marriage['number']}. Право собственности на транспортное средство, а также риск его случайной гибели и случайного повреждения переходит к Покупателю в момент передачи транспортного средства.",
                 'text-type' => 'paragraph',
             ),
-            40 => array
+            39 => array
             (
                 'text' => "5. Приемка транспортного средства",
                 'text-type' => 'title',
             ),
-            41 => array
+            40 => array
             (
                 'text' => "5.1. Приемка транспортного средства осуществляется в месте его передачи Покупателю. Во время приемки производятся идентификация, осмотр и проверка транспортного средства по качеству и комплектности.",
                 'text-type' => 'paragraph',
             ),
-            42 => array
+            41 => array
             (
                 'text' => "5.2. Покупатель проверяет наличие документов на транспортное средство.",
                 'text-type' => 'paragraph',
             ),
-            43 => array
+            42 => array
             (
                 'text' => "5.3. Идентификация транспортного средства заключается в проверке соответствия фактических данных сведениям, содержащимся в ПТС.",
                 'text-type' => 'paragraph',
             ),
-            44 => array
+            43 => array
             (
                 'text' => "5.4. Осмотр транспортного средства должен проводиться в светлое время суток либо при искусственном освещении, позволяющем провести такой осмотр.",
                 'text-type' => 'paragraph',
             ),
-            45 => array
+            44 => array
             (
                 'text' => "5.5. Все обнаруженные при приемке недостатки, в том числе по комплектности, заносятся в акт приема-передачи транспортного средства.",
                 'text-type' => 'paragraph',
             ),
-            46 => array
+            45 => array
             (
                 'text' => "5.6. Покупатель обязан в течение 10 (десяти) суток после подписания акта приема-передачи транспортного средства изменить регистрационные данные о собственнике транспортного средства, обратившись с соответствующим заявлением в регистрационное подразделение ГИБДД.",
                 'text-type' => 'paragraph',
             ),
-            47 => array
+            46 => array
             (
                 'text' => "5.7. В случае подачи заявления в регистрирующий орган о сохранении регистрационных знаков, Продавец должен сообщить об этом Покупателю в день подачи заявления.",
                 'text-type' => 'paragraph',
             ),
-            48 => array
+            47 => array
             (
                 'text' => "6. Ответственность Сторон",
                 'text-type' => 'title',
             ),
-            49 => array
+            48 => array
             (
                 'text' => "6.1. За нарушение сроков оплаты стоимости транспортного средства Продавец вправе требовать с Покупателя уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от неуплаченной суммы за каждый день просрочки.",
                 'text-type' => 'paragraph',
             ),
-            50 => array
+            49 => array
             (
                 'text' => "6.2. За нарушение сроков передачи транспортного средства Покупатель вправе требовать с Продавца уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от стоимости транспортного средства за каждый день просрочки.",
                 'text-type' => 'paragraph',
             ),
-            51 => array
+            50 => array
             (
                 'text' => "6.3. При нарушении предусмотренных Договором гарантий Продавца Покупатель вправе требовать с Продавца уплаты неустойки (штрафа) в размере {$_POST['penalty']} процентов от установленной Договором цены транспортного средства.",
                 'text-type' => 'paragraph',
             ),
-            52 => array
+            51 => array
             (
                 'text' => "6.4. При изъятии транспортного средства у Покупателя третьими лицами по основаниям, возникшим до исполнения Договора, Продавец обязан возместить Покупателю понесенные им убытки.",
                 'text-type' => 'paragraph',
             ),
-            53 => array
+            52 => array
             (
                 'text' => "7. Расторжение Договора",
                 'text-type' => 'title',
             ),
-            54 => array
+            53 => array
             (
                 'text' => "7.1. Договор может быть расторгнут по требованию Покупателя в судебном порядке в случае выявления после подписания акта приема-передачи транспортного средства хотя бы одного из следующих фактов:",
                 'text-type' => 'paragraph',
             ),
+            54 => array
+            (
+                'text' => "- обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
+                'text-type' => 'list',
+            ),
             55 => array
             (
-                'text' => "-обнаружены дефекты и повреждения, не отраженные в Договоре (скрытые дефекты), которые не позволяют в дальнейшем эксплуатировать транспортное средство в соответствии с его назначением;",
+                'text' => "- в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
                 'text-type' => 'list',
             ),
             56 => array
             (
-                'text' => "-в период владения Продавцом проведен не оговоренный в Договоре ремонт транспортного средства в связи с повреждением в результате дорожно-транспортных происшествий, а также иных событий, которые ухудшают дальнейшую эксплуатацию транспортного средства.",
-                'text-type' => 'list',
-            ),
-            57 => array
-            (
                 'text' => "8. Заключительные положения",
                 'text-type' => 'title',
             ),
-            58 => array
+            57 => array
             (
                 'text' => "8.1. Договор вступает в силу с момента его подписания и действует до исполнения Сторонами своих обязательств.",
                 'text-type' => 'paragraph',
             ),
-            59 => array
+            58 => array
             (
                 'text' => "8.2. Договор составлен в 3 (трех) экземплярах, имеющих равную юридическую силу, по одному для каждой Стороны и один для регистрирующего органа.",
                 'text-type' => 'paragraph',
             ),
-            60 => array
+            59 => array
             (
                 'text' => "9. Адреса и реквизиты Сторон",
                 'text-type' => 'paragraph',
             ),
+            60 => array
+            (
+                'text' => "Продавец: Покупатель:",
+                'text-type' => 'columns',
+            ),
             61 => array
             (
-                'text' => "Продавец: $firstside_requisites",
-                'text-type' => 'columns-left',
-            ),
-            62 => array
-            (
-
-                'text' => "Покупатель: $secondside_requisites",
-                'text-type' => 'columns-right',
+                'text' => "$firstside_requisites $secondside_requisites",
+                'text-type' => 'columns',
             )
         );
         $data = json_encode($data);
@@ -2988,7 +2991,7 @@ class Document_model extends CI_Model
             'buyer_number_of_certificate' => $_POST['buyer_number_of_certificate'],
             'buyer_date_of_certificate' => $_POST['buyer_date_of_certificate']
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_buyer'], $data_for_header);
+        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header);
 
 
         //Массив данных для канванса
@@ -3022,57 +3025,57 @@ class Document_model extends CI_Model
             ),
             5 => array
             (
-                'text' => "-марка, модель: {$_POST['mark']};",
+                'text' => "- марка, модель: {$_POST['mark']};",
                 'text-type' => 'list',
             ),
             6 => array
             (
-                'text' => "-идентификационный номер (VIN): {$_POST['vin']};",
+                'text' => "- идентификационный номер (VIN): {$_POST['vin']};",
                 'text-type' => 'list',
             ),
             7 => array
             (
-                'text' => "-государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text' => "- государственный регистрационный знак: {$_POST['reg_gov_number']};",
                 'text-type' => 'list',
             ),
             8 => array
             (
-                'text' => "-наименование (тип): {$_POST['car_type']};",
+                'text' => "- наименование (тип): {$_POST['car_type']};",
                 'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "-категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text' => "- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
                 'text-type' => 'list',
             ),
             10 => array
             (
-                'text' => "-год изготовления: $date_of_product;",
+                'text' => "- год изготовления: $date_of_product;",
                 'text-type' => 'list',
             ),
             11 => array
             (
-                'text' => "-модель, N двигателя: {$_POST['engine_model']};",
+                'text' => "- модель, N двигателя: {$_POST['engine_model']};",
                 'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => " -шасси (рама) N: {$_POST['shassi']};",
+                'text' => "- шасси (рама) N: {$_POST['shassi']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => " -кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text' => "- кузов (кабина, прицеп) N: {$_POST['carcass']};",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => " -цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
+                'text' => "- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
                 'text-type' => 'list',
             ),
             15 => array
             (
-                'text' => "-иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters, далее по тексту именуемый - \"Автомобиль\".",
+                'text' => " -иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters, далее по тексту именуемый - \"Автомобиль\".",
                 'text-type' => 'list',
             ),
             17 => array

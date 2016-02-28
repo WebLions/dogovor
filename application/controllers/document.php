@@ -130,4 +130,13 @@ class Document extends CI_Controller
     {
         $this->document_model->get_data_for_canvas_gift();//Возвращает json массив
     }
+    public function test()
+    {
+        $surname = 'Иванов';
+        $name = 'Иван';
+        $patronymic = 'Иванович';
+        echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
+        echo $this->document_model->format_shortfio($surname, $name, $patronymic);
+
+    }
 }
