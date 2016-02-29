@@ -205,29 +205,40 @@ class Document_model extends CI_Model
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
-    private function set_pack_of_documents($giver, $taker, $type_of_document)
+    private function set_pack_of_documents($giver, $taker, $type_of_document, $marriage, $gibdd)
     {
         if ($type_of_document == 'buy_sell')
         {
             if ($giver == 'physical' && $taker == 'physical')
             {
                 $id_type = 1;
+                if ($gibdd == 'false') $id_type = 7;
+                if ($marriage == 'false') $id_type = 9;
+                if ($gibdd == 'false' && $marriage == 'false') $id_type = 8;
             }
             elseif ($giver == 'individual' && $taker == 'individual')
             {
                 $id_type = 1;
+                if ($gibdd == 'false') $id_type = 7;
+                if ($marriage == 'false') $id_type = 9;
+                if ($gibdd == 'false' && $marriage == 'false') $id_type = 8;
             }
             elseif ($giver == 'law' && $taker == 'law')
             {
                 $id_type = 2;
+                if ($gibdd == 'false') $id_type = 10;
             }
             elseif ($giver == 'physical' && $taker == 'law' || $taker == 'individual')
             {
                 $id_type = 3;
+                if ($gibdd == 'false') $id_type = 7;
+                if ($marriage == 'false') $id_type = 9;
+                if ($gibdd == 'false' && $marriage == 'false') $id_type = 8;
             }
             elseif ($giver == 'law' || $giver == 'individual' && $taker == 'physical')
             {
                 $id_type = 4;
+                if ($gibdd == 'false') $id_type = 13;
             }
             else $id_type = false;
         }
@@ -236,14 +247,17 @@ class Document_model extends CI_Model
             if ($giver == 'physical' && $taker == 'physical')
             {
                 $id_type = 5;
+                if ($gibdd == 'false') $id_type = 14;
             }
             elseif ($giver == 'individual' && $taker == 'individual')
             {
                 $id_type = 5;
+                if ($gibdd == 'false') $id_type = 14;
             }
             elseif ($giver == 'physical' || $giver == 'individual' && $taker == 'law')
             {
                 $id_type = 6;
+                if ($gibdd == 'false') $id_type = 15;
             }
             else $id_type = false;
         }
@@ -293,7 +307,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -302,7 +316,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
@@ -323,7 +337,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
@@ -335,7 +349,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице'. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -398,7 +412,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_law_company_name '].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице'. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. 'от'.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name '].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -428,7 +442,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от'.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
@@ -1038,8 +1052,8 @@ class Document_model extends CI_Model
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
         $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
-        $vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
-        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $vendor_law_fio = $this->format_fio($result->vendor_law_actor_surname,$result->vendor_law_actor_name,$result->vendor_law_actor_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_actor_surname,$result->buyer_law_actor_name,$result->buyer_law_actor_patronymic);
         $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
@@ -1047,8 +1061,8 @@ class Document_model extends CI_Model
         //Короткое фио
         $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $short_vendor_law_fio = $this->format_shortfio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
-        $short_buyer_law_fio = $this->format_shortfio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $short_vendor_law_fio = $this->format_shortfio($result->vendor_law_actor_surname,$result->vendor_law_actor_name,$result->vendor_law_actor_patronymic);
+        $short_buyer_law_fio = $this->format_shortfio($result->buyer_law_actor_surname,$result->buyer_law_actor_name,$result->buyer_law_actor_patronymic);
         $short_vendor_ind_fio = $this->format_shortfio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         $short_buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $short_vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
@@ -1953,7 +1967,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_buysale()
     {
-        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract']);
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         $data = array
         (
             'date' => date("Y-m-d H:I:s"),
@@ -2065,6 +2079,7 @@ class Document_model extends CI_Model
             'for_agent_proxy_flat' => $_POST['for_agent_proxy_flat'],
             'for_agent_proxy_phone' => $_POST['for_agent_proxy_phone'],
             //Гибдд
+            'police_form' => $_POST['police_form'],
             'gibdd_power_ingine' => $_POST['gibdd_power_ingine'],
             'gibdd_eco_class' => $_POST['gibdd_eco_class'],
             'gibdd_max_mass' => $_POST['gibdd_max_mass'],
@@ -2159,7 +2174,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_gift()
     {
-        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract']);
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         $data = array
         (
             'date' => date("Y-m-d H:I:s"),
