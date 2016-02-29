@@ -248,7 +248,16 @@ $( document ).ready(function() {
     });
 
 
-
+    $('#editForm a').click(function(){
+        var type = $(this).attr('data-type');
+        var load = $(this).attr('data-load');
+        var id = $('input[name=doc_id]').val();
+        if(load == 'false'){
+            $(this).attr('data-load','true');
+            $('#'+$(this).attr('aria-controls')+' div').html('<div style="background:url(/images/default.gif) no-repeat center center;width:32px;height:32px;"></div>');
+            $('#'+$(this).attr('aria-controls')+' div').load('/ajax/getBlock/'+type+'/'+id);
+        }
+    });
 
 });
 

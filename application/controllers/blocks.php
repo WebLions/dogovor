@@ -55,13 +55,13 @@ class Blocks extends CI_Controller
             }
             if($vendor_state == 'law'){
 
-                $this->blocks_model->bs_block_vendor_law();
+                $this->blocks_model->bs_block_vendor_law_state();
                 $this->blocks_model->bs_block_buyer();
 
             }
             if($vendor_state == 'individual'){
 
-                $this->blocks_model->bs_block_vendor_individual();
+                $this->blocks_model->bs_block_vendor_individual_state();
                 $this->blocks_model->bs_block_buyer();
 
             }

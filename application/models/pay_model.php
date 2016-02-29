@@ -11,18 +11,19 @@ class Pay_model extends CI_Model
     public function getPayLink($doc_id)
     {
         $this->db->select("users.email, users.id");
-        $this->db->where("documents.id",$doc_id);
         $this->db->join("documents","documents.user_id=users.id");
+        $this->db->where("documents.id",$doc_id);
         $query = $this->db->get("users",1,0);
         //echo $this->db->last_query();
         $result = $query->row();
+        //print_r($result);
         $user_email = $result->email;
         $user_id = $result->id;
 
         $pay_amount = '390.00';
         $this->db->where("payID",$doc_id);
         $query = $this->db->get("payments",1,0);
-
+        $result = $query->row();
         if($query->num_rows()=='0'){
             $data = array(
                 "userID"=>$user_id,
@@ -34,7 +35,6 @@ class Pay_model extends CI_Model
             $this->db->insert('payments',$data);
             $for = $this->db->insert_id();
         }elseif($result->type==0){
-            $result = $query->row();
             $for = $result->id;
         }else{
             return false;

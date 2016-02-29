@@ -11,7 +11,7 @@ class Ajax extends CI_Controller {
         parent::__construct();
         $this->load->helper(array('html','url'));
         $this->load->library('form_validation');
-        $this->load->model('user_model');
+        $this->load->model('ajax_model');
     }
 
     public function modal_pay()
@@ -21,5 +21,9 @@ class Ajax extends CI_Controller {
     public function personal_data()
     {
         $this->load->view('blocks/personal_data',$this->data);
+    }
+
+    public function getBlock($b = '',$d = 0){
+        $this->ajax_model->$b($d);
     }
 }

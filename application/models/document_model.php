@@ -1028,7 +1028,7 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
@@ -1324,7 +1324,7 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
@@ -1612,7 +1612,7 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
@@ -1725,7 +1725,7 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
@@ -1842,7 +1842,7 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "documents.user_id = '$id_user' AND buy_sale.id = '$id ' AND documents.table='buy_sale'";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='buy_sale'";
         $this->db->where($where);
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
