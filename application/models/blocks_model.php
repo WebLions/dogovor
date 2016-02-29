@@ -79,13 +79,13 @@ END;
                 </div>
                 <div class = "content-radio">
 
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_law_state" type="radio" name="type_of_giver" value="law">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="law">
                     <span class = "content-input-align">Юридическое лицо</span>
 
                 </div>
                 <div class = "content-radio">
 
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_individual_state"" type="radio" name="type_of_giver" value="individual">
+                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
 
                 </div>

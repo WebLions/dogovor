@@ -12,17 +12,14 @@
                         <th style="width: 15%">Дата создания</th>
                         <th style="width: 15%;text-align: center;">Действия</th>
                     </thead>
-                    <? foreach ($documents as $key => $document) {
-                        $difference = intval(abs(
-                            strtotime($document['date']) - strtotime(date('Y-m-d H:i:s'))
-                        )); ?>
+                    <? foreach ($documents as $key => $document) {?>
                     <tr>
                         <td>Блок документов: <?=$document['doc'][0]['document_name']?></td>
-                        <td><?= 31 - ceil((time() - strtotime($document['date'])) / 86400);?> дней</td>
-                        <td><?=($document['type']==1)?"Оплаченно":"Не оплаченно"?></td>
+                        <td><?=$document['day']?> дней</td>
+                        <td><?=$document['type_s']?></td>
                         <td><?=$document['date']?></td>
                         <td>
-                            <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href=""></a>
+                            <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href="/document/edit/<?=$key?>"></a>
                             <?if($document['type']==0){?>
                                 <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" target="_blank" href="/payment/doc/<?=$key?>"></a>
                             <? }?>
@@ -35,8 +32,10 @@
                             <td></td>
                             <td></td>
                         <td>
+                            <?if($document['type']==1 ){?>
                             <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$doc['url']?>/<?=$key?>"></a>
-                        <td>
+                            <?}?>
+                        </td>
                     </tr>
                         <? } ?>
                     <? } ?>

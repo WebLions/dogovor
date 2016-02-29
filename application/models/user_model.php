@@ -130,7 +130,7 @@ class User_model extends CI_Model
         $this->db->select("table");
         $result = $this->db->get("documents");
        // var_dump($result->result_array());
-        $this->db->select("documents.doc_id as id, documents.date, types.document_name, types.url, payments.type");
+        $this->db->select("documents.id as id, documents.date, types.document_name, types.url, payments.type");
         $this->db->where("documents.user_id", $userID);
         foreach ($result->result_array() as $item) {
             $this->db->join("{$item['table']}","{$item['table']}.id=documents.doc_id");
@@ -143,12 +143,14 @@ class User_model extends CI_Model
         $data = array();
         //var_dump($result->result_array());
         foreach ($result->result_array() as $item) {
+            $data[$item['id']]['type_s'] = ($item['type']==1)?"Оплаченно":"Не оплаченно";
             $data[$item['id']]['type'] = $item['type'];
             $data[$item['id']]['date'] = $item['date'];
             $data[$item['id']]['doc'][] = array(
                 'document_name' => $item['document_name'],
                 'url' => $item['url'],
             );
+            $data[$item['id']]['day'] = 31 - ceil((time() - strtotime($item['date'])) / 86400);
         }
         return $data;
     }
@@ -181,7 +183,7 @@ class User_model extends CI_Model
         $parameters = "apikey=$api_key&list_id=$list_id&email=$email&phone=&mobilecountry=&fname=&lname=&names=&values=&optin=TRUE&update_existing=TRUE";
         // Создаём GET-запрос
         $api_url = "http://api.feedgee.com/1.0/$method?$parameters";
-        echo $email;
+        //echo $email;
         // Делаем запрос на API-сервер
         if( $curl = curl_init() ) {
             $uagent = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322)";
@@ -198,8 +200,6 @@ class User_model extends CI_Model
             $out = curl_exec($curl);
             curl_close($curl);
         }
-        print_r($out);
-
     }
     public function userInfo($user_id){
         $this->db->select("*");
@@ -218,10 +218,10 @@ class User_model extends CI_Model
         $result = $this->db->get("subscribe",1,0);
         $query = $result->row();
         if($result->num_rows()>0){
-            $dif = 31 - ceil((time() - strtotime($query->date_finish)) / 86400);
-            $data['subscribe'] = $dif;
+            $dif = ceil((strtotime($query->date_finish) - time()) / 86400);
+            $data['subscribe'] = $dif. "<small style=\"font-size:50%\">дней</small>";
         }else{
-            $data['subscribe'] = "<a href='/user/subscription'>Оформить</a>";
+            $data['subscribe'] = "<a style=\"font-size: 15px\" href='/user/subscription'>Оформить</a>";
         }
 
         $this->db->where("user_id",$user_id);
@@ -229,7 +229,6 @@ class User_model extends CI_Model
         $data['doc_pay'] = $this->db->count_all_results("documents");
         $this->db->flush_cache();
         $data['doc_all'] = $this->db->count_all("documents");
-
 
         return $data;
     }

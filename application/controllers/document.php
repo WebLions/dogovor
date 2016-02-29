@@ -34,6 +34,7 @@ class Document extends CI_Controller
     {
 
         $this->data['doc'] = $this->document_model->get_doc_act_of_reception( (int) $id );//вызов нужно функции модели;
+
         redirect($this->data['doc']);
     }
     public function receipt_of_money($id)  //  в ссылке выглядит так document/name
@@ -46,12 +47,14 @@ class Document extends CI_Controller
     {
 
         $this->data['doc'] = $this->document_model->get_doc_statement_gibdd($id);//вызов нужно функции модели;
+
         redirect($this->data['doc']);
     }
     public function marriage($id)  //  в ссылке выглядит так document/name
     {
 
         $this->data['doc'] = $this->document_model->get_doc_statement_vendor_marriage($id);//вызов нужно функции модели;
+
         redirect($this->data['doc']);
     }
     public function json()
@@ -138,5 +141,14 @@ class Document extends CI_Controller
         echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
         echo $this->document_model->format_shortfio($surname, $name, $patronymic);
 
+    }
+    public function edit($docum){
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
+        $this->data['doc_id'] = $docum;
+        $this->load->view('user/header');
+        $this->load->view('user/document_edit', $this->data);
+        $this->load->view('user/footer');
     }
 }

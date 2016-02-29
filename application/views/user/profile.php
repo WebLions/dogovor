@@ -64,7 +64,7 @@
                                                   <div class="info-box brown-bg">
                                                       <i class="fa fa-shopping-cart"></i>
                                                       <div class="count"><?=$info['subscribe']?></div>
-                                                      <div class="title">Подписка оформленна</div>
+                                                      <div class="title">Подписка</div>
                                                   </div><!--/.info-box-->
                                               </div><!--/.col-->
 
