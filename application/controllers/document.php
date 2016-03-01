@@ -135,11 +135,11 @@ class Document extends CI_Controller
     }
     public function test()
     {
-        $surname = 'Иванов';
-        $name = 'Иван';
-        $patronymic = 'Иванович';
         echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
-        echo $this->document_model->format_shortfio($surname, $name, $patronymic);
+        $string = array('левый руль', 'правый руль', 'горгород', 'окси');
+        $string = json_encode($string);
+        echo $this->document_model->json_to_string($string);
+
 
     }
     public function edit($docum){
