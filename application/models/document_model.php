@@ -198,9 +198,9 @@ class Document_model extends CI_Model
             $string = $target[0];
             for ($i = 1; $i<$quantity; $i++)
             {
-                $string .= ";<w:br/>" . $target[$i];
+                $string .= ";" . $target[$i];
             }
-            $string .= ";<w:br/>" . $target[$last_element] . ".";
+            $string .= ";" . $target[$last_element] . ".";
         }
         return $string;
     }
