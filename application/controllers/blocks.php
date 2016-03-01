@@ -170,6 +170,8 @@ class Blocks extends CI_Controller
 
     public function bs_block_additional_devices_yes()
     {
+        $buyer_state = $_GET['buyer_state'];
+
         $this->blocks_model->bs_block_additional_devices_list();
         $this->blocks_model->bs_block_car_state();
         $this->blocks_model->bs_block_maintenance();
@@ -178,10 +180,18 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        $this->blocks_model->bs_block_car_in_marriage();
+
+        if(isset($buyer_state)){
+            if($buyer_state == 'law') {
+                $this->blocks_model->bs_block_penalty();
+                $this->blocks_model->bs_block_ready();
+            }
+        }
     }
     public function bs_block_additional_devices_no()
     {
+        $buyer_state = $_GET['buyer_state'];
+
         $this->blocks_model->bs_block_car_state();
         $this->blocks_model->bs_block_maintenance();
         $this->blocks_model->bs_block_defects();
@@ -189,7 +199,12 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        $this->blocks_model->bs_block_car_in_marriage();
+        if(isset($buyer_state)){
+            if($buyer_state == 'law') {
+                $this->blocks_model->bs_block_penalty();
+                $this->blocks_model->bs_block_ready();
+            }
+        }
     }
 
     public function bs_block_car_in_marriage_yes()
