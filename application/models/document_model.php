@@ -1082,7 +1082,6 @@ class Document_model extends CI_Model
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
-        //
         $vendor_date_of_certificate = $result->vendor_date_of_certificate;
         $buyer_date_of_certificate = $result->buyer_date_of_certificate;
         $maintenance_date = $result->maintenance_date;
