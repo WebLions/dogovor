@@ -184,9 +184,9 @@ class Document_model extends CI_Model
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
-    private function json_to_string($target)
+    public function json_to_string($target)
     {
-        json_decode($target);
+        $target = json_decode($target);
         $quantity = count($target);
         $last_element = $quantity-1;//Ибо счет с нуля
         if ($quantity == 1)
@@ -198,9 +198,9 @@ class Document_model extends CI_Model
             $string = $target[0];
             for ($i = 1; $i<$quantity; $i++)
             {
-                $string .= ";" . $target[$i];
+                $string .= ";<w:br/>" . $target[$i];
             }
-            $string .= ";" . $target[$last_element] . ".";
+            $string .= ";<w:br/>" . $target[$last_element] . ".";
         }
         return $string;
     }
@@ -1082,7 +1082,6 @@ class Document_model extends CI_Model
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
-        //
         $vendor_date_of_certificate = $result->vendor_date_of_certificate;
         $buyer_date_of_certificate = $result->buyer_date_of_certificate;
         $maintenance_date = $result->maintenance_date;
@@ -2015,7 +2014,7 @@ class Document_model extends CI_Model
             'buyer_law_actor_position' => $_POST['buyer_law_actor_position'],
             'buyer_law_actor_name' => $_POST['buyer_law_actor_name'],
             'buyer_law_actor_surname' => $_POST['buyer_law_actor_surname'],
-            'buyer_law_company_patronymic' => $_POST['buyer_law_company_patronymic'],
+            'buyer_law_actor_patronymic' => $_POST['buyer_law_actor_patronymic'],
             'buyer_law_document_osn' => $_POST['buyer_law_document_osn'],
             'buyer_law_proxy_number' => $_POST['buyer_law_proxy_number'],
             'buyer_law_proxy_date' => $_POST['buyer_law_proxy_date'],
