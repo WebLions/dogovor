@@ -1252,12 +1252,6 @@ END;
                     <input class = "form-control" type="text" name="vendor_law_proxy_number"  placeholder="Номер доверенности: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_inn"  placeholder="Номер паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="vendor_passport_date" class = "form-control" type="text" name="vendor_props_ogrn"  placeholder="Дата выдачи паспорта:">
-                </div>
-                <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_law_inn"  placeholder="ИНН:">
                 </div>
                 <div class = "content-input-group">
@@ -1397,12 +1391,6 @@ END;
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_law_proxy_number"  placeholder="Номер доверенности: ">
-                </div>
-                <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_props_inn"  placeholder="Номер паспорта:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="buyer_passport_date" class = "form-control" type="text" name="buyer_props_ogrn"  placeholder="Дата выдачи паспорта:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="buyer_law_inn"  placeholder="ИНН:">
