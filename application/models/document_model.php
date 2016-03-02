@@ -198,9 +198,9 @@ class Document_model extends CI_Model
             $string = $target[0];
             for ($i = 1; $i<$quantity; $i++)
             {
-                $string .= ";<w:br/>" . $target[$i];
+                $string .= ";" . $target[$i];
             }
-            $string .= ";<w:br/>" . $target[$last_element] . ".";
+            $string .= ";" . $target[$last_element] . ".";
         }
         return $string;
     }
@@ -1082,17 +1082,17 @@ class Document_model extends CI_Model
         $buyer_birthday = $this->format_date($result->buyer_birthday);
         $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
-        $vendor_date_of_certificate = $result->vendor_date_of_certificate;
-        $buyer_date_of_certificate = $result->buyer_date_of_certificate;
-        $maintenance_date = $result->maintenance_date;
-        $vendor_passport_date  = $result->vendor_passport_date;
-        $for_agent_vendor_proxy_date = $result->for_agent_vendor_proxy_date;
-        $for_agent_buyer_proxy_date = $result->for_agent_buyer_proxy_date;
-        $vendor_ind_passport_date = $result->vendor_ind_passport_date;
-        $buyer_passport_date = $result->buyer_passport_date;
-        $buyer_ind_passport_date = $result->buyer_ind_passport_date;
-        $buyer_law_proxy_date = $result->buyer_law_proxy_date;
-        $vendor_law_proxy_date = $result->vendor_law_proxy_date;
+        $vendor_date_of_certificate = $this->format_date($result->vendor_date_of_certificate);
+        $buyer_date_of_certificate = $this->format_date($result->buyer_date_of_certificate);
+        $maintenance_date = $this->format_date($result->maintenance_date);
+        $vendor_passport_date  = $this->format_date($result->vendor_passport_date);
+        $for_agent_vendor_proxy_date = $this->format_date($result->for_agent_vendor_proxy_date);
+        $for_agent_buyer_proxy_date = $this->format_date($result->for_agent_buyer_proxy_date);
+        $vendor_ind_passport_date = $this->format_date($result->vendor_ind_passport_date);
+        $buyer_passport_date = $this->format_date($result->buyer_passport_date);
+        $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
+        $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
+        $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
         //Джсон
         $documents = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string($result->accessories);
