@@ -1346,7 +1346,7 @@ END;
                     <input class="form-control" type="text" name="vendor_ind_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_props_bik"  placeholder="БИК:">
+                    <input class="form-control" type="text" name="vendor_ind_bik"  placeholder="БИК:">
                 </div>
             </div>
            </div>
@@ -1487,7 +1487,7 @@ END;
                     <input class="form-control" type="text" name="buyer_ind_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_props_bik"  placeholder="БИК:">
+                    <input class="form-control" type="text" name="buyer_ind_bik"  placeholder="БИК:">
                 </div>
             </div>
            </div>
