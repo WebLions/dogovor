@@ -142,7 +142,6 @@ $( document ).ready(function() {
                    }
            });
            return false;
-
        }
 
        $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();

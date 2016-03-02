@@ -328,7 +328,7 @@ END;
     public function bs_block_buyer_state()
     {
         echo <<<END
-<div class="row" id="block_buyer_info">
+<div class="row" id="block_buyer_state>
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Статус покупателя:</p>
@@ -338,8 +338,6 @@ END;
                     <input data-id="block_buyer_info" class="ajax-button" data-block-name="block_buyer_info" data-name="bs_block_buyer_selected_owner" type="radio" name="buyer_is_owner_car" value="own_car">
                     <span class = "content-input-align">Покупатель является новым собственником ТС</span>
                 </div>
-
-
                 <div class = "content-radio">
                     <input data-id="block_buyer_info" class="ajax-button" data-block-name="block_buyer_info" data-name="bs_block_buyer_selected_not_owner" type="radio" name="buyer_is_not_owner_car" value="not_own_car">
                     <span class = "content-input-align">Покупатель не является новым собственником ТС и действует по доверенности</span>
@@ -1231,7 +1229,7 @@ END;
                     <input class = "form-control" type="text" name="vendor_law_actor_surname"  placeholder="Фамилия:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_law_actor_name "  placeholder="Имя:">
+                    <input class="form-control" type="text" name="vendor_law_actor_name"  placeholder="Имя:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_law_actor_patronymic"  placeholder="Отчество:">
@@ -1255,7 +1253,7 @@ END;
                     <input class="form-control" type="text" name="vendor_law_inn"  placeholder="ИНН:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_law_ogrn "  placeholder="ОГРН:">
+                    <input class="form-control" type="text" name="vendor_law_ogrn"  placeholder="ОГРН:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_law_adress"  placeholder="Юридический адрес: ">
@@ -1270,10 +1268,10 @@ END;
                     <input class = "form-control" type="text" name="vendor_law_bank_name"  placeholder="Наименование банка:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_law_korr_acc "  placeholder="Корр.счет:">
+                    <input class = "form-control" type="text" name="vendor_law_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_law_bik "  placeholder="БИК:">
+                    <input class="form-control" type="text" name="vendor_law_bik"  placeholder="БИК:">
                 </div>
             </div>
            </div>
@@ -1297,7 +1295,7 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_surname"  placeholder="Фамилия:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_ind_name "  placeholder="Имя:">
+                    <input class="form-control" type="text" name="vendor_ind_name"  placeholder="Имя:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_patronymic"  placeholder="Отчество:">
@@ -1318,16 +1316,16 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control datatimepicker" type="text" name="vendor_ind_passport_date "  placeholder="Когда выдан паспорт:">
+                    <input class="form-control datatimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
                     <input id="vendor_passport_date" class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_ind_city "  placeholder="Адрес регистрации:">
+                    <input class="form-control" type="text" name="vendor_ind_city"  placeholder="Адрес регистрации:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_ind_street  "  placeholder="Улица:">
+                    <input class="form-control" type="text" name="vendor_ind_street"  placeholder="Улица:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_ind_house"  placeholder="№ дома: ">
@@ -1345,7 +1343,7 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_bank_name"  placeholder="В банке:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_ind_korr_acc "  placeholder="Корр.счет:">
+                    <input class="form-control" type="text" name="vendor_ind_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_props_bik"  placeholder="БИК:">
@@ -1372,7 +1370,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_law_actor_surname"  placeholder="Фамилия:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_law_actor_name "  placeholder="Имя:">
+                    <input class="form-control" type="text" name="buyer_law_actor_name"  placeholder="Имя:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_law_actor_patronymic"  placeholder="Отчество:">
@@ -1396,7 +1394,7 @@ END;
                     <input class="form-control" type="text" name="buyer_law_inn"  placeholder="ИНН:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_law_ogrn "  placeholder="ОГРН:">
+                    <input class="form-control" type="text" name="buyer_law_ogrn"  placeholder="ОГРН:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="buyer_law_adress"  placeholder="Юридический адрес: ">
@@ -1411,10 +1409,10 @@ END;
                     <input class = "form-control" type="text" name="buyer_law_bank_name"  placeholder="Наименование банка:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="buyer_law_korr_acc "  placeholder="Корр.счет:">
+                    <input class = "form-control" type="text" name="buyer_law_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_law_bik "  placeholder="БИК:">
+                    <input class="form-control" type="text" name="buyer_law_bik"  placeholder="БИК:">
                 </div>
             </div>
            </div>
@@ -1438,7 +1436,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_surname"  placeholder="Фамилия:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_ind_name "  placeholder="Имя:">
+                    <input class="form-control" type="text" name="buyer_ind_name"  placeholder="Имя:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_patronymic"  placeholder="Отчество:">
@@ -1453,22 +1451,22 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_passport_serial"  placeholder="Паспорт серия:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_ind_birthday "  placeholder="Дата рождения:">
+                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control datatimepicker" type="text" name="buyer_ind_passport_date "  placeholder="Когда выдан паспорт:">
+                    <input class="form-control datatimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
                     <input id="buyer_passport_date" class = "form-control" type="text" name="buyer_ind_passport_bywho"  placeholder="Кем выдан:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_ind_city "  placeholder="Адрес регистрации:">
+                    <input class="form-control" type="text" name="buyer_ind_city"  placeholder="Адрес регистрации:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_ind_street  "  placeholder="Улица:">
+                    <input class="form-control" type="text" name="buyer_ind_street"  placeholder="Улица:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="buyer_ind_house"  placeholder="№ дома: ">
@@ -1486,7 +1484,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_bank_name"  placeholder="В банке:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_ind_korr_acc "  placeholder="Корр.счет:">
+                    <input class="form-control" type="text" name="buyer_ind_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="buyer_props_bik"  placeholder="БИК:">
