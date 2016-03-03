@@ -839,7 +839,7 @@ END;
                     <input  id="defects_yes" type="radio" name="defects" value="true">
                     <span class = "content-input-align">Есть</span>
 
-                    <input class="ajax-button" id="defects_no" type="radio" name="defects" value="false">
+                    <input id="defects_no" type="radio" name="defects" value="false">
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>
@@ -1002,7 +1002,31 @@ END;
             <div class = "content-radio-header">
 
                 <div class = "content-input-inlane">
-                    <input  class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
+                    <input class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
+                    <span class = "content-input-align">Да</span>
+
+                    <input  class="ajax-button" data-name="bs_block_car_in_marriage_no" type="radio" name="car_in_marriage" value="false">
+                    <span class = "content-input-align">Нет</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+END;
+    }
+    public function bs_block_car_in_marriage_checked()
+    {
+        echo <<<END
+<div class="row" id="block_car_in_marriage">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Автомобиль приобретен в период брака?</p>
+            <div class = "content-radio-header">
+
+                <div class = "content-input-inlane">
+                    <input checked class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
                     <span class = "content-input-align">Да</span>
 
                     <input  class="ajax-button" data-name="bs_block_car_in_marriage_no" type="radio" name="car_in_marriage" value="false">
