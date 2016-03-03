@@ -1316,10 +1316,10 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control datatimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                    <input id="vendor_passport_date"  class="form-control datatimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_passport_date" class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:">
+                    <input  class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_ind_city"  placeholder="Адрес регистрации:">
@@ -1457,10 +1457,10 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control datatimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                    <input id="buyer_passport_date" class="form-control datatimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_passport_date" class = "form-control" type="text" name="buyer_ind_passport_bywho"  placeholder="Кем выдан:">
+                    <input class = "form-control" type="text" name="buyer_ind_passport_bywho" placeholder="Кем выдан:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="buyer_ind_city"  placeholder="Адрес регистрации:">
