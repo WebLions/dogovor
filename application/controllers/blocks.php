@@ -47,37 +47,36 @@ class Blocks extends CI_Controller
     public function bs_block_vendor_selected_owner()
     {
         $vendor_state = $_GET['vendor_state'];
-
-        if(isset($vendor_state)){
-            if($vendor_state == 'physical'){
+        $_SESSION['vendor_state'] = $vendor_state;
+        if(isset($_SESSION['vendor_state'])){
+            if($_SESSION['vendor_state'] == 'physical'){
 
                 $this->blocks_model->bs_block_vendor_info();
                 $this->blocks_model->bs_block_buyer();
             }
-            if($vendor_state == 'law'){
+            if($_SESSION['vendor_state'] == 'law'){
 
                 $this->blocks_model->bs_block_vendor_law_state();
                 $this->blocks_model->bs_block_buyer();
 
             }
-            if($vendor_state == 'individual'){
+            if($_SESSION['vendor_state'] == 'individual'){
 
                 $this->blocks_model->bs_block_vendor_individual_state();
                 $this->blocks_model->bs_block_buyer();
 
             }
         }
-        $_SESSION['state'] = $vendor_state;
+
 
 
     }
-
     public function bs_block_buyer_selected_owner(){
 
         $buyer_state = $_GET['buyer_state'];
-
-        if(isset($buyer_state)){
-            if($buyer_state == 'physical'){
+        $_SESSION['buyer_state'] = $buyer_state;
+        if(isset( $_SESSION['buyer_state'])){
+            if( $_SESSION['buyer_state'] == 'physical'){
 
                 $this->blocks_model->bs_block_buyer_info();
                 $this->blocks_model->bs_block_ts_info();
@@ -86,7 +85,7 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_additional_devices();
 
             }
-            if($buyer_state == 'law'){
+            if( $_SESSION['buyer_state'] == 'law'){
 
                 $this->blocks_model->bs_block_buyer_law_state();
                 $this->blocks_model->bs_block_ts_info();
@@ -95,7 +94,7 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_additional_devices();
 
             }
-            if($buyer_state == 'individual'){
+            if( $_SESSION['buyer_state'] == 'individual'){
 
                 $this->blocks_model->bs_block_buyer_individual_state();
                 $this->blocks_model->bs_block_ts_info();
@@ -109,21 +108,22 @@ class Blocks extends CI_Controller
     public function bs_block_vendor_selected_not_owner()
     {
         $vendor_state = $_GET['vendor_state'];
-        if(isset($vendor_state)){
-            if($vendor_state == 'physical'){
+        $_SESSION['vendor_state'] = $vendor_state;
+        if(isset($_SESSION['vendor_state'])){
+            if($_SESSION['vendor_state'] == 'physical'){
 
                 $this->blocks_model->bs_block_vendor_info();
                 $this->blocks_model->bs_block_vendor_agent();
                 $this->blocks_model->bs_block_buyer();
             }
-            if($vendor_state == 'law'){
+            if($_SESSION['vendor_state'] == 'law'){
 
                 $this->blocks_model->bs_block_vendor_law_state();
                 $this->blocks_model->bs_block_vendor_agent();
                 $this->blocks_model->bs_block_buyer();
 
             }
-            if($vendor_state == 'individual'){
+            if($_SESSION['vendor_state'] == 'individual'){
 
                 $this->blocks_model->bs_block_vendor_individual_state();
                 $this->blocks_model->bs_block_vendor_agent();
@@ -136,9 +136,9 @@ class Blocks extends CI_Controller
     public function bs_block_buyer_selected_not_owner(){
 
         $buyer_state = $_GET['buyer_state'];
-
-        if(isset($buyer_state)){
-            if($buyer_state == 'physical'){
+        $_SESSION['buyer_state'] = $buyer_state;
+        if(isset($_SESSION['buyer_state'])){
+            if($_SESSION['buyer_state'] == 'physical'){
 
                 $this->blocks_model->bs_block_buyer_info();
                 $this->blocks_model->bs_block_buyer_agent();
@@ -148,7 +148,7 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_additional_devices();
 
             }
-            if($buyer_state == 'law'){
+            if($_SESSION['buyer_state'] == 'law'){
 
                 $this->blocks_model->bs_block_buyer_law_state();
                 $this->blocks_model->bs_block_buyer_agent();
@@ -158,7 +158,7 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_additional_devices();
 
             }
-            if($buyer_state == 'individual'){
+            if($_SESSION['buyer_state'] == 'individual'){
 
                 $this->blocks_model->bs_block_buyer_individual_state();
                 $this->blocks_model->bs_block_buyer_agent();
@@ -184,7 +184,7 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        if($_SESSION['state'] == 'law' || $_SESSION['state'] == 'individual') {
+        if($_SESSION['vendor_state'] == 'law' || $_SESSION['vendor_state'] == 'individual') {
 
             $this->blocks_model->bs_block_penalty();
             $this->blocks_model->bs_block_ready();
@@ -203,7 +203,7 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        if($_SESSION['state'] || $_SESSION['state']) {
+        if($_SESSION['vendor_state'] == 'law' || $_SESSION['vendor_state'] == 'individual') {
             $this->blocks_model->bs_block_penalty();
             $this->blocks_model->bs_block_ready();
         }
@@ -260,7 +260,7 @@ class Blocks extends CI_Controller
     public function gift_vendor_block()
     {
         $this->blocks_model->bs_block_deal();
-        $this->blocks_model->gift_block_vendor_state();
+        $this->blocks_model->gift_block_vendor();
     }
     public function gift_block_vendor_state()
     {
