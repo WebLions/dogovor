@@ -213,15 +213,15 @@ class Document_model extends CI_Model
             {
                 $id_type = 1;
                 if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false') $id_type = 9;
+                if ($marriage == 'false' || $marriage = null ) $id_type = 9;
                 if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
             }
             elseif ($giver == 'individual' && $taker == 'individual')
             {
                 $id_type = 1;
                 if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false') $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false') $id_type = 8;
+                if ($marriage == 'false'|| $marriage = null ) $id_type = 9;
+                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
             }
             elseif ($giver == 'law' && $taker == 'law')
             {
@@ -232,8 +232,8 @@ class Document_model extends CI_Model
             {
                 $id_type = 3;
                 if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false') $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false') $id_type = 8;
+                if ($marriage == 'false' || $marriage = null ) $id_type = 9;
+                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
             }
             elseif ($giver == 'law' || $giver == 'individual' && $taker == 'physical')
             {
@@ -261,6 +261,8 @@ class Document_model extends CI_Model
             }
             else $id_type = false;
         }
+
+        echo $id_type;
         return $id_type;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -1045,7 +1047,7 @@ class Document_model extends CI_Model
         $document->setValue('vin', $result->vin);
         $document->setValue('carcass', $result->carcass);
         $document->setValue('shassi', $result->shassi);
-        $document->setValue('gibdd_power_ingine', $result->gibdd_power_ingine);
+        $document->setValue('gibdd_power_engine', $result->gibdd_power_engine);
         $document->setValue('gibdd_eco_class', $result->gibdd_eco_class);
         $document->setValue('gibdd_max_mass', $result->gibdd_max_mass);
         $document->setValue('gibdd_min_mass', $result->gibdd_min_mass);
@@ -1676,10 +1678,10 @@ class Document_model extends CI_Model
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-        $vendor_passport_date  = $result->vendor_passport_date;
-        $vendor_ind_passport_date = $result->vendor_ind_passport_date;
-        $buyer_passport_date = $result->buyer_passport_date;
-        $buyer_ind_passport_date = $result->buyer_ind_passport_date;
+        $vendor_passport_date  = $this->format_date('$result->vendor_passport_date');
+        $vendor_ind_passport_date = $this->format_date('$result->vendor_ind_passport_date');
+        $buyer_passport_date = $this->format_date('$result->buyer_passport_date');
+        $buyer_ind_passport_date = $this->format_date('$result->buyer_ind_passport_date');
 //        $vendor_date_of_certificate = $result->vendor_date_of_certificate;
 //        $buyer_date_of_certificate = $result->buyer_date_of_certificate;
 //        $for_agent_vendor_proxy_date = $result->for_agent_vendor_proxy_date;
@@ -1865,7 +1867,7 @@ class Document_model extends CI_Model
         $document->setValue('vin', $result->vin);
         $document->setValue('carcass', $result->carcass);
         $document->setValue('shassi', $result->shassi);
-        $document->setValue('gibdd_power_ingine', $result->gibdd_power_ingine);
+        $document->setValue('gibdd_power_engine', $result->gibdd_power_engine);
         $document->setValue('gibdd_eco_class', $result->gibdd_eco_class);
         $document->setValue('gibdd_max_mass', $result->gibdd_max_mass);
         $document->setValue('gibdd_min_mass', $result->gibdd_min_mass);
@@ -2106,10 +2108,11 @@ class Document_model extends CI_Model
             'for_agent_proxy_phone' => $_POST['for_agent_proxy_phone'],
             //Гибдд
             'police_form' => $_POST['police_form'],
-            'gibdd_power_ingine' => $_POST['gibdd_power_ingine'],
+            'gibdd_power_engine' => $_POST['gibdd_power_engine'],
             'gibdd_eco_class' => $_POST['gibdd_eco_class'],
             'gibdd_max_mass' => $_POST['gibdd_max_mass'],
             'gibdd_min_mass' => $_POST['gibdd_min_mass'],
+            'gibdd_reg_name' => $_POST['gibdd_reg_name'],
             //New info end
             'vendor_surname' => $_POST['vendor_surname'],
             'vendor_name' => $_POST['vendor_name'],
@@ -2342,7 +2345,7 @@ class Document_model extends CI_Model
             'gibdd_act' => $_POST['gibdd_act'],
             'gibdd_reg_name' => $_POST['gibdd_reg_name'],
             'gibdd_inn' => $_POST['gibdd_inn'],
-            'gibdd_power_ingine' => $_POST['gibdd_power_ingine'],
+            'gibdd_power_engine' => $_POST['gibdd_power_engine'],
             'gibdd_eco_class' => $_POST['gibdd_eco_class'],
             'gibdd_max_mass' => $_POST['gibdd_max_mass'],
             'gibdd_min_mass' => $_POST['gibdd_min_mass'],
