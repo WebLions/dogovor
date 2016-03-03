@@ -128,6 +128,7 @@ class User_model extends CI_Model
         $userID = $_SESSION['user_id'];
         $this->db->distinct("table");
         $this->db->select("table");
+        $this->db->order_by("date","desc");
         $result = $this->db->get("documents");
        // var_dump($result->result_array());
         $this->db->select("documents.id as id, documents.date, types.document_name, types.url, payments.type");
@@ -138,6 +139,7 @@ class User_model extends CI_Model
         }
         $this->db->join("payments", "payments.payID=documents.id");
        // $this->db->order_by("documents.date");
+        $this->db->order_by("documents.id","desc");
         $result = $this->db->get("documents");
         //print_r($this->db->last_query());
         $data = array();
