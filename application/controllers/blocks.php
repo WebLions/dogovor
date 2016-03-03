@@ -260,7 +260,7 @@ class Blocks extends CI_Controller
     public function gift_vendor_block()
     {
         $this->blocks_model->bs_block_deal();
-        $this->blocks_model->gift_block_vendor_state();
+        $this->blocks_model->gift_block_vendor();
     }
     public function gift_block_vendor_state()
     {

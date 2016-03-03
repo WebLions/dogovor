@@ -126,7 +126,7 @@ $( document ).ready(function() {
        if(state_name == 'type_of_taker') buyer_state = $(this).val();
        if(state_name == 'type_of_giver') vendor_state = $(this).val();
 
-       if(state_name == 'buyer_is_owner_car')
+       if(state_name == 'buyer_is_owner_car' || state_name == 'buyer_is_not_owner_car')
        {
            $.ajax({
                     method:"GET",
@@ -140,7 +140,7 @@ $( document ).ready(function() {
            });
            return false;
        }
-       if(state_name == 'vendor_is_owner_car')
+       if(state_name == 'vendor_is_owner_car' || state_name == 'vendor_is_not_owner_car')
        {
            $.ajax({
                    method:"GET",
@@ -216,7 +216,7 @@ $( document ).ready(function() {
     });
     $('.document').on('change','#features_no', function() {
 
-        if(defects == false) $('#features_additional_block').remove();
+        if(features == false) $('#features_additional_block').remove();
         features=true;
     });
 
@@ -235,7 +235,11 @@ $( document ).ready(function() {
                                                                     '</div>');
         accessories=false;
     });
+    $('.document').on('change','#bs_block_car_in_marriage_yes', function() {
 
+        $('#bs_block_car_in_marriage_yes').remove();
+
+    });
     //render
 
 

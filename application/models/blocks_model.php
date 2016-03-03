@@ -29,8 +29,10 @@ END;
 <div class="row" id="block_consent" data-id="1">
      <div class="col-lg-12 ">
         <div class = "content-block">
-            <div class = "content-input-group">
+            <div class = "content-radio-header"
+            <div class = "content-input-inline">
     		    <input class="" data-name="gift_vendor_block" type="checkbox" id="pact">Заполнить персональные данные сторон и адрес объекта
+    		</div>
     		</div>
     	</div>
      </div>
@@ -993,7 +995,7 @@ END;
             <div class = "content-radio-header">
 
                 <div class = "content-input-inlane">
-                    <input class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
+                    <input id="bs_block_car_in_marriage_yes" class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
                     <span class = "content-input-align">Да</span>
 
                     <input  class="ajax-button" data-name="bs_block_car_in_marriage_no" type="radio" name="car_in_marriage" value="false">
@@ -1584,15 +1586,15 @@ END;
             <p class = "content-header">Даритель транспортного средства:</p>
             <div class = "content-radio-group">
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="physical">
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_law_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_law_state" type="radio" name="type_of_giver" value="physical">
                     <span class = "content-input-align">Юридическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="individual">
+                    <input class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
 
                 </div>
