@@ -839,7 +839,7 @@ END;
                     <input  id="defects_yes" type="radio" name="defects" value="true">
                     <span class = "content-input-align">Есть</span>
 
-                    <input class="ajax-button" data-function="defects_additional_block" id="defects_no" type="radio" name="defects" value="false">
+                    <input class="ajax-button" id="defects_no" type="radio" name="defects" value="false">
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>
@@ -1304,7 +1304,7 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control datatimepicker" type="text" name="vendor_ ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                    <input id="vendor_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="vendor_ind_date_of_certificate"  placeholder="Дата выдачи: ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:">
@@ -1445,7 +1445,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control datatimepicker" type="text" name="buyer_ ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                    <input id="buyer_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="buyer_ind_date_of_certificate"  placeholder="Дата выдачи: ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_serial"  placeholder="Паспорт серия:">
