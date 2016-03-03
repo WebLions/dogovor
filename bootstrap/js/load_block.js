@@ -98,6 +98,16 @@ $( document ).ready(function() {
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
+    $("#doc_create").delegate("#vendor_ind_date_of_certificate", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
+    $("#doc_create").delegate("#buyer_ind_date_of_certificate", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
     $("#doc_create").delegate("input[name=for_agent_proxy_pass_date]", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
@@ -192,6 +202,11 @@ $( document ).ready(function() {
                                                             '</div>');
         defects=false;
     });
+    $('.document').on('change','#defects_no', function() {
+
+        if(defects == true) $('#efects_additional_block').remove();
+        defects=true;
+    });
 
 
     $('.document').on('change','#features_yes', function() {
@@ -209,7 +224,7 @@ $( document ).ready(function() {
                                                                 '</div>');
         credit=false;
     });
-    $('.document').on('change','#block_accessories_other', function() {
+    $('.document').on('change','#accessories_other', function() {
 
         if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
                                                                     '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+

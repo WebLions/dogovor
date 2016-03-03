@@ -7,7 +7,7 @@ class Blocks extends CI_Controller
     /**
      * User constructor.
      */
-    var $state;
+    public $state;
     public function __construct()
     {
 
@@ -68,6 +68,7 @@ class Blocks extends CI_Controller
             }
         }
         $_SESSION['state'] = $vendor_state;
+
 
     }
 
@@ -174,6 +175,7 @@ class Blocks extends CI_Controller
 
     public function bs_block_additional_devices_yes()
     {
+
         $this->blocks_model->bs_block_additional_devices_list();
         $this->blocks_model->bs_block_car_state();
         $this->blocks_model->bs_block_maintenance();
@@ -183,6 +185,7 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
         if($_SESSION['state'] == 'law' || $_SESSION['state'] == 'individual') {
+
             $this->blocks_model->bs_block_penalty();
             $this->blocks_model->bs_block_ready();
         }
