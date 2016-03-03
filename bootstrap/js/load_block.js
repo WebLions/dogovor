@@ -204,17 +204,20 @@ $( document ).ready(function() {
     });
     $('.document').on('change','#defects_no', function() {
 
-        if(defects == true) $('#efects_additional_block').remove();
+        if(defects == false) $('#defects_additional_block').remove();
         defects=true;
     });
-
-
     $('.document').on('change','#features_yes', function() {
 
         if(features == true) $('#features_block').append('<div id="features_additional_block" class = "content-input-group">'+
                                                               '<input class="form-control" type="text"  name="features"  placeholder="Особенности">'+
                                                               '</div>');
         features=false;
+    });
+    $('.document').on('change','#features_no', function() {
+
+        if(defects == false) $('#features_additional_block').remove();
+        features=true;
     });
 
     $('.document').on('change','#block_payment_date', function() {
@@ -224,6 +227,7 @@ $( document ).ready(function() {
                                                                 '</div>');
         credit=false;
     });
+
     $('.document').on('change','#accessories_other', function() {
 
         if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
