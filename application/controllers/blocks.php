@@ -7,6 +7,7 @@ class Blocks extends CI_Controller
     /**
      * User constructor.
      */
+    var $state;
     public function __construct()
     {
 
@@ -66,8 +67,10 @@ class Blocks extends CI_Controller
 
             }
         }
+        $_SESSION['state'] = $vendor_state;
 
     }
+
     public function bs_block_buyer_selected_owner(){
 
         $buyer_state = $_GET['buyer_state'];
@@ -168,6 +171,7 @@ class Blocks extends CI_Controller
     }
 
 
+
     public function bs_block_additional_devices_yes()
     {
         $this->blocks_model->bs_block_additional_devices_list();
@@ -178,6 +182,12 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
+        if($_SESSION['state'] == 'law' || $_SESSION['state'] == 'individual') {
+            $this->blocks_model->bs_block_penalty();
+            $this->blocks_model->bs_block_ready();
+        }
+        else $this->blocks_model->bs_block_car_in_marriage();
+
 
 
     }
@@ -190,7 +200,11 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-
+        if($_SESSION['state'] || $_SESSION['state']) {
+            $this->blocks_model->bs_block_penalty();
+            $this->blocks_model->bs_block_ready();
+        }
+        else $this->blocks_model->bs_block_car_in_marriage();
     }
 
     public function bs_block_car_in_marriage_yes()
