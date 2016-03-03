@@ -23,7 +23,7 @@ class Ajax extends CI_Controller {
         $this->load->view('blocks/personal_data',$this->data);
     }
 
-    public function getBlock($b = '',$d = 0){
-        $this->ajax_model->$b($d);
+    public function getBlock($b = '',$d = 0,$data = false){
+        $this->ajax_model->$b($d, $data);
     }
 }

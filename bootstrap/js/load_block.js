@@ -13,6 +13,50 @@ var vendor_state,
 
 $( document ).ready(function() {
 
+    $('#editForm').on('change','.edit-ajax-button', function(e){
+        var name = $(this).attr('data-name');
+        var index = $('#editForm').find("#"+$(this).attr('data-id')).index()+1;
+        var b = $('#editForm').find("#"+$(this).attr('data-id')).parent('div');
+        console.log(name);
+        if(name!='bs_block_additional_devices_yes'&&name!='bs_block_additional_devices_no')
+            b.find('.row').slice(index).remove();
+        else
+            name = "bs_block_additional_devices_list";
+        var id = $('input[name=doc_id]').val();
+        var data = [];
+        if(name=='bs_block_vendor_selected_not_owner')
+            data = {type:'true'};
+        if(name==('bs_block_vendor_selected_owner')||name==('bs_block_vendor_selected_not_owner'))
+            switch ($('#editForm').find('input[name=type_of_giver]:checked').val()) {
+                case 'physical': name = 'bs_block_vendor_info'; break;
+                case 'law': name = 'bs_block_vendor_law_state'; break;
+                case 'individual': name = 'bs_block_vendor_individual_state'; break;
+            }
+
+        if(name=='bs_block_buyer_selected_not_owner')
+            data = {type:'true'};
+        if(name==('bs_block_buyer_selected_owner')||name==('bs_block_buyer_selected_not_owner'))
+            switch ($('#editForm').find('input[name=type_of_taker]:checked').val()) {
+                case 'physical': name = 'bs_block_buyer_info'; break;
+                case 'law': name = 'bs_block_buyer_law_state'; break;
+                case 'individual': name = 'bs_block_buyer_individual_state'; break;
+            }
+        if(name=='bs_block_additional_devices_list'){
+            $('#block_additional_devices_list').remove();
+            console.log(name);
+            if($(this).attr('data-name')=="bs_block_additional_devices_yes")
+                $.get('/ajax/getBlock/'+name+'/'+id+'/true',data,function(block){
+                    $('#block_additional_devices').after(block);
+                });
+        }else{
+            $.get('/ajax/getBlock/'+name+'/'+id+'/true',data,function(block){
+                b.append(block);
+            });
+        }
+        e.preventDefault();
+        return false;
+    });
+
     $('.document').on('change', 'input[name="additional_devices_array[]"]', function(e){
         if($(this).prop('checked')==false)
             return false;
