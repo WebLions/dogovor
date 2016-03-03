@@ -67,27 +67,22 @@ END;
     public function bs_block_vendor()
     {
         echo <<<END
-<div class="row" id="block_buyer">
+<div class="row" id="block_vendor">
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Продавец транспортного средства:</p>
             <div class = "content-radio-group">
                 <div class = "content-radio">
-
                     <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="physical">
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-
                     <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="law">
                     <span class = "content-input-align">Юридическое лицо</span>
-
                 </div>
                 <div class = "content-radio">
-
                     <input data-id="block_seller" class="ajax-button" data-name="bs_block_vendor_state" type="radio" name="type_of_giver" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
-
                 </div>
             </div>
         </div>
@@ -245,9 +240,9 @@ END;
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Покупатель транспортного средства:</p>
+
             <div class = "content-radio-group">
                 <div class = "content-radio">
-
                     <input data-id="block_buyer" class="ajax-button" data-name="bs_block_buyer_state" type="radio" name="type_of_taker" value="physical">
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
@@ -255,15 +250,13 @@ END;
 
                     <input data-id="block_seller" class="ajax-button" data-name="bs_block_buyer_state" type="radio" name="type_of_taker" value="law">
                     <span class = "content-input-align">Юридическое лицо</span>
-
                 </div>
                 <div class = "content-radio">
-
                     <input data-id="block_seller" class="ajax-button" data-name="bs_block_buyer_state"" type="radio" name="type_of_taker" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
-
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -277,7 +270,6 @@ END;
     <div class = "content-block">
         <p class = "content-header">Введите данныe покупателя:</p>
         <div class = "content-radio">
-
             <div class = "content-input">
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_surname"  placeholder="Фамилия:">
@@ -319,7 +311,7 @@ END;
                     <input class="form-control" type="text" name="buyer_phone"  placeholder="Телефон">
                 </div>
             </div>
-           </div>
+            </div>
         </div>
     </div>
 </div>
@@ -328,12 +320,11 @@ END;
     public function bs_block_buyer_state()
     {
         echo <<<END
-<div class="row" id="block_buyer_state>
+<div class="row" id="block_buyer_state">
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Статус покупателя:</p>
             <div class="content-radio-group">
-
                 <div class = "content-radio">
                     <input data-id="block_buyer_info" class="ajax-button" data-block-name="block_buyer_info" data-name="bs_block_buyer_selected_owner" type="radio" name="buyer_is_owner_car" value="own_car">
                     <span class = "content-input-align">Покупатель является новым собственником ТС</span>
@@ -1334,7 +1325,7 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_ind_birthday "  placeholder="Дата рождения:">
+                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
