@@ -784,7 +784,7 @@ END;
                     <input class="form-control" type="text" name="buyer_ind_korr_acc"  placeholder="Корр.счет:" value="{$query->buyer_ind_korr_acc}">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_ind_bik"  placeholder="БИК:" value="{$query->buyer_props_bik}">
+                    <input class="form-control" type="text" name="buyer_ind_bik"  placeholder="БИК:" value="{$query->buyer_ind_bik}">
                 </div>
             </div>
            </div>
@@ -1471,17 +1471,33 @@ END;
                     <input type="radio" id="accessories_other">
                     <span class = "content-input-align">Иное:</span>
                 </div>
-
+                %{text}%
             </div>
         </div>
     </div>
 </div>
 
 END;
-        foreach (json_decode($query->accessories) as $document) {
-            $input = str_replace("value=\"{$document}\"", "value=\"{$document}\" checked", $input);
-        }
+        $documents = json_decode($query->accessories);
 
+        foreach ($documents as $key => $document) {
+            if (strripos($input, $document)) {
+                $input = str_replace("value=\"{$document}\"", "value=\"{$document}\" checked", $input);
+                unset($documents[$key]);
+            }
+        }
+        $text = '';
+        if (!empty($documents)) {
+            foreach ($documents as $document) {
+                $text = <<<END
+                <div class="content-input-group">
+                    <input class="form-control" type="text" name="accessories[]" placeholder="Дополнительные принадлежности:" value="{$document}">
+                </div>
+END;
+            }
+            $input = str_replace("id=\"accessories_other\"", "id=\"accessories_other\" checked", $input);
+        }
+        $input = str_replace("%{text}%", $text, $input);
         echo $input;
     }
     public function bs_block_car_price($d, $data)
