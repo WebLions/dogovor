@@ -1648,52 +1648,52 @@ END;
             <div class = "content-radio">
 
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_surname"  placeholder="Фамилия:" {$query->spouse_surname}>
+                    <input class = "form-control" type="text" name="spouse_surname"  placeholder="Фамилия:" value="{$query->spouse_surname}">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="spouse_name"  placeholder="Имя:" {$query->spouse_name}>
+                    <input class="form-control" type="text" name="spouse_name"  placeholder="Имя:" value="{$query->spouse_name}">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_patronymic"  placeholder="Отчество:" {$query->spouse_patronymic}>
+                    <input class = "form-control" type="text" name="spouse_patronymic"  placeholder="Отчество:" value="{$query->spouse_patronymic}">
                 </div>
                 <div class = "content-input-group">
-                    <input id="spouse_birthday" class="form-control datetimepicker" type="text"  name="spouse_birthday"  placeholder="Дата рождения:" {$query->spouse_birthday}>
+                    <input id="spouse_birthday" class="form-control datetimepicker" type="text"  name="spouse_birthday"  placeholder="Дата рождения:" value="{$query->spouse_birthday}">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_pass_serial"  placeholder="Серия паспорта:" {$query->spouse_pass_serial}>
+                    <input class = "form-control" type="text" name="spouse_pass_serial"  placeholder="Серия паспорта:" value="{$query->spouse_pass_serial}">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="spouse_pass_number"  placeholder="Номер паспорта:" {$query->spouse_pass_number}>
+                    <input class="form-control" type="text" name="spouse_pass_number"  placeholder="Номер паспорта:" value="{$query->spouse_pass_number}">
                 </div>
                 <div class = "content-input-group">
-                    <input id="spouse_pass_date" class = "form-control datetimepicker" type="text" name="spouse_pass_date"  placeholder="Дата выдачи паспорта:" {$query->spouse_pass_date}>
+                    <input id="spouse_pass_date" class = "form-control datetimepicker" type="text" name="spouse_pass_date"  placeholder="Дата выдачи паспорта:" value="{$query->spouse_pass_date}">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="spouse_pass_bywho"  placeholder="Кем выдан паспорт:" {$query->spouse_pass_bywho}>
+                    <input class="form-control" type="text" name="spouse_pass_bywho"  placeholder="Кем выдан паспорт:" value="{$query->spouse_pass_bywho}">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_city"  placeholder="Адрес регистрации(город):" {$query->spouse_city}>
+                    <input class = "form-control" type="text" name="spouse_city"  placeholder="Адрес регистрации(город):" value="{$query->spouse_city}">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_street"  placeholder="Адрес регистрации(улица):" {$query->spouse_street}>
+                    <input class = "form-control" type="text" name="spouse_street"  placeholder="Адрес регистрации(улица):" value="{$query->spouse_street}">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_house"  placeholder="Адрес регистрации(дом):" {$query->spouse_house}>
+                    <input class = "form-control" type="text" name="spouse_house"  placeholder="Адрес регистрации(дом):" value="{$query->spouse_house}">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="spouse_flat"  placeholder="Адрес регистрации(квартира):" {$query->spouse_flat}>
+                    <input class = "form-control" type="text" name="spouse_flat"  placeholder="Адрес регистрации(квартира):" value="{$query->spouse_flat}">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="marriage_svid_serial"  placeholder="Серия свидетельства о браке:" {$query->marriage_svid_serial}>
+                    <input class="form-control" type="text" name="marriage_svid_serial"  placeholder="Серия свидетельства о браке:" value="{$query->marriage_svid_serial}">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="marriage_svid_number"  placeholder="Номер свидетельства о браке:" {$query->marriage_svid_number}>
+                    <input class="form-control" type="text" name="marriage_svid_number"  placeholder="Номер свидетельства о браке:" value="{$query->marriage_svid_number}">
                 </div>
                 <div class = "content-input-group">
-                    <input id="marriage_svid_date" class="form-control datetimepicker" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:" {$query->marriage_svid_date}>
+                    <input id="marriage_svid_date" class="form-control datetimepicker" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:" value="{$query->marriage_svid_date}">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="marriage_svid_bywho"  placeholder="Kем выдано свидетельство о браке:" {$query->marriage_svid_bywho}>
+                    <input class="form-control" type="text" name="marriage_svid_bywho"  placeholder="Kем выдано свидетельство о браке:" value="{$query->marriage_svid_bywho}">
                 </div>
 
             </div>
@@ -1724,23 +1724,23 @@ END;
             <div class = "content-radio-header">
 
               <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:" {$query->gibdd_reg_name}>
+                    <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:" value="{$query->gibdd_reg_name}">
               </div>
             </div>
             <p class = "content-header">Сведения из ПТС транспортного средства:</p>
             <div class = "content-radio-header">
 
              <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:" {$query->gibdd_power_engine}>
+                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:" value="{$query->gibdd_power_engine}">
               </div>
               <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:" {$query->gibdd_eco_class}>
+                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:" value="{$query->gibdd_eco_class}">
               </div>
               <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_max_mass"  placeholder="Разрешенная максимальная масса:" {$query->gibdd_max_mass}>
+                    <input class = "form-control" type="text" name="gibdd_max_mass"  placeholder="Разрешенная максимальная масса:" value="{$query->gibdd_max_mass}">
               </div>
                <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_min_mass"  placeholder="Разрешенная минимальная  масса:" {$query->gibdd_min_mass}>
+                    <input class = "form-control" type="text" name="gibdd_min_mass"  placeholder="Разрешенная минимальная  масса:" value="{$query->gibdd_min_mass}">
               </div>
 
             </div>
@@ -1749,10 +1749,10 @@ END;
         <h4 class="content-header">Кто несет заявление в ГИБДД?</h4>
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
-                    <input data-id="block_police" class="edit-ajax-button" data-type="statement" data-name="bs_block_statement_gibdd" type="radio" name="statement_form" value="true" {$v[0]}>
+                    <input data-id="block_police" class="edit-ajax-button" data-type="statement" type="radio" name="statement_form" value="true" {$v[0]}>
                     <span class = "content-input-align">Покупатель лично</span>
 
-                    <input data-id="block_police" class="edit-ajax-button" data-type="statement" type="radio" name="statement_form" value="false" {$v[1]}>
+                    <input data-id="block_police" class="edit-ajax-button" data-type="statement" data-name="bs_block_statement_gibdd" type="radio" name="statement_form" value="false" {$v[1]}>
                     <span class = "content-input-align">Представитель</span>
                 </div>
             </div>
@@ -1760,7 +1760,7 @@ END;
     </div>
 </div>
 END;
-        if($query->statement_form=="true")
+        if($query->statement_form=="false")
             $this->bs_block_statement_gibdd($d, $data);
     }
     public function bs_block_statement_gibdd($d, $data)
@@ -1783,31 +1783,31 @@ END;
     <div class = "content-block">
         <div class = "content-input">
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_pass_serial"  placeholder="Серия паспорта" {$query->for_agent_proxy_pass_serial}>
+                <input class="form-control" type="text" name="for_agent_proxy_pass_serial"  placeholder="Серия паспорта" value="{$query->for_agent_proxy_pass_serial}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_pass_number"  placeholder="Номер паспорта" {$query->for_agent_proxy_pass_number}>
+                <input class="form-control" type="text" name="for_agent_proxy_pass_number"  placeholder="Номер паспорта" value="{$query->for_agent_proxy_pass_number}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан" {$query->for_agent_proxy_pass_date}>
+                <input class="form-control" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан" value="{$query->for_agent_proxy_pass_date}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_pass_bywho"  placeholder="Кем выдан" {$query->for_agent_proxy_pass_bywho}>
+                <input class="form-control" type="text" name="for_agent_proxy_pass_bywho"  placeholder="Кем выдан" value="{$query->for_agent_proxy_pass_bywho}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_city"  placeholder="Адрес (Город)" {$query->for_agent_proxy_city}>
+                <input class="form-control" type="text" name="for_agent_proxy_city"  placeholder="Адрес (Город)" value="{$query->for_agent_proxy_city}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)" {$query->for_agent_proxy_street}>
+                <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)" value="{$query->for_agent_proxy_street}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Квартира)" {$query->for_agent_proxy_house}>
+                <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Квартира)" value="{$query->for_agent_proxy_house}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)" {$query->for_agent_proxy_flat}>
+                <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)" value="{$query->for_agent_proxy_flat}">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон" {$query->for_agent_proxy_phone}>
+                <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон" value="{$query->for_agent_proxy_phone}">
              </div>
         </div>
         </div>

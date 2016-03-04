@@ -2108,7 +2108,7 @@ class Document_model extends CI_Model
             'gibdd_max_mass' => $_POST['gibdd_max_mass'],
             'gibdd_min_mass' => $_POST['gibdd_min_mass'],
             'gibdd_reg_name' => $_POST['gibdd_reg_name'],
-            'statement_form' => $_POST['statement_form'],
+            'statement_form' => empty($_POST['statement_form'])?'true':$_POST['statement_form'],
             //New info end
             'vendor_surname' => $_POST['vendor_surname'],
             'vendor_name' => $_POST['vendor_name'],
@@ -3285,7 +3285,6 @@ class Document_model extends CI_Model
         foreach ($post as $key => $item) {
             $data[$key] = $item;
         }
-
         $this->db->where('id',$q->id);
         $this->db->update('buy_sale', $data);
     }
