@@ -1590,7 +1590,7 @@ END;
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_law_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="physical">
                     <span class = "content-input-align">Юридическое лицо</span>
                 </div>
                 <div class = "content-radio">
@@ -1606,7 +1606,6 @@ END;
     }
     public function gift_block_buyer()
     {
-
         echo <<<END
 <div class="row" id="block_seller">
     <div class="col-lg-12">
@@ -1614,15 +1613,15 @@ END;
             <p class = "content-header">Одаряемый транспортного средства:</p>
             <div class = "content-radio-group">
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="physical">
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_law_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_buyer_law_state" type="radio" name="type_of_taker" value="physical">
                     <span class = "content-input-align">Юридическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="individual">
+                    <input class="ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="individual">
                     <span class = "content-input-align">Индивидуальный предприниматель</span>
 
                 </div>
@@ -1751,14 +1750,38 @@ END;
             <div class="content-radio-group">
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="gift_block_vendor_info_owner" type="radio" name="vendor_is_owner_car" value="own_car">
+                    <input class="ajax-button" data-name="gift_block_vendor_selected_owner" type="radio" name="vendor_is_owner_car" value="own_car">
                     <span class = "content-input-align">Даритель является собственником ТС</span>
+                </div>
+                <div class = "content-radio">
+                    <input class="ajax-button" data-name="gift_block_vendor_selected_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
+                    <span class = "content-input-align">Даритель не является собственником ТС и действует по доверенности</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+END;
+    }
+    public function gift_block_buyer_state()
+    {
+        echo <<<END
+<div class="row" id="block_seller_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Статус одаряемого:</p>
+            <div class="content-radio-group">
+
+                <div class = "content-radio">
+                    <input  class="ajax-button"  data-name="gift_block_buyer_selected_owner" type="radio" name="vendor_is_owner_car" value="own_car">
+                    <span class = "content-input-align">Одаряемый является собственником ТС</span>
                 </div>
 
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_info" data-name="gift_block_vendor_info_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
-                    <span class = "content-input-align">Даритель не является собственником ТС и действует по доверенности</span>
+                    <input class="ajax-button"  data-name="gift_block_buyer_selected_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
+                    <span class = "content-input-align">Одаряемый не является собственником ТС и действует по доверенности</span>
                 </div>
             </div>
 

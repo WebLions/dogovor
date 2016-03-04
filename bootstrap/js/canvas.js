@@ -4,7 +4,7 @@ function canvas_render(){
     var text;
     var maxWidth = 560; //размер поле, где выводится текст
     var lineHeight;
-    var marginLeft = 15;
+    var marginLeft = 0;
     var marginTop = 40;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
@@ -23,14 +23,14 @@ function canvas_render(){
 
         context.font = "11pt Arial";
         context.fillStyle = "#000";
-        marginLeft = 30;
+        marginLeft = 15;
         lineHeight = 16;
     }
     function list(){
 
         context.font = "11pt Arial";
         context.fillStyle = "#000";
-        marginLeft = 50;
+        marginLeft = 35;
         lineHeight = 16;
 
     }
@@ -38,7 +38,7 @@ function canvas_render(){
 
         context.font = "11pt Arial";
         context.fillStyle = "#000";
-        marginLeft = 50;
+        marginLeft = 35;
         lineHeight = 16;
 
     }
@@ -46,7 +46,7 @@ function canvas_render(){
 
         context.font = "11pt Arial";
         context.fillStyle = "#000";
-        marginLeft = 400;
+        marginLeft = 385;
         lineHeight = 16;
 
     }
@@ -54,7 +54,7 @@ function canvas_render(){
 
         context.font = "13pt Arial";
         context.fillStyle = "#000";
-        marginLeft = 250;
+        marginLeft = 235;
         lineHeight = 16;
 
     }
@@ -72,23 +72,24 @@ function canvas_render(){
 
     function printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight,text_type)
     {
+        //if(text_type == 'columns-left' || text_type == 'columns-right')
         var words = text.split(" ");
         var wordsLength = words.length;
         var line = "";
         for(var i = 0; i < wordsLength; i++){
-
             var checkLine = line + words[i] + " ";
             var checkWidth = context.measureText(checkLine).width;
+
             if(checkWidth > maxWidth){
                 context.fillText(line,marginLeft,marginTop);
                 line = words[i] + " ";
                 marginTop += lineHeight;
-
-            }
+                }
             else{
                 line = checkLine;
                 context.fillText(line,marginLeft,marginTop);
             }
+
         }
         marginTop += lineHeight;
         return marginTop;
@@ -104,6 +105,7 @@ function canvas_render(){
             text_type = val['text-type'];
             get_text_type(text_type,prev_text_type);
             marginTop = printContent(context,text,marginLeft,marginTop,maxWidth,lineHeight,text_type);
+
         });
 
     },"json"
