@@ -196,7 +196,7 @@ class Document_model extends CI_Model
         elseif ($quantity > 1)
         {
             $string = $target[0];
-            for ($i = 1; $i<$quantity; $i++)
+            for ($i = 1; $i<$quantity-1; $i++)
             {
                 $string .= "; " . $target[$i];
             }
@@ -412,7 +412,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_law_company_name '].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position '].', '. $data_for_header['vendor_law_fio '].', действующего на основании '. $data_for_header['vendor_law_document_osn ']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -541,7 +541,7 @@ class Document_model extends CI_Model
                 $output .="Дата рождения : {$data['date']} <w:br/>";
                 $output .="Паспорт: Серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  <w:br/>";
                 $output .="Место жительства: {$data['adress']} <w:br/>";
-                $output .= "Телефон: {$data['phone']} ";
+                $output .= "Телефон: {$data['phone']} <w:br/>";
                 $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
                 $output .= "Корр. счет: {$data['korr_acc']} <w:br/>";
                 $output .= "БИК: {$data['bik']}";
