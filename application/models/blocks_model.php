@@ -1339,7 +1339,7 @@ END;
                     <input  class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_ind_city"  placeholder="Адрес регистрации:">
+                    <input class="form-control" type="text" name="vendor_ind_city"  placeholder="Адрес регистрации(город):">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="vendor_ind_street"  placeholder="Улица:">
@@ -1480,7 +1480,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_passport_bywho" placeholder="Кем выдан:">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_ind_city"  placeholder="Адрес регистрации:">
+                    <input class="form-control" type="text" name="buyer_ind_city"  placeholder="Адрес регистрации(Город):">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="buyer_ind_street"  placeholder="Улица:">

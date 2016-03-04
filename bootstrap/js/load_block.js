@@ -164,6 +164,7 @@ $( document ).ready(function() {
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
+    
 
     //ДАТАПИКЕР
 
