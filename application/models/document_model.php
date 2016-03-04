@@ -3259,9 +3259,22 @@ class Document_model extends CI_Model
     public function bs_save_edit($post,$id){
         unset($post['doc_id']);
 
-        if(!empty($post['type_of_giver'])&&!empty($post['type_of_taker'])&&!empty($post['type_of_contract'])&&!empty($post['car_in_marriage'])&&!empty($post['police_form']))
-            $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], $post['type_of_contract'], $post['car_in_marriage'], $post['police_form']);
-        $post['date'] = date("Y-m-d H:I:s");
+        $this->db->select('doc_id as id');
+        $this->db->where('id',$id);
+        $q = $this->db->get('documents',1)->row();
+
+        $this->db->select('id, type_of_giver, type_of_taker, type_of_contract, car_in_marriage, police_form');
+        $this->db->where('id',$q->id);
+        $d = $this->db->get('buy_sale',1)->row();
+
+        $post['type_of_giver'] = !empty($post['type_of_giver'])?$post['type_of_giver']:$d->type_of_giver;
+        $post['type_of_taker'] = !empty($post['type_of_taker'])?$post['type_of_taker']:$d->type_of_taker;
+        $post['type_of_contract'] = !empty($post['type_of_contract'])?$post['type_of_contract']:$d->type_of_contract;
+        $post['car_in_marriage'] = !empty($post['car_in_marriage'])?$post['car_in_marriage']:$d->car_in_marriage;
+        $post['police_form'] = !empty($post['police_form'])?$post['police_form']:$d->police_form;
+
+        $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], $post['type_of_contract'], $post['car_in_marriage'], $post['police_form']);
+
         if(!empty($post['additional_devices_array']))
             $post['additional_devices_array'] = json_encode($post['additional_devices_array']);
         if(!empty($post['documents']))
@@ -3272,9 +3285,6 @@ class Document_model extends CI_Model
         foreach ($post as $key => $item) {
             $data[$key] = $item;
         }
-        $this->db->select('doc_id as id');
-        $this->db->where('id',$id);
-        $q = $this->db->get('documents',1)->row();
 
         $this->db->where('id',$q->id);
         $this->db->update('buy_sale', $data);

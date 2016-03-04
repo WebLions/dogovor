@@ -1525,8 +1525,33 @@ END;
 END;
     }
 
-    public function bs_block_police_yes()
+    public function bs_block_police_yes($email)
     {
+        $text = "";
+        if($_GET['buyer']=='true')
+            $text = <<<END
+    <div class="col-lg-12">
+        Кто несет заявление в ГИБДД?
+            <div class = "content-radio-header">
+                <div class = "content-input-inlane">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true">
+                    <span class = "content-input-align">Покупатель лично</span>
+
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false">
+                    <span class = "content-input-align">Представитель</span>
+                </div>
+            </div>
+    </div>
+END;
+        else
+            $text = <<<END
+<div class="row" id="block_police" >
+            {$this->getEmailInput($email)}
+            <div class="col-lg-12">
+                <button id="ready_button" type="submit" class="btn btn-success">Сохранить и оплатить</button>
+            </div>
+        </div>
+END;
         echo <<<END
         <div class="row" id="block_police" >
     <div class="col-lg-12">
@@ -1557,20 +1582,10 @@ END;
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        Кто несет заявление в ГИБДД?
-            <div class = "content-radio-header">
-                <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true">
-                    <span class = "content-input-align">Покупатель лично</span>
-
-                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false">
-                    <span class = "content-input-align">Представитель</span>
-                </div>
-            </div>
-    </div>
+    {$text}
 </div>
 END;
+
     }
 
 

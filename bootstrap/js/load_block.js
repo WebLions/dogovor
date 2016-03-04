@@ -227,11 +227,15 @@ $( document ).ready(function() {
    });
     //BLOCK MODAL FUNCTION
     $('.document').on('change','.modal-button', function() {
-
+        var buyer = $('input[data-name=bs_block_buyer_selected_not_owner]:checked').val();
+        if(buyer=='not_own_car')
+            buyer='true';
+        else
+            buyer='false';
         if($(this).attr('data-type')=='final')
             $('.document').find('.modal-body-statement').empty();
 
-        $('.document').find('.modal-body-' + $(this).attr('data-type')).load('/blocks/' + $(this).attr('data-name'));
+        $('.document').find('.modal-body-' + $(this).attr('data-type')).load('/blocks/' + $(this).attr('data-name')+'?buyer='+buyer);
 
     });
 

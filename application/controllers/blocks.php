@@ -225,7 +225,11 @@ class Blocks extends CI_Controller
 
     public function police_yes(){
         //заполняем заяву в гибдд
-        $this->blocks_model->bs_block_police_yes();
+        $email = false;
+        if( !$this->data['user_id'] ) {
+            $email = true;
+        }
+        $this->blocks_model->bs_block_police_yes($email);
     }
     public function police_no(){
         //кнопка сохранить
