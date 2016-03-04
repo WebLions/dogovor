@@ -261,8 +261,6 @@ class Document_model extends CI_Model
             }
             else $id_type = false;
         }
-
-        echo $id_type;
         return $id_type;
     }
     //------------------------------------------------------------------------------------------------------------------
