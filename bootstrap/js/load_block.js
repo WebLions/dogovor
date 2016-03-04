@@ -8,7 +8,9 @@ var defects = true,
     police = true;
 
 var vendor_state,
-    buyer_state;
+    buyer_state,
+    vendor_state_agent,
+    buyer_state_agent;
 
 
 $( document ).ready(function() {
@@ -157,8 +159,19 @@ $( document ).ready(function() {
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
+    $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
+
     //ДАТАПИКЕР
 
+    $('.document').on('change','.agent',function(){
+
+        $(".document").find('.row').slice( $('.agent').parents("div[class=row]").index()+1).remove();
+
+    });
 
     //BLOCK FUNCTION
    $('.document').on('change','.ajax-button', function(){

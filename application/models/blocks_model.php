@@ -102,13 +102,13 @@ END;
             <div class="content-radio-group">
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_selected_owner" data-name="bs_block_vendor_selected_owner" type="radio" name="vendor_is_owner_car" value="own_car">
+                    <input class="ajax-button agent"  data-name="bs_block_vendor_selected_owner" type="radio" name="vendor_is_owner_car" value="own_car">
                     <span class = "content-input-align">Продавец является собственником ТС</span>
                 </div>
 
 
                 <div class = "content-radio">
-                    <input data-id="block_seller_info" class="ajax-button" data-block-name="block_vendor_selected_not_owner" data-name="bs_block_vendor_selected_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
+                    <input class="ajax-button agent" data-name="bs_block_vendor_selected_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
                     <span class = "content-input-align">Продавец не является собственником ТС и действует по доверенности</span>
                 </div>
             </div>
@@ -328,11 +328,11 @@ END;
             <p class = "content-header">Статус покупателя:</p>
             <div class="content-radio-group">
                 <div class = "content-radio">
-                    <input data-id="block_buyer_info" class="ajax-button" data-block-name="block_buyer_info" data-name="bs_block_buyer_selected_owner" type="radio" name="buyer_is_owner_car" value="own_car">
+                    <input class="ajax-button agent" data-name="bs_block_buyer_selected_owner" type="radio" name="buyer_is_owner_car" value="own_car">
                     <span class = "content-input-align">Покупатель является новым собственником ТС</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_buyer_info" class="ajax-button" data-block-name="block_buyer_info" data-name="bs_block_buyer_selected_not_owner" type="radio" name="buyer_is_not_owner_car" value="not_own_car">
+                    <input class="ajax-button agent" data-name="bs_block_buyer_selected_not_owner" type="radio" name="buyer_is_not_owner_car" value="not_own_car">
                     <span class = "content-input-align">Покупатель не является новым собственником ТС и действует по доверенности</span>
                 </div>
             </div>
@@ -1617,7 +1617,7 @@ END;
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_buyer_law_state" type="radio" name="type_of_taker" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="physical">
                     <span class = "content-input-align">Юридическое лицо</span>
                 </div>
                 <div class = "content-radio">
@@ -1774,17 +1774,326 @@ END;
             <div class="content-radio-group">
 
                 <div class = "content-radio">
-                    <input  class="ajax-button"  data-name="gift_block_buyer_selected_owner" type="radio" name="vendor_is_owner_car" value="own_car">
+                    <input  class="ajax-button"  data-name="gift_block_buyer_selected_owner" type="radio" name="buyer_is_owner_car" value="own_car">
                     <span class = "content-input-align">Одаряемый является собственником ТС</span>
                 </div>
 
 
                 <div class = "content-radio">
-                    <input class="ajax-button"  data-name="gift_block_buyer_selected_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car">
+                    <input class="ajax-button"  data-name="gift_block_buyer_selected_not_owner" type="radio" name="buyer_is_owner_car" value="not_own_car">
                     <span class = "content-input-align">Одаряемый не является собственником ТС и действует по доверенности</span>
                 </div>
             </div>
 
+        </div>
+    </div>
+</div>
+END;
+    }
+    public function gift_block_pts_info()
+    {
+        echo <<<END
+<div class="row" id="block_pts_info" data-id="7">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Сведения о траспортном средстве:</p>
+            <div class = "content-radio">
+
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="serial_car"  placeholder="Серия:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="number_of_serial_car"  placeholder="Номер:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="date_of_serial_car" class = "form-control datetimepicker" type="text" name="date_of_serial_car"  placeholder="Дата выдачи:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text"  name="bywho_serial_car"  placeholder="Кем выдан:">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+END;
+    }
+
+    public function gift_block_vendor_law_state()
+    {
+        echo <<<END
+<div class="row" id="block_seller_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe дарителя:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_actor_surname"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_actor_name"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_actor_patronymic"  placeholder="Отчество:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_actor_position"  placeholder="В лице: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_law_proxy_date"  placeholder="Дата выдачи доверенности:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_proxy_number"  placeholder="Номер доверенности: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_inn"  placeholder="ИНН:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_ogrn"  placeholder="ОГРН:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_adress"  placeholder="Юридический адрес: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_phone"  placeholder="Телефон:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_acc"  placeholder="Расчетный счет">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_bank_name"  placeholder="Наименование банка:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_korr_acc"  placeholder="Корр.счет:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_bik"  placeholder="БИК:">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+
+    }
+    public function gift_block_vendor_individual_state()
+    {
+        echo <<<END
+<div class="row" id="block_seller_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe дарителя:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_surname"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_name"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_patronymic"  placeholder="Отчество:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="vendor_ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_passport_date"  class="form-control datatimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                </div>
+                <div class = "content-input-group">
+                    <input  class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_city"  placeholder="Адрес регистрации:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_street"  placeholder="Улица:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_house"  placeholder="№ дома: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_flat"  placeholder="Номер квартиры:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_phone"  placeholder="Телефон">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_bank_acc"  placeholder="Расчетный счет:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_bank_name"  placeholder="В банке:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_korr_acc"  placeholder="Корр.счет:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_bik"  placeholder="БИК:">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+    }
+
+    public function gift_block_buyer_law_state()
+    {
+        echo <<<END
+<div class="row" id="block_seller_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe одаряемого:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_actor_surname"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_actor_name"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_actor_patronymic"  placeholder="Отчество:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_actor_position"  placeholder="В лице: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_document_osn"  placeholder="Действующего на основании:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_law_proxy_date"  placeholder="Дата выдачи доверенности:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_proxy_number"  placeholder="Номер доверенности: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_inn"  placeholder="ИНН:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_ogrn"  placeholder="ОГРН:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_adress"  placeholder="Юридический адрес: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_phone"  placeholder="Телефон:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_acc"  placeholder="Расчетный счет">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_bank_name"  placeholder="Наименование банка:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_korr_acc"  placeholder="Корр.счет:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_bik"  placeholder="БИК:">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+
+    }
+    public function gift_block_buyer_individual_state()
+    {
+        echo <<<END
+<div class="row" id="block_buyer_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe одаряемого:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_surname"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_name"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_patronymic"  placeholder="Отчество:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="buyer_ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_passport_serial"  placeholder="Паспорт серия:">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_passport_number"  placeholder="Паспорт номер: ">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_passport_date" class="form-control datatimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_passport_bywho" placeholder="Кем выдан:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_city"  placeholder="Адрес регистрации:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_street"  placeholder="Улица:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_house"  placeholder="№ дома: ">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_flat"  placeholder="Номер квартиры:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_phone"  placeholder="Телефон">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_bank_acc"  placeholder="Расчетный счет:">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_bank_name"  placeholder="В банке:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_korr_acc"  placeholder="Корр.счет:">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_bik"  placeholder="БИК:">
+                </div>
+            </div>
+           </div>
         </div>
     </div>
 </div>
