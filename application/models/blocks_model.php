@@ -1562,10 +1562,10 @@ END;
         Кто несет заявление в ГИБДД?
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true">
                     <span class = "content-input-align">Покупатель лично</span>
 
-                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" >
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false">
                     <span class = "content-input-align">Представитель</span>
                 </div>
             </div>

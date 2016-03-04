@@ -88,7 +88,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" role="tab" id="heading-7">
                             <h4 class="panel-title">
-                                <a role="button" data-load="false" data-type="bs_block_police_yes" data-toggle="collapse" data-parent="#accordion" href="#collapse-7" aria-expanded="true" aria-controls="collapse-7">
+                                <a role="button" data-load="false" data-type="bs_block_police" data-toggle="collapse" data-parent="#accordion" href="#collapse-7" aria-expanded="true" aria-controls="collapse-7">
                                     Заявление ГИБДД
                                 </a>
                             </h4>
@@ -98,6 +98,9 @@
                             </div>
                         </div>
                     </div>
+                        <div class="col-lg-12" style="text-align: center;margin: 20px 0px;">
+                            <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                        </div>
                 </div>
                 </form>
             </div>

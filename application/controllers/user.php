@@ -45,6 +45,7 @@ class User extends CI_Controller {
             redirect('/','refresh');
         }
         $this->data['documents'] = $this->user_model->getListDocuments( );
+        $this->data['alert_save'] = empty($_GET['save'])?'false':'true';
 
         $this->load->view('user/header');
         $this->load->view('user/documents', $this->data);

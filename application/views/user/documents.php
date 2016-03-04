@@ -1,7 +1,16 @@
 <section id="main-content">
     <section class="wrapper">
         <!--overview start-->
-
+        <?if($alert_save=='true'){?>
+        <div class = "row">
+            <div class = "col-lg-12">
+                <div class="alert alert-success" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Отлично!</strong> Ваши изменения сохранены!
+                </div>
+            </div>
+        </div>
+        <?}?>
         <div class = "row">
             <div class = "col-lg-12">
                 <table class="table table-striped">
