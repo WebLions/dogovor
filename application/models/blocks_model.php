@@ -336,7 +336,6 @@ END;
                     <span class = "content-input-align">Покупатель не является новым собственником ТС и действует по доверенности</span>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
