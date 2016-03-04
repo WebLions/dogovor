@@ -257,7 +257,13 @@ class Blocks extends CI_Controller
     {
         $this->blocks_model->gift_consent();
     }
+
     public function gift_vendor_block()
+{
+    $this->blocks_model->bs_block_deal();
+    $this->blocks_model->gift_block_vendor();
+}
+    public function gift_buyer_block()
     {
         $this->blocks_model->bs_block_deal();
         $this->blocks_model->gift_block_vendor();
@@ -270,10 +276,65 @@ class Blocks extends CI_Controller
     {
         $this->blocks_model->gift_block_buyer_state();
     }
-    public function gift_block_vendor_info_owner()
+    public function gift_block_vendor_selected_owner()
     {
-        $this->blocks_model->gift_block_vendor_info();
-        $this->blocks_model->gift_block_buyer();
-    }
+        $vendor_state = $_GET['vendor_state'];
+        $_SESSION['vendor_state'] = $vendor_state;
+        if(isset($_SESSION['vendor_state'])){
+            if($_SESSION['vendor_state'] == 'physical'){
 
+                $this->blocks_model->gift_block_vendor_info();
+                $this->blocks_model->gift_block_buyer();
+            }
+            if($_SESSION['vendor_state'] == 'law'){
+
+                $this->blocks_model->bs_block_vendor_law_state();
+                $this->blocks_model->gift_block_buyer();
+
+            }
+            if($_SESSION['vendor_state'] == 'individual'){
+
+                $this->blocks_model->bs_block_vendor_individual_state();
+                $this->blocks_model->gift_block_buyer();
+
+            }
+        }
+
+
+
+    }
+    public function gift_block_buyer_selected_owner(){
+
+        $buyer_state = $_GET['buyer_state'];
+        $_SESSION['buyer_state'] = $buyer_state;
+        if(isset( $_SESSION['buyer_state'])){
+            if( $_SESSION['buyer_state'] == 'physical'){
+
+                $this->blocks_model->bs_block_buyer_info();
+                $this->blocks_model->bs_block_ts_info();
+                $this->blocks_model->bs_block_serial_car();
+                $this->blocks_model->bs_block_car_price();
+                $this->blocks_model->bs_block_additional_devices();
+
+            }
+            if( $_SESSION['buyer_state'] == 'law'){
+
+                $this->blocks_model->bs_block_buyer_law_state();
+                $this->blocks_model->bs_block_ts_info();
+                $this->blocks_model->bs_block_serial_car();
+                $this->blocks_model->bs_block_car_price();
+                $this->blocks_model->bs_block_additional_devices();
+
+            }
+            if( $_SESSION['buyer_state'] == 'individual'){
+
+                $this->blocks_model->bs_block_buyer_individual_state();
+                $this->blocks_model->bs_block_ts_info();
+                $this->blocks_model->bs_block_serial_car();
+                $this->blocks_model->bs_block_car_price();
+                $this->blocks_model->bs_block_additional_devices();
+
+            }
+        }
+    }
 }
