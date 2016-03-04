@@ -36,8 +36,8 @@ class Document_model extends CI_Model
         $tens=array(2=>'двадцать','тридцать','сорок','пятьдесят','шестьдесят','семьдесят' ,'восемьдесят','девяносто');
         $hundred=array('','сто','двести','триста','четыреста','пятьсот','шестьсот', 'семьсот','восемьсот','девятьсот');
         $unit=array( // Units
-            array('десятая' ,'десятых' ,'десятых',	 1),
-           // array('целая'   ,'целых'   ,'целых'    ,0),
+            array('' ,'' ,'',	 1),
+            array(''   ,''   ,''    ,0),
             array('тысяча'  ,'тысячи'  ,'тысяч'     ,1),
             array('миллион' ,'миллиона','миллионов' ,0),
             array('миллиард','милиарда','миллиардов',0),
@@ -60,8 +60,8 @@ class Document_model extends CI_Model
             } //foreach
         }
         else $out[] = $nul;
-        //$out[] = $this->morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
-        //$out[] = $kop.' '.morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
+        $out[] = $this->morph(intval($rub), $unit[1][0],$unit[1][1],$unit[1][2]); // rub
+       // $out[] = $kop.' '.$this->morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
         return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
     }
     private function morph($n, $f1, $f2, $f5)
@@ -178,7 +178,7 @@ class Document_model extends CI_Model
         return $fio;
     }
     //------------------------------------------------------------------------------------------------------------------
-    private function format_shortfio($surname=string, $name=string, $patronymic=string)
+    public function format_shortfio($surname=string, $name=string, $patronymic=string)
     {
         $fio = $surname .' '. mb_substr($name, 0,1) . '. '. mb_substr($patronymic,0,1).'.';
         return $fio;
@@ -1678,10 +1678,10 @@ class Document_model extends CI_Model
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-        $vendor_passport_date  = $this->format_date('$result->vendor_passport_date');
-        $vendor_ind_passport_date = $this->format_date('$result->vendor_ind_passport_date');
-        $buyer_passport_date = $this->format_date('$result->buyer_passport_date');
-        $buyer_ind_passport_date = $this->format_date('$result->buyer_ind_passport_date');
+        $vendor_passport_date  = $this->format_date($result->vendor_passport_date);
+        $vendor_ind_passport_date = $this->format_date($result->vendor_ind_passport_date);
+        $buyer_passport_date = $this->format_date($result->buyer_passport_date);
+        $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
 //        $vendor_date_of_certificate = $result->vendor_date_of_certificate;
 //        $buyer_date_of_certificate = $result->buyer_date_of_certificate;
 //        $for_agent_vendor_proxy_date = $result->for_agent_vendor_proxy_date;
@@ -1903,8 +1903,8 @@ class Document_model extends CI_Model
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Короткое фио
         $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
-        $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
         $short_spouse_fio = $this->format_shortfio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
+        $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
         $short_vendor_law_fio = $this->format_shortfio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
         $short_buyer_law_fio = $this->format_shortfio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
         $short_vendor_ind_fio = $this->format_shortfio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
@@ -1932,15 +1932,11 @@ class Document_model extends CI_Model
         );
         $vendor_namedata = array
         (
-            'phys_name' => $short_vendor_fio
-        );
-        $spouse_namedata = array
-        (
-            'phys_name' => $short_spouse_fio
+            'phys_name' => $short_vendor_fio,
+            'agent_name' => $short_vendor_agent_fio
         );
         $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
         $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
-        $spouse_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $spouse_namedata);
 
         $price_str = $this->num2str($result->price_car);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
@@ -1958,6 +1954,7 @@ class Document_model extends CI_Model
         $document->setValue('place_of_contract', $result->place_of_contract);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('vin', $result->vin);
+        $document->setValue('mark', $result->mark);
         $document->setValue('date_of_product', $date_of_product);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('carcass', $result->carcass);
@@ -1966,7 +1963,7 @@ class Document_model extends CI_Model
         $document->setValue('bywho_serial_car', $result->bywho_serial_car);
         $document->setValue('date_of_serial_car', $date_of_serial_car);
         $document->setValue('spouse_fio', $spouse_fio);
-        $document->setValue('spouse_name', $spouse_name);
+        $document->setValue('spouse_name', $short_spouse_fio);
         $document->setValue('spouse_pass_serial', $result->spouse_pass_serial);
         $document->setValue('spouse_pass_number', $result->spouse_pass_number);
         $document->setValue('spouse_pass_bywho', $result->spouse_pass_bywho);
@@ -2598,7 +2595,7 @@ class Document_model extends CI_Model
             ),
             3 => array
             (
-                'text' => "	$date_of_contract",
+                'text' => "$date_of_contract",
                 'text-type' => 'columns-right'
             ),
             4 => array
