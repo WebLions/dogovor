@@ -151,4 +151,11 @@ class Document extends CI_Controller
         $this->load->view('user/document_edit', $this->data);
         $this->load->view('user/footer');
     }
+    public function saveEdit(){
+        $id = $_POST['doc_id'];
+        $type = $this->document_model->get_table_to_doc_id($id);
+        if($type=="buy_sale")
+            $this->document_model->bs_save_edit($this->input->post(),$id);
+        redirect('/user/documents?save=true','refresh');
+    }
 }

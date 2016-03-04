@@ -2108,6 +2108,7 @@ class Document_model extends CI_Model
             'gibdd_max_mass' => $_POST['gibdd_max_mass'],
             'gibdd_min_mass' => $_POST['gibdd_min_mass'],
             'gibdd_reg_name' => $_POST['gibdd_reg_name'],
+            'statement_form' => $_POST['statement_form'],
             //New info end
             'vendor_surname' => $_POST['vendor_surname'],
             'vendor_name' => $_POST['vendor_name'],
@@ -3248,5 +3249,34 @@ class Document_model extends CI_Model
         );
         $this->db->insert('documents',$data);
         return $this->db->insert_id();
+    }
+    public function get_table_to_doc_id($id){
+        $this->db->select('table');
+        $this->db->where('id',$id);
+        $query = $this->db->get('documents',1)->row();
+        return $query->table;
+    }
+    public function bs_save_edit($post,$id){
+        unset($post['doc_id']);
+
+        if(!empty($post['type_of_giver'])&&!empty($post['type_of_taker'])&&!empty($post['type_of_contract'])&&!empty($post['car_in_marriage'])&&!empty($post['police_form']))
+            $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], $post['type_of_contract'], $post['car_in_marriage'], $post['police_form']);
+        $post['date'] = date("Y-m-d H:I:s");
+        if(!empty($post['additional_devices_array']))
+            $post['additional_devices_array'] = json_encode($post['additional_devices_array']);
+        if(!empty($post['documents']))
+            $post['documents'] = json_encode($post['documents']);
+        if(!empty($post['accessories']))
+            $post['accessories'] = json_encode($post['accessories']);
+
+        foreach ($post as $key => $item) {
+            $data[$key] = $item;
+        }
+        $this->db->select('doc_id as id');
+        $this->db->where('id',$id);
+        $q = $this->db->get('documents',1)->row();
+
+        $this->db->where('id',$q->id);
+        $this->db->update('buy_sale', $data);
     }
 }
