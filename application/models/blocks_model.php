@@ -868,9 +868,9 @@ END;
     public function bs_block_payment_date()
     {
         echo <<<END
-<div class="row" id="block_payment_date" data-id="16">
+<div class="row" id="bs_block_payment_date" data-id="16">
     <div class="col-lg-12">
-        <div class = "content-block" id="payment_date">
+        <div class = "content-block" id="block_payment_date">
             <p class = "content-header">Сроки оплаты:</p>
             <div class = "content-radio-group">
 
@@ -1251,10 +1251,10 @@ END;
                     <input class = "form-control" type="text" name="vendor_law_actor_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование: ">
+                    <input class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование кампании: ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="vendor_law_actor_position"  placeholder="В лице: ">
+                    <input class="form-control" type="text" name="vendor_law_actor_position"  placeholder="В лице(должность): ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:">
@@ -1392,10 +1392,10 @@ END;
                     <input class = "form-control" type="text" name="buyer_law_actor_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование: ">
+                    <input class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование(кампания): ">
                 </div>
                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="buyer_law_actor_position"  placeholder="В лице: ">
+                    <input class="form-control" type="text" name="buyer_law_actor_position"  placeholder="В лице(должность): ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_law_document_osn"  placeholder="Действующего на основании:">

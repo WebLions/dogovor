@@ -278,9 +278,9 @@ $( document ).ready(function() {
         features=true;
     });
 
-    $('.document').on('change','#block_payment_date', function() {
+    $('.document').on('change','#credit', function() {
 
-        if(credit == true) $('#payment_date').append('<div class = "content-input-group">'+
+        if(credit == true) $('#block_payment_date').append('<div class = "content-input-group">'+
                                                      '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
                                                                 '</div>');
         credit=false;
