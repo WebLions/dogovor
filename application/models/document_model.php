@@ -1775,7 +1775,6 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
-
         //Подготовка
         //Фио
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
