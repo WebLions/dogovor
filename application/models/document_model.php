@@ -1086,13 +1086,13 @@ class Document_model extends CI_Model
         $query = $this->db->get('buy_sale');
         $result = $query->row();
         //Если поле пустое - вставляем отсутсвует
-        foreach ($result as $key => $value)
-        {
-            if (empty($value) == true)
-            {
-                $result->$key = 'отстутсвует';
-            }
-        }
+//        foreach ($result as $key => $value)
+//        {
+//            if (empty($value) == true)
+//            {
+//                $result->$key = 'отстутсвует';
+//            }
+//        }
         // Подготовка данных для работы с документов
         //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
@@ -1393,13 +1393,13 @@ class Document_model extends CI_Model
         $query = $this->db->get('buy_sale');
         $result = $query->row();
         //Если поле пустое - вставляем отсутсвует
-        foreach ($result as $key => $value)
-        {
-            if (empty($value) == true)
-            {
-                $result->$key = 'отстутсвует';
-            }
-        }
+//        foreach ($result as $key => $value)
+//        {
+//            if (empty($value) == true)
+//            {
+//                $result->$key = 'отстутсвует';
+//            }
+//        }
         //Подготовка данных
         //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
@@ -1690,13 +1690,13 @@ class Document_model extends CI_Model
         $query = $this->db->get('buy_sale');
         $result = $query->row();
         //Если поле пустое - вставляем отсутсвует
-        foreach ($result as $key => $value)
-        {
-            if (empty($value) == true)
-            {
-                $result->$key = 'отстутсвует';
-            }
-        }
+//        foreach ($result as $key => $value)
+//        {
+//            if (empty($value) == true)
+//            {
+//                $result->$key = 'отстутсвует';
+//            }
+//        }
         //Подготовка данных
         //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
@@ -1805,13 +1805,13 @@ class Document_model extends CI_Model
         $query = $this->db->get('buy_sale');
         $result = $query->row();
         //Если поле пустое - вставляем отсутсвует
-        foreach ($result as $key => $value)
-        {
-            if (empty($value) == true)
-            {
-                $result->$key = 'отстутсвует';
-            }
-        }
+//        foreach ($result as $key => $value)
+//        {
+//            if (empty($value) == true)
+//            {
+//                $result->$key = 'отстутсвует';
+//            }
+//        }
         //Подготовка
         //Фио
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
@@ -1929,13 +1929,13 @@ class Document_model extends CI_Model
         $query = $this->db->get('buy_sale');
         $result = $query->row();
         //Если поле пустое - вставляем отсутсвует
-        foreach ($result as $key => $value)
-        {
-            if (empty($value) == true)
-            {
-                $result->$key = 'отстутсвует';
-            }
-        }
+//        foreach ($result as $key => $value)
+//        {
+//            if (empty($value) == true)
+//            {
+//                $result->$key = 'отстутсвует';
+//            }
+//        }
         //Подготовка
        //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
