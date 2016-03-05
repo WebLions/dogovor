@@ -23,7 +23,7 @@
                     </thead>
                     <? foreach ($documents as $key => $document) {?>
                     <tr>
-                        <td>Блок документов: <?=$document['doc'][0]['document_name']?></td>
+                        <td>Блок документов: <?=$document['block_name']?></td>
                         <td><?=$document['day']?> дней</td>
                         <td><?=$document['type_s']?></td>
                         <td><?=$document['date']?></td>

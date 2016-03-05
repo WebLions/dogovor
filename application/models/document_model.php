@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-error_reporting (0);
+error_reporting(0);
 
 class Document_model extends CI_Model
 {
@@ -1084,6 +1084,7 @@ class Document_model extends CI_Model
 //            }
 //        }
         // Подготовка данных для работы с документов
+
         //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
@@ -3331,4 +3332,5 @@ class Document_model extends CI_Model
         $this->db->where('id',$q->id);
         $this->db->update('buy_sale', $data);
     }
+
 }
