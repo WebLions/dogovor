@@ -130,6 +130,7 @@ class User_model extends CI_Model
         $this->db->select("table");
         $this->db->order_by("date","desc");
         $result = $this->db->get("documents");
+
        // var_dump($result->result_array());
         $this->db->select("documents.id as id, documents.date, types.document_name, types.url, payments.type");
         $this->db->where("documents.user_id", $userID);
@@ -152,6 +153,10 @@ class User_model extends CI_Model
                 'document_name' => $item['document_name'],
                 'url' => $item['url'],
             );
+            if($item['url']=="buy_sale")
+                $data[$item['id']]['block_name'] = $item['document_name'];
+            if($item['url']=="gift")
+                $data[$item['id']]['block_name'] = $item['document_name'];
             $data[$item['id']]['day'] = 31 - ceil((time() - strtotime($item['date'])) / 86400);
         }
         return $data;
