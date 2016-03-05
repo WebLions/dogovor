@@ -21,7 +21,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-               $result->$key = 'отстутсвует';
+               $result->$key = 'отсутствует';
             }
         }
 
@@ -161,7 +161,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function format_date($date)
     {
-        if(empty($date) || $date == 'отстутсвует'){
+        if(empty($date) || $date == 'отсутствует'){
             return false;
         }
         $date = DateTime::createFromFormat('Y-m-d', $date);
@@ -1092,7 +1092,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отстутсвует';
+                $result->$key = 'отсутствует';
             }
         }
         // Подготовка данных для работы с документов
@@ -1399,7 +1399,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отстутсвует';
+                $result->$key = 'отсутствует';
             }
         }
         //Подготовка данных
@@ -1696,7 +1696,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отстутсвует';
+                $result->$key = 'отсутствует';
             }
         }
         //Подготовка данных
@@ -1811,7 +1811,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отстутсвует';
+                $result->$key = 'отсутствует';
             }
         }
         //Подготовка
@@ -1935,7 +1935,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отстутсвует';
+                $result->$key = 'отсутствует';
             }
         }
         //Подготовка
