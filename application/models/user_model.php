@@ -126,33 +126,34 @@ class User_model extends CI_Model
     public function getListDocuments()
     {
         $userID = $_SESSION['user_id'];
-        $this->db->distinct("table");
-        $this->db->select("table");
-        $this->db->order_by("date","desc");
+
+        $this->db->distinct("documents.id");
+        $this->db->select("documents.id, documents.doc_id, documents.table, types.document_name, payments.type, documents.date, types.url");
+        $this->db->where("documents.user_id",$userID);
+        $this->db->join("types", "types.url=documents.table");
+        $this->db->join("payments", "payments.payID=documents.id");
+        $this->db->order_by("documents.date","desc");
         $result = $this->db->get("documents");
 
-       // var_dump($result->result_array());
-        $this->db->select("documents.id as id, documents.date, types.document_name, types.url, payments.type");
-        $this->db->where("documents.user_id", $userID);
-        foreach ($result->result_array() as $item) {
-            $this->db->join("{$item['table']}","{$item['table']}.id=documents.doc_id");
-            $this->db->join("types", "types.id={$item['table']}.type_id");
-        }
-        $this->db->join("payments", "payments.payID=documents.id");
-       // $this->db->order_by("documents.date");
-        $this->db->order_by("documents.id","desc");
-        $result = $this->db->get("documents");
-        //print_r($this->db->last_query());
+        $types = $this->db->get("types")->result_array();
+
         $data = array();
-        //var_dump($result->result_array());
         foreach ($result->result_array() as $item) {
             $data[$item['id']]['type_s'] = ($item['type']==1)?"Оплаченно":"Не оплаченно";
             $data[$item['id']]['type'] = $item['type'];
             $data[$item['id']]['date'] = $item['date'];
-            $data[$item['id']]['doc'][] = array(
-                'document_name' => $item['document_name'],
-                'url' => $item['url'],
-            );
+
+            $this->db->select("{$item['table']}.type_id");
+            $this->db->where("id",$item['doc_id']);
+            $type_id = $this->db->get($item['table'])->row();
+
+            foreach ($types as $type) {
+                if($type['id']==$type_id->type_id)
+                    $data[$item['id']]['doc'][] = array(
+                        'document_name' => $type['document_name'],
+                        'url' => $type['url']
+                    );
+            }
             if($item['url']=="buy_sale")
                 $data[$item['id']]['block_name'] = $item['document_name'];
             if($item['url']=="gift")
