@@ -91,13 +91,16 @@ class Document extends CI_Controller
             }
         }
 
-        if($_POST['type_of_contract']=='buy_sell')
+        if($_POST['type_of_contract']=='buy_sell'){
             $doc_id = $this->document_model->insert_into_database_buysale();
-        if($_POST['type_of_contract']=='gift')
+            $table = "buy_sale";
+        }
+        if($_POST['type_of_contract']=='gift'){
             $doc_id = $this->document_model->insert_into_database_gift();
+            $table = "gift";
+        }
 
         //insert to documents return $doc_id:global
-        $table = "buy_sale";
         $doc_id = $this->document_model->add_documents($doc_id,$this->data['user_id'],$table);
 
         if($this->user_model->checkSub( $this->data['user_id'], $doc_id )){
