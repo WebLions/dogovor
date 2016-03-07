@@ -1604,7 +1604,7 @@ END;
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="law">
                     <span class = "content-input-align">Юридическое лицо</span>
                 </div>
                 <div class = "content-radio">
@@ -1631,7 +1631,7 @@ END;
                     <span class = "content-input-align">Физическое лицо</span>
                 </div>
                 <div class = "content-radio">
-                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="physical">
+                    <input data-id="block_seller" class="ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="law">
                     <span class = "content-input-align">Юридическое лицо</span>
                 </div>
                 <div class = "content-radio">
