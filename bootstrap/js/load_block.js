@@ -180,8 +180,6 @@ $( document ).ready(function() {
 
        var func_name = $(this).attr('data-name');
        var state_name = $(this).attr('name');
-       "/document/data_for_canvas_buysale"
-
 
        if(state_name == 'type_of_taker') buyer_state = $(this).val();
        if(state_name == 'type_of_giver') vendor_state = $(this).val();
