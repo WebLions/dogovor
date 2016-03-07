@@ -1,4 +1,4 @@
-function canvas_render(){
+function canvas_render(link){
     var column_indicator = 1;
     var text_type;
     var text;
@@ -8,6 +8,8 @@ function canvas_render(){
     var marginTop = 40;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
+
+    console.log(link);
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -123,7 +125,7 @@ function canvas_render(){
 
 
 
-        $.post( "/document/data_for_canvas_buysale",$('#document_form').serialize(),function( data ) {
+        $.post(link,$('#document_form').serialize(),function( data ) {
         $.each( data , function(key , val){
             /*
             console.log(val['text-type']);

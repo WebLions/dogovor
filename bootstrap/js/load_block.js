@@ -9,8 +9,9 @@ var defects = true,
 
 var vendor_state,
     buyer_state,
-    vendor_state_agent,
-    buyer_state_agent;
+    type_of_contract;
+
+var link;
 
 
 $( document ).ready(function() {
@@ -179,10 +180,17 @@ $( document ).ready(function() {
 
        var func_name = $(this).attr('data-name');
        var state_name = $(this).attr('name');
+       "/document/data_for_canvas_buysale"
 
 
        if(state_name == 'type_of_taker') buyer_state = $(this).val();
        if(state_name == 'type_of_giver') vendor_state = $(this).val();
+       if(state_name == 'type_of_contract') type_of_contract = $(this).val();
+
+       if(type_of_contract == 'buy_sell') link = "/document/data_for_canvas_buysale";
+       else link = "/document/data_for_canvas_gift";
+
+
 
        if(state_name == 'buyer_is_owner_car' || state_name == 'buyer_is_not_owner_car')
        {
@@ -324,7 +332,7 @@ $( document ).ready(function() {
     });
 
     $('.document').on('change','input', function(){
-        canvas_render();
+        canvas_render(link);
     });
 
 
