@@ -564,10 +564,10 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='buy_sale'";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='gift'";
         $this->db->where($where);
-        $this->db->join("documents","documents.doc_id=buy_sale.id");
-        $query = $this->db->get('buy_sale');
+        $this->db->join("documents","documents.doc_id=gift.id");
+        $query = $this->db->get('gift');
         $result = $query->row();
 
         //Подготовка
@@ -1086,7 +1086,6 @@ class Document_model extends CI_Model
             }
         }
         // Подготовка данных для работы с документов
-
         //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
@@ -2248,12 +2247,12 @@ class Document_model extends CI_Model
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         $data = array
         (
-            'date' => date("Y-m-d H:I:s"),
+            'type_id' => $type_id,
             'type_of_contract' => $_POST['type_of_contract'],
             'place_of_contract' => $_POST['place_of_contract'],
             'date_of_contract' => $_POST['date_of_contract'],
             'type_of_giver' => $_POST['type_of_giver'],
-            'giver_is_owner_car' => $_POST['giver_is_owner_car'],
+            'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
             'vendor_surname' => $_POST['vendor_surname'],
             'vendor_name' => $_POST['vendor_name'],
             'vendor_patronymic' => $_POST['vendor_patronymic'],
@@ -2312,6 +2311,7 @@ class Document_model extends CI_Model
             'for_agent_vendor_proxy_date' => $_POST['for_agent_vendor_proxy_date'],
             'for_agent_vendor_proxy_notary' => $_POST['for_agent_vendor_proxy_notary'],
             'type_of_taker' => $_POST['type_of_taker'],
+            'buyer_is_owner_car' => $_POST['buyer_is_owner_car'],
             'buyer_surname' => $_POST['buyer_surname'],
             'buyer_name' => $_POST['buyer_name'],
             'buyer_patronymic' => $_POST['buyer_patronymic'],
@@ -2384,14 +2384,22 @@ class Document_model extends CI_Model
             'number_of_serial_car' => $_POST['number_of_serial_car'],
             'date_of_serial_car' => $_POST['date_of_serial_car'],
             'bywho_serial_car' => $_POST['bywho_serial_car'],
-            'gibdd_act' => $_POST['gibdd_act'],
+            'police_form' => $_POST['police_form'],
             'gibdd_reg_name' => $_POST['gibdd_reg_name'],
             'gibdd_inn' => $_POST['gibdd_inn'],
             'gibdd_power_engine' => $_POST['gibdd_power_engine'],
             'gibdd_eco_class' => $_POST['gibdd_eco_class'],
             'gibdd_max_mass' => $_POST['gibdd_max_mass'],
             'gibdd_min_mass' => $_POST['gibdd_min_mass'],
-            'type_id' => $type_id
+            'for_agent_proxy_pass_serial' => $_POST['for_agent_proxy_pass_serial'],
+            'for_agent_proxy_pass_number' => $_POST['for_agent_proxy_pass_number'],
+            'for_agent_proxy_pass_date' => $_POST['for_agent_proxy_pass_date'],
+            'for_agent_proxy_pass_bywho' => $_POST['for_agent_proxy_pass_bywho'],
+            'for_agent_proxy_city' => $_POST['for_agent_proxy_city'],
+            'for_agent_proxy_street' => $_POST['for_agent_proxy_street'],
+            'for_agent_proxy_house' => $_POST['for_agent_proxy_house'],
+            'for_agent_proxy_flat' => $_POST['for_agent_proxy_flat'],
+            'for_agent_proxy_phone' => $_POST['for_agent_proxy_phone'],
         );
         //Бизопаснасть
         /*foreach ($data as $key)
