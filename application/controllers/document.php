@@ -27,6 +27,15 @@ class Document extends CI_Controller
 
         redirect($this->data['doc']);
     }
+    public function gift($id)  //  в ссылке выглядит так document/name
+    {
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
+        $this->data['doc'] = $this->document_model->get_gift_doc( (int) $id );//вызов нужно функции модели;
+
+        redirect($this->data['doc']);
+    }
     /*public function test_packset(){
         $this->document_model->testpack();
     }*/
@@ -150,8 +159,13 @@ class Document extends CI_Controller
             redirect('/','refresh');
         }
         $this->data['doc_id'] = $docum;
+        $type = $this->document_model->get_table_to_doc_id($this->data['doc_id']);
+
         $this->load->view('user/header');
-        $this->load->view('user/document_edit', $this->data);
+        if($type=="buy_sale")
+            $this->load->view('user/document_edit_bs', $this->data);
+        if($type=="gift")
+            $this->load->view('user/document_edit_gift', $this->data);
         $this->load->view('user/footer');
     }
     public function saveEdit(){
@@ -159,6 +173,8 @@ class Document extends CI_Controller
         $type = $this->document_model->get_table_to_doc_id($id);
         if($type=="buy_sale")
             $this->document_model->bs_save_edit($this->input->post(),$id);
+        if($type=="gift")
+            $this->document_model->gift_save_edit($this->input->post(),$id);
         redirect('/user/documents?save=true','refresh');
     }
 }
