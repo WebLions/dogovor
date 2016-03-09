@@ -829,7 +829,7 @@ class Document_model extends CI_Model
         $document->setValue('firstside_requisites', $firstside_requisites);
         $document->setValue('secondside_requisites', $secondside_requisites);
         $document->setValue('vendor_name', $vendor_name);
-        $document->setValue('$buyer_name', $buyer_name);
+        $document->setValue('buyer_name', $buyer_name);
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'gift.docx';//Имя файла и путь к нему
