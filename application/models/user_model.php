@@ -154,10 +154,14 @@ class User_model extends CI_Model
                         'url' => $type['url']
                     );
             }
-            if($item['url']=="buy_sale")
+            if($item['url']=="buy_sale") {
                 $data[$item['id']]['block_name'] = $item['document_name'];
-            if($item['url']=="gift")
+                $data[$item['id']]['url'] = $item['url'];
+            }
+            if($item['url']=="gift"){
                 $data[$item['id']]['block_name'] = $item['document_name'];
+                $data[$item['id']]['url'] = $item['url'];
+            }
             $data[$item['id']]['day'] = 31 - ceil((time() - strtotime($item['date'])) / 86400);
         }
         return $data;

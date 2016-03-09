@@ -42,7 +42,7 @@
                             <td></td>
                         <td>
                             <?if($document['type']==1 ){?>
-                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$doc['url']?>/<?=$key?>"></a>
+                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$document['url']?>_<?=$doc['url']?>/<?=$key?>"></a>
                             <?}?>
                         </td>
                     </tr>
