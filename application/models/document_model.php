@@ -844,8 +844,9 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "id_user = '$id_user' AND id = '$id '";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='gift'";
         $this->db->where($where);
+        $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
 
@@ -1150,8 +1151,9 @@ class Document_model extends CI_Model
         //Работа с базой
         $this->db->select();
         $id_user = $this->data['user_id'];
-        $where = "id_user = '$id_user' AND id = '$id '";
+        $where = "documents.user_id = '$id_user' AND documents.id = '$id ' AND documents.table='gift'";
         $this->db->where($where);
+        $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
 
