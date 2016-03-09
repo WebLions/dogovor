@@ -18,7 +18,7 @@ class Document extends CI_Controller
     {
         echo $this->pay_model->getPayLink($id);
     }
-    public function buy_sale($id)  //  в ссылке выглядит так document/name
+    public function buy_sale_buy_sale($id)  //  в ссылке выглядит так document/name
     {
         if( !$this->data['user_id'] ) {
             redirect('/','refresh');
@@ -27,7 +27,7 @@ class Document extends CI_Controller
 
         redirect($this->data['doc']);
     }
-    public function gift($id)  //  в ссылке выглядит так document/name
+    public function gift_gift($id)  //  в ссылке выглядит так document/name
     {
         if( !$this->data['user_id'] ) {
             redirect('/','refresh');
@@ -39,27 +39,41 @@ class Document extends CI_Controller
     /*public function test_packset(){
         $this->document_model->testpack();
     }*/
-    public function act_of_reception($id)  //  в ссылке выглядит так document/name
+    public function buy_sale_act_of_reception($id)  //  в ссылке выглядит так document/name
     {
 
         $this->data['doc'] = $this->document_model->get_doc_act_of_reception( (int) $id );//вызов нужно функции модели;
 
         redirect($this->data['doc']);
     }
-    public function receipt_of_money($id)  //  в ссылке выглядит так document/name
+    public function gift_act_of_reception($id)  //  в ссылке выглядит так document/name
+    {
+
+        $this->data['doc'] = $this->document_model->get_gift_act_of_reception( (int) $id );//вызов нужно функции модели;
+
+        redirect($this->data['doc']);
+    }
+    public function gift_statement_gibdd($id)  //  в ссылке выглядит так document/name
+    {
+
+        $this->data['doc'] = $this->document_model->get_gift_gibbd($id);//вызов нужно функции модели;
+
+        redirect($this->data['doc']);
+    }
+    public function buy_sale_receipt_of_money($id)  //  в ссылке выглядит так document/name
     {
 
         $this->data['doc'] = $this->document_model->get_doc_receipt_of_money($id);//вызов нужно функции модели;
         redirect($this->data['doc']);
     }
-    public function statement_gibdd($id)  //  в ссылке выглядит так document/name
+    public function buy_sale_statement_gibdd($id)  //  в ссылке выглядит так document/name
     {
 
         $this->data['doc'] = $this->document_model->get_doc_statement_gibdd($id);//вызов нужно функции модели;
 
         redirect($this->data['doc']);
     }
-    public function marriage($id)  //  в ссылке выглядит так document/name
+    public function buy_sale_marriage($id)  //  в ссылке выглядит так document/name
     {
 
         $this->data['doc'] = $this->document_model->get_doc_statement_vendor_marriage($id);//вызов нужно функции модели;
