@@ -297,7 +297,7 @@ class Document_model extends CI_Model
                     $header = $bold_start. 'Гражданин  ' . $data_for_header['vendor_fio']. $bold_end . ', далее именуемый "'.$bold_start. $first_person.$bold_end.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -306,7 +306,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.'гражданин ' . $data_for_header['buyer_fio'] .$bold_end. ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -318,7 +318,7 @@ class Document_model extends CI_Model
                     $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -327,7 +327,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -339,7 +339,7 @@ class Document_model extends CI_Model
                     $header = $bold_start.'Гражданин' . $data_for_header['vendor_fio']. $bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -348,7 +348,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -360,7 +360,7 @@ class Document_model extends CI_Model
                     $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -369,7 +369,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.'гражданин ' . $data_for_header['buyer_fio'].$bold_end. ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -378,10 +378,10 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header =  $bold_start.'Гражданин' . $data_for_header['vendor_fio '].$bold_end. ', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ';
+                    $header =  $bold_start.'Гражданин ' . $data_for_header['vendor_fio'].$bold_end. ', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -390,7 +390,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -402,7 +402,7 @@ class Document_model extends CI_Model
                     $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -411,7 +411,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.'гражданин '.$data_for_header['buyer_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -423,7 +423,7 @@ class Document_model extends CI_Model
                     $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -432,7 +432,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -444,7 +444,7 @@ class Document_model extends CI_Model
                     $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -453,7 +453,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             };
         }
@@ -465,7 +465,7 @@ class Document_model extends CI_Model
                     $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -474,7 +474,7 @@ class Document_model extends CI_Model
                     $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выдданным нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         };
@@ -933,7 +933,6 @@ class Document_model extends CI_Model
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_buyer, $data_for_header);
         unset($data_for_header);
         //Реквизиты
-        //Реквизиты
         //Продавец
         switch ($result->type_of_giver)
         {
@@ -1061,8 +1060,8 @@ class Document_model extends CI_Model
                     'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
                     'agent_proxy_date' => $for_agent_buyer_proxy_date,
                     'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary,
-                    'number_of_certificate' => $result->vendor_ind_number_of_certificate,
-                    'date_of_certificate' => $vendor_ind_date_of_certificate,
+                    'number_of_certificate' => $result->buyer_ind_number_of_certificate,
+                    'date_of_certificate' => $buyer_ind_date_of_certificate,
                 );
                 break;
         }
@@ -1496,8 +1495,8 @@ class Document_model extends CI_Model
                     'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
                     'agent_proxy_date' => $for_agent_buyer_proxy_date,
                     'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary,
-                    'number_of_certificate' => $result->vendor_ind_number_of_certificate,
-                    'date_of_certificate' => $vendor_ind_date_of_certificate,
+                    'number_of_certificate' => $result->buyer_ind_number_of_certificate,
+                    'date_of_certificate' => $buyer_ind_date_of_certificate,
                 );
                 break;
         }
@@ -1803,8 +1802,8 @@ class Document_model extends CI_Model
                     'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
                     'agent_proxy_date' => $for_agent_buyer_proxy_date,
                     'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary,
-                    'number_of_certificate' => $result->vendor_ind_number_of_certificate,
-                    'date_of_certificate' => $vendor_ind_date_of_certificate,
+                    'number_of_certificate' => $result->buyer_ind_number_of_certificate,
+                    'date_of_certificate' => $buyer_ind_date_of_certificate,
                 );
                 break;
         }
@@ -1902,12 +1901,20 @@ class Document_model extends CI_Model
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
         $vendor_ind_adress = $this->format_adress($result->vendor_ind_city,$result->vendor_ind_street,$result->vendor_ind_house,$result->vendor_ind_flat);
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
+        $agent_vendor_adress = $this->format_adress($result->agent_vendor_city,$result->agent_vendor_street,$result->agent_vendor_house,$result->agent_vendor_flat);
+        $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
         $vendor_passport_date  = $this->format_date($result->vendor_passport_date);
         $vendor_ind_passport_date = $this->format_date($result->vendor_ind_passport_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
+        $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
+
+
 //        $vendor_date_of_certificate = $result->vendor_date_of_certificate;
 //        $buyer_date_of_certificate = $result->buyer_date_of_certificate;
 //        $for_agent_vendor_proxy_date = $result->for_agent_vendor_proxy_date;
@@ -1923,19 +1930,19 @@ class Document_model extends CI_Model
                 if ($result->vendor_is_owner_car == 'own_car')
                     $vendor_data = "Я, $vendor_fio паспорт серия $result->vendor_passport_serial, № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $vendor_adress (далее - Продавец)";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio паспорт серия $result->vendor_passport_serial, № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $vendor_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
                 break;
             case 'law':
                 if ($result->vendor_is_owner_car == 'own_car')
                     $vendor_data = "Я, $vendor_law_fio в лице $result->vendor_law_actor_position компании $result->vendor_law_company_name, ИНН $result->vendor_law_inn , ОГРН $result->vendor_law_ogrn зарегистрированной по адресу: $result->vendor_law_adress (далее - Продавец)";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio паспорт серия $result->vendor_passport_serial, № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $result->vendor_law_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
                 break;
             case 'individual':
                 if ($result->vendor_is_owner_car == 'own_car')
                     $vendor_data = "Я, $vendor_ind_fio паспорт серия $result->vendor_ind_passport_serial, № $result->vendor_ind_passport_number, выдан $result->vendor_ind_passport_bywho дата выдачи $vendor_ind_passport_date, зарегистрированный(ая) по адресу: $vendor_ind_adress (далее - Продавец)";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio паспорт серия $result->vendor_ind_passport_serial, № $result->vendor_ind_passport_number, выдан $result->vendor_ind_passport_bywho дата выдачи $vendor_ind_passport_date, зарегистрированный(ая) по адресу: $vendor_ind_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
                 break;
         }
         //Покупатель
@@ -1945,19 +1952,19 @@ class Document_model extends CI_Model
                 if ($result->buyer_is_owner_car == 'own_car')
                     $buyer_data = " получил от $buyer_fio паспорт серия $result->buyer_passport_serial, № $result->buyer_passport_number, выдан $result->buyer_passport_bywho дата выдачи $buyer_passport_date, зарегистрированный(ая) по адресу: $buyer_adress (далее - Покупатель)";
                 elseif ($result->buyer_is_owner_car == 'not_own_car')
-                    $buyer_data = " получил от $buyer_agent_fio паспорт серия $result->buyer_passport_serial, № $result->buyer_passport_number, выдан $result->buyer_passport_bywho дата выдачи $buyer_passport_date, зарегистрированный(ая) по адресу: $buyer_adress (далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_agent_fio $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_fio(далее - Покупатель)";
                 break;
             case 'law':
                 if ($result->buyer_is_owner_car == 'own_car')
                     $buyer_data = " получил от $buyer_law_fio в лице $result->buyer_law_actor_position компании $result->buyer_law_company_name, ИНН $result->buyer_law_inn , ОГРН $result->buyer_law_ogrn зарегистрированной по адресу: $result->buyer_law_adress (далее - Покупатель)";
                 elseif ($result->buyer_is_owner_car == 'not_own_car')
-                    $buyer_data = " получил от $buyer_agent_fio паспорт серия $result->buyer_passport_serial, № $result->buyer_passport_number, выдан $result->buyer_passport_bywho дата выдачи $buyer_passport_date, зарегистрированный(ая) по адресу: $result->buyer_law_adress (далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_agent_fio $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_fio(далее - Покупатель)";
                 break;
             case 'individual':
                 if ($result->buyer_is_owner_car == 'own_car')
                     $buyer_data = " получил от $buyer_ind_fio паспорт серия $result->buyer_ind_passport_serial, № $result->buyer_ind_passport_number, выдан $result->buyer_ind_passport_bywho дата выдачи $buyer_ind_passport_date, зарегистрированный(ая) по адресу: $buyer_ind_adress (далее - Покупатель)";
                 elseif ($result->buyer_is_owner_car == 'not_own_car')
-                    $buyer_data = " получил от $buyer_agent_fio паспорт серия $result->buyer_ind_passport_serial, № $result->buyer_ind_passport_number, выдан $result->buyer_ind_passport_bywho дата выдачи $buyer_ind_passport_date, зарегистрированный(ая) по адресу: $buyer_ind_adress (далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_agent_fio $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_fio(далее - Покупатель)";
                 break;
         }
         //Для подписи
@@ -2153,6 +2160,7 @@ class Document_model extends CI_Model
         $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
+        $vendor_ind_adress = $this->format_adress($result->vendor_ind_city,$result->vendor_ind_street,$result->vendor_ind_house,$result->vendor_ind_flat);
         $spouse_adress = $this->format_adress($result->spouse_city,$result->spouse_street,$result->spouse_house,$result->spouse_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
@@ -2162,6 +2170,7 @@ class Document_model extends CI_Model
         $marriage_svid_date = $this->format_date($result->marriage_svid_date);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
+        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
         //Имена сторон
         $buyer_namedata = array
         (
@@ -2172,25 +2181,49 @@ class Document_model extends CI_Model
         );
         $vendor_namedata = array
         (
+            'phys_name' => $vendor_fio,
+            'ind_name' => $vendor_ind_fio,
+            'agent_name' => $vendor_agent_fio
+        );
+        $vendor_shortnamedata = array
+        (
             'phys_name' => $short_vendor_fio,
+            'ind_name' => $short_vendor_ind_fio,
             'agent_name' => $short_vendor_agent_fio
         );
         $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
         $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
+        $vendor_shortname = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_shortnamedata);
 
         $price_str = $this->num2str($result->price_car);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
 
         $document->setValue('date_of_contract', $date_of_contract);
         $document->setValue('buyer_name', $buyer_name);
-        $document->setValue('vendor_fio', $vendor_fio);
         $document->setValue('vendor_name', $vendor_name);
-        $document->setValue('vendor_birthday', $vendor_birthday);
-        $document->setValue('vendor_passport_serial', $result->vendor_passport_serial);
-        $document->setValue('vendor_passport_number', $result->vendor_passport_number);
-        $document->setValue('vendor_passport_bywho', $result->vendor_passport_bywho);
-        $document->setValue('vendor_passport_date', $vendor_passport_date);
-        $document->setValue('vendor_adress', $vendor_adress);
+        $document->setValue('vendor_shortname', $vendor_shortname);
+        //Костыльеты
+        //Если физическое лицо
+        if ($result->type_of_giver == 'physical')
+        {
+            $document->setValue('vendor_birthday', $vendor_birthday);
+            $document->setValue('vendor_passport_serial', $result->vendor_passport_serial);
+            $document->setValue('vendor_passport_number', $result->vendor_passport_number);
+            $document->setValue('vendor_passport_bywho', $result->vendor_passport_bywho);
+            $document->setValue('vendor_passport_date', $vendor_passport_date);
+            $document->setValue('vendor_adress', $vendor_adress);
+        }
+        //Если инд. лицо
+        elseif ($result->type_of_giver == 'individual')
+        {
+            $document->setValue('vendor_birthday', $vendor_ind_birthday);
+            $document->setValue('vendor_passport_serial', $result->vendor_ind_passport_serial);
+            $document->setValue('vendor_passport_number', $result->vendor_ind_passport_number);
+            $document->setValue('vendor_passport_bywho', $result->vendor_ind_passport_bywho);
+            $document->setValue('vendor_passport_date', $vendor_passport_date);
+            $document->setValue('vendor_adress', $vendor_ind_adress);
+        }
+
         $document->setValue('place_of_contract', $result->place_of_contract);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('vin', $result->vin);
@@ -2203,7 +2236,7 @@ class Document_model extends CI_Model
         $document->setValue('bywho_serial_car', $result->bywho_serial_car);
         $document->setValue('date_of_serial_car', $date_of_serial_car);
         $document->setValue('spouse_fio', $spouse_fio);
-        $document->setValue('spouse_name', $short_spouse_fio);
+        $document->setValue('spouse_shortname', $short_spouse_fio);
         $document->setValue('spouse_pass_serial', $result->spouse_pass_serial);
         $document->setValue('spouse_pass_number', $result->spouse_pass_number);
         $document->setValue('spouse_pass_bywho', $result->spouse_pass_bywho);
@@ -2250,6 +2283,17 @@ class Document_model extends CI_Model
             'for_agent_vendor_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
             'for_agent_vendor_proxy_date' => $_POST['for_agent_vendor_proxy_date'],
             'for_agent_vendor_proxy_notary' => $_POST['for_agent_vendor_proxy_notary'],
+            //Новые. Свежие
+            'agent_vendor_birthday' => $_POST['agent_vendor_birthday'],
+            'agent_vendor_pass_serial' => $_POST['agent_vendor_pass_serial'],
+            'agent_vendor_pass_number' => $_POST['agent_vendor_pass_number'],
+            'agent_vendor_pass_date' => $_POST['agent_vendor_pass_date'],
+            'agent_vendor_pass_bywho' => $_POST['agent_vendor_pass_bywho'],
+            'agent_vendor_city' => $_POST['agent_vendor_city'],
+            'agent_vendor_street' => $_POST['agent_vendor_street'],
+            'agent_vendor_house' => $_POST['agent_vendor_house'],
+            'agent_vendor_flat' => $_POST['agent_vendor_flat'],
+            'agent_vendor_phone' => $_POST['agent_vendor_phone'],
                 //Покуппатель
             'for_agent_buyer_surname' => $_POST['for_agent_buyer_surname'],
             'for_agent_buyer_name' => $_POST['for_agent_buyer_name'],
@@ -2257,6 +2301,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
             'for_agent_buyer_proxy_date' => $_POST['for_agent_buyer_proxy_date'],
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
+
             //Юридическое лицо
                 //Продавец
             'vendor_law_company_name' => $_POST['vendor_law_company_name'],
@@ -2343,6 +2388,7 @@ class Document_model extends CI_Model
             'for_agent_proxy_house' => $_POST['for_agent_proxy_house'],
             'for_agent_proxy_flat' => $_POST['for_agent_proxy_flat'],
             'for_agent_proxy_phone' => $_POST['for_agent_proxy_phone'],
+            'for_agent_proxy_birthday' => $_POST['for_agent_proxy_birthday'],
             //Гибдд
             'police_form' => $_POST['police_form'],
             'gibdd_power_engine' => $_POST['gibdd_power_engine'],
