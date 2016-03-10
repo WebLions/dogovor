@@ -3519,5 +3519,31 @@ class Document_model extends CI_Model
         $this->db->where('id',$q->id);
         $this->db->update('buy_sale', $data);
     }
+    public function gift_save_edit($post,$id)
+    {
+        unset($post['doc_id']);
+
+        $this->db->select('doc_id as id');
+        $this->db->where('id',$id);
+        $q = $this->db->get('documents',1)->row();
+
+        $this->db->select('id, type_of_giver, type_of_taker, type_of_contract, police_form');
+        $this->db->where('id',$q->id);
+        $d = $this->db->get('gift',1)->row();
+
+        $post['type_of_giver'] = !empty($post['type_of_giver'])?$post['type_of_giver']:$d->type_of_giver;
+        $post['type_of_taker'] = !empty($post['type_of_taker'])?$post['type_of_taker']:$d->type_of_taker;
+        $post['type_of_contract'] = !empty($post['type_of_contract'])?$post['type_of_contract']:$d->type_of_contract;
+        //$post['car_in_marriage'] = !empty($post['car_in_marriage'])?$post['car_in_marriage']:$d->car_in_marriage;
+        $post['police_form'] = !empty($post['police_form'])?$post['police_form']:$d->police_form;
+
+        $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], $post['type_of_contract'], null, $post['police_form']);
+
+        foreach ($post as $key => $item) {
+            $data[$key] = $item;
+        }
+        $this->db->where('id',$q->id);
+        $this->db->update('gift', $data);
+    }
 
 }
