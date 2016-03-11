@@ -577,7 +577,6 @@ class Document_model extends CI_Model
                 $result->$key = 'отсутствует';
             }
         }
-
         //Подготовка
         //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
