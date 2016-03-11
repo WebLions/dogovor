@@ -162,7 +162,9 @@ class User_model extends CI_Model
                 $data[$item['id']]['block_name'] = $item['document_name'];
                 $data[$item['id']]['url'] = $item['url'];
             }
-            $data[$item['id']]['day'] = 31 - ceil((time() - strtotime($item['date'])) / 86400);
+            $date = new DateTime($item['date']);
+            $interval = $date->diff(new DateTime());
+            $data[$item['id']]['day'] = 30 - $interval->format('%a');
         }
         return $data;
     }
