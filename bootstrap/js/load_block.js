@@ -191,7 +191,7 @@ $( document ).ready(function() {
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
-    $("#doc_create").delegate("# marriage_svid_serial", "focusin", function(){
+    $("#doc_create").delegate("#marriage_svid_serial", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
         });
