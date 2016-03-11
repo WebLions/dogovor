@@ -115,6 +115,7 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_vendor_info();
                 $this->blocks_model->bs_block_vendor_agent();
                 $this->blocks_model->bs_block_buyer();
+                return true;
             }
             if($_SESSION['vendor_state'] == 'law'){
 
@@ -253,7 +254,9 @@ class Blocks extends CI_Controller
         if( !$this->data['user_id'] ) {
             $email = true;
         }
-        $this->blocks_model->bs_block_statement_gibdd($email);
+        $this->blocks_model->bs_block_statement_no($email);
+
+        //$this->blocks_model->bs_block_statement_gibdd($email);
     }
 
     //Дарение
