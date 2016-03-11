@@ -189,16 +189,16 @@ END;
                     <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
                     </div>
                     <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Серия паспорта:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Номер паспорта:">
-                    </div>
-                    <div class = "content-input-group">
                     <input class = "form-control" type="text" name="agent_vendor_birthday"  placeholder="Дата рождения:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Кем выдана доверенность:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи доверенности:">
                     </div>
                     <div class = "content-input-group">
                     <input class="form-control" type="text" name="agent_vendor_pass_serial"  placeholder="Серия паспорта:">
@@ -219,7 +219,7 @@ END;
                     <input class = "form-control" type="text" name="agent_vendor_street"  placeholder="Адрес(улица):">
                     </div>
                     <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control" type="text"  name="agent_vendor_house"  placeholder="Адрес(дом:">
+                    <input id="vendor_birthday" class="form-control" type="text"  name="agent_vendor_house"  placeholder="Адрес(дом):">
                     </div>
                     <div class = "content-input-group">
                     <input class = "form-control" type="text" name="agent_vendor_flat"  placeholder="Адрес(квартира):">
@@ -236,30 +236,60 @@ END;
     public function bs_block_buyer_agent()
     {
         echo <<<END
-         <div class="row" id="for_agent_vendor_info">
-            <div class="col-lg-12">
-            <div class = "content-block">
+<div class="row" id="for_agent_vendor_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
-                <div class = "content-input">
-                    <div class = "content-input-group">
+             <div class = "content-input">
+                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:">
-                    </div>
-                    <div class = "content-input-group">
+                 </div>
+                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="for_agent_buyer_name"  placeholder="Имя:">
-                    </div>
-                    <div class = "content-input-group">
+                 </div>
+                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Серия паспорта:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Номер паспорта:">
-                    </div>
-                </div>
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_proxy_birthday"  placeholder="Дата рождения:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Кем выдана доверенность:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи доверенности:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_serial"  placeholder="Серия паспорта">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_number"  placeholder="Номер паспорта">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_bywho"  placeholder="Кем выдан">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_city"  placeholder="Адрес (Город)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Дом)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон">
+                 </div>
+             </div>
          </div>
     </div>
 </div>
@@ -1108,7 +1138,7 @@ END;
                     <input class = "form-control" type="text" name="spouse_flat"  placeholder="Адрес регистрации(квартира):">
                 </div>
                 <div class = "content-input-group">
-                    <input id ="marriage_svid_serial" class="form-control" type="text" name="marriage_svid_serial"  placeholder="Серия свидетельства о браке:">
+                    <input class="form-control" type="text" name="marriage_svid_serial"  placeholder="Серия свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="marriage_svid_number"  placeholder="Номер свидетельства о браке:">
@@ -1238,7 +1268,7 @@ END;
                 <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Квартира)">
+                <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Дом)">
              </div>
              <div class = "content-input-group">
                 <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)">

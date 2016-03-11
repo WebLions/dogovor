@@ -27,6 +27,16 @@ $( document ).ready(function() {
             name = "bs_block_additional_devices_list";
         var id = $('input[name=doc_id]').val();
         var data = [];
+
+        if(name=='gift_block_vendor_selected__not_owner')
+            data = {type:'true'};
+        if(name==('gift_block_vendor_selected_owner')||name==('gift_block_vendor_selected_not_owner'))
+            switch ($('#editForm').find('input[name=type_of_giver]:checked').val()) {
+                case 'physical': name = 'gift_block_vendor_info'; break;
+                case 'law': name = 'gift_block_vendor_law_state'; break;
+                case 'individual': name = 'gift_block_vendor_individual_state'; break;
+            }
+
         if(name=='bs_block_vendor_selected_not_owner')
             data = {type:'true'};
         if(name==('bs_block_vendor_selected_owner')||name==('bs_block_vendor_selected_not_owner'))
@@ -44,6 +54,7 @@ $( document ).ready(function() {
                 case 'law': name = 'bs_block_buyer_law_state'; break;
                 case 'individual': name = 'bs_block_buyer_individual_state'; break;
             }
+
         if(name=='bs_block_additional_devices_list'){
             $('#block_additional_devices_list').remove();
             console.log(name);
@@ -161,6 +172,11 @@ $( document ).ready(function() {
         });
     });
     $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
+    $("#editForm").delegate(".datetimepicker", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
         });

@@ -14,7 +14,7 @@ function canvas_render(link){
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.font = "16px Arial";
-    context.fillStyle = 'red';
+    context.fillStyle = 'blue';
     context.fillText("Предварительный просмотр документа",150,30);
 
     function printText(text,marginTop,lineHeight,maxWidth){
@@ -70,7 +70,6 @@ function canvas_render(link){
                         Line = baseLine;
 
                     }
-
                 });
                 marginTop += lineHeight;
                 break;

@@ -7,7 +7,7 @@
                 <form action="/document/saveEdit" method="post" id="editForm" class="document">
                     <input type="text" value="<?=$doc_id?>" name="doc_id" hidden>
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default" style="overflow: inherit;">
                         <div class="panel-heading" role="tab" id="heading-1">
                             <h4 class="panel-title">
                                 <a role="button" data-load="false" data-type="bs_block_deal" data-toggle="collapse" data-parent="#accordion" href="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
