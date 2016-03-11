@@ -252,17 +252,27 @@ class Document_model extends CI_Model
         }
         if ($type_of_document == 'gift')
         {
-            if ($giver == 'physical' && $taker == 'physical')
+            if ($giver == 'physical' && $taker == 'physical' || $taker == 'individual')
             {
                 $id_type = 5;
                 if ($gibdd == 'false') $id_type = 14;
             }
-            elseif ($giver == 'individual' && $taker == 'individual')
+            elseif ($giver == 'individual' && $taker == 'individual' || $taker == 'physical')
             {
                 $id_type = 5;
                 if ($gibdd == 'false') $id_type = 14;
             }
             elseif ($giver == 'physical' || $giver == 'individual' && $taker == 'law')
+            {
+                $id_type = 6;
+                if ($gibdd == 'false') $id_type = 15;
+            }
+            elseif ($giver == 'law' && $taker == 'individual' || $taker == 'physical')
+            {
+                $id_type = 6;
+                if ($gibdd == 'false') $id_type = 15;
+            }
+            elseif ($giver == 'law' && $taker == 'law')
             {
                 $id_type = 6;
                 if ($gibdd == 'false') $id_type = 15;
@@ -785,8 +795,8 @@ class Document_model extends CI_Model
                     'agent_proxy_number' => $result->for_agent_buyer_proxy_number,
                     'agent_proxy_date' => $for_agent_buyer_proxy_date,
                     'agent_proxy_notary' => $result->for_agent_buyer_proxy_notary,
-                    'number_of_certificate' => $result->vendor_ind_number_of_certificate,
-                    'date_of_certificate' => $vendor_ind_date_of_certificate,
+                    'number_of_certificate' => $result->buyer_ind_number_of_certificate,
+                    'date_of_certificate' => $buyer_ind_date_of_certificate,
                 );
                 break;
         }
