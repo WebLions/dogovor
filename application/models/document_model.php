@@ -336,7 +336,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.'Гражданин' . $data_for_header['vendor_fio']. $bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ';
+                    $header = $bold_start.'Гражданин ' . $data_for_header['vendor_fio']. $bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -569,7 +569,14 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
-
+        //Если поле пустое - вставляем отсутсвует
+        foreach ($result as $key => $value)
+        {
+            if (empty($value) == true)
+            {
+                $result->$key = 'отсутствует';
+            }
+        }
         //Подготовка
         //Фио
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
@@ -648,9 +655,8 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
         );
-        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
-        //Реквизиты
         //Реквизиты
         //Продавец
         switch ($result->type_of_giver)
@@ -849,6 +855,14 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
+        //Если поле пустое - вставляем отсутсвует
+        foreach ($result as $key => $value)
+        {
+            if (empty($value) == true)
+            {
+                $result->$key = 'отсутствует';
+            }
+        }
 
         //Подготовка данных
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/gift/patterns/act_of_reception.docx');
@@ -930,7 +944,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
         );
-        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_buyer, $data_for_header);
+        $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
         //Реквизиты
         //Продавец
@@ -1088,14 +1102,15 @@ class Document_model extends CI_Model
         $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
 
         //Заполнение
-        $document->setValue('city_contract', $result->place_of_contract);
+        $document->setValue('place_of_contract', $result->place_of_contract);
         $document->setValue('date_of_contract', $date_of_contract);
         $document->setValue('header_doc', $header_doc);
         $document->setValue('mark', $result->mark);
         $document->setValue('vin', $result->vin);
-        $document->setValue('reg_number', $result->reg_gov_number);
+        $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('car_type', $result->car_type);
         $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('category', $result->category);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('shassi', $result->shassi);
         $document->setValue('carcass', $result->carcass);
@@ -1155,17 +1170,25 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
-
+        //Если поле пустое - вставляем отсутсвует
+        foreach ($result as $key => $value)
+        {
+            if (empty($value) == true)
+            {
+                $result->$key = 'отсутствует';
+            }
+        }
         //Подготовка
         //Фио
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_actor_surname,$result->buyer_law_actor_name,$result->buyer_law_actor_patronymic);
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Адрес
         $buyer_agent_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
+//        $buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
         //Дата
         $date_of_product = $this->format_date($result->date_of_product);
         $buyer_date = $this->format_date($result->buyer_birthday);
@@ -2183,15 +2206,18 @@ class Document_model extends CI_Model
         (
             'phys_name' => $vendor_fio,
             'ind_name' => $vendor_ind_fio,
+            'agent_name' => $vendor_agent_fio
         );
         $vendor_shortnamedata = array
         (
             'phys_name' => $short_vendor_fio,
             'ind_name' => $short_vendor_ind_fio,
+            'agent_name' => $short_vendor_agent_fio
         );
         $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
-        $vendor_name = $this->get_side_name($result->type_of_giver, 'own_car', $vendor_namedata);
-        $vendor_shortname = $this->get_side_name($result->type_of_giver, 'own_car', $vendor_shortnamedata);
+        $vendor_name = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_namedata);
+        $vendor_shortname = $this->get_side_name($result->type_of_giver, $result->vendor_is_owner_car, $vendor_shortnamedata);
+
         $price_str = $this->num2str($result->price_car);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
 
@@ -2220,6 +2246,7 @@ class Document_model extends CI_Model
             $document->setValue('vendor_passport_date', $vendor_passport_date);
             $document->setValue('vendor_adress', $vendor_ind_adress);
         }
+
         $document->setValue('place_of_contract', $result->place_of_contract);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('vin', $result->vin);
@@ -2515,10 +2542,12 @@ class Document_model extends CI_Model
             'vendor_law_proxy_date' => $_POST['vendor_law_proxy_date'],
             'vendor_law_inn' => $_POST['vendor_law_inn'],
             'vendor_law_ogrn' => $_POST['vendor_law_ogrn'],
-            'vendor_law_city' => $_POST['vendor_law_city'],
-            'vendor_law_street' => $_POST['vendor_law_street'],
-            'vendor_law_house' => $_POST['vendor_law_house'],
-            'vendor_law_flat' => $_POST['vendor_law_flat'],
+            'vendor_law_adress' => $_POST['vendor_law_adress'],
+            'buyer_law_adress' => $_POST['buyer_law_adress'],
+//            'vendor_law_city' => $_POST['vendor_law_city'],
+//            'vendor_law_street' => $_POST['vendor_law_street'],
+//            'vendor_law_house' => $_POST['vendor_law_house'],
+//            'vendor_law_flat' => $_POST['vendor_law_flat'],
             'vendor_law_phone' => $_POST['vendor_law_phone'],
             'vendor_law_acc' => $_POST['vendor_law_acc'],
             'vendor_law_bank_name' => $_POST['vendor_law_bank_name'],
