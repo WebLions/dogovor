@@ -1374,6 +1374,9 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
@@ -1381,9 +1384,6 @@ END;
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
@@ -1515,6 +1515,9 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
@@ -1522,9 +1525,6 @@ END;
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_serial"  placeholder="Паспорт серия:">
-                </div>
-                <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_number"  placeholder="Паспорт номер: ">
