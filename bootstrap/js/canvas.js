@@ -5,13 +5,17 @@ function canvas_render(link){
     var maxWidth = 560; //размер поле, где выводится текст
     var lineHeight = 16;
     var marginLeft = 0;
-    var marginTop = 40;
+    var marginTop = 70;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
 
     console.log(link);
 
     context.clearRect(0, 0, canvas.width, canvas.height);
+
+    context.font = "16px Arial";
+    context.fillStyle = 'red';
+    context.fillText("Предварительный просмотр документа",150,30);
 
     function printText(text,marginTop,lineHeight,maxWidth){
 
@@ -23,19 +27,22 @@ function canvas_render(link){
                 var Line = "";
                 marginLeft = 250;
                 context.font = "16px Arial";
+                context.fillStyle = 'black';
                 lineHeight = 35;
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
                     console.log(lineLength);
-                    if(lineLength > maxWidth){
+                    if(lineLength > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
                         marginTop += lineHeight;
                     }
                     else
                     {
+                        Line = baseLine;
                         context.fillText(baseLine,marginLeft,marginTop);
+
                     }
 
                 });
@@ -46,19 +53,22 @@ function canvas_render(link){
                 var Line = "";
                 marginLeft = 100;
                 context.font = "16px Arial";
+                context.fillStyle = 'black';
                 lineHeight = 30;
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    if(lineLength > maxWidth){
+                    if(lineLength > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
                         marginTop += lineHeight;
+
                     }
                     else
                     {
+                        context.fillText(baseLine,marginLeft,marginTop);
                         Line = baseLine;
-                        context.fillText(Line,marginLeft,marginTop);
+
                     }
 
                 });
@@ -66,23 +76,25 @@ function canvas_render(link){
                 break;
             case '^3':
                 context.font = "13px Arial";
+                context.fillStyle = 'black';
                 var words = text_type[1].split("^3*");
                 marginLeft = 50;
                 context.fillText(words[0],marginLeft,marginTop);
                 marginLeft = 420;
                 context.fillText(words[1],marginLeft,marginTop);
                 lineHeight = 20;
-                marginTop += lineHeight;
                 break;
             case '^4':
                 var words = text_type[1].split(" ");
                 var Line = "";
                 marginLeft = 25;
+                lineHeight = 16;
                 context.font = "13px Arial";
-                $.each(words, function(key,value){
+                context.fillStyle = 'black';
+                $.each(words, function(key,value ){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width;
-                    if(lineLength+58 > maxWidth){
+                    if(lineLength+10 > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
                         Line = value + " ";
                         marginTop += lineHeight;
@@ -90,7 +102,7 @@ function canvas_render(link){
                     else
                     {
                         Line = baseLine;
-                        context.fillText(Line,marginLeft,marginTop);
+                        context.fillText(baseLine,marginLeft,marginTop);
                     }
                 });
                 marginTop += lineHeight;
@@ -100,10 +112,12 @@ function canvas_render(link){
                 var Line = "";
                 marginLeft = 80;
                 context.font = "13px Arial";
+                context.fillStyle = 'black';
+                lineHeight = 16;
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    if(lineLength > maxWidth){
+                    if(lineLength > maxWidth || words.length == (key.length)+10){
                         context.fillText(baseLine,marginLeft,marginTop);
                         Line = value + " ";
                         marginTop += lineHeight;
@@ -111,7 +125,7 @@ function canvas_render(link){
                     else
                     {
                         Line = baseLine;
-                        context.fillText(Line,marginLeft,marginTop);
+                        context.fillText(baseLine,marginLeft,marginTop);
                     }
 
                 });
