@@ -2192,7 +2192,6 @@ class Document_model extends CI_Model
         $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $buyer_namedata);
         $vendor_name = $this->get_side_name($result->type_of_giver, 'own_car', $vendor_namedata);
         $vendor_shortname = $this->get_side_name($result->type_of_giver, 'own_car', $vendor_shortnamedata);
-
         $price_str = $this->num2str($result->price_car);
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/statement_vendor_marriage.docx');
 
@@ -2221,7 +2220,6 @@ class Document_model extends CI_Model
             $document->setValue('vendor_passport_date', $vendor_passport_date);
             $document->setValue('vendor_adress', $vendor_ind_adress);
         }
-
         $document->setValue('place_of_contract', $result->place_of_contract);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('vin', $result->vin);
