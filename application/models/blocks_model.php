@@ -189,7 +189,7 @@ END;
                     <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
                     </div>
                     <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="agent_vendor_birthday"  placeholder="Дата рождения:">
+                    <input class = "form-control datetimepicker" type="text" name="agent_vendor_birthday"  placeholder="Дата рождения:">
                     </div>
                     <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:">
@@ -251,7 +251,7 @@ END;
                     <input class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
                  </div>
                  <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="for_agent_proxy_birthday"  placeholder="Дата рождения:">
+                    <input class = "form-control datetimepicker" type="text" name="for_agent_proxy_birthday"  placeholder="Дата рождения:">
                  </div>
                  <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:">
@@ -269,7 +269,7 @@ END;
                     <input class="form-control" type="text" name="for_agent_proxy_pass_number"  placeholder="Номер паспорта">
                  </div>
                  <div class = "content-input-group">
-                    <input class="form-control" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан">
+                    <input class="form-control datetimepicker" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан">
                  </div>
                  <div class = "content-input-group">
                     <input class="form-control" type="text" name="for_agent_proxy_pass_bywho"  placeholder="Кем выдан">
@@ -520,13 +520,12 @@ END;
         </div>
     </div>
 </div>
-
 END;
     }
     public function bs_block_additional_devices_list()
     {
         echo <<<END
-<div class="row" id="block_additional_devices">
+<div class="row" id="block_additional_devices_list">
     <div class="col-lg-12">
         <div class = "content-block">
             <div class = "content-input-group">
@@ -538,7 +537,7 @@ END;
                     <div class = "content-radio-group">
 
                         <div class = "content-input">
-                            <input type="checkbox" data-name="rule" data-name="system" name="additional_devices_array[]" value="Левый руль">
+                            <input type="checkbox" data-name="rule" name="additional_devices_array[]" value="Левый руль">
                             <span class = "content-input-align">Левый руль</span>
                         </div>
 
@@ -881,7 +880,7 @@ END;
     public function bs_block_defects()
     {
         echo <<<END
-        <div class="row" id="block_defects" >
+<div class="row" id="block_defects">
     <div class="col-lg-12">
         <div class = "content-block" id="defects_block">
             <p class = "content-header">Неустраненные повреждения и эксплуатационные дефекты:</p>
@@ -995,7 +994,6 @@ END;
         </div>
     </div>
 </div>
-
 END;
     }
     public function bs_block_accessories()
@@ -1041,7 +1039,6 @@ END;
         </div>
     </div>
 </div>
-
 END;
     }
     public function bs_block_car_in_marriage()
@@ -1054,7 +1051,7 @@ END;
             <div class = "content-radio-header">
 
                 <div class = "content-input-inlane">
-                    <input id="bs_block_car_in_marriage_yes" class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
+                    <input  class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
                     <span class = "content-input-align">Да</span>
 
                     <input  class="ajax-button" data-name="bs_block_car_in_marriage_no" type="radio" name="car_in_marriage" value="false">
@@ -1144,7 +1141,7 @@ END;
                     <input class="form-control" type="text" name="marriage_svid_number"  placeholder="Номер свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="marriage_svid_date" class="form-control datetimepicker" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:">
+                    <input class="form-control datetimepicker" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="marriage_svid_bywho"  placeholder="Kем выдано свидетельство о браке:">
