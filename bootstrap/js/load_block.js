@@ -12,6 +12,7 @@ var vendor_state,
     type_of_contract;
 
 var link;
+var data_state = new Object();
 
 
 $( document ).ready(function() {
@@ -129,52 +130,24 @@ $( document ).ready(function() {
 
     //BLOCK FUNCTION
    $('.document').on('change','.ajax-button', function(){
-
+       $('.document').append('<div class="row"><img src="/images/default.gif" width="20px"></div>');
        var func_name = $(this).attr('data-name');
        var state_name = $(this).attr('name');
-
-       if(state_name == 'type_of_taker') buyer_state = $(this).val();
-       if(state_name == 'type_of_giver') vendor_state = $(this).val();
-       if(state_name == 'type_of_contract') type_of_contract = $(this).val();
+      // data_state = new Object();
+       if(state_name == 'type_of_taker') data_state.buyer_state = $(this).val();
+       if(state_name == 'type_of_giver') data_state.vendor_state = $(this).val();
+       if(state_name == 'type_of_contract') data_state.type_of_contract = $(this).val();
 
        if(type_of_contract == 'buy_sell') link = "/document/data_for_canvas_buysale";
        else link = "/document/data_for_canvas_gift";
 
-       $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
-
-       if(state_name == 'buyer_is_owner_car' || state_name == 'buyer_is_not_owner_car')
-       {
-           $.ajax({
-                    method:"GET",
-                    url: '/blocks/'+func_name,
-                    dataType: "html",
-                    data:{buyer_state:buyer_state},
-                    success: function (data, textStatus) {
-                                                            $('.document').append(data);
-
-                    }
-           });
-           return false;
-       }
-       if(state_name == 'vendor_is_owner_car' || state_name == 'vendor_is_not_owner_car')
-       {
-           $.ajax({
-                   method:"GET",
-                   url: '/blocks/'+func_name,
-                   dataType: "html",
-                   data:{vendor_state:vendor_state},
-                   success: function (data, textStatus) {
-                                                            $('.document').append(data);
-                   }
-           });
-           return false;
-       }
-
-       console.log($(this).parents("div[class=row]").index());
+       var index = $(this).parents("div[class=row]").index()+1;
+       $(".document").children('div[class=row]').slice( index ).remove();
 
        $.ajax({
            url: '/blocks/'+func_name,
            dataType: "html",
+           data: data_state,
            success: function (data, textStatus) {
                $('.document').append(data);
 

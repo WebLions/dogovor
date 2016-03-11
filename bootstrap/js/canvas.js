@@ -9,7 +9,7 @@ function canvas_render(link){
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
 
-    console.log(link);
+    //console.log(link);
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -32,7 +32,7 @@ function canvas_render(link){
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    console.log(lineLength);
+                    //console.log(lineLength);
                     if(lineLength > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
@@ -150,7 +150,7 @@ function canvas_render(link){
             var print_data = printText(text,marginTop,lineHeight,maxWidth);
             marginTop = print_data.marginTop;
             column_indicator = print_data.column_indicator;
-            console.log(column_indicator);
+            //console.log(column_indicator);
 
         });
 
