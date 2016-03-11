@@ -310,7 +310,6 @@ class Blocks extends CI_Controller
                 $this->blocks_model->gift_block_buyer_info();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
-                $this->blocks_model->bs_block_penalty();
                 $this->blocks_model->bs_block_ready();
 
             }
@@ -319,7 +318,6 @@ class Blocks extends CI_Controller
                 $this->blocks_model->gift_block_buyer_law_state();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
-                $this->blocks_model->bs_block_penalty();
                 $this->blocks_model->bs_block_ready();
 
             }
@@ -328,7 +326,6 @@ class Blocks extends CI_Controller
                 $this->blocks_model->gift_block_buyer_individual_state();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
-                $this->blocks_model->bs_block_penalty();
                 $this->blocks_model->bs_block_ready();
 
             }
@@ -373,7 +370,6 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_buyer_agent();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
-                $this->blocks_model->bs_block_penalty();
                 $this->blocks_model->bs_block_ready();
             }
             if($_SESSION['buyer_state'] == 'law'){
@@ -382,7 +378,6 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_buyer_agent();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
-                $this->blocks_model->bs_block_penalty();
                 $this->blocks_model->bs_block_ready();
 
             }
@@ -392,7 +387,6 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_buyer_agent();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
-                $this->blocks_model->bs_block_penalty();
                 $this->blocks_model->bs_block_ready();
 
             }

@@ -165,7 +165,22 @@ $( document ).ready(function() {
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
-    
+    $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
+    $("#doc_create").delegate("#spouse_pass_date", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
+    $("#doc_create").delegate("# marriage_svid_serial", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
+
 
     //ДАТАПИКЕР
 
