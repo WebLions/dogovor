@@ -106,92 +106,13 @@ $( document ).ready(function() {
     });
 
     //ДАТАПИКЕР
-    $("#doc_create").delegate("#date_of_contract", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#vendor_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#vendor_passport_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#buyer_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#buyer_passport_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#date_of_product", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#maintenance_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#marriage_svid_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#vendor_ind_date_of_certificate", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#buyer_ind_date_of_certificate", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("input[name=for_agent_proxy_pass_date]", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
+
     $("#editForm").delegate(".datetimepicker", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
-    $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#spouse_pass_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("# marriage_svid_serial", "focusin", function(){
+    $("#doc_create").delegate(".datetimepicker", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
         });
@@ -219,7 +140,7 @@ $( document ).ready(function() {
        if(type_of_contract == 'buy_sell') link = "/document/data_for_canvas_buysale";
        else link = "/document/data_for_canvas_gift";
 
-
+       $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
 
        if(state_name == 'buyer_is_owner_car' || state_name == 'buyer_is_not_owner_car')
        {
@@ -249,7 +170,6 @@ $( document ).ready(function() {
            return false;
        }
 
-       $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
        console.log($(this).parents("div[class=row]").index());
 
        $.ajax({
@@ -334,11 +254,12 @@ $( document ).ready(function() {
                                                                     '</div>');
         accessories=false;
     });
+    /*
     $('.document').on('change','#bs_block_car_in_marriage_yes', function() {
 
-        $('#bs_block_car_in_marriage_yes').remove();
+        $('#block_car_in_marriage').remove();
 
-    });
+    });*/
     //render
 
 
