@@ -460,7 +460,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio '].', действующего на основании '. $data_for_header['buyer_law_document_osn ']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
@@ -481,7 +481,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
