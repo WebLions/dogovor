@@ -115,7 +115,6 @@ class Blocks extends CI_Controller
                 $this->blocks_model->bs_block_vendor_info();
                 $this->blocks_model->bs_block_vendor_agent();
                 $this->blocks_model->bs_block_buyer();
-                return true;
             }
             if($_SESSION['vendor_state'] == 'law'){
 
@@ -185,7 +184,7 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        if($_SESSION['vendor_state'] == 'law') {
+        if($_SESSION['vendor_state'] == 'law' || $_SESSION['vendor_state'] == 'individual') {
 
             $this->blocks_model->bs_block_penalty();
             $this->blocks_model->bs_block_ready();
@@ -204,7 +203,7 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        if($_SESSION['vendor_state'] == 'law') {
+        if($_SESSION['vendor_state'] == 'law' || $_SESSION['vendor_state'] == 'individual') {
             $this->blocks_model->bs_block_penalty();
             $this->blocks_model->bs_block_ready();
         }
@@ -213,7 +212,7 @@ class Blocks extends CI_Controller
 
     public function bs_block_car_in_marriage_yes()
     {
-        //$this->blocks_model->bs_block_car_in_marriage_checked();
+        $this->blocks_model->bs_block_car_in_marriage_checked();
         $this->blocks_model->bs_block_spounse();
         $this->blocks_model->bs_block_penalty();
         $this->blocks_model->bs_block_ready();
@@ -226,11 +225,13 @@ class Blocks extends CI_Controller
 
     public function police_yes(){
         //заполняем заяву в гибдд
-        $email = false;
-        if( !$this->data['user_id'] ) {
-            $email = true;
+
+        $buyer_state = $_GET['buyer_state'];
+        $_SESSION['buyer_state'] = $buyer_state;
+        if(isset( $_SESSION['buyer_state'])){
+            if( $_SESSION['buyer_state'] == 'physical'){$this->blocks_model->bs_block_police_yes_physical();}
+            else $this->blocks_model->bs_block_police_yes($email);
         }
-        $this->blocks_model->bs_block_police_yes($email);
     }
     public function police_no(){
         //кнопка сохранить
@@ -254,9 +255,7 @@ class Blocks extends CI_Controller
         if( !$this->data['user_id'] ) {
             $email = true;
         }
-        $this->blocks_model->bs_block_statement_no($email);
-
-        //$this->blocks_model->bs_block_statement_gibdd($email);
+        $this->blocks_model->bs_block_statement_gibdd($email);
     }
 
     //Дарение
