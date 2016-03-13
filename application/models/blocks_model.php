@@ -1609,6 +1609,7 @@ END;
             </div>
         </div>
 END;
+        if($_SESSION[''])
         echo <<<END
         <div class="row" id="block_police" >
     <div class="col-lg-12">

@@ -225,11 +225,12 @@ class Blocks extends CI_Controller
 
     public function police_yes(){
         //заполняем заяву в гибдд
-
-        $buyer_state = $_GET['buyer_state'];
-        $_SESSION['buyer_state'] = $buyer_state;
+        $email = false;
+        if( !$this->data['user_id'] ) {
+            $email = true;
+        }
         if(isset( $_SESSION['buyer_state'])){
-            if( $_SESSION['buyer_state'] == 'physical'){$this->blocks_model->bs_block_police_yes_physical();}
+            if( $_SESSION['buyer_state'] == 'physical'){$this->blocks_model->bs_block_police_yes_physical($email);}
             else $this->blocks_model->bs_block_police_yes($email);
         }
     }
