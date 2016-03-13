@@ -58,17 +58,14 @@ function canvas_render(link){
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    if(lineLength > maxWidth || words.length == (key+1)){
+                    if(lineLength+10 > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
                         marginTop += lineHeight;
-
                     }
                     else
                     {
-                        context.fillText(baseLine,marginLeft,marginTop);
                         Line = baseLine;
-
                     }
                 });
                 marginTop += lineHeight;
@@ -101,7 +98,6 @@ function canvas_render(link){
                     else
                     {
                         Line = baseLine;
-                        context.fillText(baseLine,marginLeft,marginTop);
                     }
                 });
                 marginTop += lineHeight;
@@ -116,7 +112,8 @@ function canvas_render(link){
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    if(lineLength > maxWidth || words.length == (key.length)+10){
+                    console.log(key.length);
+                    if(lineLength > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
                         Line = value + " ";
                         marginTop += lineHeight;
