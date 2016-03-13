@@ -1,4 +1,5 @@
 function canvas_render(link){
+    var column_indicator = 1;
     var text_type;
     var text;
     var maxWidth = 560; //размер поле, где выводится текст
@@ -8,10 +9,12 @@ function canvas_render(link){
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
 
+    //console.log(link);
+
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.font = "16px Arial";
-    context.fillStyle = 'red';
+    context.fillStyle = 'blue';
     context.fillText("Предварительный просмотр документа",150,30);
 
     function printText(text,marginTop,lineHeight,maxWidth){
@@ -25,11 +28,11 @@ function canvas_render(link){
                 marginLeft = 250;
                 context.font = "16px Arial";
                 context.fillStyle = 'black';
-                lineHeight = 30;
+                lineHeight = 35;
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    console.log(lineLength);
+                    //console.log(lineLength);
                     if(lineLength > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
@@ -48,14 +51,14 @@ function canvas_render(link){
             case '^2':
                 var words = text_type[1].split(" ");
                 var Line = "";
-                marginLeft = 120;
+                marginLeft = 100;
                 context.font = "16px Arial";
                 context.fillStyle = 'black';
                 lineHeight = 30;
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    if(lineLength > maxWidth){
+                    if(lineLength > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
                         marginTop += lineHeight;
@@ -67,7 +70,6 @@ function canvas_render(link){
                         Line = baseLine;
 
                     }
-
                 });
                 marginTop += lineHeight;
                 break;
@@ -148,6 +150,7 @@ function canvas_render(link){
             var print_data = printText(text,marginTop,lineHeight,maxWidth);
             marginTop = print_data.marginTop;
             column_indicator = print_data.column_indicator;
+            //console.log(column_indicator);
 
         });
 

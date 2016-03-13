@@ -12,6 +12,7 @@ var vendor_state,
     type_of_contract;
 
 var link;
+var data_state = new Object();
 
 
 $( document ).ready(function() {
@@ -27,6 +28,16 @@ $( document ).ready(function() {
             name = "bs_block_additional_devices_list";
         var id = $('input[name=doc_id]').val();
         var data = [];
+
+        if(name=='gift_block_vendor_selected__not_owner')
+            data = {type:'true'};
+        if(name==('gift_block_vendor_selected_owner')||name==('gift_block_vendor_selected_not_owner'))
+            switch ($('#editForm').find('input[name=type_of_giver]:checked').val()) {
+                case 'physical': name = 'gift_block_vendor_info'; break;
+                case 'law': name = 'gift_block_vendor_law_state'; break;
+                case 'individual': name = 'gift_block_vendor_individual_state'; break;
+            }
+
         if(name=='bs_block_vendor_selected_not_owner')
             data = {type:'true'};
         if(name==('bs_block_vendor_selected_owner')||name==('bs_block_vendor_selected_not_owner'))
@@ -44,6 +55,7 @@ $( document ).ready(function() {
                 case 'law': name = 'bs_block_buyer_law_state'; break;
                 case 'individual': name = 'bs_block_buyer_individual_state'; break;
             }
+
         if(name=='bs_block_additional_devices_list'){
             $('#block_additional_devices_list').remove();
             console.log(name);
@@ -95,92 +107,13 @@ $( document ).ready(function() {
     });
 
     //ДАТАПИКЕР
-    $("#doc_create").delegate("#date_of_contract", "focusin", function(){
+
+    $("#editForm").delegate(".datetimepicker", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
-    $("#doc_create").delegate("#vendor_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#vendor_ind_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#vendor_passport_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#buyer_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#buyer_passport_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#date_of_product", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#maintenance_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#marriage_svid_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#vendor_ind_date_of_certificate", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#buyer_ind_date_of_certificate", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("input[name=for_agent_proxy_pass_date]", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#date_of_serial_car", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#spouse_birthday", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("#spouse_pass_date", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
-        });
-    });
-    $("#doc_create").delegate("# marriage_svid_serial", "focusin", function(){
+    $("#doc_create").delegate(".datetimepicker", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
         });
@@ -197,67 +130,24 @@ $( document ).ready(function() {
 
     //BLOCK FUNCTION
    $('.document').on('change','.ajax-button', function(){
-
+       $('.document').append('<div class="row"><img src="/images/default.gif" width="20px"></div>');
        var func_name = $(this).attr('data-name');
        var state_name = $(this).attr('name');
-
-       if(state_name == 'type_of_taker') buyer_state = $(this).val();
-       if(state_name == 'type_of_giver') vendor_state = $(this).val();
-       if(state_name == 'type_of_contract') type_of_contract = $(this).val();
-       if(state_name == 'police_form') police_state = $(this).val();
+      // data_state = new Object();
+       if(state_name == 'type_of_taker') data_state.buyer_state = $(this).val();
+       if(state_name == 'type_of_giver') data_state.vendor_state = $(this).val();
+       if(state_name == 'type_of_contract') data_state.type_of_contract = $(this).val();
 
        if(type_of_contract == 'buy_sell') link = "/document/data_for_canvas_buysale";
        else link = "/document/data_for_canvas_gift";
 
-       if(state_name == 'police_form')
-       {
-           $.ajax({
-               method:"GET",
-               url: '/blocks/'+func_name,
-               dataType: "html",
-               data:{police_state :police_state },
-               success: function (data, textStatus) {
-                   $('.document').append(data);
-
-               }
-           });
-           return false;
-       }
-
-       if(state_name == 'buyer_is_owner_car' || state_name == 'buyer_is_not_owner_car')
-       {
-           $.ajax({
-                    method:"GET",
-                    url: '/blocks/'+func_name,
-                    dataType: "html",
-                    data:{buyer_state:buyer_state},
-                    success: function (data, textStatus) {
-                                                            $('.document').append(data);
-
-                    }
-           });
-           return false;
-       }
-       if(state_name == 'vendor_is_owner_car' || state_name == 'vendor_is_not_owner_car')
-       {
-           $.ajax({
-                   method:"GET",
-                   url: '/blocks/'+func_name,
-                   dataType: "html",
-                   data:{vendor_state:vendor_state},
-                   success: function (data, textStatus) {
-                                                            $('.document').append(data);
-                   }
-           });
-           return false;
-       }
-
-       $(".document").find('.row').slice( $(this).parents("div[class=row]").index()+1).remove();
-       console.log($(this).parents("div[class=row]").index());
+       var index = $(this).parents("div[class=row]").index()+1;
+       $(".document").children('div[class=row]').slice( index ).remove();
 
        $.ajax({
            url: '/blocks/'+func_name,
            dataType: "html",
+           data: data_state,
            success: function (data, textStatus) {
                $('.document').append(data);
 
@@ -267,11 +157,15 @@ $( document ).ready(function() {
    });
     //BLOCK MODAL FUNCTION
     $('.document').on('change','.modal-button', function() {
-
+        var buyer = $('input[data-name=bs_block_buyer_selected_not_owner]:checked').val();
+        if(buyer=='not_own_car')
+            buyer='true';
+        else
+            buyer='false';
         if($(this).attr('data-type')=='final')
             $('.document').find('.modal-body-statement').empty();
 
-        $('.document').find('.modal-body-' + $(this).attr('data-type')).load('/blocks/' + $(this).attr('data-name'));
+        $('.document').find('.modal-body-' + $(this).attr('data-type')).load('/blocks/' + $(this).attr('data-name')+'?buyer='+buyer);
 
     });
 
@@ -333,11 +227,12 @@ $( document ).ready(function() {
                                                                     '</div>');
         accessories=false;
     });
+    /*
     $('.document').on('change','#bs_block_car_in_marriage_yes', function() {
 
-        $('#bs_block_car_in_marriage_yes').remove();
+        $('#block_car_in_marriage').remove();
 
-    });
+    });*/
     //render
 
 

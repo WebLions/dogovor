@@ -1,7 +1,16 @@
 <section id="main-content">
     <section class="wrapper">
         <!--overview start-->
-
+        <?if($alert_save=='true'){?>
+        <div class = "row">
+            <div class = "col-lg-12">
+                <div class="alert alert-success" role="alert">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Отлично!</strong> Ваши изменения сохранены!
+                </div>
+            </div>
+        </div>
+        <?}?>
         <div class = "row">
             <div class = "col-lg-12">
                 <table class="table table-striped">
@@ -14,7 +23,7 @@
                     </thead>
                     <? foreach ($documents as $key => $document) {?>
                     <tr>
-                        <td>Блок документов: <?=$document['doc'][0]['document_name']?></td>
+                        <td>Блок документов: <?=$document['block_name']?></td>
                         <td><?=$document['day']?> дней</td>
                         <td><?=$document['type_s']?></td>
                         <td><?=$document['date']?></td>
@@ -33,7 +42,7 @@
                             <td></td>
                         <td>
                             <?if($document['type']==1 ){?>
-                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$doc['url']?>/<?=$key?>"></a>
+                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" href="/document/<?=$document['url']?>_<?=$doc['url']?>/<?=$key?>"></a>
                             <?}?>
                         </td>
                     </tr>

@@ -189,16 +189,16 @@ END;
                     <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
                     </div>
                     <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи:">
+                    <input class = "form-control datetimepicker" type="text" name="agent_vendor_birthday"  placeholder="Дата рождения:">
                     </div>
                     <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Серия паспорта:">
+                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:">
                     </div>
                     <div class = "content-input-group">
-                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Номер паспорта:">
+                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Кем выдана доверенность:">
                     </div>
                     <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="agent_vendor_birthday"  placeholder="Дата рождения:">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи доверенности:">
                     </div>
                     <div class = "content-input-group">
                     <input class="form-control" type="text" name="agent_vendor_pass_serial"  placeholder="Серия паспорта:">
@@ -219,7 +219,7 @@ END;
                     <input class = "form-control" type="text" name="agent_vendor_street"  placeholder="Адрес(улица):">
                     </div>
                     <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control" type="text"  name="agent_vendor_house"  placeholder="Адрес(дом:">
+                    <input id="vendor_birthday" class="form-control" type="text"  name="agent_vendor_house"  placeholder="Адрес(дом):">
                     </div>
                     <div class = "content-input-group">
                     <input class = "form-control" type="text" name="agent_vendor_flat"  placeholder="Адрес(квартира):">
@@ -236,30 +236,60 @@ END;
     public function bs_block_buyer_agent()
     {
         echo <<<END
-         <div class="row" id="for_agent_vendor_info">
-            <div class="col-lg-12">
-            <div class = "content-block">
+<div class="row" id="for_agent_vendor_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
-                <div class = "content-input">
-                    <div class = "content-input-group">
+             <div class = "content-input">
+                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:">
-                    </div>
-                    <div class = "content-input-group">
+                 </div>
+                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="for_agent_buyer_name"  placeholder="Имя:">
-                    </div>
-                    <div class = "content-input-group">
+                 </div>
+                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Серия паспорта:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Номер паспорта:">
-                    </div>
-                </div>
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control datetimepicker" type="text" name="for_agent_proxy_birthday"  placeholder="Дата рождения:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Кем выдана доверенность:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи доверенности:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_serial"  placeholder="Серия паспорта">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_number"  placeholder="Номер паспорта">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_bywho"  placeholder="Кем выдан">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_city"  placeholder="Адрес (Город)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Дом)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон">
+                 </div>
+             </div>
          </div>
     </div>
 </div>
@@ -313,7 +343,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_passport_serial"  placeholder="Серия паспорта:">
@@ -490,13 +520,12 @@ END;
         </div>
     </div>
 </div>
-
 END;
     }
     public function bs_block_additional_devices_list()
     {
         echo <<<END
-<div class="row" id="block_additional_devices">
+<div class="row" id="block_additional_devices_list">
     <div class="col-lg-12">
         <div class = "content-block">
             <div class = "content-input-group">
@@ -508,7 +537,7 @@ END;
                     <div class = "content-radio-group">
 
                         <div class = "content-input">
-                            <input type="checkbox" data-name="rule" data-name="system" name="additional_devices_array[]" value="Левый руль">
+                            <input type="checkbox" data-name="rule" name="additional_devices_array[]" value="Левый руль">
                             <span class = "content-input-align">Левый руль</span>
                         </div>
 
@@ -851,7 +880,7 @@ END;
     public function bs_block_defects()
     {
         echo <<<END
-        <div class="row" id="block_defects" >
+<div class="row" id="block_defects">
     <div class="col-lg-12">
         <div class = "content-block" id="defects_block">
             <p class = "content-header">Неустраненные повреждения и эксплуатационные дефекты:</p>
@@ -965,7 +994,6 @@ END;
         </div>
     </div>
 </div>
-
 END;
     }
     public function bs_block_accessories()
@@ -1011,7 +1039,6 @@ END;
         </div>
     </div>
 </div>
-
 END;
     }
     public function bs_block_car_in_marriage()
@@ -1024,7 +1051,7 @@ END;
             <div class = "content-radio-header">
 
                 <div class = "content-input-inlane">
-                    <input id="bs_block_car_in_marriage_yes" class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
+                    <input  class="ajax-button" data-name="bs_block_car_in_marriage_yes" type="radio" name="car_in_marriage" value="true">
                     <span class = "content-input-align">Да</span>
 
                     <input  class="ajax-button" data-name="bs_block_car_in_marriage_no" type="radio" name="car_in_marriage" value="false">
@@ -1108,13 +1135,13 @@ END;
                     <input class = "form-control" type="text" name="spouse_flat"  placeholder="Адрес регистрации(квартира):">
                 </div>
                 <div class = "content-input-group">
-                    <input id ="marriage_svid_serial" class="form-control" type="text" name="marriage_svid_serial"  placeholder="Серия свидетельства о браке:">
+                    <input class="form-control" type="text" name="marriage_svid_serial"  placeholder="Серия свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="marriage_svid_number"  placeholder="Номер свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="marriage_svid_date" class="form-control datetimepicker" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:">
+                    <input class="form-control datetimepicker" type="text" name="marriage_svid_date"  placeholder="Дата выдачи свидетельства о браке:">
                 </div>
                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="marriage_svid_bywho"  placeholder="Kем выдано свидетельство о браке:">
@@ -1175,10 +1202,10 @@ END;
            Хотите дополнительно оформить заявление в ГИБДД?(Это совершенно бесплатно).
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="final" data-name="police_yes" type="radio" name="police_form" value="true">
+                    <input  class="modal-button" data-type="final" data-name="police_yes" id = "bs_deal" type="radio" name="police_form">
                     <span class = "content-input-align">Да</span>
 
-                    <input  class="modal-button" data-type="final" data-name="police_no" type="radio" name="police_form" value="false">
+                    <input  class="modal-button" data-type="final" data-name="police_no" type="radio" name="police_form" >
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>
@@ -1238,7 +1265,7 @@ END;
                 <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)">
              </div>
              <div class = "content-input-group">
-                <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Квартира)">
+                <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Дом)">
              </div>
              <div class = "content-input-group">
                 <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)">
@@ -1290,7 +1317,7 @@ END;
                     <input class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_law_proxy_date"  placeholder="Дата выдачи доверенности:">
+                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_law_proxy_date"  placeholder="Дата выдачи доверенности:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_law_proxy_number"  placeholder="Номер доверенности: ">
@@ -1347,22 +1374,22 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="vendor_ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                    <input id="vendor_ind_date_of_certificate" class="form-control datetimepicker" type="text" name="vendor_ind_date_of_certificate"  placeholder="Дата выдачи: ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_ind_birthday" class="form-control datatimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
-                </div>
-                <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_passport_date"  class="form-control datatimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                    <input id="vendor_passport_date"  class="form-control datetimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
                     <input  class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:">
@@ -1431,7 +1458,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_law_document_osn"  placeholder="Действующего на основании:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_law_proxy_date"  placeholder="Дата выдачи доверенности:">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_law_proxy_date"  placeholder="Дата выдачи доверенности:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_law_proxy_number"  placeholder="Номер доверенности: ">
@@ -1488,22 +1515,22 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
+                </div>
+                <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="buyer_ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                    <input id="buyer_ind_date_of_certificate" class="form-control datetimepicker" type="text" name="buyer_ind_date_of_certificate"  placeholder="Дата выдачи: ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_serial"  placeholder="Паспорт серия:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
-                </div>
-                <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_passport_date" class="form-control datatimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                    <input id="buyer_passport_date" class="form-control datetimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_bywho" placeholder="Кем выдан:">
@@ -1555,8 +1582,33 @@ END;
 END;
     }
 
-    public function bs_block_police_yes()
+    public function bs_block_police_yes($email)
     {
+        $text = "";
+        if($_GET['buyer']=='true')
+            $text = <<<END
+    <div class="col-lg-12">
+        Кто несет заявление в ГИБДД?
+            <div class = "content-radio-header">
+                <div class = "content-input-inlane">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true">
+                    <span class = "content-input-align">Покупатель лично</span>
+
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false">
+                    <span class = "content-input-align">Представитель</span>
+                </div>
+            </div>
+    </div>
+END;
+        else
+            $text = <<<END
+<div class="row" id="block_police" >
+            {$this->getEmailInput($email)}
+            <div class="col-lg-12">
+                <button id="ready_button" type="submit" class="btn btn-success">Сохранить и оплатить</button>
+            </div>
+        </div>
+END;
         echo <<<END
         <div class="row" id="block_police" >
     <div class="col-lg-12">
@@ -1567,9 +1619,7 @@ END;
               <div class = "content-input-group">
                     <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:">
               </div>
-               <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_inn"  placeholder="ИНН (для физических лиц при наличии):">
-               </div>
+            </div>
             <p class = "content-header">Сведения из ПТС транспортного средства:</p>
             <div class = "content-radio-header">
 
@@ -1589,69 +1639,10 @@ END;
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        Кто несет заявление в ГИБДД?
-            <div class = "content-radio-header">
-                <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form">
-                    <span class = "content-input-align">Покупатель лично</span>
-
-                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" >
-                    <span class = "content-input-align">Представитель</span>
-                </div>
-            </div>
-    </div>
+    {$text}
 </div>
 END;
-    }
-    public function bs_block_police_yes_physical()
-    {
-        echo <<<END
-        <div class="row" id="block_police" >
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Заявление в ГИББД</p>
-            <div class = "content-radio-header">
 
-              <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:">
-              </div>
-               <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_inn"  placeholder="ИНН (для физических лиц при наличии):">
-               </div>
-            <p class = "content-header">Сведения из ПТС транспортного средства:</p>
-            <div class = "content-radio-header">
-
-             <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:">
-              </div>
-              <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:">
-              </div>
-              <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_max_mass"  placeholder="Разрешенная максимальная масса:">
-              </div>
-               <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_min_mass"  placeholder="Разрешенная минимальная  масса:">
-              </div>
-
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        Кто несет заявление в ГИБДД?
-            <div class = "content-radio-header">
-                <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form">
-                    <span class = "content-input-align">Покупатель лично</span>
-
-                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" >
-                    <span class = "content-input-align">Представитель</span>
-                </div>
-            </div>
-    </div>
-</div>
-END;
     }
 
 
@@ -1784,7 +1775,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_patronymic"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_passport_serial"  placeholder="Серия паспорта:">
@@ -1876,7 +1867,7 @@ END;
 <div class="row" id="block_pts_info" data-id="7">
     <div class="col-lg-12">
         <div class = "content-block">
-            <p class = "content-header">Сведения о паспорте транспортного средства(ПТС)</p>
+            <p class = "content-header">Сведения о траспортном средстве:</p>
             <div class = "content-radio">
 
                 <div class = "content-input-group">
@@ -1927,7 +1918,7 @@ END;
                     <input class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_law_proxy_date"  placeholder="Дата выдачи доверенности:">
+                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_law_proxy_date"  placeholder="Дата выдачи доверенности:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_law_proxy_number"  placeholder="Номер доверенности: ">
@@ -1987,19 +1978,19 @@ END;
                     <input class = "form-control" type="text" name="vendor_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="vendor_ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                    <input id="vendor_ind_date_of_certificate" class="form-control datetimepicker" type="text" name="vendor_ind_date_of_certificate"  placeholder="Дата выдачи: ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
+                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="vendor_passport_date"  class="form-control datatimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                    <input id="vendor_passport_date"  class="form-control datetimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
                     <input  class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:">
@@ -2068,7 +2059,7 @@ END;
                     <input class = "form-control" type="text" name="buyer_law_document_osn"  placeholder="Действующего на основании:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_law_proxy_date"  placeholder="Дата выдачи доверенности:">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_law_proxy_date"  placeholder="Дата выдачи доверенности:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_law_proxy_number"  placeholder="Номер доверенности: ">
@@ -2128,19 +2119,19 @@ END;
                     <input class = "form-control" type="text" name="buyer_ind_number_of_certificate"  placeholder="Номер свидетельства: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="buyer_ind_date_of_certificate"  placeholder="Дата выдачи: ">
+                    <input id="buyer_ind_date_of_certificate" class="form-control datetimepicker" type="text" name="buyer_ind_date_of_certificate"  placeholder="Дата выдачи: ">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_serial"  placeholder="Паспорт серия:">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_birthday" class="form-control datatimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_number"  placeholder="Паспорт номер: ">
                 </div>
                 <div class = "content-input-group">
-                    <input id="buyer_passport_date" class="form-control datatimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
+                    <input id="buyer_passport_date" class="form-control datetimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_passport_bywho" placeholder="Кем выдан:">
