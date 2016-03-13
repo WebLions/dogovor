@@ -46,7 +46,7 @@
                   <div class="col-lg-6" id="sticky">
                       <div class="content-block" style="height: 1000px;">
                           <div style="text-align: center;">
-                              <canvas id="canvas" width="560" height="1000">
+                              <canvas id="canvas" width="500" height="1000">
 
                               </canvas>
                           </div>

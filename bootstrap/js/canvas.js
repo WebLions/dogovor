@@ -2,20 +2,13 @@ function canvas_render(link){
     var column_indicator = 1;
     var text_type;
     var text;
-    var maxWidth = 560; //размер поле, где выводится текст
+    var maxWidth = $('#sticky').width(); //размер поле, где выводится текст
+    $('#canvas').attr('width',maxWidth-100);
     var lineHeight = 16;
     var marginLeft = 0;
     var marginTop = 70;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
-
-    //console.log(link);
-
-    context.clearRect(0, 0, canvas.width, canvas.height);
-
-    context.font = "16px Arial";
-    context.fillStyle = 'blue';
-    context.fillText("Предварительный просмотр документа",150,30);
 
     function printText(text,marginTop,lineHeight,maxWidth){
 
@@ -50,22 +43,18 @@ function canvas_render(link){
                 break;
             case '^2':
                 var words = text_type[1].split(" ");
-                var Line = "";
+                var baseLine = "";
                 marginLeft = 100;
                 context.font = "16px Arial";
                 context.fillStyle = 'black';
                 lineHeight = 30;
                 $.each(words, function(key,value){
-                    var baseLine = Line + value + " ";
-                    var lineLength = context.measureText(baseLine).width+5;
+                    baseLine += value + " ";
+                    var lineLength = context.measureText(baseLine+words[key+1]+" ").width+5;
                     if(lineLength+10 > maxWidth || words.length == (key+1)){
-                        baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
+                        baseLine = "";
                         marginTop += lineHeight;
-                    }
-                    else
-                    {
-                        Line = baseLine;
                     }
                 });
                 marginTop += lineHeight;
@@ -79,25 +68,23 @@ function canvas_render(link){
                 marginLeft = 420;
                 context.fillText(words[1],marginLeft,marginTop);
                 lineHeight = 20;
+                marginTop += lineHeight;
                 break;
             case '^4':
                 var words = text_type[1].split(" ");
-                var Line = "";
-                marginLeft = 25;
+                var baseLine = "";
+                marginLeft = 0;
                 lineHeight = 16;
                 context.font = "13px Arial";
                 context.fillStyle = 'black';
                 $.each(words, function(key,value ){
-                    var baseLine = Line + value + " ";
-                    var lineLength = context.measureText(baseLine).width;
-                    if(lineLength+10 > maxWidth || words.length == (key+1)){
+                    baseLine += value + " ";
+                    var lineLength = context.measureText(baseLine+words[key+1]+" ").width;
+
+                    if(lineLength > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
-                        Line = value + " ";
+                        baseLine = "";
                         marginTop += lineHeight;
-                    }
-                    else
-                    {
-                        Line = baseLine;
                     }
                 });
                 marginTop += lineHeight;
@@ -112,7 +99,7 @@ function canvas_render(link){
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    console.log(key.length);
+
                     if(lineLength > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
                         Line = value + " ";
@@ -121,11 +108,10 @@ function canvas_render(link){
                     else
                     {
                         Line = baseLine;
-                        context.fillText(baseLine,marginLeft,marginTop);
                     }
 
                 });
-                marginTop += lineHeight;
+                //marginTop += lineHeight;
                 break;
 
         }
@@ -133,9 +119,14 @@ function canvas_render(link){
         return result;
     }
 
+        var doc = $('#document_form');
 
 
-        $.post(link,$('#document_form').serialize(),function( data ) {
+        $.post(link, doc.serialize(),function( data ) {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.font = "16px Arial";
+                context.fillStyle = 'blue';
+                context.fillText("Предварительный просмотр документа",150,30);
         $.each( data , function(key , val){
             /*
             console.log(val['text-type']);
