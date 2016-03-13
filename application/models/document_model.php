@@ -284,10 +284,15 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     //Функция вывода заголовка документа
     /*Анализирует лица, между которыми заключается договор и возвращает переменную, в которой содержиться правильный вариант текста*/
-    private function set_header_doc($type_of_contract, $type_of_vendor, $type_of_buyer,$data_for_header) //law //physical //individual
+    private function set_header_doc($type_of_contract, $type_of_vendor, $type_of_buyer,$data_for_header, $canvas = false) //law //physical //individual
     {
-        $bold_start = '<w:rPr><w:b/></w:rPr>';
-        $bold_end = '</w:t></w:r><w:r><w:t>';
+        $bold_start = '';
+        $bold_end = '';
+        if(!$canvas) {
+            $bold_start = '<w:rPr><w:b/></w:rPr>';
+            $bold_end = '</w:t></w:r><w:r><w:t>';
+        }
+
         switch ($type_of_contract)
         {
             case 'buy_sell':
@@ -2902,7 +2907,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header);
+        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header, true);
 
 
         //Массив данных для канванса

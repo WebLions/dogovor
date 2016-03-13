@@ -130,29 +130,33 @@ $( document ).ready(function() {
 
     //BLOCK FUNCTION
    $('.document').on('change','.ajax-button', function(){
-       $('.document').append('<div class="row"><img src="/images/default.gif" width="20px"></div>');
+       $('.document').append('<div class="row"><center><img src="/images/default.gif" width="20px"></center></div>');
        var func_name = $(this).attr('data-name');
        var state_name = $(this).attr('name');
-      // data_state = new Object();
+
        if(state_name == 'type_of_taker') data_state.buyer_state = $(this).val();
        if(state_name == 'type_of_giver') data_state.vendor_state = $(this).val();
        if(state_name == 'type_of_contract') data_state.type_of_contract = $(this).val();
 
-       if(type_of_contract == 'buy_sell') link = "/document/data_for_canvas_buysale";
+       if(data_state.type_of_contract == 'buy_sell') link = "/document/data_for_canvas_buysale";
        else link = "/document/data_for_canvas_gift";
 
        var index = $(this).parents("div[class=row]").index()+1;
-       $(".document").children('div[class=row]').slice( index ).remove();
+       //$(".document").children('div[class=row]').slice( index ).remove();
 
        $.ajax({
            url: '/blocks/'+func_name,
            dataType: "html",
            data: data_state,
            success: function (data, textStatus) {
+               $(".document").children('div[class=row]').slice( index ).remove();
                $('.document').append(data);
+
+               $("html, body").animate({ scrollTop: $('.document').height() }, 600);
 
            }
        });
+
 
    });
     //BLOCK MODAL FUNCTION
