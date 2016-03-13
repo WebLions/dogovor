@@ -230,7 +230,7 @@ class Blocks extends CI_Controller
         $_SESSION['buyer_state'] = $buyer_state;
         if(isset( $_SESSION['buyer_state'])){
             if( $_SESSION['buyer_state'] == 'physical'){$this->blocks_model->bs_block_police_yes_physical();}
-            else $this->blocks_model->bs_block_police_yes();
+            else $this->blocks_model->bs_block_police_yes($email);
         }
     }
     public function police_no(){

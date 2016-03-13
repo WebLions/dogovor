@@ -1202,10 +1202,10 @@ END;
            Хотите дополнительно оформить заявление в ГИБДД?(Это совершенно бесплатно).
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="final" data-name="police_yes" id = "bs_deal" type="radio" name="police_form">
+                    <input  class="modal-button" data-type="final" data-name="police_yes"type="radio" name="police_form" value="true">
                     <span class = "content-input-align">Да</span>
 
-                    <input  class="modal-button" data-type="final" data-name="police_no" type="radio" name="police_form" >
+                    <input  class="modal-button" data-type="final" data-name="police_no" type="radio" name="police_form" value="false">
                     <span class = "content-input-align">Нет</span>
                 </div>
             </div>
@@ -1644,6 +1644,71 @@ END;
 END;
 
     }
+    public function bs_block_police_yes_physical($email)
+    {
+        $text = "";
+        if($_GET['buyer']=='true')
+            $text = <<<END
+    <div class="col-lg-12">
+        Кто несет заявление в ГИБДД?
+            <div class = "content-radio-header">
+                <div class = "content-input-inlane">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true">
+                    <span class = "content-input-align">Покупатель лично</span>
+
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false">
+                    <span class = "content-input-align">Представитель</span>
+                </div>
+            </div>
+    </div>
+END;
+        else
+            $text = <<<END
+<div class="row" id="block_police" >
+            {$this->getEmailInput($email)}
+            <div class="col-lg-12">
+                <button id="ready_button" type="submit" class="btn btn-success">Сохранить и оплатить</button>
+            </div>
+        </div>
+END;
+        echo <<<END
+        <div class="row" id="block_police" >
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Заявление в ГИББД</p>
+            <div class = "content-radio-header">
+
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:">
+              </div>
+              <div class = "content-input-group">
+                 <input class = "form-control" type="text" name="gibdd_inn"  placeholder="ИНН (для физических лиц при наличии):">
+             </div>
+            </div>
+            <p class = "content-header">Сведения из ПТС транспортного средства:</p>
+            <div class = "content-radio-header">
+
+             <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:">
+              </div>
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:">
+              </div>
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_max_mass"  placeholder="Разрешенная максимальная масса:">
+              </div>
+               <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_min_mass"  placeholder="Разрешенная минимальная  масса:">
+              </div>
+
+            </div>
+        </div>
+    </div>
+    {$text}
+</div>
+END;
+
+    }
 
 
     //Дарение ТС
@@ -1867,7 +1932,7 @@ END;
 <div class="row" id="block_pts_info" data-id="7">
     <div class="col-lg-12">
         <div class = "content-block">
-            <p class = "content-header">Сведения о траспортном средстве:</p>
+            <p class = "content-header">Сведения о паспорте транспортного средства(ПТС)</p>
             <div class = "content-radio">
 
                 <div class = "content-input-group">
