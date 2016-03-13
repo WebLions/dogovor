@@ -105,6 +105,11 @@ $( document ).ready(function() {
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
+    $("#doc_create").delegate("#vendor_ind_birthday", "focusin", function(){
+        $(this).datetimepicker({
+            format: 'YYYY-MM-DD', locale: 'ru'
+        });
+    });
     $("#doc_create").delegate("#vendor_passport_date", "focusin", function(){
         $(this).datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
@@ -199,11 +204,25 @@ $( document ).ready(function() {
        if(state_name == 'type_of_taker') buyer_state = $(this).val();
        if(state_name == 'type_of_giver') vendor_state = $(this).val();
        if(state_name == 'type_of_contract') type_of_contract = $(this).val();
+       if(state_name == 'police_form') police_state = $(this).val();
 
        if(type_of_contract == 'buy_sell') link = "/document/data_for_canvas_buysale";
        else link = "/document/data_for_canvas_gift";
 
+       if(state_name == 'police_form')
+       {
+           $.ajax({
+               method:"GET",
+               url: '/blocks/'+func_name,
+               dataType: "html",
+               data:{police_state :police_state },
+               success: function (data, textStatus) {
+                   $('.document').append(data);
 
+               }
+           });
+           return false;
+       }
 
        if(state_name == 'buyer_is_owner_car' || state_name == 'buyer_is_not_owner_car')
        {
