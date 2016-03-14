@@ -515,58 +515,61 @@ class Document_model extends CI_Model
         return $marriage;
     }
     //------------------------------------------------------------------------------------------------------------------
-    private function get_requisites($data)
+    private function get_requisites($data, $canvans = false)
     {
+        $enter = "<w:br/>";
+        if($canvans == true)
+            $enter = '';
         $output = ""; //Строка вывода
         switch ($data['type_of_side'])
         {
             case 'physical':
-                $output =  "{$data['fio']} <w:br/>";
+                $output =  "{$data['fio']} $enter";
                 if ($data['owner_car'] == 'not_own_car')
                 {
-                    $output = "{$data['agent_fio']} <w:br/>";
-                    $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
-                    $output .= "Дата выдачи: {$data['agent_proxy_date']} <w:br/>";
-                    $output .= "Нотариус: {$data['agent_proxy_notary']} <w:br/>";
+                    $output = "{$data['agent_fio']} $enter";
+                    $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
+                    $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
+                    $output .= "Нотариус: {$data['agent_proxy_notary']} $enter";
                 }
-                $output .= "Дата рождения: {$data['date']} <w:br/>";
-                $output .= "Паспорт: серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  <w:br/>";
-                $output .= "Место жительства: {$data['adress']} <w:br/>";
+                $output .= "Дата рождения: {$data['date']} $enter";
+                $output .= "Паспорт: серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  $enter";
+                $output .= "Место жительства: {$data['adress']} $enter";
                 $output .= "Телефон: {$data['phone']} ";
                 break;
             case 'law':
-                $output = "{$data['name']} <w:br/>";
+                $output = "{$data['name']} $enter";
                 if ($data['owner_car'] == 'not_own_car')
                 {
-                    $output .= "{$data['agent_fio']} <w:br/>";
-                    $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
-                    $output .= "Дата выдачи: {$data['agent_proxy_date']} <w:br/>";
-                    $output .= "Нотариус: {$data['agent_proxy_notary']} <w:br/>";
+                    $output .= "{$data['agent_fio']} $enter";
+                    $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
+                    $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
+                    $output .= "Нотариус: {$data['agent_proxy_notary']} $enter";
                 }
-                $output .= "ИНН: {$data['inn']} <w:br/>";
-                $output .= "ОГРН: {$data['ogrn']}<w:br/>";
-                $output .= "Юридический адрес:{$data['adress']} <w:br/>";
-                $output .= "Телефон: {$data['phone']} <w:br/>";
-                $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
-                $output .= "Корр. счет: {$data['korr_acc']} <w:br/>";
+                $output .= "ИНН: {$data['inn']} $enter";
+                $output .= "ОГРН: {$data['ogrn']}$enter";
+                $output .= "Юридический адрес:{$data['adress']} $enter";
+                $output .= "Телефон: {$data['phone']} $enter";
+                $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}$enter";
+                $output .= "Корр. счет: {$data['korr_acc']} $enter";
                 $output .= "БИК: {$data['bik']}";
                 break;
             case 'individual':
-                $output = "{$data['fio']} <w:br/>";
+                $output = "{$data['fio']} $enter";
                 if ($data['owner_car'] == 'not_own_car')
                 {
-                    $output = "{$data['agent_fio']} <w:br/>";
-                    $output .= "Доверенность № {$data['agent_proxy_number']} <w:br/>";
-                    $output .= "Дата выдачи: {$data['agent_proxy_date']} <w:br/>";
-                    $output .= "Нотариус: {$data['agent_proxy_notary']} <w:br/>";
+                    $output = "{$data['agent_fio']} $enter";
+                    $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
+                    $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
+                    $output .= "Нотариус: {$data['agent_proxy_notary']} $enter";
                 }
-                $output .= "Свидетельство №{$data['number_of_certificate']} от {$data['date_of_certificate']} <w:br/>";
-                $output .="Дата рождения : {$data['date']} <w:br/>";
-                $output .="Паспорт: Серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  <w:br/>";
-                $output .="Место жительства: {$data['adress']} <w:br/>";
-                $output .= "Телефон: {$data['phone']} <w:br/>";
-                $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}<w:br/>";
-                $output .= "Корр. счет: {$data['korr_acc']} <w:br/>";
+                $output .= "Свидетельство №{$data['number_of_certificate']} от {$data['date_of_certificate']} $enter";
+                $output .="Дата рождения : {$data['date']} $enter";
+                $output .="Паспорт: Серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  $enter";
+                $output .="Место жительства: {$data['adress']} $enter";
+                $output .= "Телефон: {$data['phone']} $enter";
+                $output .= "Расчестный счёт {$data['acc']} в банке {$data['bank_name']}$enter";
+                $output .= "Корр. счет: {$data['korr_acc']} $enter";
                 $output .= "БИК: {$data['bik']}";
                 break;
         }
@@ -2733,77 +2736,82 @@ class Document_model extends CI_Model
         $buyer_ind_passport_date = $this->format_date($_POST['buyer_ind_passport_date']);
         $vendor_law_proxy_date = $this->format_date($_POST['$vendor_law_proxy_date']);
         $buyer_law_proxy_date =  $this->format_date($_POST['$buyer_law_proxy_date']);
-        $vendor_date_of_certificate =  $this->format_date($_POST['$vendor_date_of_certificate']);
-        $buyer_date_of_certificate =  $this->format_date($_POST['$buyer_date_of_certificate']);
+        $vendor_ind_date_of_certificate =  $this->format_date($_POST['$vendor_ind_date_of_certificate']);
+        $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
 
         //Джсон
         $documents = $this->json_to_string($_POST['documents']);
         $additional_equip = $this->json_to_string($_POST['additional_devices']);
+        $accessories = $this->json_to_string($_POST['accessories']);
         //Иное
         $marriage = $this->get_marriage_info($_POST['car_in_marriage'], $spouse_fio);
-        $accessories = $this->json_to_string($_POST['accessories']);
         $price_str = $this->num2str($_POST['price_car']);
         //Реквизиты
         //Продавец
+//        $data_for_req_giver = array(); //данные продавца
+//        $data_for_req_taker = array(); //данные покупателя
         switch ($_POST['type_of_giver'])
         {
             case 'physical':
-                $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $_POST['type_of_giver'],
-                    $data_for_req_giver['fio'] = $vendor_fio,
-                    $data_for_req_giver['date'] = $vendor_birthday,
-                    $data_for_req_giver['document']['serial'] = $_POST['vendor_passport_serial'],
-                    $data_for_req_giver['document']['number'] = $_POST['vendor_passport_number'],
-                    $data_for_req_giver['document']['bywho'] = $_POST['vendor_passport_bywho'],
-                    $data_for_req_giver['document']['date'] = $vendor_passport_date,
-                    $data_for_req_giver['adress'] = $vendor_adress,
-                    $data_for_req_giver['phone'] = $_POST['vendor_phone'],
-                    $data_for_req_giver['owner_car'] = $_POST['vendor_is_owner_car'],
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $_POST['for_agent_vendor_proxy_number'],
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $_POST['for_agent_vendor_proxy_notary']
+                $data_for_req_giver = array
+                (
+                    'type_of_side' => $_POST['type_of_giver'],
+                    'fio' => $vendor_fio,
+                    'date' => $vendor_birthday,
+                    'document_serial' => $_POST['vendor_passport_serial'],
+                    'document_number' => $_POST['vendor_passport_number'],
+                    'document_bywho' => $_POST['vendor_passport_bywho'],
+                    'document_date' => $vendor_passport_date,
+                    'adress' => $vendor_adress,
+                    'phone' => $_POST['vendor_phone'],
+                    'owner_car' => $_POST['vendor_is_owner_car'],
+                    'agent_fio' => $vendor_agent_fio,
+                    'agent_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $_POST['for_agent_vendor_proxy_notary']
                 );
                 break;
             case 'law':
                 $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $_POST['type_of_giver'],
-                    $data_for_req_giver['name']= $_POST['vendor_law_company_name'],
-                    $data_for_req_giver['inn']= $_POST['vendor_law_inn'],
-                    $data_for_req_giver['ogrn']= $_POST['vendor_law_ogrn'],
-                    $data_for_req_giver['adress']= $_POST['vendor_law_adress'],
-                    $data_for_req_giver['phone']= $_POST['vendor_law_phone'],
-                    $data_for_req_giver['acc']= $_POST['vendor_law_acc'],
-                    $data_for_req_giver['bank_name']= $_POST['vendor_law_bank_name'],
-                    $data_for_req_giver['korr_acc']= $_POST['vendor_law_korr_acc'],
-                    $data_for_req_giver['bik']= $_POST['vendor_law_bik'],
-                    $data_for_req_giver['owner_car'] = $_POST['vendor_is_owner_car'],
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $_POST['for_agent_vendor_proxy_number'],
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $_POST['for_agent_vendor_proxy_notary']
+                    'type_of_side' => $_POST['type_of_giver'],
+                    'name'=> $_POST['vendor_law_company_name'],
+                    'inn'=> $_POST['vendor_law_inn'],
+                    'ogrn'=> $_POST['vendor_law_ogrn'],
+                    'adress'=> $_POST['vendor_law_adress'],
+                    'phone'=> $_POST['vendor_law_phone'],
+                    'acc'=> $_POST['vendor_law_acc'],
+                    'bank_name'=> $_POST['vendor_law_bank_name'],
+                    'korr_acc'=> $_POST['vendor_law_korr_acc'],
+                    'bik'=> $_POST['vendor_law_bik'],
+                    'owner_car'=> $_POST['vendor_is_owner_car'],
+                    'agent_fio'=> $vendor_agent_fio,
+                    'agent_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $_POST['for_agent_vendor_proxy_notary']
                 );
                 break;
             case 'individual':
                 $data_for_req_giver = array(
-                    $data_for_req_giver['type_of_side'] = $_POST['type_of_giver'],
-                    $data_for_req_giver['fio']= $vendor_ind_fio,
-                    $data_for_req_giver['date']= $vendor_ind_birthday,
-                    $data_for_req_giver['document']['serial']= $_POST['vendor_ind_passport_serial'],
-                    $data_for_req_giver['document']['number']= $_POST['vendor_ind_passport_number'],
-                    $data_for_req_giver['document']['bywho']= $_POST['vendor_ind_passport_bywho'],
-                    $data_for_req_giver['document']['date']= $vendor_ind_passport_date,
-                    $data_for_req_giver['adress']= $vendor_ind_adress,
-                    $data_for_req_giver['phone']= $_POST['vendor_ind_phone'],
-                    $data_for_req_giver['acc']= $_POST['vendor_ind_bank_acc'],
-                    $data_for_req_giver['bank_name']= $_POST['vendor_ind_bank_name'],
-                    $data_for_req_giver['korr_acc']= $_POST['vendor_ind_korr_acc'],
-                    $data_for_req_giver['bik']= $_POST['vendor_ind_bik'],
-                    $data_for_req_giver['owner_car'] = $_POST['vendor_is_owner_car'],
-                    $data_for_req_giver['agent_fio'] = $vendor_agent_fio,
-                    $data_for_req_giver['agent_proxy_number'] = $_POST['for_agent_vendor_proxy_number'],
-                    $data_for_req_giver['agent_proxy_date'] = $for_agent_vendor_proxy_date,
-                    $data_for_req_giver['agent_proxy_notary'] = $_POST['for_agent_vendor_proxy_notary']
+                    'type_of_side' => $_POST['type_of_giver'],
+                    'fio'=> $vendor_ind_fio,
+                    'date'=> $vendor_ind_birthday,
+                    'document_serial' => $_POST['vendor_ind_passport_serial'],
+                    'document_number' => $_POST['vendor_ind_passport_number'],
+                    'document_bywho' => $_POST['vendor_ind_passport_bywho'],
+                    'document_date' => $vendor_ind_passport_date,
+                    'adress'=> $vendor_ind_adress,
+                    'phone'=> $_POST['vendor_ind_phone'],
+                    'acc'=> $_POST['vendor_ind_bank_acc'],
+                    'bank_name'=> $_POST['vendor_ind_bank_name'],
+                    'korr_acc'=> $_POST['vendor_ind_korr_acc'],
+                    'bik'=> $_POST['vendor_ind_bik'],
+                    'owner_car' => $_POST['vendor_is_owner_car'],
+                    'agent_fio' => $vendor_agent_fio,
+                    'agent_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
+                    'agent_proxy_date' => $for_agent_vendor_proxy_date,
+                    'agent_proxy_notary' => $_POST['for_agent_vendor_proxy_notary'],
+                    'number_of_certificate' => $_POST['vendor_ind_number_of_certificate'],
+                    'date_of_certificate' => $vendor_ind_date_of_certificate,
                 );
                 break;
         }
@@ -2811,98 +2819,98 @@ class Document_model extends CI_Model
         switch ($_POST['type_of_taker'])
         {
             case 'physical':
-                $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $_POST['type_of_taker'],
-                    $data_for_req_taker['fio'] = $buyer_fio,
-                    $data_for_req_taker['date'] = $buyer_birthday,
-                    $data_for_req_taker['document']['serial'] = $_POST['buyer_passport_serial'],
-                    $data_for_req_taker['document']['number'] = $_POST['buyer_passport_number'],
-                    $data_for_req_taker['document']['bywho'] = $_POST['buyer_passport_bywho'],
-                    $data_for_req_taker['document']['date'] = $buyer_passport_date,
-                    $data_for_req_taker['adress'] = $buyer_adress,
-                    $data_for_req_taker['phone'] = $_POST['buyer_phone'],
-                    //
-                    $data_for_req_taker['owner_car'] = $_POST['buyer_is_owner_car'],
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $_POST['for_agent_buyer_proxy_number'],
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $_POST['for_agent_buyer_proxy_notary']
+                $data_for_req_taker = array
+                (
+                    'type_of_side' => $_POST['type_of_taker'],
+                    'fio' => $buyer_fio,
+                    'date' => $buyer_birthday,
+                    'document_serial' => $_POST['buyer_passport_serial'],
+                    'document_number' => $_POST['buyer_passport_number'],
+                    'document_bywho' => $_POST['buyer_passport_bywho'],
+                    'document_date' => $buyer_passport_date,
+                    'adress' => $buyer_adress,
+                    'phone' => $_POST['buyer_phone'],
+                    'owner_car' => $_POST['buyer_is_owner_car'],
+                    'agent_fio' => $buyer_agent_fio,
+                    'agent_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
                 );
                 break;
             case 'law':
                 $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $_POST['type_of_taker'],
-                    $data_for_req_taker['name']= $_POST['buyer_law_company_name'],
-                    $data_for_req_taker['inn']= $_POST['buyer_law_inn'],
-                    $data_for_req_taker['ogrn']= $_POST['buyer_law_ogrn'],
-                    $data_for_req_taker['adress']= $_POST['buyer_law_adress'],
-                    $data_for_req_taker['phone']= $_POST['buyer_law_phone'],
-                    $data_for_req_taker['acc']= $_POST['buyer_law_acc'],
-                    $data_for_req_taker['bank_name']= $_POST['buyer_law_bank_name'],
-                    $data_for_req_taker['korr_acc']= $_POST['buyer_law_korr_acc'],
-                    $data_for_req_taker['bik']= $_POST['buyer_law_bik'],
-                    //
-                    $data_for_req_taker['owner_car'] = $_POST['buyer_is_owner_car'],
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $_POST['for_agent_buyer_proxy_number'],
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $_POST['for_agent_buyer_proxy_notary']
+                    'type_of_side' => $_POST['type_of_taker'],
+                    'name'=> $_POST['buyer_law_company_name'],
+                    'inn'=> $_POST['buyer_law_inn'],
+                    'ogrn'=> $_POST['buyer_law_ogrn'],
+                    'adress'=> $_POST['buyer_law_adress'],
+                    'phone'=> $_POST['buyer_law_phone'],
+                    'acc'=> $_POST['buyer_law_acc'],
+                    'bank_name'=> $_POST['buyer_law_bank_name'],
+                    'korr_acc'=> $_POST['buyer_law_korr_acc'],
+                    'bik'=> $_POST['buyer_law_bik'],
+                    'owner_car'=> $_POST['buyer_is_owner_car'],
+                    'agent_fio'=> $buyer_agent_fio,
+                    'agent_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $_POST['for_agent_buyer_proxy_notary']
                 );
                 break;
             case 'individual':
                 $data_for_req_taker = array(
-                    $data_for_req_taker['type_of_side'] = $_POST['type_of_taker'],
-                    $data_for_req_taker['fio']= $buyer_ind_fio,
-                    $data_for_req_taker['date']= $buyer_ind_birthday,
-                    $data_for_req_taker['document']['serial']= $_POST['buyer_ind_passport_serial'],
-                    $data_for_req_taker['document']['number']= $_POST['buyer_ind_passport_number'],
-                    $data_for_req_taker['document']['bywho']= $_POST['buyer_ind_passport_bywho'],
-                    $data_for_req_taker['document']['date']= $buyer_ind_passport_date,
-                    $data_for_req_taker['adress']= $buyer_ind_adress,
-                    $data_for_req_taker['phone']= $_POST['buyer_ind_phone'],
-                    $data_for_req_taker['acc']= $_POST['buyer_ind_bank_acc'],
-                    $data_for_req_taker['bank_name']= $_POST['buyer_ind_bank_name'],
-                    $data_for_req_taker['korr_acc']= $_POST['buyer_ind_korr_acc'],
-                    $data_for_req_taker['bik']= $_POST['buyer_ind_bik'],
-                    //
-                    $data_for_req_taker['owner_car'] = $_POST['buyer_is_owner_car'],
-                    $data_for_req_taker['agent_fio'] = $buyer_agent_fio,
-                    $data_for_req_taker['agent_proxy_number'] = $_POST['for_agent_buyer_proxy_number'],
-                    $data_for_req_taker['agent_proxy_date'] = $for_agent_buyer_proxy_date,
-                    $data_for_req_taker['agent_proxy_notary'] = $_POST['for_agent_buyer_proxy_notary']
+                    'type_of_side' => $_POST['type_of_taker'],
+                    'fio'=> $buyer_ind_fio,
+                    'date'=> $buyer_ind_birthday,
+                    'document_serial' => $_POST['buyer_ind_passport_serial'],
+                    'document_number' => $_POST['buyer_ind_passport_number'],
+                    'document_bywho' => $_POST['buyer_ind_passport_bywho'],
+                    'document_date' => $buyer_ind_passport_date,
+                    'adress'=> $buyer_ind_adress,
+                    'phone'=> $_POST['buyer_ind_phone'],
+                    'acc'=> $_POST['buyer_ind_bank_acc'],
+                    'bank_name'=> $_POST['buyer_ind_bank_name'],
+                    'korr_acc'=> $_POST['buyer_ind_korr_acc'],
+                    'bik'=> $_POST['buyer_ind_bik'],
+                    'owner_car' => $_POST['buyer_is_owner_car'],
+                    'agent_fio' => $buyer_agent_fio,
+                    'agent_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
+                    'agent_proxy_date' => $for_agent_buyer_proxy_date,
+                    'agent_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
+                    'number_of_certificate' => $_POST['buyer_ind_number_of_certificate'],
+                    'date_of_certificate' => $buyer_ind_date_of_certificate,
                 );
                 break;
         }
-        $firstside_requisites = $this->get_requisites($data_for_req_giver);
-        $secondside_requisites = $this->get_requisites($data_for_req_taker);
+        $firstside_requisites = $this->get_requisites($data_for_req_giver, true);
+        $secondside_requisites = $this->get_requisites($data_for_req_taker, true);
         $data_for_header = array(
-            'vendor_fio' => $vendor_fio,
-            'buyer_fio' => $buyer_fio,
+            'vendor_fio' =>$vendor_fio,
+            'buyer_fio' =>$buyer_fio,
             'vendor_law_company_name' => $_POST['vendor_law_company_name'],
             'vendor_law_actor_position' => $_POST['vendor_law_actor_position'],
-            'vendor_law_fio' => $vendor_law_fio,
+            'vendor_law_fio' =>$vendor_law_fio,
             'vendor_law_document_osn' => $_POST['vendor_law_document_osn'],
             'vendor_law_proxy_number' => $_POST['vendor_law_proxy_number'],
             'vendor_law_proxy_date' => $vendor_law_proxy_date,
             'buyer_law_company_name' => $_POST['buyer_law_company_name'],
             'buyer_law_actor_position' => $_POST['buyer_law_actor_position'],
-            'buyer_law_fio' => $buyer_law_fio,
+            'buyer_law_fio' =>$buyer_law_fio,
             'buyer_law_document_osn' => $_POST['buyer_law_document_osn'],
             'buyer_law_proxy_number' => $_POST['buyer_law_proxy_number'],
             'buyer_law_proxy_date' => $buyer_law_proxy_date,
-            'vendor_ind_fio' => $vendor_ind_fio,
-            'vendor_number_of_certificate' => $_POST['vendor_number_of_certificate'],
-            'vendor_date_of_certificate' => $vendor_date_of_certificate,
-            'buyer_ind_fio' => $buyer_ind_fio,
-            'buyer_number_of_certificate' => $_POST['buyer_number_of_certificate'],
-            'buyer_date_of_certificate' => $buyer_date_of_certificate,
+            'vendor_ind_fio' =>$vendor_ind_fio,
+            'vendor_number_of_certificate' => $_POST['vendor_ind_number_of_certificate'],
+            'vendor_date_of_certificate' => $vendor_ind_date_of_certificate,
+            'buyer_ind_fio' =>$buyer_ind_fio,
+            'buyer_number_of_certificate' => $_POST['buyer_ind_number_of_certificate'],
+            'buyer_date_of_certificate' => $buyer_ind_date_of_certificate,
             'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
             'buyer_is_owner_car' => $_POST['buyer_is_owner_car'],
-            'vendor_agent_fio' => $vendor_agent_fio,
+            'vendor_agent_fio' =>$vendor_agent_fio,
             'for_agent_vendor_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
             'for_agent_vendor_proxy_date' => $for_agent_vendor_proxy_date,
             'for_agent_vendor_proxy_notary' => $_POST['for_agent_vendor_proxy_notary'],
-            'buyer_agent_fio' => $buyer_agent_fio,
+            'buyer_agent_fio' =>$buyer_agent_fio,
             'for_agent_buyer_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
@@ -3393,8 +3401,8 @@ class Document_model extends CI_Model
                 );
                 break;
         }
-        $firstside_requisites = $this->get_requisites($data_for_req_giver);
-        $secondside_requisites = $this->get_requisites($data_for_req_taker);
+        $firstside_requisites = $this->get_requisites($data_for_req_giver, true);
+        $secondside_requisites = $this->get_requisites($data_for_req_taker, true);
         $data_for_header = array(
             'vendor_fio' => $vendor_fio,
             'buyer_fio' => $buyer_fio,
