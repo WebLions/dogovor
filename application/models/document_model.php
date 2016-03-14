@@ -3075,7 +3075,7 @@ class Document_model extends CI_Model
             ),
             29 => array
             (
-                'text' => "^4/3.1. По соглашению Сторон цена транспортного средства составляет {$_POST['price_car']} ($price_str) руб.",
+                'text' => "^4/3.1. По соглашению Сторон цена транспортного средства составляет {$_POST['price_car']} ($price_str) {$_POST['currency']}.",
                 'text-type' => 'paragraph',
             ),
             30 => array
@@ -3235,6 +3235,7 @@ class Document_model extends CI_Model
             ),
 
         );
+        include 'array_for_canvans.php';
         $data = json_encode($data);
         echo $data;
         return true;
@@ -3580,6 +3581,7 @@ class Document_model extends CI_Model
                 'text-type' => 'columns',
             )
         );
+        include 'array_for_gift_canvans.php';
         $data = json_encode($data);
         echo $data;
         return true;
