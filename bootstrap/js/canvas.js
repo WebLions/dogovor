@@ -3,7 +3,6 @@ function canvas_render(link){
     var text_type;
     var text;
     var maxWidth = $('#sticky').width(); //размер поле, где выводится текст
-    $('#canvas').attr('width',maxWidth-100);
     var lineHeight = 16;
     var marginLeft = 0;
     var marginTop = 70;
@@ -124,6 +123,7 @@ function canvas_render(link){
 
 
         $.post(link, doc.serialize(),function( data ) {
+                $('#canvas').attr('width',maxWidth-100);
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 context.font = "16px Arial";
                 context.fillStyle = 'blue';
