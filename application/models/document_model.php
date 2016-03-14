@@ -2920,7 +2920,7 @@ class Document_model extends CI_Model
             ),
             1 => array
             (
-                'text' => '^2/КУПЛИ - ПРОДАЖИ ТРАНСПОРТНОГО СРЕДСТВА',
+                'text' => '^2/УПЛИ - ПРОДАЖИ ТРАНСПОРТНОГО СРЕДСТВА',
                 'text-type' => 'title'
             ),
             2 => array
@@ -3215,7 +3215,7 @@ class Document_model extends CI_Model
             ),
             60 => array
             (
-                'text' => "^3/Продавец: $firstside_requisites Покупатель:  $secondside_requisites",
+                'text' => "^3/Продавец: $firstside_requisites ^3*Покупатель:  $secondside_requisites",
                 'text-type' => 'columns-left',
             ),
 

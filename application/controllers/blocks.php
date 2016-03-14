@@ -210,9 +210,8 @@ class Blocks extends CI_Controller
         else $this->blocks_model->bs_block_car_in_marriage();
     }
 
-    public function bs_block_car_in_marriage_yes()
-    {
-        $this->blocks_model->bs_block_car_in_marriage_checked();
+    public function bs_block_car_in_marriage_yes()    {
+
         $this->blocks_model->bs_block_spounse();
         $this->blocks_model->bs_block_penalty();
         $this->blocks_model->bs_block_ready();
