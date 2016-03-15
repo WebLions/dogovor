@@ -15,7 +15,7 @@ $data_input = array
     'carcass' => '[Кузов]',
     'color_carcass' => '[Цвет кузова]',
     'other_parameters' => '[Иные индивидуальные признаки]',
-    'additional_equip' => '[Дополнительное оборудование]',
+    'additional_devices_array' => array('[Дополнительное оборудование]'),
     'serial_car' => '[Серия паспорта машины]',
     'number_of_serial_car' => '[Номер паспорта машины]',
     'bywho_serial_car' => '[Кем выдан паспорт]',
@@ -29,8 +29,8 @@ $data_input = array
     'price_str' => '[Цена в буквах]',
     'currency' => '[Валюта]',
     'payment_date' => '[Сроки оплаты]',
-    'documents' => '[Документы]',
-    'accessories' => '[Аксесуары]',
+    'documents' => array('[Документы]'),
+    'accessories' => array('[Аксесуары]'),
     'penalty' => '[Размер штрафа]',
     'firstside_requisites' => '[Реквизиты первой стороны]',
     'secondside_requisites' => '[Реквизиты второй стороны]',
@@ -45,5 +45,6 @@ $data_input = array
     'buyer_patronymic' => 'О. покупателя]',
     'vendor_is_owner_car' => 'own_car',
     'buyer_is_owner_car' => 'own_car',
+    'penalty' => '[Размер процента]',
 
 );
