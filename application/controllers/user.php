@@ -44,6 +44,7 @@ class User extends CI_Controller {
         if( !$this->data['user_id'] ) {
             redirect('/','refresh');
         }
+
         $page = 0;
         if(!empty($_GET['page'])){
             $page = (int) $_GET['page'];
