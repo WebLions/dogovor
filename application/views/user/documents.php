@@ -51,6 +51,13 @@
                 </table>
                 <div>
             </div>
+            <div class = "col-lg-12">
+                <ul class="pagination">
+                    <? for($i = 0; $i < $pages; $i++){?>
+                    <li class="<?=($i==$page)?'disabled':'active'?>"><a href="?page=<?=$i?>"><?=$i+1?></a></li>
+                    <?}?>
+                </ul>
+            </div>
         </div>
 
 

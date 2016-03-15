@@ -123,9 +123,12 @@ class User_model extends CI_Model
         $result = $this->db->get("payments");
         return $result->result_array();
     }
-    public function getListDocuments()
+    public function getListDocuments($page = 0)
     {
         $userID = $_SESSION['user_id'];
+
+        $this->db->where("documents.user_id", $userID);
+        $return['pages'] = (int) $this->db->count_all_results('documents') / 5;
 
         $this->db->distinct("documents.id");
         $this->db->select("documents.id, documents.doc_id, documents.table, types.document_name, payments.type, documents.date, types.url");
@@ -133,7 +136,7 @@ class User_model extends CI_Model
         $this->db->join("types", "types.url=documents.table");
         $this->db->join("payments", "payments.payID=documents.id");
         $this->db->order_by("documents.date","desc");
-        $result = $this->db->get("documents");
+        $result = $this->db->get("documents",5,$page*5);
 
         $types = $this->db->get("types")->result_array();
 
@@ -166,7 +169,9 @@ class User_model extends CI_Model
             $interval = $date->diff(new DateTime());
             $data[$item['id']]['day'] = 30 - $interval->format('%a');
         }
-        return $data;
+        $return['documents'] = $data;
+
+        return $return;
     }
     public function checkSub($user_id, $doc_id)
     {

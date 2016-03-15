@@ -44,8 +44,14 @@ class User extends CI_Controller {
         if( !$this->data['user_id'] ) {
             redirect('/','refresh');
         }
-        $this->data['documents'] = $this->user_model->getListDocuments( );
+        $page = 0;
+        if(!empty($_GET['page'])){
+            $page = (int) $_GET['page'];
+        }
+
+        $this->data = $this->user_model->getListDocuments($page);
         $this->data['alert_save'] = empty($_GET['save'])?'false':'true';
+        $this->data['page'] = $page;
 
         $this->load->view('user/header');
         $this->load->view('user/documents', $this->data);
