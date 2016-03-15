@@ -18,25 +18,48 @@ var data_state = new Object();
 $( document ).ready(function() {
 
     $('#editForm').on('change','.edit-ajax-button', function(e){
+
         var name = $(this).attr('data-name');
         var index = $('#editForm').find("#"+$(this).attr('data-id')).index()+1;
         var b = $('#editForm').find("#"+$(this).attr('data-id')).parent('div');
-        console.log(name);
+
         if(name!='bs_block_additional_devices_yes'&&name!='bs_block_additional_devices_no')
             b.find('.row').slice(index).remove();
         else
             name = "bs_block_additional_devices_list";
+
         var id = $('input[name=doc_id]').val();
         var data = [];
 
-        if(name=='gift_block_vendor_selected__not_owner')
+        if(name=='gift_block_vendor_selected_not_owner')
             data = {type:'true'};
-        if(name==('gift_block_vendor_selected_owner')||name==('gift_block_vendor_selected_not_owner'))
+        if(name==('gift_block_vendor_selected_owner')||name==('gift_block_vendor_selected_not_owner')){
             switch ($('#editForm').find('input[name=type_of_giver]:checked').val()) {
                 case 'physical': name = 'gift_block_vendor_info'; break;
                 case 'law': name = 'gift_block_vendor_law_state'; break;
                 case 'individual': name = 'gift_block_vendor_individual_state'; break;
             }
+            $.get('/ajax/getBlock/'+name+'/'+id+'/true',data,function(block){
+                b.append(block);
+            });
+            e.preventDefault();
+            return false;
+        }
+
+        if(name=='gift_block_buyer_selected_not_owner')
+            data = {type:'true'};
+        if(name==('gift_block_buyer_selected_owner')||name==('gift_block_buyer_selected_not_owner')){
+            switch ($('#editForm').find('input[name=type_of_taker]:checked').val()) {
+                case 'physical': name = 'gift_block_buyer_info'; break;
+                case 'law': name = 'gift_block_buyer_law_state'; break;
+                case 'individual': name = 'gift_block_buyer_individual_state'; break;
+            }
+            $.get('/ajax/getBlock/'+name+'/'+id+'/true',data,function(block){
+                b.append(block);
+            });
+            e.preventDefault();
+            return false;
+        }
 
         if(name=='bs_block_vendor_selected_not_owner')
             data = {type:'true'};

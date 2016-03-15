@@ -345,20 +345,20 @@ class Blocks extends CI_Controller
             if($_SESSION['vendor_state'] == 'physical'){
 
                 $this->blocks_model->gift_block_vendor_info();
-                $this->blocks_model->bs_block_vendor_agent();
+                $this->blocks_model->gift_block_vendor_agent();
                 $this->blocks_model->gift_block_buyer();
             }
             if($_SESSION['vendor_state'] == 'law'){
 
                 $this->blocks_model->gift_block_vendor_law_state();
-                $this->blocks_model->bs_block_vendor_agent();
+                $this->blocks_model->gift_block_vendor_agent();
                 $this->blocks_model->gift_block_buyer();
 
             }
             if($_SESSION['vendor_state'] == 'individual'){
 
                 $this->blocks_model->gift_block_vendor_individual_state();
-                $this->blocks_model->bs_block_vendor_agent();
+                $this->blocks_model->gift_block_vendor_agent();
                 $this->blocks_model->gift_block_buyer();
 
             }
@@ -373,7 +373,7 @@ class Blocks extends CI_Controller
             if($_SESSION['buyer_state'] == 'physical'){
 
                 $this->blocks_model->gift_block_buyer_info();
-                $this->blocks_model->bs_block_buyer_agent();
+                $this->blocks_model->gift_block_buyer_agent();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
                 $this->blocks_model->bs_block_ready();
@@ -381,7 +381,7 @@ class Blocks extends CI_Controller
             if($_SESSION['buyer_state'] == 'law'){
 
                 $this->blocks_model->gift_block_buyer_law_state();
-                $this->blocks_model->bs_block_buyer_agent();
+                $this->blocks_model->gift_block_buyer_agent();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
                 $this->blocks_model->bs_block_ready();
@@ -390,7 +390,7 @@ class Blocks extends CI_Controller
             if($_SESSION['buyer_state'] == 'individual'){
 
                 $this->blocks_model->gift_block_buyer_individual_state();
-                $this->blocks_model->bs_block_buyer_agent();
+                $this->blocks_model->gift_block_buyer_agent();
                 $this->blocks_model->bs_block_ts_info();
                 $this->blocks_model->gift_block_pts_info();
                 $this->blocks_model->bs_block_ready();

@@ -111,40 +111,80 @@ END;
     public function bs_block_vendor_agent($d, $data)
     {
         $this->db->select("bs.for_agent_vendor_surname,
-                            bs.for_agent_vendor_name,
-                            bs.for_agent_vendor_patronymic,
-                            bs.for_agent_vendor_proxy_date,
-                            bs.for_agent_vendor_proxy_number,
-                            bs.for_agent_vendor_proxy_notary");
+                bs.for_agent_vendor_name,
+                bs.for_agent_vendor_patronymic,
+                bs.agent_vendor_birthday,
+                bs.for_agent_vendor_proxy_number,
+                bs.for_agent_vendor_proxy_notary,
+                bs.for_agent_vendor_proxy_date,
+                bs.agent_vendor_pass_serial,
+                bs.agent_vendor_pass_number,
+                bs.agent_vendor_pass_date,
+                bs.agent_vendor_pass_bywho,
+                bs.agent_vendor_city,
+                bs.agent_vendor_street,
+                bs.agent_vendor_house,
+                bs.agent_vendor_flat,
+                bs.agent_vendor_phone");
         $this->db->join("documents","documents.doc_id=bs.id");
         $this->db->where("documents.id",$d);
         $query = $this->db->get("buy_sale as bs",1,0)->row();
         echo <<<END
-<div class="row" id="for_agent_vendor_info">
-    <div class="col-lg-12">
-        <div class = "content-block">
+         <div class="row" id="for_agent_vendor_info">
+            <div class="col-lg-12">
+            <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
-             <div class = "content-input">
-                 <div class = "content-input-group">
+                <div class = "content-input">
+                    <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:" value="{$query->for_agent_vendor_surname}">
-                 </div>
-                 <div class = "content-input-group">
+                    </div>
+                    <div class = "content-input-group">
                     <input class="form-control" type="text" name="for_agent_vendor_name"  placeholder="Имя:" value="{$query->for_agent_vendor_name}">
-                 </div>
-                 <div class = "content-input-group">
+                    </div>
+                    <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:" value="{$query->for_agent_vendor_patronymic}">
-                 </div>
-                 <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи:" value="{$query->for_agent_vendor_proxy_date}">
-                 </div>
-                 <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Серия паспорта:" value="{$query->for_agent_vendor_proxy_number}">
-                 </div>
-                 <div class = "content-input-group">
-                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Номер паспорта:" value="{$query->for_agent_vendor_proxy_notary}">
-                 </div>
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control datetimepicker" type="text" name="agent_vendor_birthday"  placeholder="Дата рождения:" value="{$query->agent_vendor_birthday}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:" value="{$query->for_agent_vendor_proxy_number}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Кем выдана доверенность:" value="{$query->for_agent_vendor_proxy_notary}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи доверенности:" value="{$query->for_agent_vendor_proxy_date}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="agent_vendor_pass_serial"  placeholder="Серия паспорта:" value="{$query->agent_vendor_pass_serial}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="agent_vendor_pass_number"  placeholder="Номер паспорта:" value="{$query->agent_vendor_pass_number}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="agent_vendor_pass_date"  placeholder="Когда выдан :" value="{$query->agent_vendor_pass_date}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="agent_vendor_pass_bywho"  placeholder="Кем выдан:" value="{$query->agent_vendor_pass_bywho}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="agent_vendor_city"  placeholder="Адрес(город):" value="{$query->agent_vendor_city}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="agent_vendor_street"  placeholder="Адрес(улица):" value="{$query->agent_vendor_street}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control" type="text"  name="agent_vendor_house"  placeholder="Адрес(дом):" value="{$query->agent_vendor_house}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="agent_vendor_flat"  placeholder="Адрес(квартира):" value="{$query->agent_vendor_flat}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="agent_vendor_phone"  placeholder="Телефон:" value="{$query->agent_vendor_phone}">
+                    </div>
              </div>
-        </div>
+         </div>
     </div>
 </div>
 END;
@@ -493,39 +533,79 @@ END;
     public function bs_block_buyer_agent($d, $data)
     {
         $this->db->select("bs.for_agent_buyer_surname,
-                            bs.for_agent_buyer_name,
-                            bs.for_agent_buyer_patronymic,
-                            bs.for_agent_buyer_proxy_date,
-                            bs.for_agent_buyer_proxy_number,
-                            bs.for_agent_buyer_proxy_notary");
+                        bs.for_agent_buyer_name,
+                        bs.for_agent_buyer_patronymic,
+                        bs.for_agent_proxy_birthday,
+                        bs.for_agent_buyer_proxy_number,
+                        bs.for_agent_buyer_proxy_notary,
+                        bs.for_agent_buyer_proxy_date,
+                        bs.for_agent_proxy_pass_serial,
+                        bs.for_agent_proxy_pass_number,
+                        bs.for_agent_proxy_pass_date,
+                        bs.for_agent_proxy_pass_bywho,
+                        bs.for_agent_proxy_city,
+                        bs.for_agent_proxy_street,
+                        bs.for_agent_proxy_house,
+                        bs.for_agent_proxy_flat,
+                        bs.for_agent_proxy_phone");
         $this->db->join("documents","documents.doc_id=bs.id");
         $this->db->where("documents.id",$d);
         $query = $this->db->get("buy_sale as bs",1,0)->row();
         echo <<<END
-         <div class="row" id="for_agent_buyer_info">
-            <div class="col-lg-12">
-            <div class = "content-block">
+<div class="row" id="for_agent_vendor_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
-                <div class = "content-input">
-                    <div class = "content-input-group">
+             <div class = "content-input">
+                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:" value="{$query->for_agent_buyer_surname}">
-                    </div>
-                    <div class = "content-input-group">
+                 </div>
+                 <div class = "content-input-group">
                     <input class="form-control" type="text" name="for_agent_buyer_name"  placeholder="Имя:" value="{$query->for_agent_buyer_name}">
-                    </div>
-                    <div class = "content-input-group">
+                 </div>
+                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:" value="{$query->for_agent_buyer_patronymic}">
-                    </div>
-                    <div class = "content-input-group">
-                    <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи:" value="{$query->for_agent_buyer_proxy_date}">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Серия паспорта:" value="{$query->for_agent_buyer_proxy_number}">
-                    </div>
-                    <div class = "content-input-group">
-                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Номер паспорта:" value="{$query->for_agent_buyer_proxy_notary}">
-                    </div>
-                </div>
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control datetimepicker" type="text" name="for_agent_proxy_birthday"  placeholder="Дата рождения:" value="{$query->for_agent_proxy_birthday}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:" value="{$query->for_agent_buyer_proxy_number}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Кем выдана доверенность:" value="{$query->for_agent_buyer_proxy_notary}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи доверенности:" value="{$query->for_agent_buyer_proxy_date}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_serial"  placeholder="Серия паспорта" value="{$query->for_agent_proxy_pass_serial}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_number"  placeholder="Номер паспорта" value="{$query->for_agent_proxy_pass_number}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text" name="for_agent_proxy_pass_date"  placeholder="Когда выдан" value="{$query->for_agent_proxy_pass_date}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_pass_bywho"  placeholder="Кем выдан" value="{$query->for_agent_proxy_pass_bywho}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_city"  placeholder="Адрес (Город)" value="{$query->for_agent_proxy_city}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_street"  placeholder="Адрес (Улица)" value="{$query->for_agent_proxy_street}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_house"  placeholder="Адрес (Дом)" value="{$query->for_agent_proxy_house}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_flat"  placeholder="Адрес (Квартира)" value="{$query->for_agent_proxy_flat}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон" value="{$query->for_agent_proxy_phone}">
+                 </div>
+             </div>
          </div>
     </div>
 </div>
@@ -1706,6 +1786,7 @@ END;
     public function bs_block_police($d,$data)
     {
         $this->db->select("bs.gibdd_reg_name,
+                            bs.gibdd_inn,
                             bs.gibdd_power_engine,
                             bs.gibdd_eco_class,
                             bs.gibdd_max_mass,
@@ -1717,7 +1798,7 @@ END;
         $v[] = ($query->statement_form=="true")?' checked':'';
         $v[] = ($query->statement_form=="false")?' checked':'';
         echo <<<END
-<div class="row" id="block_police">
+        <div class="row" id="block_police" >
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Заявление в ГИББД</p>
@@ -1726,6 +1807,9 @@ END;
               <div class = "content-input-group">
                     <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:" value="{$query->gibdd_reg_name}">
               </div>
+              <div class = "content-input-group">
+                 <input class = "form-control" type="text" name="gibdd_inn"  placeholder="ИНН (для физических лиц при наличии):" value="{$query->gibdd_inn}">
+             </div>
             </div>
             <p class = "content-header">Сведения из ПТС транспортного средства:</p>
             <div class = "content-radio-header">
@@ -1744,15 +1828,17 @@ END;
               </div>
 
             </div>
-
-
-        <h4 class="content-header">Кто несет заявление в ГИБДД?</h4>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class = "content-block">
+        <p class = "content-header">Кто несет заявление в ГИБДД?</p>
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
-                    <input data-id="block_police" class="edit-ajax-button" data-type="statement" type="radio" name="statement_form" value="true" {$v[0]}>
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true" {$v[0]}>
                     <span class = "content-input-align">Покупатель лично</span>
 
-                    <input data-id="block_police" class="edit-ajax-button" data-type="statement" data-name="bs_block_statement_gibdd" type="radio" name="statement_form" value="false" {$v[1]}>
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false" {$v[1]}>
                     <span class = "content-input-align">Представитель</span>
                 </div>
             </div>
@@ -1760,8 +1846,6 @@ END;
     </div>
 </div>
 END;
-        if($query->statement_form=="false")
-            $this->bs_block_statement_gibdd($d, $data);
     }
     public function bs_block_statement_gibdd($d, $data)
     {
@@ -1816,4 +1900,955 @@ END;
 END;
 
     }
+
+    //Раздел договора дарения
+
+    //блок адреса и даты заключения
+    public function gift_block_deal($d, $data)
+    {
+        $this->db->select("gift.place_of_contract, gift.date_of_contract");
+        $this->db->join("documents","documents.doc_id=gift.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift",1,0)->row();
+
+        echo <<<END
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class = "content-block">
+            <div class = "content-input-group">
+                <input class = "form-control" type="text" name="place_of_contract" value="{$query->place_of_contract}"  placeholder="Место заключения договора:">
+            </div>
+            <div class = "content-input-group">
+                <input id="date_of_contract" class="form-control datetimepicker"  value="{$query->date_of_contract}" name="date_of_contract"  placeholder="Дата заключения договора:">
+            </div>
+        </div>
+    </div>
+</div>
+END;
+    }
+
+    public function gift_vendor($d, $data)
+    {
+        $this->db->select("gift.type_of_taker");
+        $this->db->join("documents","documents.doc_id=gift.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift",1,0)->row();
+        $type = $query->type_of_taker;
+        $v[] = ($type=='physical')?'checked':'';
+        $v[] = ($type=='law')?'checked':'';
+        $v[] = ($type=='individual')?'checked':'';
+
+        echo <<<END
+<div class="row" id="block_seller">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Даритель транспортного средства:</p>
+            <div class = "content-radio-group">
+                <div class = "content-radio">
+                    <input data-id="block_seller" class="edit-ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="physical" {$v[0]}>
+                    <span class = "content-input-align">Физическое лицо</span>
+                </div>
+                <div class = "content-radio">
+                    <input data-id="block_seller" class="edit-ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="law" {$v[1]}>
+                    <span class = "content-input-align">Юридическое лицо</span>
+                </div>
+                <div class = "content-radio">
+                    <input data-id="block_seller" class="edit-ajax-button" data-name="gift_block_vendor_state" type="radio" name="type_of_giver" value="individual" {$v[2]}>
+                    <span class = "content-input-align">Индивидуальный предприниматель</span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+END;
+        $this->gift_block_vendor_state($d);
+        switch ($type) {
+            case 'physical': $this->gift_block_vendor_info($d); break;
+            case 'law': $this->gift_block_buyer_law_state($d); break;
+            case 'individual': $this->gift_block_buyer_individual_state($d); break;
+        }
+    }
+
+    public function gift_block_vendor_state($d, $data)
+    {
+        if(!$data){
+            $this->db->select("gift.buyer_is_owner_car");
+            $this->db->join("documents","documents.doc_id=gift.id");
+            $this->db->where("documents.id",$d);
+            $query = $this->db->get("gift",1,0)->row();
+            $type = $query->buyer_is_owner_car;
+            $v[] = ($type=='own_car')?'checked':'';
+            $v[] = ($type=='not_own_car')?'checked':'';
+        }
+        echo <<<END
+<div class="row" id="block_seller_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Статус дарителя:</p>
+            <div class="content-radio-group">
+
+                <div class = "content-radio">
+                    <input data-id="block_seller_info" class="edit-ajax-button" data-name="gift_block_vendor_selected_owner" type="radio" name="vendor_is_owner_car" value="own_car" {$v[0]}>
+                    <span class = "content-input-align">Даритель является собственником ТС</span>
+                </div>
+                <div class = "content-radio">
+                    <input data-id="block_seller_info" class="edit-ajax-button" data-name="gift_block_vendor_selected_not_owner" type="radio" name="vendor_is_owner_car" value="not_own_car" {$v[1]}>
+                    <span class = "content-input-align">Даритель не является собственником ТС и действует по доверенности</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+END;
+        if($data=='true'&&$_GET['type']=='true'){
+            $this->gift_block_vendor_agent($d, $data);
+        }
+    }
+
+    public function gift_block_vendor_info($d, $data)
+    {
+        $this->db->select("bs.vendor_surname,
+                           bs.vendor_name,
+                           bs.vendor_patronymic,
+                           bs.vendor_birthday,
+                           bs.vendor_passport_serial,
+                           bs.vendor_passport_number,
+                           bs.vendor_passport_date,
+                           bs.vendor_passport_bywho,
+                           bs.vendor_city,
+                           bs.vendor_street,
+                           bs.vendor_house,
+                           bs.vendor_flat,
+                           bs.vendor_phone
+                           ");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        echo <<<END
+         <div class="row" id="vendor_info">
+            <div class="col-lg-12">
+            <div class = "content-block">
+             <p class = "content-header">Введите данныe дарителя:</p>
+                <div class = "content-input">
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_surname"  placeholder="Фамилия:" value="{$query->vendor_surname}">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_name"  placeholder="Имя:" value="{$query->vendor_name}">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_patronymic"  placeholder="Отчество:" value="{$query->vendor_patronymic}">
+                </div>
+                <div class = "content-input-group">
+                <input id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_birthday"  placeholder="Дата рождения:" value="{$query->vendor_birthday}">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_passport_serial"  placeholder="Серия паспорта:" value="{$query->vendor_passport_serial}">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_passport_number"  placeholder="Номер паспорта:" value="{$query->vendor_passport_number}">
+                </div>
+                <div class = "content-input-group">
+                <input id="vendor_passport_date" class = "form-control datetimepicker" type="text" name="vendor_passport_date"  placeholder="Дата выдачи паспорта:" value="{$query->vendor_passport_date}">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_passport_bywho"  placeholder="Кем выдан паспорт:" value="{$query->vendor_passport_bywho}">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_city"  placeholder="Город (адрес регистрации):" value="{$query->vendor_city}">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_street"  placeholder="Улица:" value="{$query->vendor_street}">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_house"  placeholder="№ Дома:" value="{$query->vendor_house}">
+                </div>
+                <div class = "content-input-group">
+                <input class = "form-control" type="text" name="vendor_flat"  placeholder="Квартира:" value="{$query->vendor_flat}">
+                </div>
+                <div class = "content-input-group">
+                <input class="form-control" type="text" name="vendor_phone"  placeholder="Телефон:" value="{$query->vendor_phone}">
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+END;
+        if($data=='true'&&$_GET['type']=='true'){
+            $this->gift_block_vendor_agent($d, $data);
+        }
+    }
+    public function gift_block_vendor_law_state($d, $data)
+    {
+        $this->db->select("bs.vendor_law_actor_surname,
+                            bs.vendor_law_actor_name,
+                            bs.vendor_law_actor_patronymic,
+                            bs.vendor_law_company_name,
+                            bs.vendor_law_actor_position,
+                            bs.vendor_law_document_osn,
+                            bs.vendor_law_proxy_date,
+                            bs.vendor_law_proxy_number,
+                            bs.vendor_law_inn,
+                            bs.vendor_law_ogrn,
+                            bs.vendor_law_adress,
+                            bs.vendor_law_phone,
+                            bs.vendor_law_acc,
+                            bs.vendor_law_bank_name,
+                            bs.vendor_law_korr_acc,
+                            bs.vendor_law_bik
+                           ");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        echo <<<END
+<div class="row" id="block_seller_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe дарителя:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_actor_surname"  placeholder="Фамилия:" value="{$query->vendor_law_actor_surname}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_actor_name"  placeholder="Имя:" value="{$query->vendor_law_actor_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_actor_patronymic"  placeholder="Отчество:" value="{$query->vendor_law_actor_patronymic}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование: " value="{$query->vendor_law_company_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_actor_position"  placeholder="В лице: " value="{$query->vendor_law_actor_position}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:" value="{$query->vendor_law_document_osn}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_law_proxy_date"  placeholder="Дата выдачи доверенности:" value="{$query->vendor_law_proxy_date}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_proxy_number"  placeholder="Номер доверенности: " value="{$query->vendor_law_proxy_number}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_inn"  placeholder="ИНН:" value="{$query->vendor_law_inn}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_ogrn"  placeholder="ОГРН:" value="{$query->vendor_law_ogrn}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_adress"  placeholder="Юридический адрес: " value="{$query->vendor_law_adress}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_phone"  placeholder="Телефон:" value="{$query->vendor_law_phone}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_acc"  placeholder="Расчетный счет" value="{$query->vendor_law_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_bank_name"  placeholder="Наименование банка:" value="{$query->vendor_law_bank_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_law_korr_acc"  placeholder="Корр.счет:" value="{$query->vendor_law_korr_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_law_bik"  placeholder="БИК:" value="{$query->vendor_law_bik}">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+        if($data=='true'&&$_GET['type']=='true'){
+            $this->gift_block_vendor_agent($d, $data);
+        }
+    }
+    public function gift_block_vendor_individual_state($d, $data)
+    {
+        $this->db->select("bs.vendor_ind_surname,
+                            bs.vendor_ind_name,
+                            bs.vendor_ind_patronymic,
+                            bs.vendor_ind_number_of_certificate,
+                            bs.vendor_ind_date_of_certificate,
+                            bs.vendor_ind_passport_serial,
+                            bs.vendor_ind_birthday,
+                            bs.vendor_ind_passport_number,
+                            bs.vendor_ind_passport_date,
+                            bs.vendor_ind_passport_bywho,
+                            bs.vendor_ind_city,
+                            bs.vendor_ind_street,
+                            bs.vendor_ind_house,
+                            bs.vendor_ind_flat,
+                            bs.vendor_ind_phone,
+                            bs.vendor_ind_bank_acc,
+                            bs.vendor_ind_bank_name,
+                            bs.vendor_ind_korr_acc,
+                            bs.vendor_ind_bik
+                           ");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        echo <<<END
+<div class="row" id="block_seller_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe дарителя:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_surname"  placeholder="Фамилия:" value="{$query->vendor_ind_surname}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_name"  placeholder="Имя:" value="{$query->vendor_ind_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_patronymic"  placeholder="Отчество:" value="{$query->vendor_ind_patronymic}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_number_of_certificate"  placeholder="Номер свидетельства: " value="{$query->vendor_ind_number_of_certificate}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_ind_date_of_certificate" class="form-control datatimepicker" type="text" name="vendor_ind_date_of_certificate"  placeholder="Дата выдачи: " value="{$query->vendor_ind_date_of_certificate}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_passport_serial"  placeholder="Паспорт серия:" value="{$query->vendor_ind_passport_serial}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_birthday" class="form-control datatimepicker" type="text"  name="vendor_ind_birthday"  placeholder="Дата рождения:" value="{$query->vendor_ind_birthday}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_passport_number"  placeholder="Паспорт номер: " value="{$query->vendor_ind_passport_number}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="vendor_passport_date"  class="form-control datatimepicker" type="text" name="vendor_ind_passport_date"  placeholder="Когда выдан паспорт:" value="{$query->vendor_ind_passport_date}">
+                </div>
+                <div class = "content-input-group">
+                    <input  class = "form-control" type="text" name="vendor_ind_passport_bywho"  placeholder="Кем выдан:" value="{$query->vendor_ind_passport_bywho}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_city"  placeholder="Адрес регистрации:" value="{$query->vendor_ind_city}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_street"  placeholder="Улица:" value="{$query->vendor_ind_street}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_house"  placeholder="№ дома: " value="{$query->vendor_ind_house}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_flat"  placeholder="Номер квартиры:" value="{$query->vendor_ind_flat}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_phone"  placeholder="Телефон" value="{$query->vendor_ind_phone}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_bank_acc"  placeholder="Расчетный счет:" value="{$query->vendor_ind_bank_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="vendor_ind_bank_name"  placeholder="В банке:" value="{$query->vendor_ind_bank_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_korr_acc"  placeholder="Корр.счет:" value="{$query->vendor_ind_korr_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vendor_ind_bik"  placeholder="БИК:" value="{$query->vendor_ind_bik}">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+        if($data=='true'&&$_GET['type']=='true'){
+            $this->gift_block_vendor_agent($d, $data);
+        }
+    }
+    public function gift_block_vendor_agent($d, $data)
+    {
+        $this->db->select("bs.for_agent_vendor_surname,
+                bs.for_agent_vendor_name,
+                bs.for_agent_vendor_patronymic,
+                bs.for_agent_vendor_proxy_number,
+                bs.for_agent_vendor_proxy_notary,
+                bs.for_agent_vendor_proxy_date");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        echo <<<END
+         <div class="row" id="for_agent_vendor_info">
+            <div class="col-lg-12">
+            <div class = "content-block">
+             <p class = "content-header">Введите данныe предствителя:</p>
+                <div class = "content-input">
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:" value="{$query->for_agent_vendor_surname}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_vendor_name"  placeholder="Имя:" value="{$query->for_agent_vendor_name}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:" value="{$query->for_agent_vendor_patronymic}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:" value="{$query->for_agent_vendor_proxy_number}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Кем выдана доверенность:" value="{$query->for_agent_vendor_proxy_notary}">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи доверенности:" value="{$query->for_agent_vendor_proxy_date}">
+                    </div>
+             </div>
+         </div>
+    </div>
+</div>
+END;
+    }
+
+    //Одаряемый
+    public function gift_buyer($d, $data)
+    {
+        $this->db->select("bs.type_of_taker");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        $type = $query->type_of_taker;
+        $v[] = ($type=='physical')?'checked':'';
+        $v[] = ($type=='law')?'checked':'';
+        $v[] = ($type=='individual')?'checked':'';
+
+        echo <<<END
+<div class="row" id="gift_buyer">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Одаряемый транспортного средства:</p>
+            <div class = "content-radio-group">
+                <div class = "content-radio">
+                    <input data-id="gift_buyer" class="edit-ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="physical" {$v[0]}>
+                    <span class = "content-input-align">Физическое лицо</span>
+                </div>
+                <div class = "content-radio">
+                    <input data-id="gift_buyer" class="edit-ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="law" {$v[1]}>
+                    <span class = "content-input-align">Юридическое лицо</span>
+                </div>
+                <div class = "content-radio">
+                    <input data-id="gift_buyer" class="edit-ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="individual" {$v[2]}>
+                    <span class = "content-input-align">Индивидуальный предприниматель</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+END;
+        $this->gift_block_buyer_state($d);
+        switch ($type) {
+            case 'physical': $this->gift_block_buyer_info($d); break;
+            case 'law': $this->gift_block_buyer_law_state($d); break;
+            case 'individual': $this->gift_block_buyer_individual_state($d); break;
+        }
+    }
+    public function gift_block_buyer_state($d,$data)
+    {
+        if(!$data){
+            $this->db->select("gift.buyer_is_owner_car");
+            $this->db->join("documents","documents.doc_id=gift.id");
+            $this->db->where("documents.id",$d);
+            $query = $this->db->get("gift",1,0)->row();
+            $type = $query->buyer_is_owner_car;
+            $v[] = ($type=='own_car')?'checked':'';
+            $v[] = ($type=='not_own_car')?'checked':'';
+        }
+        echo <<<END
+<div class="row" id="gift_buyer_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Статус одаряемого:</p>
+            <div class="content-radio-group">
+
+                <div class = "content-radio">
+                    <input data-id="gift_buyer_info" class="edit-ajax-button" data-name="gift_block_buyer_selected_owner" type="radio" name="buyer_is_owner_car" value="own_car" {$v[0]}>
+                    <span class = "content-input-align">Одаряемый является собственником ТС</span>
+                </div>
+
+
+                <div class = "content-radio">
+                    <input data-id="gift_buyer_info" class="edit-ajax-button" data-name="gift_block_buyer_selected_not_owner" type="radio" name="buyer_is_owner_car" value="not_own_car" {$v[1]}>
+                    <span class = "content-input-align">Одаряемый не является собственником ТС и действует по доверенности</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+END;
+        if($type=='not_own_car'&&$data==false){
+            $this->gift_block_buyer_agent($d);
+        }
+    }
+    public function gift_block_buyer_info($d, $data)
+    {
+        $this->db->select("bs.buyer_surname,
+                           bs.buyer_name,
+                           bs.buyer_patronymic,
+                           bs.buyer_birthday,
+                           bs.buyer_passport_serial,
+                           bs.buyer_passport_number,
+                           bs.buyer_passport_date,
+                           bs.buyer_passport_bywho,
+                           bs.buyer_city,
+                           bs.buyer_street,
+                           bs.buyer_house,
+                           bs.buyer_flat,
+                           bs.buyer_phone
+                           ");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+
+        echo <<<END
+        <div class="row" id="block_buyer_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe одаряемого:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_surname"  placeholder="Фамилия:" value="{$query->buyer_surname}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_name"  placeholder="Имя:" value="{$query->buyer_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_patronymic"  placeholder="Отчество:" value="{$query->buyer_patronymic}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:" value="{$query->buyer_birthday}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_passport_serial"  placeholder="Серия паспорта:" value="{$query->buyer_passport_serial}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_passport_number"  placeholder="Номер паспорта:" value="{$query->buyer_passport_number}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_passport_date" class = "form-control datetimepicker" type="text" name="buyer_passport_date"  placeholder="Дата выдачи паспорта:" value="{$query->buyer_passport_date}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_passport_bywho"  placeholder="Кем выдан паспорт:" value="{$query->buyer_passport_bywho}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_city"  placeholder="Город (адрес регистрации):" value="{$query->buyer_city}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_street"  placeholder="Улица:" value="{$query->buyer_street}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_house"  placeholder="№ Дома:" value="{$query->buyer_house}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_flat"  placeholder="Квартира:" value="{$query->buyer_flat}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_phone"  placeholder="Телефон" value="{$query->buyer_phone}">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+        if($data=='true'&&$_GET['type']=='true'){
+            $this->gift_block_buyer_agent($d);
+        }
+    }
+
+    public function gift_block_buyer_law_state($d, $data)
+    {
+        $this->db->select("bs.buyer_law_actor_surname,
+        bs.buyer_law_actor_name,
+        bs.buyer_law_actor_patronymic,
+        bs.buyer_law_company_name,
+        bs.buyer_law_actor_position,
+        bs.buyer_law_document_osn,
+        bs.buyer_law_proxy_date,
+        bs.buyer_law_proxy_number,
+        bs.buyer_law_inn,
+        bs.buyer_law_ogrn,
+        bs.buyer_law_adress,
+        bs.buyer_law_phone,
+        bs.buyer_law_acc,
+        bs.buyer_law_bank_name,
+        bs.buyer_law_korr_acc,
+        bs.buyer_law_bik");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        echo <<<END
+<div class="row" id="block_seller_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe одаряемого:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_actor_surname"  placeholder="Фамилия:" value="{$query->buyer_law_actor_surname}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_actor_name"  placeholder="Имя:" value="{$query->buyer_law_actor_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_actor_patronymic"  placeholder="Отчество:" value="{$query->buyer_law_actor_patronymic}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование: " value="{$query->buyer_law_company_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_actor_position"  placeholder="В лице: " value="{$query->buyer_law_actor_position}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_document_osn"  placeholder="Действующего на основании:" value="{$query->buyer_law_document_osn}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_law_proxy_date"  placeholder="Дата выдачи доверенности:" value="{$query->buyer_law_proxy_date}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_proxy_number"  placeholder="Номер доверенности: " value="{$query->buyer_law_proxy_number}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_inn"  placeholder="ИНН:" value="{$query->buyer_law_inn}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_ogrn"  placeholder="ОГРН:" value="{$query->buyer_law_ogrn}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_adress"  placeholder="Юридический адрес: " value="{$query->buyer_law_adress}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_phone"  placeholder="Телефон:" value="{$query->buyer_law_phone}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_acc"  placeholder="Расчетный счет" value="{$query->buyer_law_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_bank_name"  placeholder="Наименование банка:" value="{$query->buyer_law_bank_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_law_korr_acc"  placeholder="Корр.счет:" value="{$query->buyer_law_korr_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_law_bik"  placeholder="БИК:" value="{$query->buyer_law_bik}">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+        if($data=='true'&&$_GET['type']=='true'){
+            $this->gift_block_buyer_agent($d);
+        }
+
+    }
+    public function gift_block_buyer_individual_state($d, $data)
+    {
+        $this->db->select("bs.buyer_ind_surname,
+                            bs.buyer_ind_name,
+                            bs.buyer_ind_patronymic,
+                            bs.buyer_ind_number_of_certificate,
+                            bs.buyer_ind_date_of_certificate,
+                            bs.buyer_ind_passport_serial,
+                            bs.buyer_ind_birthday,
+                            bs.buyer_ind_passport_number,
+                            bs.buyer_ind_passport_date,
+                            bs.buyer_ind_passport_bywho,
+                            bs.buyer_ind_city,
+                            bs.buyer_ind_street,
+                            bs.buyer_ind_house,
+                            bs.buyer_ind_flat,
+                            bs.buyer_ind_phone,
+                            bs.buyer_ind_bank_acc,
+                            bs.buyer_ind_bank_name,
+                            bs.buyer_ind_korr_acc,
+                            bs.buyer_ind_bik");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+
+        echo <<<END
+<div class="row" id="block_buyer_info">
+<div class="col-lg-12">
+    <div class = "content-block">
+        <p class = "content-header">Введите данныe одаряемого:</p>
+        <div class = "content-radio">
+
+            <div class = "content-input">
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_surname"  placeholder="Фамилия:" value="{$query->buyer_ind_surname}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_name"  placeholder="Имя:" value="{$query->buyer_ind_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_patronymic"  placeholder="Отчество:" value="{$query->buyer_ind_patronymic}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_number_of_certificate"  placeholder="Номер свидетельства: " value="{$query->buyer_ind_number_of_certificate}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_ind_date_of_certificate" class="form-control datetimepicker" type="text" name="buyer_ind_date_of_certificate"  placeholder="Дата выдачи: " value="{$query->buyer_ind_date_of_certificate}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_passport_serial"  placeholder="Паспорт серия:" value="{$query->buyer_ind_passport_serial}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_ind_birthday"  placeholder="Дата рождения:" value="{$query->buyer_ind_birthday}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_passport_number"  placeholder="Паспорт номер: " value="{$query->buyer_ind_passport_number}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="buyer_passport_date" class="form-control datetimepicker" type="text" name="buyer_ind_passport_date"  placeholder="Когда выдан паспорт:" value="{$query->buyer_ind_passport_date}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_passport_bywho" placeholder="Кем выдан:" value="{$query->buyer_ind_passport_bywho}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_city"  placeholder="Адрес регистрации:" value="{$query->buyer_ind_city}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_street"  placeholder="Улица:" value="{$query->buyer_ind_street}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_house"  placeholder="№ дома: " value="{$query->buyer_ind_house}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_flat"  placeholder="Номер квартиры:" value="{$query->buyer_ind_flat}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_phone"  placeholder="Телефон" value="{$query->buyer_ind_phone}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_bank_acc"  placeholder="Расчетный счет:" value="{$query->buyer_ind_bank_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="buyer_ind_bank_name"  placeholder="В банке:" value="{$query->buyer_ind_bank_name}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_korr_acc"  placeholder="Корр.счет:" value="{$query->buyer_ind_korr_acc}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="buyer_ind_bik"  placeholder="БИК:" value="{$query->buyer_ind_bik}">
+                </div>
+            </div>
+           </div>
+        </div>
+    </div>
+</div>
+END;
+        if($data=='true'&&$_GET['type']=='true'){
+            $this->gift_block_buyer_agent($d);
+        }
+    }
+    public function gift_block_buyer_agent($d, $data)
+    {
+        $this->db->select("bs.for_agent_buyer_surname,
+                        bs.for_agent_buyer_name,
+                        bs.for_agent_buyer_patronymic,
+                        bs.for_agent_buyer_proxy_number,
+                        bs.for_agent_buyer_proxy_notary,
+                        bs.for_agent_buyer_proxy_date");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        echo <<<END
+<div class="row" id="for_agent_vendor_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
+             <p class = "content-header">Введите данныe предствителя:</p>
+             <div class = "content-input">
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:" value="{$query->for_agent_buyer_surname}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_buyer_name"  placeholder="Имя:" value="{$query->for_agent_buyer_name}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:" value="{$query->for_agent_buyer_patronymic}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:" value="{$query->for_agent_buyer_proxy_number}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Кем выдана доверенность:" value="{$query->for_agent_buyer_proxy_notary}">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи доверенности:" value="{$query->for_agent_buyer_proxy_date}">
+                 </div>
+             </div>
+         </div>
+    </div>
+</div>
+END;
+    }
+
+    public function gift_block_ts_info($d, $data)
+    {
+        $this->db->select("bs.mark,
+                            bs.vin,
+                            bs.reg_gov_number,
+                            bs.car_type,
+                            bs.category,
+                            bs.date_of_product,
+                            bs.engine_model,
+                            bs.shassi,
+                            bs.carcass,
+                            bs.color_carcass,
+                            bs.serial_car,
+                            bs.number_of_serial_car,
+                            bs.date_of_serial_car,
+                            bs.bywho_serial_car");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+
+        echo <<<END
+<div class="row" id="block_ts_info" data-id="7">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Сведения о траспортном средстве:</p>
+            <div class = "content-radio">
+
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="mark"  placeholder="Модель,марка:" value="{$query->mark}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="vin"  placeholder="Идентификационный номер (VIN):" value="{$query->vin}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="reg_gov_number"  placeholder="Государственный регистрационный знак:" value="{$query->reg_gov_number}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text"  name="car_type"  placeholder="Наименование(тип):" value="{$query->car_type}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="category"  placeholder="Категория:" value="{$query->category}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="date_of_product" class="form-control datetimepicker" type="text" name="date_of_product"  placeholder="Год изготовления:" value="{$query->date_of_product}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="engine_model"  placeholder="Модель, номер двигателя:" value="{$query->engine_model}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="shassi"  placeholder="Номер рамы,шасси:" value="{$query->shassi}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="carcass"  placeholder="Кузов(кабина,прицеп):" value="{$query->carcass}">
+                </div>
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="color_carcass"  placeholder="Цвет кузова,кабины,прицепа:" value="{$query->color_carcass}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+END;
+        echo <<<END
+<div class="row" id="block_pts_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Сведения о паспорте транспортного средства(ПТС)</p>
+            <div class = "content-radio">
+
+                <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="serial_car"  placeholder="Серия:" value="{$query->serial_car}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text" name="number_of_serial_car"  placeholder="Номер:" value="{$query->number_of_serial_car}">
+                </div>
+                <div class = "content-input-group">
+                    <input id="date_of_serial_car" class = "form-control datetimepicker" type="text" name="date_of_serial_car"  placeholder="Дата выдачи:" value="{$query->date_of_serial_car}">
+                </div>
+                <div class = "content-input-group">
+                    <input class="form-control" type="text"  name="bywho_serial_car"  placeholder="Кем выдан:" value="{$query->bywho_serial_car}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+END;
+    }
+    public function gift_block_police($d,$data)
+    {
+        $this->db->select("bs.gibdd_reg_name,
+                            bs.gibdd_inn,
+                            bs.gibdd_power_engine,
+                            bs.gibdd_eco_class,
+                            bs.gibdd_max_mass,
+                            bs.gibdd_min_mass,
+                            bs.statement_form");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        $v[] = ($query->statement_form=="true")?' checked':'';
+        $v[] = ($query->statement_form=="false")?' checked':'';
+        echo <<<END
+        <div class="row" id="block_police" >
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Заявление в ГИББД</p>
+            <div class = "content-radio-header">
+
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_reg_name"  placeholder="Наименование регистрационного подразделения ГИБДД:" value="{$query->gibdd_reg_name}">
+              </div>
+              <div class = "content-input-group">
+                 <input class = "form-control" type="text" name="gibdd_inn"  placeholder="ИНН (для физических лиц при наличии):" value="{$query->gibdd_inn}">
+             </div>
+            </div>
+            <p class = "content-header">Сведения из ПТС транспортного средства:</p>
+            <div class = "content-radio-header">
+
+             <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:" value="{$query->gibdd_power_engine}">
+              </div>
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:" value="{$query->gibdd_eco_class}">
+              </div>
+              <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_max_mass"  placeholder="Разрешенная максимальная масса:" value="{$query->gibdd_max_mass}">
+              </div>
+               <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="gibdd_min_mass"  placeholder="Разрешенная минимальная  масса:" value="{$query->gibdd_min_mass}">
+              </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Кто несет заявление в ГИБДД?</p>
+            <div class = "content-radio-header">
+                <div class = "content-input-inlane">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true" {$v[0]}>
+                    <span class = "content-input-align">Покупатель лично</span>
+
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false" {$v[1]}>
+                    <span class = "content-input-align">Представитель</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+END;
+
+    }
+
 }
