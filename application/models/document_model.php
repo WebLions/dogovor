@@ -2314,6 +2314,8 @@ class Document_model extends CI_Model
     public function insert_into_database_buysale()
     {
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
+        if ($_POST['defects'] == false) {$_POST['defects'] = 'отсутствует';}
+        if ($_POST['features'] == false) {$_POST['features'] = 'отсутствует';}
         $data = array
         (
             'date' => date("Y-m-d H:I:s"),
@@ -2712,12 +2714,16 @@ class Document_model extends CI_Model
         //Подготовка данных
         strip_tags($_POST);
         // Обновление ифнормации в связи с ПОСТуплением
+        if ($_POST['defects'] == 'false') {$_POST['defects'] = 'отсутствует';}
+        if ($_POST['features'] == 'false') {$_POST['features'] = 'отсутствует';}
         include 'array_for_canvans.php';
         foreach ($_POST as $key => $value)
         {
             if(!empty($_POST["$key"]))
                 $data_input["$key"] = $value;
         }
+
+
         //ФИО
         $vendor_fio = $this->format_fio($data_input['vendor_surname'], $data_input['vendor_name'], $data_input['vendor_patronymic']);
         $buyer_fio = $this->format_fio($data_input['buyer_surname'],$data_input['buyer_name'],$data_input['buyer_patronymic']);
@@ -2756,9 +2762,9 @@ class Document_model extends CI_Model
         $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
 
         //Джсон
-        $documents = $this->json_to_string($_POST['documents']);
-        $additional_equip = $this->json_to_string($_POST['additional_devices']);
-        $accessories = $this->json_to_string($_POST['accessories']);
+        $documents = $this->json_to_string(json_encode($data_input['documents']));
+        $additional_devices_array = $this->json_to_string(json_encode($data_input['additional_devices_array']));
+        $accessories = $this->json_to_string(json_encode($data_input['accessories']));
         //Иное
         $marriage = $this->get_marriage_info($_POST['car_in_marriage'], $spouse_fio);
         $price_str = $this->num2str($_POST['price_car']);
@@ -2920,8 +2926,8 @@ class Document_model extends CI_Model
             'buyer_ind_fio' =>$buyer_ind_fio,
             'buyer_number_of_certificate' => $_POST['buyer_ind_number_of_certificate'],
             'buyer_date_of_certificate' => $buyer_ind_date_of_certificate,
-            'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
-            'buyer_is_owner_car' => $_POST['buyer_is_owner_car'],
+            'vendor_is_owner_car' => $data_input['vendor_is_owner_car'],
+            'buyer_is_owner_car' => $data_input['buyer_is_owner_car'],
             'vendor_agent_fio' =>$vendor_agent_fio,
             'for_agent_vendor_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
             'for_agent_vendor_proxy_date' => $for_agent_vendor_proxy_date,
@@ -2932,7 +2938,6 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
-
         //Массив данных для канванса
         $data = array
         (
@@ -3023,7 +3028,7 @@ class Document_model extends CI_Model
             ),
             17 => array
             (
-                'text' => "^4/1.2. Продавец обязуется передать Покупателю транспортное средство, оснащенное серийным оборудованием и комплектующими изделиями, установленными заводом-изготовителем, а также следующим дополнительным оборудованием: $additional_equip",
+                'text' => "^4/1.2. Продавец обязуется передать Покупателю транспортное средство, оснащенное серийным оборудованием и комплектующими изделиями, установленными заводом-изготовителем, а также следующим дополнительным оборудованием: $additional_devices_array",
                 'text-type' => 'paragraph',
             ),
             18 => array
@@ -3178,17 +3183,17 @@ class Document_model extends CI_Model
             ),
             48 => array
             (
-                'text' => "^4/6.1. За нарушение сроков оплаты стоимости транспортного средства Продавец вправе требовать с Покупателя уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от неуплаченной суммы за каждый день просрочки.",
+                'text' => "^4/6.1. За нарушение сроков оплаты стоимости транспортного средства Продавец вправе требовать с Покупателя уплаты неустойки (пеней) в размере {$data_input['penalty']} процента от неуплаченной суммы за каждый день просрочки.",
                 'text-type' => 'paragraph',
             ),
             49 => array
             (
-                'text' => "^4/6.2. За нарушение сроков передачи транспортного средства Покупатель вправе требовать с Продавца уплаты неустойки (пеней) в размере {$_POST['penalty']} процента от стоимости транспортного средства за каждый день просрочки.",
+                'text' => "^4/6.2. За нарушение сроков передачи транспортного средства Покупатель вправе требовать с Продавца уплаты неустойки (пеней) в размере {$data_input['penalty']} процента от стоимости транспортного средства за каждый день просрочки.",
                 'text-type' => 'paragraph',
             ),
             50 => array
             (
-                'text' => "^4/6.3. При нарушении предусмотренных Договором гарантий Продавца Покупатель вправе требовать с Продавца уплаты неустойки (штрафа) в размере {$_POST['penalty']} процентов от установленной Договором цены транспортного средства.",
+                'text' => "^4/6.3. При нарушении предусмотренных Договором гарантий Продавца Покупатель вправе требовать с Продавца уплаты неустойки (штрафа) в размере {$data_input['penalty']} процентов от установленной Договором цены транспортного средства.",
                 'text-type' => 'paragraph',
             ),
             51 => array
