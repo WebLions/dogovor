@@ -3621,7 +3621,7 @@ class Document_model extends CI_Model
         $post['type_of_contract'] = !empty($post['type_of_contract'])?$post['type_of_contract']:$d->type_of_contract;
         $post['car_in_marriage'] = !empty($post['car_in_marriage'])?$post['car_in_marriage']:$d->car_in_marriage;
         $post['police_form'] = !empty($post['police_form'])?$post['police_form']:$d->police_form;
-
+        
         $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], $post['type_of_contract'], $post['car_in_marriage'], $post['police_form']);
 
         if(!empty($post['additional_devices_array']))

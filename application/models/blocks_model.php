@@ -233,6 +233,38 @@ END;
 </div>
 END;
     }
+    public function gift_block_vendor_agent()
+    {
+        echo <<<END
+         <div class="row" id="for_agent_vendor_info">
+            <div class="col-lg-12">
+            <div class = "content-block">
+             <p class = "content-header">Введите данныe предствителя:</p>
+                <div class = "content-input">
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_vendor_name"  placeholder="Имя:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_vendor_proxy_notary"  placeholder="Кем выдана доверенность:">
+                    </div>
+                    <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_vendor_proxy_date"  placeholder="Дата выдачи доверенности:">
+                    </div>
+             </div>
+         </div>
+    </div>
+</div>
+END;
+    }
     public function bs_block_buyer_agent()
     {
         echo <<<END
@@ -288,6 +320,38 @@ END;
                  </div>
                  <div class = "content-input-group">
                     <input class="form-control" type="text" name="for_agent_proxy_phone"  placeholder="Телефон">
+                 </div>
+             </div>
+         </div>
+    </div>
+</div>
+END;
+    }
+    public function gift_block_buyer_agent()
+    {
+        echo <<<END
+<div class="row" id="for_agent_vendor_info">
+    <div class="col-lg-12">
+        <div class = "content-block">
+             <p class = "content-header">Введите данныe предствителя:</p>
+             <div class = "content-input">
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_buyer_name"  placeholder="Имя:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control" type="text" name="for_agent_buyer_proxy_notary"  placeholder="Кем выдана доверенность:">
+                 </div>
+                 <div class = "content-input-group">
+                    <input class="form-control datetimepicker" type="text"  name="for_agent_buyer_proxy_date"  placeholder="Дата выдачи доверенности:">
                  </div>
              </div>
          </div>
@@ -1241,6 +1305,9 @@ END;
 
     public function bs_block_statement_gibdd($email)
     {
+        $this->bs_block_statement_no($email);
+        return false;
+
         echo <<<END
 <div class="row">
     <div class="col-lg-12">
