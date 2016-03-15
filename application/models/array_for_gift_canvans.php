@@ -1,6 +1,6 @@
 <?php
 //Массив значений по умолчанию для канванса
-$data_default = array
+$data_input = array
 (
     'place_of_contract' => '[Город договора]',
     'date_of_contract' => '[Дата договора]',
