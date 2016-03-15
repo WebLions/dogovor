@@ -3258,6 +3258,12 @@ class Document_model extends CI_Model
     {
         //Подготовка данных
         strip_tags($_POST);
+        include 'array_for_gift_canvans.php';
+        foreach ($_POST as $key => $value)
+        {
+            if(!empty($_POST["$key"]))
+                $data_input["$key"] = $value;
+        }
         //ФИО
         $vendor_fio = $this->format_fio($_POST['vendor_surname'], $_POST['vendor_name'], $_POST['vendor_patronymic']);
         $buyer_fio = $this->format_fio($_POST['buyer_surname'],$_POST['buyer_name'],$_POST['buyer_patronymic']);
@@ -3275,8 +3281,8 @@ class Document_model extends CI_Model
         $buyer_ind_adress = $this->format_adress($_POST['buyer_ind_city'],$_POST['buyer_ind_street'],$_POST['buyer_ind_house'],$_POST['buyer_ind_flat']);
 
         //Дата
-        $date_of_contract = $this->format_date($_POST['date_of_contract']);
-        $date_of_product = $this->format_date($_POST['date_of_contract']);
+        $date_of_contract = $this->format_date($data_input['date_of_contract']);
+        $date_of_product = $this->format_date($data_input['date_of_contract']);
         $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
@@ -3284,7 +3290,7 @@ class Document_model extends CI_Model
         $vendor_ind_birthday= $this->format_date($_POST['vendor_ind_birthday']);
         $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date']);
         $for_agent_buyer_proxy_date = $this->format_date($_POST['for_agent_buyer_proxy_date']);
-        $date_of_serial_car = $this->format_date($_POST['date_of_serial_car']);
+        $date_of_serial_car = $this->format_date($data_input['date_of_serial_car']);
         $for_agent_vendor_proxy_date = $this->format_date($_POST['for_agent_vendor_proxy_date']);
         $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday']);
         $buyer_ind_passport_date = $this->format_date($_POST['buyer_ind_passport_date']);
@@ -3479,7 +3485,7 @@ class Document_model extends CI_Model
             ),
             2 => array
             (
-                'text' => "^3/г.{$_POST['place_of_contract']} ^3*$date_of_contract",
+                'text' => "^3/г.{$data_input['place_of_contract']} ^3*$date_of_contract",
                 'text-type' => 'columns'
             ),
             3 => array
@@ -3494,27 +3500,27 @@ class Document_model extends CI_Model
             ),
             5 => array
             (
-                'text' => "^5/- марка, модель: {$_POST['mark']};",
+                'text' => "^5/- марка, модель: {$data_input['mark']};",
                 'text-type' => 'list',
             ),
             6 => array
             (
-                'text' => "^5/- идентификационный номер (VIN): {$_POST['vin']};",
+                'text' => "^5/- идентификационный номер (VIN): {$data_input['vin']};",
                 'text-type' => 'list',
             ),
             7 => array
             (
-                'text' => "^5/- государственный регистрационный знак: {$_POST['reg_gov_number']};",
+                'text' => "^5/- государственный регистрационный знак: {$data_input['reg_gov_number']};",
                 'text-type' => 'list',
             ),
             8 => array
             (
-                'text' => "^5/- наименование (тип): {$_POST['car_type']};",
+                'text' => "^5/- наименование (тип): {$data_input['car_type']};",
                 'text-type' => 'list',
             ),
             9 => array
             (
-                'text' => "^5/- категория (А, В, С, D, М, прицеп): {$_POST['category']};",
+                'text' => "^5/- категория (А, В, С, D, М, прицеп): {$data_input['category']};",
                 'text-type' => 'list',
             ),
             10 => array
@@ -3524,27 +3530,22 @@ class Document_model extends CI_Model
             ),
             11 => array
             (
-                'text' => "^5/- модель, N двигателя: {$_POST['engine_model']};",
+                'text' => "^5/- модель, N двигателя: {$data_input['engine_model']};",
                 'text-type' => 'list',
             ),
             12 => array
             (
-                'text' => "^5/- шасси (рама) N: {$_POST['shassi']};",
+                'text' => "^5/- шасси (рама) N: {$data_input['shassi']};",
                 'text-type' => 'list',
             ),
             13 => array
             (
-                'text' => "^5/- кузов (кабина, прицеп) N: {$_POST['carcass']};",
+                'text' => "^5/- кузов (кабина, прицеп) N: {$data_input['carcass']};",
                 'text-type' => 'list',
             ),
             14 => array
             (
-                'text' => "^5/- цвет кузова (кабины, прицепа): {$_POST['color_carcass']};",
-                'text-type' => 'list',
-            ),
-            15 => array
-            (
-                'text' => "^5/- иные индивидуализирующие признаки (голограммы, рисунки и т.д.): $other_parameters, далее по тексту именуемый - \"Автомобиль\".",
+                'text' => "^5/- цвет кузова (кабины, прицепа): {$data_input['color_carcass']};",
                 'text-type' => 'list',
             ),
             17 => array
@@ -3554,7 +3555,7 @@ class Document_model extends CI_Model
             ),
             18 => array
             (
-                'text' => "^4/3. Принадлежность передаваемого по настоящему Договору Автомобиля Дарителю подтверждается паспортом транспортного средства серии {$_POST['serial_car']} № {$_POST['number_of_serial_car']} выданного {$_POST['bywho_serial_car']} $date_of_serial_car ",
+                'text' => "^4/3. Принадлежность передаваемого по настоящему Договору Автомобиля Дарителю подтверждается паспортом транспортного средства серии {$data_input['serial_car']} № {$data_input['number_of_serial_car']} выданного {$data_input['bywho_serial_car']} $date_of_serial_car ",
                 'text-type' => 'paragraph',
             ),
             19 => array
@@ -3593,7 +3594,7 @@ class Document_model extends CI_Model
                 'text-type' => 'columns',
             )
         );
-        include 'array_for_gift_canvans.php';
+
         $data = json_encode($data);
         echo $data;
         return true;
