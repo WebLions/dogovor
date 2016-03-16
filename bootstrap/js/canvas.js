@@ -8,9 +8,11 @@ function canvas_render(link){
     var marginTop = 70;
     var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
+    var checkTop;
 
     function printText(text,marginTop,lineHeight,maxWidth){
 
+        console.log(text_type);
         var text_type = text.split('/');
 
         switch(text_type[0]){
@@ -23,8 +25,7 @@ function canvas_render(link){
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    marginLeft = $('#sticky').width()/2 - lineLength;
-                    console.log(marginLeft);
+                    marginLeft = $('#sticky').width()/2 - lineLength
                     if(lineLength > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
@@ -69,7 +70,6 @@ function canvas_render(link){
                 marginLeft = 470;
                 context.fillText(words[1],marginLeft,marginTop);
                 lineHeight = 20;
-
                 break;
             case '^4':
                 marginTop += lineHeight;
@@ -112,6 +112,29 @@ function canvas_render(link){
 
                 });
                 //marginTop += lineHeight;
+                break;
+            case '^6':
+                marginTop += lineHeight;
+                checkTop = marginTop;
+                context.font = "13px Arial";
+                context.fillStyle = 'black';
+                var words = text_type[1].split("^6*");
+
+                column_left = words[0].split('^+');
+                column_right = words[1].split('^+');
+                $.each(column_left,function(key,value){
+                    marginTop += lineHeight;
+                    marginLeft = 0;
+                    context.fillText(value,marginLeft,marginTop);
+                    lineHeight = 16;
+                });
+                marginTop += 50;
+                $.each(column_right,function(key,value){
+                    marginTop += lineHeight;
+                    marginLeft = 0;
+                    context.fillText(value,marginLeft,marginTop);
+                    lineHeight = 16;
+                });
                 break;
 
         }
