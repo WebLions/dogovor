@@ -294,13 +294,13 @@ class Blocks extends CI_Controller
             }
             if($_SESSION['vendor_state'] == 'law'){
 
-                $this->blocks_model->bs_block_vendor_law_state();
+                $this->blocks_model->gift_block_vendor_law_state();
                 $this->blocks_model->gift_block_buyer();
 
             }
             if($_SESSION['vendor_state'] == 'individual'){
 
-                $this->blocks_model->bs_block_vendor_individual_state();
+                $this->blocks_model->gift_block_vendor_individual_state();
                 $this->blocks_model->gift_block_buyer();
 
             }

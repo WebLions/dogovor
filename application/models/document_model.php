@@ -526,7 +526,7 @@ class Document_model extends CI_Model
     {
         $enter = "<w:br/>";
         if($canvans == true)
-            $enter = '';
+            $enter = '^+';
         $output = ""; //Строка вывода
         switch ($data['type_of_side'])
         {
@@ -3238,7 +3238,7 @@ class Document_model extends CI_Model
             ),
             60 => array
             (
-                'text' => "^3/Продавец: $firstside_requisites ^3*Покупатель:  $secondside_requisites",
+                'text' => "^6/Продавец: $firstside_requisites ^6*Покупатель:  $secondside_requisites",
                 'text-type' => 'columns-left',
             ),
 
