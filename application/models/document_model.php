@@ -2313,11 +2313,51 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_buysale()
     {
+//        //Проверка на пустоту
+//        //_______________________________
+//        //Массив исключений
+//        $exception = array
+//        (
+//            'vendor_phone' => '',
+//            'vendor_law_proxy_number' => '',
+//            'vendor_law_proxy_date' => '',
+//            'buyer_phone' => '',
+//            'buyer_law_proxy_number' => '',
+//            'buyer_law_proxy_date' => '',
+//            'engine_model' => '',
+//            'shassi' => '',
+//            'carcass' => '',
+//            'other_parameters' => '',
+//            'additional_devices_array' => '',
+//            'oil_in_car' => '',
+//            'car_allstatus' => '',
+//            'maintenance_date' => '',
+//            'maintenance_bywho' => '',
+//            'penalty' => '',
+//            'gibdd_inn' => '',
+//        );
+//
+//        foreach ($_POST as $key => $value)
+//        {
+//            if ($_POST["$key"] == $exception["$key"])
+//            {
+//                continue;
+//            }
+//            else
+//            {
+//                if(empty($_POST["$key"]))
+//                {
+//                    redirect('/');
+//                }
+//            }
+//        }
+//        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
-        if ($_POST['defects'] == false) {$_POST['defects'] = 'отсутствует';}
-        if ($_POST['features'] == false) {$_POST['features'] = 'отсутствует';}
+        if ($_POST['defects'] == 'false') {$_POST['defects'] = 'отсутствует';}
+        if ($_POST['features'] == 'false') {$_POST['features'] = 'отсутствует';}
         $data = array
         (
+            'type_id' => $type_id,
             'date' => date("Y-m-d H:I:s"),
             'type_of_contract' => $_POST['type_of_contract'],
             'place_of_contract' => $_POST['place_of_contract'],
@@ -2522,7 +2562,6 @@ class Document_model extends CI_Model
             'marriage_svid_date' => $_POST['marriage_svid_date'],
             'marriage_svid_bywho' => $_POST['marriage_svid_bywho'],
             'penalty' => $_POST['penalty'],
-            'type_id' => $type_id
         );
         //Бизопаснасть
         /*foreach ($data as $key)
@@ -2537,6 +2576,38 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_gift()
     {
+//        //Проверка на пустоту
+//        //_______________________________
+//        //Массив исключений
+//        $exception = array
+//        (
+//            'vendor_phone' => '',
+//            'vendor_law_proxy_number' => '',
+//            'vendor_law_proxy_date' => '',
+//            'buyer_phone' => '',
+//            'buyer_law_proxy_number' => '',
+//            'buyer_law_proxy_date' => '',
+//            'engine_model' => '',
+//            'shassi' => '',
+//            'carcass' => '',
+//            'gibdd_inn' => '',
+//        );
+//
+//        foreach ($_POST as $key => $value)
+//        {
+//            if ($_POST["$key"] == $exception["$key"])
+//            {
+//                continue;
+//            }
+//            else
+//            {
+//                if(empty($_POST["$key"]))
+//                {
+//                    redirect('/');
+//                }
+//            }
+//        }
+//        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         $data = array
         (
@@ -3265,8 +3336,8 @@ class Document_model extends CI_Model
                 $data_input["$key"] = $value;
         }
         //ФИО
-        $vendor_fio = $this->format_fio($_POST['vendor_surname'], $_POST['vendor_name'], $_POST['vendor_patronymic']);
-        $buyer_fio = $this->format_fio($_POST['buyer_surname'],$_POST['buyer_name'],$_POST['buyer_patronymic']);
+        $vendor_fio = $this->format_fio($data_input['vendor_surname'], $data_input['vendor_name'], $data_input['vendor_patronymic']);
+        $buyer_fio = $this->format_fio($data_input['buyer_surname'],$data_input['buyer_name'],$data_input['buyer_patronymic']);
         $vendor_law_fio = $this->format_fio($_POST['vendor_law_surname'],$_POST['vendor_law_name'],$_POST['vendor_law_patronymic']);
         $buyer_law_fio = $this->format_fio($_POST['buyer_law_surname'],$_POST['buyer_law_name'],$_POST['buyer_law_patronymic']);
         $vendor_ind_fio = $this->format_fio($_POST['vendor_ind_surname'],$_POST['vendor_ind_name'],$_POST['vendor_ind_patronymic']);
@@ -3457,8 +3528,8 @@ class Document_model extends CI_Model
             'buyer_ind_fio' =>$buyer_ind_fio,
             'buyer_number_of_certificate' => $_POST['buyer_ind_number_of_certificate'],
             'buyer_date_of_certificate' => $buyer_ind_date_of_certificate,
-            'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
-            'buyer_is_owner_car' => $_POST['buyer_is_owner_car'],
+            'vendor_is_owner_car' => $data_input['vendor_is_owner_car'],
+            'buyer_is_owner_car' => $data_input['buyer_is_owner_car'],
             'vendor_agent_fio' =>$vendor_agent_fio,
             'for_agent_vendor_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
             'for_agent_vendor_proxy_date' => $for_agent_vendor_proxy_date,
@@ -3468,7 +3539,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header, true);
+        $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Массив данных для канванса
         $data = array
         (
