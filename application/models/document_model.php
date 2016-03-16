@@ -3265,8 +3265,8 @@ class Document_model extends CI_Model
                 $data_input["$key"] = $value;
         }
         //ФИО
-        $vendor_fio = $this->format_fio($_POST['vendor_surname'], $_POST['vendor_name'], $_POST['vendor_patronymic']);
-        $buyer_fio = $this->format_fio($_POST['buyer_surname'],$_POST['buyer_name'],$_POST['buyer_patronymic']);
+        $vendor_fio = $this->format_fio($data_input['vendor_surname'], $data_input['vendor_name'], $data_input['vendor_patronymic']);
+        $buyer_fio = $this->format_fio($data_input['buyer_surname'],$data_input['buyer_name'],$data_input['buyer_patronymic']);
         $vendor_law_fio = $this->format_fio($_POST['vendor_law_surname'],$_POST['vendor_law_name'],$_POST['vendor_law_patronymic']);
         $buyer_law_fio = $this->format_fio($_POST['buyer_law_surname'],$_POST['buyer_law_name'],$_POST['buyer_law_patronymic']);
         $vendor_ind_fio = $this->format_fio($_POST['vendor_ind_surname'],$_POST['vendor_ind_name'],$_POST['vendor_ind_patronymic']);
@@ -3457,8 +3457,8 @@ class Document_model extends CI_Model
             'buyer_ind_fio' =>$buyer_ind_fio,
             'buyer_number_of_certificate' => $_POST['buyer_ind_number_of_certificate'],
             'buyer_date_of_certificate' => $buyer_ind_date_of_certificate,
-            'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
-            'buyer_is_owner_car' => $_POST['buyer_is_owner_car'],
+            'vendor_is_owner_car' => $data_input['vendor_is_owner_car'],
+            'buyer_is_owner_car' => $data_input['buyer_is_owner_car'],
             'vendor_agent_fio' =>$vendor_agent_fio,
             'for_agent_vendor_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
             'for_agent_vendor_proxy_date' => $for_agent_vendor_proxy_date,
@@ -3468,7 +3468,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
         );
-        $header_doc = $this->set_header_doc($_POST['type_of_contract'], $_POST['type_of_giver'], $_POST['type_of_taker'], $data_for_header, true);
+        $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Массив данных для канванса
         $data = array
         (
