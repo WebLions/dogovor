@@ -162,9 +162,20 @@ class Document extends CI_Controller
     public function test()
     {
         echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
-        $string = array('левый руль', 'правый руль', 'горгород', 'окси');
-        $string = json_encode($string);
-        echo $this->document_model->json_to_string($string);
+
+        $arr = array(1 =>'левый руль',2 => 'правый руль',3 => 'горгород',4 => 'окси');
+        $exception = array(4 =>'окси');
+        foreach ($arr as $key => $value)
+        {
+            if ($arr["$key"] == $exception["$key"])
+            {
+                continue;
+            }
+            else
+            {
+                echo $arr["$key"];
+            }
+        }
 
 
     }
