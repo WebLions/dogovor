@@ -137,7 +137,8 @@ $( document ).ready(function() {
         });
     });
     $("#doc_create").delegate(".datetimepicker", "focusin", function(){
-        $(this).datetimepicker({
+        var name = $(this).attr('name');
+        $('input[name='+name+']').datetimepicker({
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
@@ -156,7 +157,7 @@ $( document ).ready(function() {
        $('.document').append('<div class="row"><center><img src="/images/default.gif" width="20px"></center></div>');
        var func_name = $(this).attr('data-name');
        var state_name = $(this).attr('name');
-
+       var height = $('.document').height();
        if(state_name == 'type_of_taker') data_state.buyer_state = $(this).val();
        if(state_name == 'type_of_giver') data_state.vendor_state = $(this).val();
        if(state_name == 'type_of_contract') data_state.type_of_contract = $(this).val();
@@ -175,7 +176,7 @@ $( document ).ready(function() {
                $(".document").children('div[class=row]').slice( index ).remove();
                $('.document').append(data);
 
-               $("html, body").animate({ scrollTop: $('.document').height() }, 600);
+               $("html, body").animate({ scrollTop: height }, 600);
 
            }
        });

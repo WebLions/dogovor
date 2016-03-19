@@ -24,8 +24,10 @@ class Document extends CI_Controller
             redirect('/','refresh');
         }
         $this->data['doc'] = $this->document_model->get_doc_buy_sale( (int) $id );//вызов нужно функции модели;
-
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     public function gift_gift($id)  //  в ссылке выглядит так document/name
     {
@@ -33,52 +35,79 @@ class Document extends CI_Controller
             redirect('/','refresh');
         }
         $this->data['doc'] = $this->document_model->get_gift_doc( (int) $id );//вызов нужно функции модели;
-
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     /*public function test_packset(){
         $this->document_model->testpack();
     }*/
     public function buy_sale_act_of_reception($id)  //  в ссылке выглядит так document/name
     {
-
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
         $this->data['doc'] = $this->document_model->get_doc_act_of_reception( (int) $id );//вызов нужно функции модели;
-
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     public function gift_act_of_reception($id)  //  в ссылке выглядит так document/name
     {
-
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
         $this->data['doc'] = $this->document_model->get_gift_act_of_reception( (int) $id );//вызов нужно функции модели;
-
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     public function gift_statement_gibdd($id)  //  в ссылке выглядит так document/name
     {
-
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
         $this->data['doc'] = $this->document_model->get_gift_gibbd($id);//вызов нужно функции модели;
-
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     public function buy_sale_receipt_of_money($id)  //  в ссылке выглядит так document/name
     {
-
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
         $this->data['doc'] = $this->document_model->get_doc_receipt_of_money($id);//вызов нужно функции модели;
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     public function buy_sale_statement_gibdd($id)  //  в ссылке выглядит так document/name
     {
-
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
         $this->data['doc'] = $this->document_model->get_doc_statement_gibdd($id);//вызов нужно функции модели;
-
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     public function buy_sale_marriage($id)  //  в ссылке выглядит так document/name
     {
-
+        if( !$this->data['user_id'] ) {
+            redirect('/','refresh');
+        }
         $this->data['doc'] = $this->document_model->get_doc_statement_vendor_marriage($id);//вызов нужно функции модели;
-
-        redirect($this->data['doc']);
+        if($this->data['doc'] != false){
+            redirect($this->data['doc']);
+        }
+        redirect('/','refresh');
     }
     public function json()
     {

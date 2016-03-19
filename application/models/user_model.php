@@ -53,7 +53,17 @@ class User_model extends CI_Model
             //Отправляем почту в фидгии
             $this->send_email_to_db($email);
             //Отправляем на почту логин и пароль
-            $this->XMail("info@jera.ws", $email, "Регистрация", $text);
+            $this->load->library('email');
+
+            $this->email->from('admin@jera.ws', 'CarDocs');
+            $this->email->to($email);
+
+            $this->email->subject('Регистрация');
+            $this->email->message($text);
+
+            $this->email->send();
+
+            //$this->XMail("info@jera.ws", $email, "Регистрация", $text);
 
         }else{
             $result = $query->row();

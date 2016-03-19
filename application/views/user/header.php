@@ -76,7 +76,7 @@
             </a>
           </li>
           <li class="sub-menu">
-            <a href="documents" class="/user/documents">
+            <a href="/user/documents" class="">
               <i class="glyphicon glyphicon-file"></i>
               <span>Документы</span>
             </a>

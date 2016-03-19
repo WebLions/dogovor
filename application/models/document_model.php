@@ -594,6 +594,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
@@ -880,6 +883,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
@@ -1195,6 +1201,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=gift.id");
         $query = $this->db->get('gift');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
@@ -1321,6 +1330,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
@@ -1628,6 +1640,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
@@ -1925,6 +1940,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
@@ -2053,6 +2071,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
@@ -2177,6 +2198,9 @@ class Document_model extends CI_Model
         $this->db->join("documents","documents.doc_id=buy_sale.id");
         $query = $this->db->get('buy_sale');
         $result = $query->row();
+        if(empty($result)){
+            return false;
+        }
         //Если поле пустое - вставляем отсутсвует
         foreach ($result as $key => $value)
         {
