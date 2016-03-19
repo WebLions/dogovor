@@ -1783,7 +1783,36 @@ END;
 
 END;
     }
-    public function bs_block_police($d,$data)
+    public function bs_block_police($d,$data){
+        $this->db->select("bs.police_form");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("buy_sale as bs",1,0)->row();
+        $v[] = ($query->police_form=="true")?' checked':'';
+        $v[] = ($query->police_form=="false")?' checked':'';
+        echo <<<END
+        <div class="row" id="block_police">
+            <div class="col-lg-12">
+                <div class = "content-block">
+                   <p class = "content-header">Хотите дополнительно оформить заявление в ГИБДД?</p>
+                    <div class = "content-radio-header">
+                        <div class = "content-input-inlane">
+                            <input class="edit-ajax-button modal-button" data-id="block_police" data-name="bs_block_statement_yes" data-type="final" type="radio" name="police_form" value="true" {$v[0]}>
+                            <span class = "content-input-align">Да</span>
+                            <input class="edit-ajax-button modal-button" data-id="block_police" data-name="bs_block_statement" data-type="final"  type="radio" name="police_form" value="false" {$v[1]}>
+                            <span class = "content-input-align">Нет</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+END;
+        if($query->police_form=="true"){
+            $this->bs_block_statement_yes($d, $data);
+            return false;
+        }
+    }
+    public function bs_block_statement_yes($d,$data)
     {
         $this->db->select("bs.gibdd_reg_name,
                             bs.gibdd_inn,
@@ -1791,14 +1820,34 @@ END;
                             bs.gibdd_eco_class,
                             bs.gibdd_max_mass,
                             bs.gibdd_min_mass,
-                            bs.statement_form");
+                            bs.statement_form,
+                            bs.buyer_is_owner_car");
         $this->db->join("documents","documents.doc_id=bs.id");
         $this->db->where("documents.id",$d);
         $query = $this->db->get("buy_sale as bs",1,0)->row();
         $v[] = ($query->statement_form=="true")?' checked':'';
         $v[] = ($query->statement_form=="false")?' checked':'';
+        $stathem = '';
+        if($query->buyer_is_owner_car=="not_own_car") {
+            $stathem = <<<END
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Кто несет заявление в ГИБДД?</p>
+            <div class = "content-radio-header">
+                <div class = "content-input-inlane">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true" {$v[0]}>
+                    <span class = "content-input-align">Покупатель лично</span>
+
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false" {$v[1]}>
+                    <span class = "content-input-align">Представитель</span>
+                </div>
+            </div>
+        </div>
+    </div>
+END;
+        }
         echo <<<END
-        <div class="row" id="block_police" >
+        <div class="row" id="block_police">
     <div class="col-lg-12">
         <div class = "content-block">
             <p class = "content-header">Заявление в ГИББД</p>
@@ -1830,20 +1879,7 @@ END;
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class = "content-block">
-        <p class = "content-header">Кто несет заявление в ГИБДД?</p>
-            <div class = "content-radio-header">
-                <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true" {$v[0]}>
-                    <span class = "content-input-align">Покупатель лично</span>
-
-                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false" {$v[1]}>
-                    <span class = "content-input-align">Представитель</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    {$stathem}
 </div>
 END;
     }
@@ -2785,7 +2821,36 @@ END;
 </div>
 END;
     }
-    public function gift_block_police($d,$data)
+    public function gift_block_police($d,$data){
+        $this->db->select("bs.police_form");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("gift as bs",1,0)->row();
+        $v[] = ($query->police_form=="true")?' checked':'';
+        $v[] = ($query->police_form=="false")?' checked':'';
+        echo <<<END
+        <div class="row" id="block_police">
+            <div class="col-lg-12">
+                <div class = "content-block">
+                   <p class = "content-header">Хотите дополнительно оформить заявление в ГИБДД?</p>
+                    <div class = "content-radio-header">
+                        <div class = "content-input-inlane">
+                            <input class="edit-ajax-button modal-button" data-id="block_police" data-name="gift_block_statement_yes" data-type="final" type="radio" name="police_form" value="true" {$v[0]}>
+                            <span class = "content-input-align">Да</span>
+                            <input class="edit-ajax-button modal-button" data-id="block_police" data-name="bs_block_statement" data-type="final"  type="radio" name="police_form" value="false" {$v[1]}>
+                            <span class = "content-input-align">Нет</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+END;
+        if($query->police_form=="true"){
+            $this->gift_block_statement_yes($d, $data);
+            return false;
+        }
+    }
+    public function gift_block_statement_yes($d,$data)
     {
         $this->db->select("bs.gibdd_reg_name,
                             bs.gibdd_inn,
@@ -2793,12 +2858,32 @@ END;
                             bs.gibdd_eco_class,
                             bs.gibdd_max_mass,
                             bs.gibdd_min_mass,
-                            bs.statement_form");
+                            bs.statement_form,
+                            bs.buyer_is_owner_car");
         $this->db->join("documents","documents.doc_id=bs.id");
         $this->db->where("documents.id",$d);
         $query = $this->db->get("gift as bs",1,0)->row();
         $v[] = ($query->statement_form=="true")?' checked':'';
         $v[] = ($query->statement_form=="false")?' checked':'';
+        $stathem = '';
+        if($query->buyer_is_owner_car=="not_own_car") {
+                $stathem = <<<END
+    <div class="col-lg-12">
+        <div class = "content-block">
+            <p class = "content-header">Кто несет заявление в ГИБДД?</p>
+            <div class = "content-radio-header">
+                <div class = "content-input-inlane">
+                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true" {$v[0]}>
+                    <span class = "content-input-align">Покупатель лично</span>
+
+                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false" {$v[1]}>
+                    <span class = "content-input-align">Представитель</span>
+                </div>
+            </div>
+        </div>
+    </div>
+END;
+        }
         echo <<<END
         <div class="row" id="block_police" >
     <div class="col-lg-12">
@@ -2832,20 +2917,7 @@ END;
             </div>
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class = "content-block">
-            <p class = "content-header">Кто несет заявление в ГИБДД?</p>
-            <div class = "content-radio-header">
-                <div class = "content-input-inlane">
-                    <input  class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true" {$v[0]}>
-                    <span class = "content-input-align">Покупатель лично</span>
-
-                    <input  class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false" {$v[1]}>
-                    <span class = "content-input-align">Представитель</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    {$stathem}
 </div>
 END;
 

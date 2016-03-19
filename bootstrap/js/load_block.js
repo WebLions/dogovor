@@ -33,6 +33,9 @@ $( document ).ready(function() {
 
         if(name=='gift_block_vendor_selected_not_owner')
             data = {type:'true'};
+
+        if(name=='gift_block_vendor_selected_not_owner')
+            data = {type:'true'};
         if(name==('gift_block_vendor_selected_owner')||name==('gift_block_vendor_selected_not_owner')){
             switch ($('#editForm').find('input[name=type_of_giver]:checked').val()) {
                 case 'physical': name = 'gift_block_vendor_info'; break;
