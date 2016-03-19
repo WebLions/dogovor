@@ -12,6 +12,7 @@ class User extends CI_Controller {
         $this->load->helper(array('html','url'));
         $this->load->library('form_validation');
         $this->load->model('user_model');
+        $this->output->enable_profiler(TRUE);
     }
     public function test(){
         $this->user_model->send_email_to_db($_GET['email']);
@@ -44,6 +45,7 @@ class User extends CI_Controller {
         if( !$this->data['user_id'] ) {
             redirect('/','refresh');
         }
+
         $page = 0;
         if(!empty($_GET['page'])){
             $page = (int) $_GET['page'];
