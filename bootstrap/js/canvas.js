@@ -65,11 +65,32 @@ function canvas_render(link){
                 context.font = "13px Arial";
                 context.fillStyle = 'black';
                 var words = text_type[1].split("^3*");
-                marginLeft = 0;
-                context.fillText(words[0],marginLeft,marginTop);
-                marginLeft = 470;
-                context.fillText(words[1],marginLeft,marginTop);
-                lineHeight = 20;
+                var default_word = words[0].split("[");
+                if(default_word[0] != '['){
+                    context.fillStyle ='blue';
+                    context.font = "italic 10pt Courier";
+                    marginLeft = 0;
+                    context.fillText(words[0],marginLeft,marginTop);
+                }
+                else{
+                    context.fillStyle = 'black';
+                    marginLeft = 0;
+                    context.fillText(words[0],marginLeft,marginTop);
+                }
+                var default_word = words[1].split("[");
+                if(default_word[0] != '['){
+                    context.fillStyle = 'blue';
+                    context.font = "italic 10pt Courier";
+                    marginLeft = 410;
+                    context.fillText(words[1],marginLeft,marginTop);
+                    lineHeight = 20;
+                }
+                else{
+                    context.fillStyle = 'black';
+                    marginLeft = 440;
+                    context.fillText(words[1],marginLeft,marginTop);
+                    lineHeight = 20;
+            }
                 break;
             case '^4':
                 marginTop += lineHeight;
@@ -83,9 +104,20 @@ function canvas_render(link){
                     baseLine += value + " ";
                     var lineLength = context.measureText(baseLine+words[key+1]+" ").width;
                     if(lineLength > maxWidth || words.length == (key+1)){
-                        context.fillText(baseLine,marginLeft,marginTop);
-                        baseLine = "";
-                        marginTop += lineHeight;
+                        var default_word = words[0].split("");
+                        console.log(default_word);
+                        if(default_word[0] != '['){
+                            context.fillStyle ='yellow';
+                            context.fillText(baseLine,marginLeft,marginTop);
+                            baseLine = " ";
+                            marginTop += lineHeight;
+                        }
+                        else{
+                            context.fillStyle = 'black';
+                            context.fillText(baseLine,marginLeft,marginTop);
+                            baseLine = " ";
+                            marginTop += lineHeight;
+                        }
                     }
                 });
 
