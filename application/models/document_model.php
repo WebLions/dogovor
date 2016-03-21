@@ -1320,6 +1320,34 @@ class Document_model extends CI_Model
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор купли-продажи транспортного средства
+    private function file_force_download($file)
+    {
+        if (file_exists($file)) {
+            // сбрасываем буфер вывода PHP, чтобы избежать переполнения памяти выделенной под скрипт
+            // если этого не сделать файл будет читаться в память полностью!
+            if (ob_get_level()) {
+                ob_end_clean();
+            }
+            // заставляем браузер показать окно сохранения файла
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename=' . basename($file));
+            header('Content-Transfer-Encoding: binary');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file));
+            // читаем файл и отправляем его пользователю
+            if ($fd = fopen($file, 'rb')) {
+                while (!feof($fd)) {
+                    print fread($fd, 1024);
+                }
+                fclose($fd);
+            }
+            exec('rm '.$file);
+            exit;
+        }
+    }
     public function get_doc_buy_sale($id)
     {
         //Работа с базой
@@ -1626,7 +1654,12 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
         $document->save($name_of_file,true); // Сохранение документа
         $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.docx';
-        return $name_for_server ;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+
+        return true;
     }
     //------------------------------------------------------------------------------------------------------------------
     //акт приема-передачи автомобиля
@@ -1925,6 +1958,7 @@ class Document_model extends CI_Model
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'act_of_reception.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
+
         $name_for_server = '/documents/buy_sale/'.$id.'act_of_reception.docx';
         return $name_for_server;
     }

@@ -285,8 +285,12 @@ $( document ).ready(function() {
         });
     });
 
-    $('.document').on('click', '#final_button', function () {
-        $('#document_form').submit();
+    $('.document').on('click', '#ready_button', function () {
+        $('.document').find('input[type=text]').each(function(){
+            $(this).addClass("content-required");
+        });
+        console.log(1);
+        //$('#document_form').submit();
     });
 
     $('.document').on('change','input', function(){
