@@ -869,7 +869,11 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'gift.docx';//Имя файла и путь к нему
         $document->save($name_of_file,true); // Сохранение документа
         $name_for_server = '/documents/gift/'.$id.'gift.docx';
-        return $name_for_server;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'gift.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+        return true;
     }
     //------------------------------------------------------------------------------------------------------------------
     public function get_gift_act_of_reception($id)
@@ -1159,7 +1163,12 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'act_of_reception.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
         $name_for_server = '/documents/gift/'.$id.'act_of_reception.docx';
-        return $name_for_server;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'act_of_reception.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+        return true;
+
     }
     //------------------------------------------------------------------------------------------------------------------
     private function get_info_for_gibbd($type_of_giver, $data)
@@ -1316,10 +1325,13 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'gibdd.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
         $name_for_server = '/documents/gift/'.$id.'gibdd.docx';
-        return $name_for_server;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'gibdd.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+        return true;
     }
     //------------------------------------------------------------------------------------------------------------------
-    //договор купли-продажи транспортного средства
     private function file_force_download($file)
     {
         if (file_exists($file)) {
@@ -1348,6 +1360,8 @@ class Document_model extends CI_Model
             exit;
         }
     }
+    //------------------------------------------------------------------------------------------------------------------
+    //договор купли-продажи транспортного средства
     public function get_doc_buy_sale($id)
     {
         //Работа с базой
@@ -1658,7 +1672,6 @@ class Document_model extends CI_Model
         exec('rm /var/www/carsdoc.ru'.$name_for_server);
         $name_for_server = '/documents/buy_sale/'.$id.'buy_sale_deal.pdf';
         $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
-
         return true;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -1958,9 +1971,12 @@ class Document_model extends CI_Model
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'act_of_reception.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
-
         $name_for_server = '/documents/buy_sale/'.$id.'act_of_reception.docx';
-        return $name_for_server;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'act_of_reception.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+        return true;
     }
     //------------------------------------------------------------------------------------------------------------------
     //расписка в получении денежных средств
@@ -2091,7 +2107,11 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'receipt_of_money.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
         $name_for_server = '/documents/buy_sale/'.$id.'receipt_of_money.docx';
-        return $name_for_server;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'receipt_of_money.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+        return true;
     }
     //------------------------------------------------------------------------------------------------------------------
     //заявление в ГИБДД для смены собственника
@@ -2218,7 +2238,11 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'gibdd.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
         $name_for_server = '/documents/buy_sale/'.$id.'gibdd.docx';
-        return $name_for_server;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'gibdd.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+        return true;
     }
     //------------------------------------------------------------------------------------------------------------------
     //заявление продавца о согласии супруга
@@ -2360,7 +2384,11 @@ class Document_model extends CI_Model
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'statement_vendor_marriage.docx';//Имя файла и путь к нему
         $document->save($name_of_file); // Сохранение документа
         $name_for_server = '/documents/buy_sale/'.$id.'statement_vendor_marriage.docx';
-        return $name_for_server;
+        exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
+        exec('rm /var/www/carsdoc.ru'.$name_for_server);
+        $name_for_server = '/documents/buy_sale/'.$id.'statement_vendor_marriage.pdf';
+        $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
+        return true;
     }
     //------------------------------------------------------------------------------------------------------------------
     //договор аренды
