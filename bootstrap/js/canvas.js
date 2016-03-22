@@ -107,7 +107,7 @@ function canvas_render(link){
                         var default_word = words[0].split("");
                         console.log(default_word);
                         if(default_word[0] != '['){
-                            context.fillStyle ='yellow';
+                            context.fillStyle ='blue';
                             context.fillText(baseLine,marginLeft,marginTop);
                             baseLine = " ";
                             marginTop += lineHeight;
