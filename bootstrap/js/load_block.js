@@ -285,13 +285,41 @@ $( document ).ready(function() {
         });
     });
 
-    $('.document').on('click', '#ready_button', function () {
-        $('.document').find('input[type=text]').each(function(){
-            $(this).addClass("content-required");
+
+        var inputs = [  'vendor_phone',
+                        'vendor_law_proxy_number',
+                        'vendor_law_proxy_date',
+                        'buyer_phone', 'buyer_law_proxy_number',
+                        'buyer_law_proxy_date',
+                        'engine_model',
+                        'shassi',
+                        'carcass',
+                        'other_parameters',
+                        'additional_devices_array',
+                        'oil_in_car', 'car_allstatus',
+                        'maintenance_date',
+                        'maintenance_bywho',
+                        'penalty',
+                        'gibdd_inn'];
+
+        $('.document').on('click', '#ready_button', function () {
+            var ready = true;
+            $('.document').find('input[type=text]').each(function(){
+                $(this).addClass("content-required");
+                var name = $(this).attr('name');
+                if(typeof inputs[name]=='undefined'){
+                    $(this).addClass("content-required");
+                    ready = false;
+                }
+            });
+            if(ready == false)
+                console.log(1);
+            //1
+            //$('#document_form').submit();
         });
-        console.log(1);
-        //$('#document_form').submit();
-    });
+
+
+
 
     $('.document').on('change','input', function(){
         canvas_render(link);
