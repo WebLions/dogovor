@@ -110,3 +110,7 @@ float:right;
     width:95%;
     height: 90%;
 }
+.content-required{
+    border-color: #ff243a;
+    border-radius: 3px;
+}
