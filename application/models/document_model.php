@@ -2877,7 +2877,9 @@ class Document_model extends CI_Model
         foreach ($_POST as $key => $value)
         {
             if(!empty($_POST["$key"]))
+            {
                 $data_input["$key"] = $value;
+            }
         }
 
 
@@ -2899,8 +2901,8 @@ class Document_model extends CI_Model
         $buyer_ind_adress = $this->format_adress($_POST['buyer_ind_city'],$_POST['buyer_ind_street'],$_POST['buyer_ind_house'],$_POST['buyer_ind_flat']);
 
         //Дата
-        $date_of_contract = $this->format_date($_POST['date_of_contract']);
-        $date_of_product = $this->format_date($_POST['date_of_product']);
+        $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($_POST['date_of_contract']) : $data_input['date_of_contract'];
+        $date_of_product = !empty($_POST['date_of_product']) ? $this->format_date($data_input['date_of_product']) : $data_input['date_of_product'];
         $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
@@ -2909,7 +2911,8 @@ class Document_model extends CI_Model
         $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date']);
         $for_agent_buyer_proxy_date = $this->format_date($_POST['for_agent_buyer_proxy_date']);
 //        $payment_date = $this->format_date($_POST['payment_date']);
-        $date_of_serial_car = $this->format_date($_POST['date_of_serial_car']);
+        $date_of_serial_car = !empty($_POST['date_of_serial_car']) ? $this->format_date($_POST['date_of_serial_car']) : $data_input['date_of_serial_car'];
+        $maintenance_date = !empty($_POST['maintenance_date']) ? $this->format_date($_POST['maintenance_date']) : $data_input['maintenance_date'];
         $for_agent_vendor_proxy_date = $this->format_date($_POST['for_agent_vendor_proxy_date']);
         $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday']);
         $buyer_ind_passport_date = $this->format_date($_POST['buyer_ind_passport_date']);
@@ -3110,7 +3113,7 @@ class Document_model extends CI_Model
             ),
             2 => array
             (
-                'text' => "^3/г.{$data_input['place_of_contract']} ^3*{$this->format_date($data_input['date_of_contract'])} ",
+                'text' => "^3/г.{$data_input['place_of_contract']} ^3*$date_of_contract ",
                 'text-type' => 'columns-left'
             ),
             3 => array
@@ -3155,7 +3158,7 @@ class Document_model extends CI_Model
             ),
             11 => array
             (
-                'text' => "^5/- год изготовления: {$this->format_date($data_input['date_of_product'])};",
+                'text' => "^5/- год изготовления: $date_of_product;",
                 'text-type' => 'list',
             ),
             12 => array
@@ -3190,7 +3193,7 @@ class Document_model extends CI_Model
             ),
             18 => array
             (
-                'text' => "^4/1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$data_input['serial_car']} N {$data_input['number_of_serial_car']}, выданного {$data_input['bywho_serial_car']} {$this->format_date($data_input['date_of_serial_car'])}.",
+                'text' => "^4/1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$data_input['serial_car']} N {$data_input['number_of_serial_car']}, выданного {$data_input['bywho_serial_car']} $date_of_serial_car.",
                 'text-type' => 'paragraph',
             ),
             19 => array
@@ -3215,7 +3218,7 @@ class Document_model extends CI_Model
             ),
             23 => array
             (
-                'text' => "^4/2.2. Последнее техническое обслуживание транспортного средства проведено {$this->format_date($data_input['maintenance_date'])}{$data_input['maintenance_bywho']} (организация, проводившая техническое обслуживание либо самостоятельно).",
+                'text' => "^4/2.2. Последнее техническое обслуживание транспортного средства проведено $maintenance_date {$data_input['maintenance_bywho']} (организация, проводившая техническое обслуживание либо самостоятельно).",
                 'text-type' => 'paragraph',
             ),
             24 => array
@@ -3280,7 +3283,7 @@ class Document_model extends CI_Model
              ),
             36 => array
             (
-                'text' => "^5/- паспорт транспортного средства серия {$data_input['serial_car']} N {$data_input['number_of_serial_car']}, дата выдачи {$this->format_date($data_input['date_of_serial_car'])}, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
+                'text' => "^5/- паспорт транспортного средства серия {$data_input['serial_car']} N {$data_input['number_of_serial_car']}, дата выдачи $date_of_serial_car, с подписью Продавца в графе \"Подпись прежнего собственника\";$documents",
                 'text-type' => 'list',
             ),
             37 => array
@@ -3438,8 +3441,8 @@ class Document_model extends CI_Model
         $buyer_ind_adress = $this->format_adress($_POST['buyer_ind_city'],$_POST['buyer_ind_street'],$_POST['buyer_ind_house'],$_POST['buyer_ind_flat']);
 
         //Дата
-        $date_of_contract = $this->format_date($data_input['date_of_contract']);
-        $date_of_product = $this->format_date($data_input['date_of_contract']);
+        $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($data_input['date_of_contract']) : $data_input['date_of_contract'];
+        $date_of_product = !empty($_POST['date_of_product']) ? $this->format_date($data_input['date_of_contract']) : $data_input['date_of_product'];
         $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
@@ -3447,7 +3450,7 @@ class Document_model extends CI_Model
         $vendor_ind_birthday= $this->format_date($_POST['vendor_ind_birthday']);
         $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date']);
         $for_agent_buyer_proxy_date = $this->format_date($_POST['for_agent_buyer_proxy_date']);
-        $date_of_serial_car = $this->format_date($data_input['date_of_serial_car']);
+        $date_of_serial_car = !empty($_POST['date_of_serial_car']) ? $this->format_date($data_input['date_of_serial_car']) : $data_input['date_of_serial_car'];
         $for_agent_vendor_proxy_date = $this->format_date($_POST['for_agent_vendor_proxy_date']);
         $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday']);
         $buyer_ind_passport_date = $this->format_date($_POST['buyer_ind_passport_date']);
