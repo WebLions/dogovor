@@ -314,6 +314,7 @@ $( document ).ready(function() {
             });
             if(ready == false)
                 console.log(1);
+            //1
             //$('#document_form').submit();
         });
 
