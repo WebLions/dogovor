@@ -28,9 +28,9 @@
                         <td><?=$document['type_s']?></td>
                         <td><?=$document['date']?></td>
                         <td>
-                            <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href="/document/edit/<?=$key?>"></a>
+                            <a class="glyphicon glyphicon-pencil btn btn-success btn-xs" style="float:right;" href="/document/edit/<?=$key?>" title="Редактировать документ"></a>
                             <?if($document['type']==0){?>
-                                <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" target="_blank" href="/payment/doc/<?=$key?>"></a>
+                                <a class="glyphicon glyphicon-shopping-cart btn btn-info btn-xs" style="float:right;" target="_blank" href="/payment/doc/<?=$key?>" title="Оплатить документ"></a>
                             <? }?>
                         <td>
                     </tr>
@@ -42,7 +42,7 @@
                             <td></td>
                         <td>
                             <?if($document['type']==1 ){?>
-                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" target="_blank" href="/document/<?=$document['url']?>_<?=$doc['url']?>/<?=$key?>"></a>
+                            <a class="glyphicon glyphicon-floppy-save btn btn-primary btn-xs" style="float:right;" target="_blank" href="/document/<?=$document['url']?>_<?=$doc['url']?>/<?=$key?>" title="Скачать документ"></a>
                             <?}?>
                         </td>
                     </tr>

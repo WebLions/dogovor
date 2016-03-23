@@ -26,7 +26,7 @@ function canvas_render(link){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
                     marginLeft = $('#sticky').width()/2 - lineLength
-                    if(lineLength > maxWidth || words.length == (key+1)){
+                    if(lineLength+100 > maxWidth || words.length == (key+1)){
                         baseLine = value + " ";
                         context.fillText(baseLine,marginLeft,marginTop);
                         marginTop += lineHeight;
@@ -52,7 +52,7 @@ function canvas_render(link){
                     baseLine += value + " ";
                     var lineLength = context.measureText(baseLine+words[key+1]+" ").width+5;
                     marginLeft = $('#sticky').width()/2 - lineLength + 150;
-                    if(lineLength+10 > maxWidth || words.length == (key+1)){
+                    if(lineLength+100 > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
                         baseLine = "";
                         marginTop += lineHeight;
@@ -65,32 +65,11 @@ function canvas_render(link){
                 context.font = "13px Arial";
                 context.fillStyle = 'black';
                 var words = text_type[1].split("^3*");
-                var default_word = words[0].split("[");
-                if(default_word[0] != '['){
-                    context.fillStyle ='blue';
-                    context.font = "italic 10pt Courier";
-                    marginLeft = 0;
-                    context.fillText(words[0],marginLeft,marginTop);
-                }
-                else{
-                    context.fillStyle = 'black';
-                    marginLeft = 0;
-                    context.fillText(words[0],marginLeft,marginTop);
-                }
-                var default_word = words[1].split("[");
-                if(default_word[0] != '['){
-                    context.fillStyle = 'blue';
-                    context.font = "italic 10pt Courier";
-                    marginLeft = 410;
-                    context.fillText(words[1],marginLeft,marginTop);
-                    lineHeight = 20;
-                }
-                else{
-                    context.fillStyle = 'black';
-                    marginLeft = 440;
-                    context.fillText(words[1],marginLeft,marginTop);
-                    lineHeight = 20;
-            }
+                marginLeft = 0;
+                context.fillText(words[0],marginLeft,marginTop);
+                marginLeft = 420;
+                context.fillText(words[1],marginLeft,marginTop);
+                lineHeight = 20;
                 break;
             case '^4':
                 marginTop += lineHeight;
@@ -103,21 +82,10 @@ function canvas_render(link){
                 $.each(words, function(key,value ){
                     baseLine += value + " ";
                     var lineLength = context.measureText(baseLine+words[key+1]+" ").width;
-                    if(lineLength > maxWidth || words.length == (key+1)){
-                        var default_word = words[0].split("");
-                        console.log(default_word);
-                        if(default_word[0] != '['){
-                            context.fillStyle ='blue';
-                            context.fillText(baseLine,marginLeft,marginTop);
-                            baseLine = " ";
-                            marginTop += lineHeight;
-                        }
-                        else{
-                            context.fillStyle = 'black';
-                            context.fillText(baseLine,marginLeft,marginTop);
-                            baseLine = " ";
-                            marginTop += lineHeight;
-                        }
+                    if(lineLength+100 > maxWidth || words.length == (key+1)){
+                        context.fillText(baseLine,marginLeft,marginTop);
+                        baseLine = "";
+                        marginTop += lineHeight;
                     }
                 });
 
@@ -132,7 +100,7 @@ function canvas_render(link){
                 $.each(words, function(key,value){
                     var baseLine = Line + value + " ";
                     var lineLength = context.measureText(baseLine).width+5;
-                    if(lineLength > maxWidth || words.length == (key+1)){
+                    if(lineLength+170 > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
                         Line = value + " ";
                         marginTop += lineHeight;

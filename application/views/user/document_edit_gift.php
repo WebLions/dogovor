@@ -50,7 +50,7 @@
                         <div class="panel-heading" role="tab" id="heading-4">
                             <h4 class="panel-title">
                                 <a role="button" data-load="false" data-type="gift_block_ts_info" data-toggle="collapse" data-parent="#accordion" href="#collapse-4" aria-expanded="true" aria-controls="collapse-4">
-                                    Машина
+                                    Автомобиль
                                 </a>
                             </h4>
                         </div>
