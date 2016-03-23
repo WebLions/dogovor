@@ -32,7 +32,7 @@ class Document_model extends CI_Model
         echo '</pre>';
     }
     //------------------------------------------------------------------------------------------------------------------
-    private  function num2str($num)
+    public function num2str($num)
     {
         $nul='ноль';
         $ten=array(
@@ -71,7 +71,7 @@ class Document_model extends CI_Model
        // $out[] = $kop.' '.$this->morph($kop,$unit[0][0],$unit[0][1],$unit[0][2]); // kop
         return trim(preg_replace('/ {2,}/', ' ', join(' ',$out)));
     }
-    private function morph($n, $f1, $f2, $f5)
+    public function morph($n, $f1, $f2, $f5)
     {
         $n = abs(intval($n)) % 100;
         if ($n>10 && $n<20) return $f5;
@@ -239,7 +239,7 @@ class Document_model extends CI_Model
                     {
                         $string .= $mvalue;
                     }
-                    $string .= ' в количестве '.$middle_element.'шт.; ';
+                    $string .= ' в количестве '.$middle_element.'('.$this->num2str($middle_element).') '.'шт.; ';
                 }
             elseif (is_object($value))
             {
@@ -2999,7 +2999,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['vendor_passport_bywho'],
                     'document_date' => $vendor_passport_date,
                     'adress' => $vendor_adress,
-                    'phone' => $_POST['vendor_phone'],
+                    'phone' => $data_input['vendor_phone'],
                     'owner_car' => $_POST['vendor_is_owner_car'],
                     'agent_fio' => $vendor_agent_fio,
                     'agent_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
@@ -3014,7 +3014,7 @@ class Document_model extends CI_Model
                     'inn'=> $_POST['vendor_law_inn'],
                     'ogrn'=> $_POST['vendor_law_ogrn'],
                     'adress'=> $_POST['vendor_law_adress'],
-                    'phone'=> $_POST['vendor_law_phone'],
+                    'phone'=> $data_input['vendor_law_phone'],
                     'acc'=> $_POST['vendor_law_acc'],
                     'bank_name'=> $_POST['vendor_law_bank_name'],
                     'korr_acc'=> $_POST['vendor_law_korr_acc'],
@@ -3036,7 +3036,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['vendor_ind_passport_bywho'],
                     'document_date' => $vendor_ind_passport_date,
                     'adress'=> $vendor_ind_adress,
-                    'phone'=> $_POST['vendor_ind_phone'],
+                    'phone'=> $data_input['vendor_ind_phone'],
                     'acc'=> $_POST['vendor_ind_bank_acc'],
                     'bank_name'=> $_POST['vendor_ind_bank_name'],
                     'korr_acc'=> $_POST['vendor_ind_korr_acc'],
@@ -3065,7 +3065,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['buyer_passport_bywho'],
                     'document_date' => $buyer_passport_date,
                     'adress' => $buyer_adress,
-                    'phone' => $_POST['buyer_phone'],
+                    'phone' => $data_input['buyer_phone'],
                     'owner_car' => $_POST['buyer_is_owner_car'],
                     'agent_fio' => $buyer_agent_fio,
                     'agent_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
@@ -3080,7 +3080,7 @@ class Document_model extends CI_Model
                     'inn'=> $_POST['buyer_law_inn'],
                     'ogrn'=> $_POST['buyer_law_ogrn'],
                     'adress'=> $_POST['buyer_law_adress'],
-                    'phone'=> $_POST['buyer_law_phone'],
+                    'phone'=> $data_input['buyer_law_phone'],
                     'acc'=> $_POST['buyer_law_acc'],
                     'bank_name'=> $_POST['buyer_law_bank_name'],
                     'korr_acc'=> $_POST['buyer_law_korr_acc'],
@@ -3102,7 +3102,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['buyer_ind_passport_bywho'],
                     'document_date' => $buyer_ind_passport_date,
                     'adress'=> $buyer_ind_adress,
-                    'phone'=> $_POST['buyer_ind_phone'],
+                    'phone'=> $data_input['buyer_ind_phone'],
                     'acc'=> $_POST['buyer_ind_bank_acc'],
                     'bank_name'=> $_POST['buyer_ind_bank_name'],
                     'korr_acc'=> $_POST['buyer_ind_korr_acc'],
@@ -3530,7 +3530,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['vendor_passport_bywho'],
                     'document_date' => $vendor_passport_date,
                     'adress' => $vendor_adress,
-                    'phone' => $_POST['vendor_phone'],
+                    'phone' => $data_input['vendor_phone'],
                     'owner_car' => $_POST['vendor_is_owner_car'],
                     'agent_fio' => $vendor_agent_fio,
                     'agent_proxy_number' => $_POST['for_agent_vendor_proxy_number'],
@@ -3545,7 +3545,7 @@ class Document_model extends CI_Model
                     'inn'=> $_POST['vendor_law_inn'],
                     'ogrn'=> $_POST['vendor_law_ogrn'],
                     'adress'=> $_POST['vendor_law_adress'],
-                    'phone'=> $_POST['vendor_law_phone'],
+                    'phone'=> $data_input['vendor_law_phone'],
                     'acc'=> $_POST['vendor_law_acc'],
                     'bank_name'=> $_POST['vendor_law_bank_name'],
                     'korr_acc'=> $_POST['vendor_law_korr_acc'],
@@ -3567,7 +3567,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['vendor_ind_passport_bywho'],
                     'document_date' => $vendor_ind_passport_date,
                     'adress'=> $vendor_ind_adress,
-                    'phone'=> $_POST['vendor_ind_phone'],
+                    'phone'=> $data_input['vendor_ind_phone'],
                     'acc'=> $_POST['vendor_ind_bank_acc'],
                     'bank_name'=> $_POST['vendor_ind_bank_name'],
                     'korr_acc'=> $_POST['vendor_ind_korr_acc'],
@@ -3596,7 +3596,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['buyer_passport_bywho'],
                     'document_date' => $buyer_passport_date,
                     'adress' => $buyer_adress,
-                    'phone' => $_POST['buyer_phone'],
+                    'phone' => $data_input['buyer_phone'],
                     'owner_car' => $_POST['buyer_is_owner_car'],
                     'agent_fio' => $buyer_agent_fio,
                     'agent_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
@@ -3611,7 +3611,7 @@ class Document_model extends CI_Model
                     'inn'=> $_POST['buyer_law_inn'],
                     'ogrn'=> $_POST['buyer_law_ogrn'],
                     'adress'=> $_POST['buyer_law_adress'],
-                    'phone'=> $_POST['buyer_law_phone'],
+                    'phone'=> $data_input['buyer_law_phone'],
                     'acc'=> $_POST['buyer_law_acc'],
                     'bank_name'=> $_POST['buyer_law_bank_name'],
                     'korr_acc'=> $_POST['buyer_law_korr_acc'],
@@ -3633,7 +3633,7 @@ class Document_model extends CI_Model
                     'document_bywho' => $_POST['buyer_ind_passport_bywho'],
                     'document_date' => $buyer_ind_passport_date,
                     'adress'=> $buyer_ind_adress,
-                    'phone'=> $_POST['buyer_ind_phone'],
+                    'phone'=> $data_input['buyer_ind_phone'],
                     'acc'=> $_POST['buyer_ind_bank_acc'],
                     'bank_name'=> $_POST['buyer_ind_bank_name'],
                     'korr_acc'=> $_POST['buyer_ind_korr_acc'],
