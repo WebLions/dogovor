@@ -557,16 +557,20 @@ class Document_model extends CI_Model
         return $header;
     }
     //------------------------------------------------------------------------------------------------------------------
-    private function get_marriage_info($car_in_marriage, $spouse_fio)
+    private function get_marriage_info($car_in_marriage, $spouse_fio, $canvas=false)
     {
         $marriage = array();
-        if ($car_in_marriage == true)
+        $enter = "<w:br/>";
+        if ($canvas  == true){
+            $enter = "^+";
+        };
+        if ($car_in_marriage == 'true')
         {
             // Если продавец в браке то
-            $marriage['info'] ="<w:br/>4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства с супругой(ом)".$spouse_fio."и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
+            $marriage['info'] ="$enter 4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства с супругой(ом)".$spouse_fio."и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
             $marriage['number'] = 5; //номер следующего пункта
         }
-        elseif ($car_in_marriage == false)
+        elseif ($car_in_marriage == 'false')
         {
             //Если не в браке
             $marriage['info'] = "";//пропускаем этот пункт
@@ -2980,7 +2984,7 @@ class Document_model extends CI_Model
         $additional_devices_array = !empty($_POST['additional_devices_array']) ? $this->json_to_string(json_encode($_POST['additional_devices_array'])) : $data_input['additional_devices_array'];
         $accessories = !empty($_POST['accessories']) ? $this->json_to_string_accessories(json_encode($_POST['accessories'])) : $data_input['accessories'];
         //Иное
-        $marriage = $this->get_marriage_info($_POST['car_in_marriage'], $spouse_fio);
+        $marriage = $this->get_marriage_info($data_input['car_in_marriage'], $spouse_fio, true);
         $price_str = $this->num2str($_POST['price_car']);
         //Реквизиты
         //Продавец
