@@ -192,21 +192,19 @@ class Document extends CI_Controller
     {
         echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
 
-        $arr = array(1 =>'левый руль',2 => 'правый руль',3 => 'горгород',4 => 'окси');
-        $exception = array(4 =>'окси');
-        foreach ($arr as $key => $value)
-        {
-            if ($arr["$key"] == $exception["$key"])
-            {
-                continue;
-            }
-            else
-            {
-                echo $arr["$key"];
-            }
-        }
+        $arr = array
+        (
 
 
+            0 => array(2),
+            1 => 'левый руль',
+            3 => 'передний привод',
+            2 => array('ключи от дома где деньги лежат', 1)
+        );
+//        print_r($arr);
+        $arr = json_encode($arr);
+        $arr = $this->document_model->json_to_string_accessories($arr);
+        print_r($arr);
     }
     public function edit($docum){
         if( !$this->data['user_id'] ) {
