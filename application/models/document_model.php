@@ -195,21 +195,75 @@ class Document_model extends CI_Model
     {
         $string = "";
         $target = json_decode($target);
-        $quantity = count($target);
-        $last_element = $quantity-1;//Ибо счет с нуля
-        if ($quantity == 1)
+//        $quantity = count($target);
+//        $last_element = $quantity-1;//Ибо счет с нуля
+//        if ($quantity == 1)
+//        {
+//            $string = $target[0];
+//        }
+//        elseif ($quantity > 1)
+//        {
+//            $string = $target[0];
+//            for ($i = 1; $i<$quantity-1; $i++)
+//            {
+//                $string .= "; " . $target[$i];
+//            }
+//            $string .= "; " . $target[$last_element] . ".";
+//        }
+        $string = join("; ", $target);
+        return $string;
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    public function json_to_string_accessories($target)
+    {
+        $string = "";
+        $target = json_decode($target);
+//        $last_element = array_pop($target);
+        foreach ($target as $value)
         {
-            $string = $target[0];
-        }
-        elseif ($quantity > 1)
-        {
-            $string = $target[0];
-            for ($i = 1; $i<$quantity-1; $i++)
+            if (is_array($value) && !empty($value[0]))
+                {
+//                    foreach ($value as $skey => $svalue)
+//                    {
+//                        if (!next($value))
+//                        {
+//                            $string .= " в количестве $svalue шт.";
+//                        }
+//                        else
+//                        {
+//                            $string .= $svalue;
+//                        }
+//                    }
+                    $middle_element = array_pop($value);
+                    foreach ($value as $mvalue)
+                    {
+                        $string .= $mvalue;
+                    }
+                    $string .= ' в количестве '.$middle_element.'шт.; ';
+                }
+            elseif (is_object($value))
             {
-                $string .= "; " . $target[$i];
+                continue;
             }
-            $string .= "; " . $target[$last_element] . ".";
+            else
+            {
+                $string .= $value .'; ';
+            }
         }
+//        // Последний элемент
+//        if (is_array($last_element))
+//        {
+//            $end_element = array_pop($last_element);
+//            foreach ($last_element as $lvalue)
+//            {
+//                $string .= $lvalue;
+//            }
+//            $string .= ' в количестве '.$end_element.'шт.';
+//        }
+//        else
+//        {
+//            $string .= $last_element . '.';
+//        }
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -1431,7 +1485,7 @@ class Document_model extends CI_Model
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
         //Джсон
         $documents = $this->json_to_string($result->documents);
-        $accessories = $this->json_to_string($result->accessories);
+        $accessories = $this->json_to_string_accessories($result->accessories);
         $additional_devices_array = $this->json_to_string($result->additional_devices_array);
         //Иные
         $marriage = $this->get_marriage_info($result->car_in_marriage, $spouse_fio);
@@ -2399,45 +2453,45 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_buysale()
     {
-        //Проверка на пустоту
-        //_______________________________
-        //Массив исключений
-        $exception = array
-        (
-            'vendor_phone' => '',
-            'vendor_law_proxy_number' => '',
-            'vendor_law_proxy_date' => '',
-            'buyer_phone' => '',
-            'buyer_law_proxy_number' => '',
-            'buyer_law_proxy_date' => '',
-            'engine_model' => '',
-            'shassi' => '',
-            'carcass' => '',
-            'other_parameters' => '',
-            'additional_devices_array' => '',
-            'oil_in_car' => '',
-            'car_allstatus' => '',
-            'maintenance_date' => '',
-            'maintenance_bywho' => '',
-            'penalty' => '',
-            'gibdd_inn' => '',
-        );
-
-        foreach ($_POST as $key => $value)
-        {
-            if ($_POST["$key"] == $exception["$key"])
-            {
-                continue;
-            }
-            else
-            {
-                if(empty($_POST["$key"]))
-                {
-                    redirect('/');
-                }
-            }
-        }
-        //_______________________________
+//        //Проверка на пустоту
+//        //_______________________________
+//        //Массив исключений
+//        $exception = array
+//        (
+//            'vendor_phone' => '',
+//            'vendor_law_proxy_number' => '',
+//            'vendor_law_proxy_date' => '',
+//            'buyer_phone' => '',
+//            'buyer_law_proxy_number' => '',
+//            'buyer_law_proxy_date' => '',
+//            'engine_model' => '',
+//            'shassi' => '',
+//            'carcass' => '',
+//            'other_parameters' => '',
+//            'additional_devices_array' => '',
+//            'oil_in_car' => '',
+//            'car_allstatus' => '',
+//            'maintenance_date' => '',
+//            'maintenance_bywho' => '',
+//            'penalty' => '',
+//            'gibdd_inn' => '',
+//        );
+//
+//        foreach ($_POST as $key => $value)
+//        {
+//            if ($_POST["$key"] == $exception["$key"])
+//            {
+//                continue;
+//            }
+//            else
+//            {
+//                if(empty($_POST["$key"]))
+//                {
+//                    redirect('/');
+//                }
+//            }
+//        }
+//        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         if ($_POST['defects'] == 'false') {$_POST['defects'] = 'отсутствует';}
         if ($_POST['features'] == 'false') {$_POST['features'] = 'отсутствует';}
@@ -2662,38 +2716,38 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_gift()
     {
-        //Проверка на пустоту
-        //_______________________________
-        //Массив исключений
-        $exception = array
-        (
-            'vendor_phone' => '',
-            'vendor_law_proxy_number' => '',
-            'vendor_law_proxy_date' => '',
-            'buyer_phone' => '',
-            'buyer_law_proxy_number' => '',
-            'buyer_law_proxy_date' => '',
-            'engine_model' => '',
-            'shassi' => '',
-            'carcass' => '',
-            'gibdd_inn' => '',
-        );
-
-        foreach ($_POST as $key => $value)
-        {
-            if ($_POST["$key"] == $exception["$key"])
-            {
-                continue;
-            }
-            else
-            {
-                if(empty($_POST["$key"]))
-                {
-                    redirect('/');
-                }
-            }
-        }
-        //_______________________________
+//        //Проверка на пустоту
+//        //_______________________________
+//        //Массив исключений
+//        $exception = array
+//        (
+//            'vendor_phone' => '',
+//            'vendor_law_proxy_number' => '',
+//            'vendor_law_proxy_date' => '',
+//            'buyer_phone' => '',
+//            'buyer_law_proxy_number' => '',
+//            'buyer_law_proxy_date' => '',
+//            'engine_model' => '',
+//            'shassi' => '',
+//            'carcass' => '',
+//            'gibdd_inn' => '',
+//        );
+//
+//        foreach ($_POST as $key => $value)
+//        {
+//            if ($_POST["$key"] == $exception["$key"])
+//            {
+//                continue;
+//            }
+//            else
+//            {
+//                if(empty($_POST["$key"]))
+//                {
+//                    redirect('/');
+//                }
+//            }
+//        }
+//        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         $data = array
         (
@@ -2902,7 +2956,7 @@ class Document_model extends CI_Model
 
         //Дата
         $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($_POST['date_of_contract']) : $data_input['date_of_contract'];
-        $date_of_product = !empty($_POST['date_of_product']) ? $this->format_date($data_input['date_of_product']) : $data_input['date_of_product'];
+        $date_of_product = !empty($_POST['date_of_product']) ? $this->format_date($_POST['date_of_product']) : $data_input['date_of_product'];
         $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
@@ -2922,9 +2976,9 @@ class Document_model extends CI_Model
         $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
 
         //Джсон
-        $documents = $this->json_to_string(json_encode($data_input['documents']));
-        $additional_devices_array = $this->json_to_string(json_encode($data_input['additional_devices_array']));
-        $accessories = $this->json_to_string(json_encode($data_input['accessories']));
+        $documents = !empty($_POST['documents']) ? $this->json_to_string(json_encode($_POST['documents'])) : $data_input['documents'];
+        $additional_devices_array = !empty($_POST['additional_devices_array']) ? $this->json_to_string(json_encode($_POST['additional_devices_array'])) : $data_input['additional_devices_array'];
+        $accessories = !empty($_POST['accessories']) ? $this->json_to_string_accessories(json_encode($_POST['accessories'])) : $data_input['accessories'];
         //Иное
         $marriage = $this->get_marriage_info($_POST['car_in_marriage'], $spouse_fio);
         $price_str = $this->num2str($_POST['price_car']);
