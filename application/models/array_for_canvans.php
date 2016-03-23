@@ -52,5 +52,4 @@ $data_input = array
     'buyer_phone' => '[отсутствует]',
     'buyer_law_phone' => '[отсутствует]',
     'buyer_ind_phone' => '[отсутствует]',
-
 );
