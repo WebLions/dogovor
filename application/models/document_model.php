@@ -1732,7 +1732,6 @@ class Document_model extends CI_Model
         $document->setValue('penalty', $result->penalty);
         $document->setValue('firstside_requisites', $firstside_requisites);
         $document->setValue('secondside_requisites', $secondside_requisites);
-
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'buy_sale_deal.docx';//Имя файла и путь к нему
         $document->save($name_of_file,true); // Сохранение документа
