@@ -1487,6 +1487,7 @@ class Document_model extends CI_Model
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
+        $credit_date = $this->format_date($result->credit_date);
         //Джсон
         $documents = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string_accessories($result->accessories);
@@ -1713,7 +1714,17 @@ class Document_model extends CI_Model
         $document->setValue('price', $result->price_car);
         $document->setValue('price_str', $price_str);
         $document->setValue('currency', $result->currency);
+
         $document->setValue('payment_date', $result->payment_date);
+        if ($result->payment_date == 'В рассрочку по следующему графику')
+        {
+            $credit = ": аванс в сумме $result->credit (".$this->num2str($result->credit).") $result->credit_currency оплачен покупателем при подписании настоящего договора, оставшуюся часть денег покупатель обязуется оплатить до $credit_date ";
+        }
+        else
+        {
+            $credit = '';
+        }
+        $document->setValue('credit', $credit);
         $document->setValue('documents', $documents);
         $document->setValue('accessories', $accessories);
         $document->setValue('marriage_info', $marriage['info']);
@@ -2686,6 +2697,9 @@ class Document_model extends CI_Model
             'defects' => $_POST['defects'],
             'features' => $_POST['features'],
             'payment_date' => $_POST['payment_date'],
+            'credit' => $_POST['credit'],
+            'credit_currency' => $_POST['credit_currency'],
+            'credit_date' => $_POST['credit_date'],
             'documents' => json_encode($_POST['documents']),
             'accessories' => json_encode($_POST['accessories']),
             'car_in_marriage' => $_POST['car_in_marriage'],
@@ -2978,6 +2992,7 @@ class Document_model extends CI_Model
         $buyer_law_proxy_date =  $this->format_date($_POST['$buyer_law_proxy_date']);
         $vendor_ind_date_of_certificate =  $this->format_date($_POST['$vendor_ind_date_of_certificate']);
         $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
+        $credit_date =  $this->format_date($_POST['credit_date']);
 
         //Джсон
         $documents = !empty($_POST['documents']) ? $this->json_to_string(json_encode($_POST['documents'])) : $data_input['documents'];
@@ -3156,6 +3171,15 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
+        //Сроки подписания договора
+        if ($_POST['payment_date']== 'В рассрочку по следующему графику')
+        {
+            $credit = ": аванс в сумме {$_POST['credit']}(". $this->num2str($_POST['credit']).") {$_POST['credit_currency']} оплачен покупателем при подписании настоящего договора, оставшуюся часть денег покупатель обязуется оплатить до $credit_date ";
+        }
+        else
+        {
+            $credit = '';
+        }
         //Массив данных для канванса
         $data = array
         (
@@ -3316,7 +3340,7 @@ class Document_model extends CI_Model
             ),
             31 => array
             (
-                'text' => "^4/3.3. Покупатель оплачивает стоимость транспортного средства путем передачи наличных денег Продавцу не позднее {$data_input['payment_date']}. При получении денежных средств Продавец в соответствии с п. 2 ст. 408 ГК РФ выдает расписку.",
+                'text' => "^4/3.3. Покупатель оплачивает стоимость транспортного средства путем передачи наличных денег Продавцу {$data_input['payment_date']}$credit. При получении денежных средств Продавец в соответствии с п. 2 ст. 408 ГК РФ выдает расписку.",
                 'text-type' => 'paragraph',
             ),
             32 => array

@@ -248,9 +248,9 @@ $( document ).ready(function() {
         if(credit == true) $('#block_payment_date').append('<div style="width:100%"class = "content-input-group">'+
             '<input  required  style="width:80%;float:left;"class="form-control" type="text"  name="credit"  placeholder="Аванс оплачеваемый покупателем при подписании договора:">'+
             '<select style="width:15%" class="form-control" name="credit_currency">'+
-            '<option value="RUB">Рубль</option>'+
-            '<option value="USD">Доллар</option>'+
-            '<option value="EUR">Евро</option>'+
+            '<option value="рублей">рублей</option>'+
+            '<option value="долларов">долларов</option>'+
+            '<option value="евро">евро</option>'+
             '</select>'+
             '</div>'+
             '<div class = "content-input-group">'+
