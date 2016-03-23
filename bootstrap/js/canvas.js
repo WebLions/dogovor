@@ -50,7 +50,7 @@ function canvas_render(link){
                 lineHeight = 16;
                 $.each(words, function(key,value){
                     baseLine += value + " ";
-                    var lineLength = context.measureText(baseLine+words[key+1]+" ").width+5;
+                    var lineLength = context.measureText(baseLine+" "+words[key+1]+" ").width+5;
                     marginLeft = $('#sticky').width()/2 - lineLength + 150;
                     if(lineLength+100 > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
@@ -81,7 +81,7 @@ function canvas_render(link){
                 context.fillStyle = 'black';
                 $.each(words, function(key,value ){
                     baseLine += value + " ";
-                    var lineLength = context.measureText(baseLine+words[key+1]+" ").width;
+                    var lineLength = context.measureText(baseLine+" "+words[key+1]+" ").width;
                     if(lineLength+100 > maxWidth || words.length == (key+1)){
                         context.fillText(baseLine,marginLeft,marginTop);
                         baseLine = "";

@@ -549,9 +549,9 @@ END;
             <div style="width:100%"class = "content-input-group">
                    <input  required  style="width:80%;float:left;"class="form-control" type="text"  name="price_car"  placeholder="Стоимость:">
                 <select style="width:15%" class="form-control" name="currency">
-                    <option value="RUB">RUB</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
+                    <option value="рублей">рублей</option>
+                    <option value="долларов">долларов</option>
+                    <option value="евро">евро</option>
                 </select>
             </div>
 
@@ -858,12 +858,12 @@ END;
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Круиз-контроль">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Круиз-контроль">
                             <span class = "content-input-align">Круиз-контроль</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Парктроник">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Парктроник">
                             <span class = "content-input-align">Парктроник</span>
                         </div>
 
@@ -1050,7 +1050,7 @@ END;
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="documents[]" value="Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование">
+                    <input  type="checkbox" name="documents[]" value="Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование">
                     <span class = "content-input-align">Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование</span>
                 </div>
 

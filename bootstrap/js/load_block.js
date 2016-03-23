@@ -245,16 +245,24 @@ $( document ).ready(function() {
 
     $('.document').on('change','#credit', function() {
 
-        if(credit == true) $('#block_payment_date').append('<div class = "content-input-group">'+
-                                                     '<input class="form-control" type="text"  name="credit_value[]"  placeholder="Сумма:">'+
-                                                                '</div>');
+        if(credit == true) $('#block_payment_date').append('<div style="width:100%"class = "content-input-group">'+
+            '<input  required  style="width:80%;float:left;"class="form-control" type="text"  name="credit"  placeholder="Аванс оплачеваемый покупателем при подписании договора:">'+
+            '<select style="width:15%" class="form-control" name="credit_currency">'+
+            '<option value="RUB">Рубль</option>'+
+            '<option value="USD">Доллар</option>'+
+            '<option value="EUR">Евро</option>'+
+            '</select>'+
+            '</div>'+
+            '<div class = "content-input-group">'+
+            '<input  required  id="credit_date" class="form-control datetimepicker" type="text"  name="credit_date"  placeholder="Дата рождения:">'+
+            '</div>');
         credit=false;
     });
 
     $('.document').on('change','#accessories_other', function() {
 
         if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
-                                                                    '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
+                                                                    '<input class="form-control" type="text"  name="accessories[5]"  placeholder="Дополнительные принадлежности:">'+
                                                                     '</div>');
         accessories=false;
     });
@@ -307,7 +315,8 @@ $( document ).ready(function() {
             $('.document').find('input[type=text]').each(function(){
                 $(this).addClass("content-required");
                 var name = $(this).attr('name');
-                if(typeof inputs[name]=='undefined'){
+                console.log(name);
+                if(typeof inputs[name]=='undefined'&&name.indexOf("accessories")==-1){
                     $(this).addClass("content-required");
                     ready = false;
                 }

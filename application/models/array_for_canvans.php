@@ -21,8 +21,8 @@ $data_input = array
     'bywho_serial_car' => '[Кем выдан паспорт]',
     'date_of_serial_car' => '[Дата выдачи паспорта машины]',
     'car_allstatus' => '[Состояние машины]',
-    'maintenance_date' => '[Дата тех. осмотра машины]',
-    'maintenance_bywho' => '[Кем проведенно обсдуживание]',
+    'maintenance_date' => '[отсутствует]',
+    'maintenance_bywho' => '[отсутствует]',
     'defects' => '[Дефекты]',
     'features' => '[Особенности]',
     'price_car' => '[Цена ТС]',
@@ -45,6 +45,6 @@ $data_input = array
     'buyer_patronymic' => 'О. покупателя]',
     'vendor_is_owner_car' => 'own_car',
     'buyer_is_owner_car' => 'own_car',
-    'penalty' => '[Размер процента]',
+    'penalty' => '[не предусмотрена]',
 
 );
