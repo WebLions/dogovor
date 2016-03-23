@@ -46,5 +46,11 @@ $data_input = array
     'vendor_is_owner_car' => 'own_car',
     'buyer_is_owner_car' => 'own_car',
     'penalty' => '[не предусмотрена]',
+    'vendor_phone' => '[отсутствует]',
+    'vendor_law_phone' => '[отсутствует]',
+    'vendor_ind_phone' => '[отсутствует]',
+    'buyer_phone' => '[отсутствует]',
+    'buyer_law_phone' => '[отсутствует]',
+    'buyer_ind_phone' => '[отсутствует]',
 
 );
