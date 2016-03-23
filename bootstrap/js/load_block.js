@@ -312,17 +312,14 @@ $( document ).ready(function() {
                     ready = false;
                 }
             });
-            if(ready == false)
-                console.log(1);
-            //1
-            //$('#document_form').submit();
+            if(ready == true)
+                $('#document_form').submit();
+            $('#modal_ready').modal('hide')
         });
-
-
-
 
     $('.document').on('change','input', function(){
         canvas_render(link);
+        $(this).removeClass("content-required");
     });
 
 

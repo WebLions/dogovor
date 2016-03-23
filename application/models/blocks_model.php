@@ -1070,32 +1070,32 @@ END;
             <div class = "content-radio-group">
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="accessories[]" value="Оригинальные ключи в количестве">
-                    <span class = "content-input-align">Оригинальные ключи в количестве :</span>
+                    <input  type="checkbox" name="accessories[0]" value="Оригинальные ключи в количестве">
+                    <span class = "content-input-align">Оригинальные ключи в количестве: <input  type="text" name="accessories[0][0]"></span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="accessories[]" value="Ключи от иммобилайзера в количестве">
-                    <span class = "content-input-align">Ключи от иммобилайзера в количестве </span>
+                    <input type="checkbox" name="accessories[1]" value="Ключи от иммобилайзера в количестве">
+                    <span class = "content-input-align">Ключи от иммобилайзера в количестве: <input  type="text" name="accessories[1][0]"></span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="accessories[]" value="Запасное колесо">
+                    <input type="checkbox" name="accessories[2]" value="Запасное колесо">
                     <span class = "content-input-align">Запасное колесо</span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="accessories[]" value="Домкрат">
+                    <input type="checkbox" name="accessories[3]" value="Домкрат">
                     <span class = "content-input-align">Домкрат</span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="accessories[]" value="Балонный ключ">
+                    <input  type="checkbox" name="accessories[4]" value="Балонный ключ">
                     <span class = "content-input-align">Балонный ключ</span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="radio" id="accessories_other">
+                    <input  type="radio" id="accessories_other">
                     <span class = "content-input-align">Иное:</span>
                 </div>
 

@@ -2399,45 +2399,45 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_buysale()
     {
-//        //Проверка на пустоту
-//        //_______________________________
-//        //Массив исключений
-//        $exception = array
-//        (
-//            'vendor_phone' => '',
-//            'vendor_law_proxy_number' => '',
-//            'vendor_law_proxy_date' => '',
-//            'buyer_phone' => '',
-//            'buyer_law_proxy_number' => '',
-//            'buyer_law_proxy_date' => '',
-//            'engine_model' => '',
-//            'shassi' => '',
-//            'carcass' => '',
-//            'other_parameters' => '',
-//            'additional_devices_array' => '',
-//            'oil_in_car' => '',
-//            'car_allstatus' => '',
-//            'maintenance_date' => '',
-//            'maintenance_bywho' => '',
-//            'penalty' => '',
-//            'gibdd_inn' => '',
-//        );
-//
-//        foreach ($_POST as $key => $value)
-//        {
-//            if ($_POST["$key"] == $exception["$key"])
-//            {
-//                continue;
-//            }
-//            else
-//            {
-//                if(empty($_POST["$key"]))
-//                {
-//                    redirect('/');
-//                }
-//            }
-//        }
-//        //_______________________________
+        //Проверка на пустоту
+        //_______________________________
+        //Массив исключений
+        $exception = array
+        (
+            'vendor_phone' => '',
+            'vendor_law_proxy_number' => '',
+            'vendor_law_proxy_date' => '',
+            'buyer_phone' => '',
+            'buyer_law_proxy_number' => '',
+            'buyer_law_proxy_date' => '',
+            'engine_model' => '',
+            'shassi' => '',
+            'carcass' => '',
+            'other_parameters' => '',
+            'additional_devices_array' => '',
+            'oil_in_car' => '',
+            'car_allstatus' => '',
+            'maintenance_date' => '',
+            'maintenance_bywho' => '',
+            'penalty' => '',
+            'gibdd_inn' => '',
+        );
+
+        foreach ($_POST as $key => $value)
+        {
+            if ($_POST["$key"] == $exception["$key"])
+            {
+                continue;
+            }
+            else
+            {
+                if(empty($_POST["$key"]))
+                {
+                    redirect('/');
+                }
+            }
+        }
+        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         if ($_POST['defects'] == 'false') {$_POST['defects'] = 'отсутствует';}
         if ($_POST['features'] == 'false') {$_POST['features'] = 'отсутствует';}
@@ -2662,38 +2662,38 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_gift()
     {
-//        //Проверка на пустоту
-//        //_______________________________
-//        //Массив исключений
-//        $exception = array
-//        (
-//            'vendor_phone' => '',
-//            'vendor_law_proxy_number' => '',
-//            'vendor_law_proxy_date' => '',
-//            'buyer_phone' => '',
-//            'buyer_law_proxy_number' => '',
-//            'buyer_law_proxy_date' => '',
-//            'engine_model' => '',
-//            'shassi' => '',
-//            'carcass' => '',
-//            'gibdd_inn' => '',
-//        );
-//
-//        foreach ($_POST as $key => $value)
-//        {
-//            if ($_POST["$key"] == $exception["$key"])
-//            {
-//                continue;
-//            }
-//            else
-//            {
-//                if(empty($_POST["$key"]))
-//                {
-//                    redirect('/');
-//                }
-//            }
-//        }
-//        //_______________________________
+        //Проверка на пустоту
+        //_______________________________
+        //Массив исключений
+        $exception = array
+        (
+            'vendor_phone' => '',
+            'vendor_law_proxy_number' => '',
+            'vendor_law_proxy_date' => '',
+            'buyer_phone' => '',
+            'buyer_law_proxy_number' => '',
+            'buyer_law_proxy_date' => '',
+            'engine_model' => '',
+            'shassi' => '',
+            'carcass' => '',
+            'gibdd_inn' => '',
+        );
+
+        foreach ($_POST as $key => $value)
+        {
+            if ($_POST["$key"] == $exception["$key"])
+            {
+                continue;
+            }
+            else
+            {
+                if(empty($_POST["$key"]))
+                {
+                    redirect('/');
+                }
+            }
+        }
+        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         $data = array
         (

@@ -44,8 +44,8 @@ class User_model extends CI_Model
             $this->db->insert('users', $data);
             $user_id = $this->db->insert_id();
 
-            $text = "Спасибо!<br>";
-            $text.= "Теперь вы можете зайти в личный кабинет <a href='project.dogovor.jera.ws/user/login'>project.dogovor.jera.ws/user/login</a><br>";
+            $text = "Спасибо за использование нашего сервиса CarsDoc.ru!<br>";
+            $text.= "Теперь вы можете зайти в <a href=\"http://carsdoc.ru/user/login\">личный кабинет</a><br>";
             $text.= "Логин: " . $email . "<br>";
             $text.= "Пароль: " . $pass . "<br>";
             $text.= "Внимание! Поменяйте сгенерированый пароль на новый!<br>";
@@ -55,15 +55,14 @@ class User_model extends CI_Model
             //Отправляем на почту логин и пароль
             $this->load->library('email');
 
-            $this->email->from('admin@jera.ws', 'CarDocs');
+            $this->email->from('admin@carsdoc.ru', 'CarsDoc');
             $this->email->to($email);
-
-            $this->email->subject('Регистрация');
+            $this->email->set_mailtype("html");
+            $this->email->subject('Ваш договор готов');
             $this->email->message($text);
 
             $this->email->send();
 
-            //$this->XMail("info@jera.ws", $email, "Регистрация", $text);
 
         }else{
             $result = $query->row();
@@ -76,31 +75,7 @@ class User_model extends CI_Model
     {
         return isset($_SESSION['user_id']) ? $_SESSION['user_id'] : false;
     }
-    private function XMail($from, $to, $subj, $text)
-    {
-       // $f         = fopen($filename,"rb");
-        $un        = strtoupper(uniqid(time()));
-        $head      = "From: $from\n";
-        $head     .= "To: $to\n";
-        $head     .= "Subject: $subj\n";
-        $head     .= "X-Mailer: PHPMail Tool\n";
-        $head     .= "Reply-To: $from\n";
-        $head     .= "Mime-Version: 1.0\n";
-        $head     .= "Content-Type:text/html; charset=utf-8;\r\n";
-        /*
-        $head     .= "boundary=\"----------".$un."\"\n\n";
-        $zag       = "------------".$un."\nContent-Type:text/html;\n";*/
-        $zag      = "\n\n$text\n\n";
-       /* $zag      .= "------------".$un."\n";
-        $zag      .= "Content-Type: application/octet-stream;";*/
-        /*$zag      .= "name=\"".basename($filename)."\"\n";
-        $zag      .= "Content-Transfer-Encoding:base64\n";
-        $zag      .= "Content-Disposition:attachment;";
-        $zag      .= "filename=\"".basename($filename)."\"\n\n";
-        $zag      .= chunk_split(base64_encode(fread($f,filesize($filename))))."\n";*/
 
-        return @mail("$to", "$subj", $zag, $head);
-    }
     private function generate_password($number)
     {
         $arr = array('a','b','c','d','e','f',
@@ -137,12 +112,18 @@ class User_model extends CI_Model
     {
         $userID = $_SESSION['user_id'];
 
+        $date = new DateTime();
+        $date->modify("-30 days");
+        $date = $date->format("Y-m-d");
+
         $this->db->where("documents.user_id", $userID);
+        $this->db->where("DATE(documents.date)>", $date);
         $return['pages'] = (int) $this->db->count_all_results('documents') / 5;
 
         $this->db->distinct("documents.id");
         $this->db->select("documents.id, documents.doc_id, documents.table, types.document_name, payments.type, documents.date, types.url");
         $this->db->where("documents.user_id",$userID);
+        $this->db->where("DATE(documents.date)>", $date);
         $this->db->join("types", "types.url=documents.table");
         $this->db->join("payments", "payments.payID=documents.id");
         $this->db->order_by("documents.date","desc");
@@ -198,11 +179,11 @@ class User_model extends CI_Model
     }
     public function send_email_to_db($email){
         // Ваш ключ доступа к API
-        $api_key = "dfc5387aa2874f70b0c518e60ab047bf";//Поменяй на нужный апи, который тебе выдаст сервис
+        $api_key = "3e8d76dc9e9b4f7e84c7cbaf76b1ef6e";//Поменяй на нужный апи, который тебе выдаст сервис
         //Имя метода
         $method = "listSubscribeOptInNow";
         //параметры
-        $list_id = "B383252HC49293R98618";
+        $list_id = "94138";
         $phone = "";
         $fname = "";
         $lname = "";
