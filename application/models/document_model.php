@@ -3157,7 +3157,7 @@ class Document_model extends CI_Model
         (
             0 => array
             (
-                'text' => '^1/ДОГОВОР'
+                'text' => '^2/ДОГОВОР'
 
             ),
             1 => array
@@ -3237,7 +3237,7 @@ class Document_model extends CI_Model
             ),
             16 => array
             (
-                'text' => "^5/-иные индивидуализирующие признаки (голограммы, рисунки и т.д.): {$data_input['other_parameters']}",
+                'text' => "^5/- иные индивидуализирующие признаки (голограммы, рисунки и т.д.): {$data_input['other_parameters']}",
                 'text-type' => 'list',
             ),
             17 => array
@@ -3457,7 +3457,7 @@ class Document_model extends CI_Model
             ),
             60 => array
             (
-                'text' => "^6/Продавец: $firstside_requisites ^6*Покупатель:  $secondside_requisites",
+                'text' => "^6/Продавец: $firstside_requisites ^+______________ Подпись ^6*Покупатель:  $secondside_requisites ^+______________ Подпись ",
                 'text-type' => 'columns-left',
             ),
 
@@ -3688,7 +3688,7 @@ class Document_model extends CI_Model
         (
             0 => array
             (
-                'text' => '^1/ДОГОВОР',
+                'text' => '^2/ДОГОВОР',
                 'text-type' => 'title'
 
             ),
