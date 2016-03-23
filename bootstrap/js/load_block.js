@@ -254,7 +254,7 @@ $( document ).ready(function() {
     $('.document').on('change','#accessories_other', function() {
 
         if(accessories == true) $('#block_accessories').append('<div class = "content-input-group">'+
-                                                                    '<input class="form-control" type="text"  name="accessories[]"  placeholder="Дополнительные принадлежности:">'+
+                                                                    '<input class="form-control" type="text"  name="accessories[5]"  placeholder="Дополнительные принадлежности:">'+
                                                                     '</div>');
         accessories=false;
     });
@@ -307,7 +307,8 @@ $( document ).ready(function() {
             $('.document').find('input[type=text]').each(function(){
                 $(this).addClass("content-required");
                 var name = $(this).attr('name');
-                if(typeof inputs[name]=='undefined'){
+                console.log(name);
+                if(typeof inputs[name]=='undefined'&&name.indexOf("accessories")==-1){
                     $(this).addClass("content-required");
                     ready = false;
                 }

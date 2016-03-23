@@ -542,7 +542,7 @@ class Document_model extends CI_Model
                 $output .= "Дата рождения: {$data['date']} $enter";
                 $output .= "Паспорт: серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  $enter";
                 $output .= "Место жительства: {$data['adress']} $enter";
-                $output .= "Телефон: {$data['phone']} ";
+                $output .= "Телефон: {$data['phone']}";
                 break;
             case 'law':
                 $output = "{$data['name']} $enter";
@@ -3193,7 +3193,7 @@ class Document_model extends CI_Model
             ),
             18 => array
             (
-                'text' => "^4/1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$data_input['serial_car']} N {$data_input['number_of_serial_car']}, выданного {$data_input['bywho_serial_car']} $date_of_serial_car.",
+                'text' => "^4/1.3. Транспортное средство, отчуждаемое по настоящему договору принадлежит Продавцу на праве собственности, что подтверждается паспортом транспортного средства (ПТС)  серии {$data_input['serial_car']} N {$data_input['number_of_serial_car']}, выданного {$data_input['bywho_serial_car']} $date_of_serial_car",
                 'text-type' => 'paragraph',
             ),
             19 => array
@@ -3218,7 +3218,7 @@ class Document_model extends CI_Model
             ),
             23 => array
             (
-                'text' => "^4/2.2. Последнее техническое обслуживание транспортного средства проведено $maintenance_date {$data_input['maintenance_bywho']} (организация, проводившая техническое обслуживание либо самостоятельно).",
+                'text' => "^4/2.2. Последнее техническое обслуживание транспортного средства проведено $maintenance_date {$data_input['maintenance_bywho']}.",
                 'text-type' => 'paragraph',
             ),
             24 => array
@@ -3238,7 +3238,7 @@ class Document_model extends CI_Model
             ),
             27 => array
             (
-                'text' => "^4/2.4. Транспортное средство имеет следующие особенности, которые не влияют на безопасность товара и не являются недостатками: {$data_input['features']} (например, вибрация при эксплуатации, визг тормозов, превышение нормы потребления моторного масла, толчки при переключении трансмиссии и т.д.).",
+                'text' => "^4/2.4. Транспортное средство имеет следующие особенности, которые не влияют на безопасность товара и не являются недостатками: {$data_input['features']}.",
                 'text-type' => 'paragraph',
             ),
             28 => array

@@ -549,9 +549,9 @@ END;
             <div style="width:100%"class = "content-input-group">
                    <input  required  style="width:80%;float:left;"class="form-control" type="text"  name="price_car"  placeholder="Стоимость:">
                 <select style="width:15%" class="form-control" name="currency">
-                    <option value="RUB">RUB</option>
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
+                    <option value="рублей">рублей</option>
+                    <option value="долларов">долларов</option>
+                    <option value="евро">евро</option>
                 </select>
             </div>
 
@@ -606,130 +606,130 @@ END;
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="rule" name="additional_devices_array[]" value="Правый руль">
+                            <input type="checkbox" data-name="rule" name="additional_devices_array[]" value="Правый руль">
                             <span class = "content-input-align">Правый руль</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="dvs" name="additional_devices_array[]" value="Бензиновый ДВС">
+                            <input type="checkbox" data-name="dvs" name="additional_devices_array[]" value="Бензиновый ДВС">
                             <span class = "content-input-align">Бензиновый ДВС</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="dvs" name="additional_devices_array[]" value="Дизельный ДВС">
+                            <input  type="checkbox" data-name="dvs" name="additional_devices_array[]" value="Дизельный ДВС">
                             <span class = "content-input-align">Дизельный ДВС</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Газовое оборудование">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Газовое оборудование">
                             <span class = "content-input-align">Газовое оборудование</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Турбонаддув">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Турбонаддув">
                             <span class = "content-input-align">Турбонаддув</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Интеркулер">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Интеркулер">
                             <span class = "content-input-align">Интеркулер</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="typed" name="additional_devices_array[]" value="Карбюратор">
+                            <input  type="checkbox" data-name="typed" name="additional_devices_array[]" value="Карбюратор">
                             <span class = "content-input-align">Карбюратор</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="typed" name="additional_devices_array[]" value="Инжектор">
+                            <input  type="checkbox" data-name="typed" name="additional_devices_array[]" value="Инжектор">
                             <span class = "content-input-align">Инжектор</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="kpp" name="additional_devices_array[]" value="Механическая КПП">
+                            <input  type="checkbox" data-name="kpp" name="additional_devices_array[]" value="Механическая КПП">
                             <span class = "content-input-align">Механическая КПП</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="kpp" name="additional_devices_array[]" value="Автоматическая КПП">
+                            <input   type="checkbox" data-name="kpp" name="additional_devices_array[]" value="Автоматическая КПП">
                             <span class = "content-input-align">Автоматическая КПП</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Галогеновые фары">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Галогеновые фары">
                             <span class = "content-input-align">Галогеновые фары</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Противотуманные фары">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Противотуманные фары">
                             <span class = "content-input-align">Противотуманные фары</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Омыватель фар">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Омыватель фар">
                             <span class = "content-input-align">Омыватель фар</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="system" name="additional_devices_array[]" value="Противоугонная система штатная">
+                            <input  type="checkbox" data-name="system" name="additional_devices_array[]" value="Противоугонная система штатная">
                             <span class = "content-input-align">Противоугонная система штатная</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="system" name="additional_devices_array[]" value="Противоугонная система механическая">
+                            <input  type="checkbox" data-name="system" name="additional_devices_array[]" value="Противоугонная система механическая">
                             <span class = "content-input-align">Противоугонная система механическая</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="system" name="additional_devices_array[]" value="Противоугонная система электронная">
+                            <input  type="checkbox" data-name="system" name="additional_devices_array[]" value="Противоугонная система электронная">
                             <span class = "content-input-align">Противоугонная система электронная</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Центральный замок">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Центральный замок">
                             <span class = "content-input-align">Центральный замок</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Аудиосистема">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Аудиосистема">
                             <span class = "content-input-align">Аудиосистема</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Антенна наружная">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Антенна наружная">
                             <span class = "content-input-align">Антенна наружная</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Антенна на ветровом стекле">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Антенна на ветровом стекле">
                             <span class = "content-input-align">Антенна на ветровом стекле</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Электрические стеклоподъемники">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Электрические стеклоподъемники">
                             <span class = "content-input-align">Электрические стеклоподъемники</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Окрашенные бамперы">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Окрашенные бамперы">
                             <span class = "content-input-align">Окрашенные бамперы</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="lining" name="additional_devices_array[]" value="Накладки окрашенные">
+                            <input    type="checkbox" data-name="lining" name="additional_devices_array[]" value="Накладки окрашенные">
                             <span class = "content-input-align">Накладки окрашенные</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="lining" name="additional_devices_array[]" value="Накладки хромированные">
+                            <input  type="checkbox" data-name="lining" name="additional_devices_array[]" value="Накладки хромированные">
                             <span class = "content-input-align">Накладки хромированные</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="privod" name="additional_devices_array[]" value="Привод передний">
+                            <input    type="checkbox" data-name="privod" name="additional_devices_array[]" value="Привод передний">
                             <span class = "content-input-align">Привод передний</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="privod" name="additional_devices_array[]" value="Привод задний">
+                            <input  type="checkbox" data-name="privod" name="additional_devices_array[]" value="Привод задний">
                             <span class = "content-input-align">Привод задний</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="privod" name="additional_devices_array[]" value="Полный привод">
+                            <input   type="checkbox" data-name="privod" name="additional_devices_array[]" value="Полный привод">
                             <span class = "content-input-align">Полный привод</span>
                         </div>
 
@@ -740,130 +740,130 @@ END;
                     <div class = "content-radio">
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="block-system" name="additional_devices_array[]" value="Антиблокировочная тормозная система">
+                            <input  type="checkbox" data-name="block-system" name="additional_devices_array[]" value="Антиблокировочная тормозная система">
                             <span class = "content-input-align">Антиблокировочная тормозная система</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="rudder" name="additional_devices_array[]" value="Гидроусилитель руля">
+                            <input  type="checkbox" data-name="rudder" name="additional_devices_array[]" value="Гидроусилитель руля">
                             <span class = "content-input-align">Гидроусилитель руля</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="rudder" name="additional_devices_array[]" value="Электроусилитель руля">
+                            <input  type="checkbox" data-name="rudder" name="additional_devices_array[]" value="Электроусилитель руля">
                             <span class = "content-input-align">Электроусилитель руля</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox"  data-name="reg_rudder" name="additional_devices_array[]" value="Регулируемая рулевая колонка">
+                            <input  type="checkbox"  data-name="reg_rudder" name="additional_devices_array[]" value="Регулируемая рулевая колонка">
                             <span class = "content-input-align">Регулируемая рулевая колонка</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="ton_glass" name="additional_devices_array[]" value="Тонированное ветровое стекло">
+                            <input  type="checkbox" data-name="ton_glass" name="additional_devices_array[]" value="Тонированное ветровое стекло">
                             <span class = "content-input-align">Тонированное ветровое стекло</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="ton_glass" name="additional_devices_array[]" value="Тонированные стекла прочие">
+                            <input  type="checkbox" data-name="ton_glass" name="additional_devices_array[]" value="Тонированные стекла прочие">
                             <span class = "content-input-align">Тонированные стекла прочие</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="disk" name="additional_devices_array[]" value="Диски легкосплавные">
+                            <input  type="checkbox" data-name="disk" name="additional_devices_array[]" value="Диски легкосплавные">
                             <span class = "content-input-align">Диски легкосплавные</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="disk" name="additional_devices_array[]" value="Диски штампованные">
+                            <input  type="checkbox" data-name="disk" name="additional_devices_array[]" value="Диски штампованные">
                             <span class = "content-input-align">Диски штампованные</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="korrekt" name="additional_devices_array[]" value="Корректор фар">
+                            <input   type="checkbox" data-name="korrekt" name="additional_devices_array[]" value="Корректор фар">
                             <span class = "content-input-align">Корректор фар</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Спойлер передний">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Спойлер передний">
                             <span class = "content-input-align">Спойлер передний</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Спойлер задний">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Спойлер задний">
                             <span class = "content-input-align">Спойлер задний</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="luk_fun" name="additional_devices_array[]" value="Люк механический">
+                            <input  type="checkbox" data-name="luk_fun" name="additional_devices_array[]" value="Люк механический">
                                 <span class = "content-input-align">Люк механический</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="luk_fun" name="additional_devices_array[]" value="Люк с электроприводом">
+                            <input  type="checkbox" data-name="luk_fun" name="additional_devices_array[]" value="Люк с электроприводом">
                             <span class = "content-input-align">Люк с электроприводом</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="luk_material" name="additional_devices_array[]" value="Люк стеклянный">
+                            <input  type="checkbox" data-name="luk_material" name="additional_devices_array[]" value="Люк стеклянный">
                             <span class = "content-input-align">Люк стеклянный</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="luk_material" name="additional_devices_array[]" value="Люк металлический">
+                            <input   type="checkbox" data-name="luk_material" name="additional_devices_array[]" value="Люк металлический">
                             <span class = "content-input-align">Люк металлический</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Зеркала с электроприводом">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Зеркала с электроприводом">
                             <span class = "content-input-align">Зеркала с электроприводом</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Зеркала с подогревом">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Зеркала с подогревом">
                             <span class = "content-input-align">Зеркала с подогревом</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="salon" name="additional_devices_array[]" value="Салон кожаный">
+                            <input   type="checkbox" data-name="salon" name="additional_devices_array[]" value="Салон кожаный">
                             <span class = "content-input-align">Салон кожаный</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" data-name="salon" name="additional_devices_array[]" value="Салон велюровый">
+                            <input   type="checkbox" data-name="salon" name="additional_devices_array[]" value="Салон велюровый">
                             <span class = "content-input-align">Салон велюровый</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Подогрев сидений">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Подогрев сидений">
                             <span class = "content-input-align">Подогрев сидений</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Подушка безопасности водителя">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Подушка безопасности водителя">
                             <span class = "content-input-align">Подушка безопасности водителя</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Подушка безопасности пассажира">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Подушка безопасности пассажира">
                             <span class = "content-input-align">Подушка безопасности пассажира</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Прочие подушки безопасности">
+                            <input  type="checkbox" name="additional_devices_array[]" value="Прочие подушки безопасности">
                             <span class = "content-input-align">Прочие подушки безопасности</span>
                         </div>
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Кондиционер">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Кондиционер">
                             <span class = "content-input-align">Кондиционер</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Климат-контроль">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Климат-контроль">
                             <span class = "content-input-align">Климат-контроль</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Круиз-контроль">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Круиз-контроль">
                             <span class = "content-input-align">Круиз-контроль</span>
                         </div>
 
                         <div class = "content-input">
-                            <input  required  type="checkbox" name="additional_devices_array[]" value="Парктроник">
+                            <input   type="checkbox" name="additional_devices_array[]" value="Парктроник">
                             <span class = "content-input-align">Парктроник</span>
                         </div>
 
@@ -1030,27 +1030,27 @@ END;
             <div class = "content-radio-group">
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="documents[]" value="Свидетельство о регистрации транспортного средства">
+                    <input   type="checkbox" name="documents[]" value="Свидетельство о регистрации транспортного средства">
                     <span class = "content-input-align">Свидетельство о регистрации транспортного средства:</span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="documents[]" value="Диагностическую карту (талон технического осмотра)">
+                    <input   type="checkbox" name="documents[]" value="Диагностическую карту (талон технического осмотра)">
                     <span class = "content-input-align">Диагностическую карту (талон технического осмотра)</span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="documents[]" value="Гарантийную (сервисную) книжку">
+                    <input   type="checkbox" name="documents[]" value="Гарантийную (сервисную) книжку">
                     <span class = "content-input-align">Гарантийную (сервисную) книжку</span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="documents[]" value="Инструкцию (руководство) по эксплуатации транспортного средства">
+                    <input   type="checkbox" name="documents[]" value="Инструкцию (руководство) по эксплуатации транспортного средства">
                     <span class = "content-input-align">Инструкцию (руководство) по эксплуатации транспортного средства</span>
                 </div>
 
                 <div class = "content-input">
-                    <input  required  type="checkbox" name="documents[]" value="Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование">
+                    <input  type="checkbox" name="documents[]" value="Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование">
                     <span class = "content-input-align">Гарантийные талоны и инструкции по эксплуатации на дополнительно установленное оборудование</span>
                 </div>
 
@@ -1071,12 +1071,12 @@ END;
 
                 <div class = "content-input">
                     <input  type="checkbox" name="accessories[0]" value="Оригинальные ключи в количестве">
-                    <span class = "content-input-align">Оригинальные ключи в количестве: <input  type="text" name="accessories[0][0]"></span>
+                    <span class = "content-input-align">Оригинальные ключи в количестве: <input  type="text" style="width:20px" name="accessories[0][0]"></span>
                 </div>
 
                 <div class = "content-input">
                     <input type="checkbox" name="accessories[1]" value="Ключи от иммобилайзера в количестве">
-                    <span class = "content-input-align">Ключи от иммобилайзера в количестве: <input  type="text" name="accessories[1][0]"></span>
+                    <span class = "content-input-align">Ключи от иммобилайзера в количестве: <input  type="text" style="width:20px" name="accessories[1][0]"></span>
                 </div>
 
                 <div class = "content-input">
@@ -2312,7 +2312,7 @@ END;
     <div class="col-lg-12">
         <h4>Введите ваш E-mail, после оплаты документа вам прийдет пароль от собственного аккаунта где вы сможете скачать документ</h4>
         <div class = "content-input-group">
-            <input  required  type="text" name="email" required>
+            <input  type="text" name="email" required>
         </div>
     </div>
 END;
