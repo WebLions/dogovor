@@ -250,7 +250,6 @@ function canvas_render(link){
                 marginTop += lineHeight;
                 marginLeft = 0;
                 lineHeight = 16;
-
                 var myText = new CanvasText({
                     x: marginLeft,
                     y: marginTop
@@ -259,13 +258,43 @@ function canvas_render(link){
                     height: 20
                 });
 
-                myText
-                    .family('Arial')
-                    .size('13px')
-                    .color('black')
-                    .append(text_type[1])
-                    .render();
-                marginTop+= textAdjustment.y+lineHeight;
+                var tag = text_type[1].indexOf('^+')+1;
+                if(tag != 0)
+                {
+                    var strings = text_type[1].split('^+');
+                    console.log(strings);
+                        $.each(strings, function(key,value)
+                        {
+                            marginTop += lineHeight;
+                            marginLeft = 0;
+                            lineHeight = 16;
+                            var myText = new CanvasText({
+                                x: marginLeft,
+                                y: marginTop
+                            },{
+                                width: maxWidth-100,
+                                height: 20
+                            });
+                            myText
+                                .family('Arial')
+                                .size('13px')
+                                .color('black')
+                                .append(value)
+                                .render();
+                            console.log(value);
+                            marginTop+= textAdjustment.y+lineHeight;
+                        })
+                }
+               else
+                {
+                    myText
+                        .family('Arial')
+                        .size('13px')
+                        .color('black')
+                        .append(text_type[1])
+                        .render();
+                    marginTop+= textAdjustment.y+lineHeight;
+                }
                 break;
             case '^5':
                 //marginTop += lineHeight;
@@ -276,7 +305,7 @@ function canvas_render(link){
                     x: marginLeft,
                     y: marginTop
                 },{
-                    width: maxWidth-100,
+                    width: maxWidth-160,
                     height: 20
                 });
 
