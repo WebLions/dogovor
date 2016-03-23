@@ -43,8 +43,8 @@
 
                 </div>
                   <div id="sticky-anchor"></div>
-                  <div class="col-lg-6" id="sticky">
-                      <div class="content-block" style="height: 700px; overflow-y: scroll">
+                  <div class="col-lg-6" id="sticky" style="height: 700px;overflow-y: scroll;">
+                      <div class="content-block">
                           <div style="text-align: center;">
                               <canvas id="canvas" width="510" height="3000">
 
