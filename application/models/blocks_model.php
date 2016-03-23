@@ -1070,13 +1070,13 @@ END;
             <div class = "content-radio-group">
 
                 <div class = "content-input">
-                    <input  type="checkbox" name="accessories[0]" value="Оригинальные ключи в количестве">
-                    <span class = "content-input-align">Оригинальные ключи в количестве: <input  type="text" name="accessories[0][0]"></span>
+                    <input  type="checkbox" name="accessories[0][0]" value="Оригинальные ключи в количестве">
+                    <span class = "content-input-align">Оригинальные ключи в количестве: <input  type="text" name="accessories[0][1]"></span>
                 </div>
 
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories[1]" value="Ключи от иммобилайзера в количестве">
-                    <span class = "content-input-align">Ключи от иммобилайзера в количестве: <input  type="text" name="accessories[1][0]"></span>
+                    <input type="checkbox" name="accessories[1][0]" value="Ключи от иммобилайзера в количестве">
+                    <span class = "content-input-align">Ключи от иммобилайзера в количестве: <input  type="text" name="accessories[1][1]"></span>
                 </div>
 
                 <div class = "content-input">
