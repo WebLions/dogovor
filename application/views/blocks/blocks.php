@@ -544,17 +544,17 @@
             <div class = "content-radio">
                 <div class = "content-input">
                     <input type="radio" name="payment_date" value="before">
-                    <span class = "content-input-align">До подписания настоящего договора</span>
+                    <span class = "content-input-align">до подписания настоящего договора</span>
                 </div>
 
                 <div class = "content-input">
                     <input type="radio" name="payment_date" value="after">
-                    <span class = "content-input-align">При подписании настоящего договора</span>
+                    <span class = "content-input-align">при подписании настоящего договора</span>
                 </div>
 
                 <div class = "content-input">
                     <input type="radio" name="payment_date" value="credit">
-                    <span class = "content-input-align">В рассрочку по следующему графику:</span>
+                    <span class = "content-input-align">в рассрочку по следующему графику:</span>
                 </div>
             </div>
         </div>
