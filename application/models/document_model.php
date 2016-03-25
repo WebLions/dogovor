@@ -569,7 +569,7 @@ class Document_model extends CI_Model
         if ($car_in_marriage == 'true')
         {
             // Если продавец в браке то
-            $marriage['info'] ="$enter 4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства с супругой(ом)".$spouse_fio."и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
+            $marriage['info'] ="$enter  4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства принадлежащие ему(ей) и супруге(у)".$spouse_fio." и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
             $marriage['number'] = 5; //номер следующего пункта
         }
         elseif ($car_in_marriage == 'false')
@@ -584,7 +584,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function get_requisites($data, $canvans = false)
     {
-        $enter = "</w:t></w:r></w:p><w:p><w:r><w:t>";
+        $enter = "</w:t><w:br/><w:t>";
         if($canvans == true){$enter = '^+';}
         $output = ""; //Строка вывода
         switch ($data['type_of_side'])
@@ -2197,21 +2197,21 @@ class Document_model extends CI_Model
         {
             case 'physical':
                 if ($result->vendor_is_owner_car == 'own_car')
-                    $vendor_data = "Я, $vendor_fio, паспорт серия $result->vendor_passport_serial № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $vendor_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_fio, паспорт серия $result->vendor_passport_serial № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $vendor_adress (далее - Продавец),";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец),";
                 break;
             case 'law':
                 if ($result->vendor_is_owner_car == 'own_car')
-                    $vendor_data = "Я, $vendor_law_fio, в лице $result->vendor_law_actor_position компании $result->vendor_law_company_name, ИНН $result->vendor_law_inn , ОГРН $result->vendor_law_ogrn зарегистрированной по адресу: $result->vendor_law_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_law_fio, в лице $result->vendor_law_actor_position компании $result->vendor_law_company_name, ИНН $result->vendor_law_inn , ОГРН $result->vendor_law_ogrn зарегистрированной по адресу: $result->vendor_law_adress (далее - Продавец),";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец),";
                 break;
             case 'individual':
                 if ($result->vendor_is_owner_car == 'own_car')
-                    $vendor_data = "Я, $vendor_ind_fio, паспорт серия $result->vendor_ind_passport_serial № $result->vendor_ind_passport_number, выдан $result->vendor_ind_passport_bywho дата выдачи $vendor_ind_passport_date, зарегистрированный(ая) по адресу: $vendor_ind_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_ind_fio, паспорт серия $result->vendor_ind_passport_serial № $result->vendor_ind_passport_number, выдан $result->vendor_ind_passport_bywho дата выдачи $vendor_ind_passport_date, зарегистрированный(ая) по адресу: $vendor_ind_adress (далее - Продавец),";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец),";
                 break;
         }
         //Покупатель
@@ -2618,6 +2618,32 @@ class Document_model extends CI_Model
             'type_of_giver' => $_POST['type_of_giver'],
             'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
             //New info begind
+            //Новые инпуты с родительским подажем
+            'for_agent_vendor_surname_parent' => $_POST['for_agent_vendor_surname_parent'],
+            'for_agent_vendor_name_parent' => $_POST['for_agent_vendor_name_parent'],
+            'for_agent_vendor_patronymic_parent' => $_POST['for_agent_vendor_patronymic_parent'],
+            'for_agent_buyer_surname_parent' => $_POST['for_agent_buyer_surname_parent'],
+            'for_agent_buyer_name_parent' => $_POST['for_agent_buyer_name_parent'],
+            'for_agent_buyer_patronymic_parent' => $_POST['for_agent_buyer_patronymic_parent'],
+            'vendor_surname_parent' => $_POST['vendor_surname'],
+            'vendor_name_parent' => $_POST['vendor_name'],
+            'vendor_patronymic_parent' => $_POST['vendor_patronymic'],
+            'buyer_surname_parent' => $_POST['buyer_surname'],
+            'buyer_name_parent' => $_POST['buyer_name'],
+            'buyer_patronymic_parent' => $_POST['buyer_patronymic'],
+            'vendor_law_actor_name_parent' => $_POST['vendor_law_actor_name_parent'],
+            'vendor_law_actor_surname_parent' => $_POST['vendor_law_actor_surname_parent'],
+            'vendor_law_actor_patronymic_parent' => $_POST['vendor_law_actor_patronymic_parent'],
+            'buyer_law_actor_name_parent' => $_POST['buyer_law_actor_name_parent'],
+            'buyer_law_actor_surname_parent' => $_POST['buyer_law_actor_surname_parent'],
+            'buyer_law_actor_patronymic_parent' => $_POST['buyer_law_actor_patronymic_parent'],
+            'vendor_ind_surname_parent' => $_POST['vendor_ind_surname_parent'],
+            'vendor_ind_name_parent' => $_POST['vendor_ind_name_parent'],
+            'vendor_ind_patronymic_parent' => $_POST['vendor_ind_patronymic_parent'],
+            'buyer_ind_surname_parent' => $_POST['buyer_ind_surname_parent'],
+            'buyer_ind_name_parent' => $_POST['buyer_ind_name_parent'],
+            'buyer_ind_patronymic_parent' => $_POST['buyer_ind_patronymic_parent'],
+
             //Доверенное лицо
                 //Продавец
             'for_agent_vendor_surname' => $_POST['for_agent_vendor_surname'],
