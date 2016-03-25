@@ -194,6 +194,7 @@ class Document_model extends CI_Model
     private function json_to_string($target)
     {
         $string = "";
+        if (empty($target)) return 'не указано';
         $target = json_decode($target);
 //        $quantity = count($target);
 //        $last_element = $quantity-1;//Ибо счет с нуля
@@ -216,6 +217,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function json_to_string_accessories($target)
     {
+        if (empty($target)) return 'не указано';
         $string = "";
         $target = json_decode($target);
 //        $last_element = array_pop($target);
@@ -463,7 +465,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= 'индивидуальный предприниматель '.$bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
@@ -475,7 +477,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
+                    $header = 'Индивидуальный предприниматель '.$bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -505,7 +507,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= 'индивидуальный предприниматель '.$bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'",  действующий на основании свидетельства №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
@@ -517,7 +519,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
+                    $header = 'Индивидуальный предприниматель '.$bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -538,7 +540,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
+                    $header = 'Индивидуальный предприниматель '.$bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства №'.$data_for_header['vendor_number_of_certificate'].' от '.$data_for_header['vendor_date_of_certificate'].', с одной стороны и ';
                     break;
                 case 'not_own_car':
                     $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
@@ -547,7 +549,7 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства индивидуального предпринимателя №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= 'индивидуальный предприниматель '.$bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства №'.$data_for_header['buyer_number_of_certificate'].' от '.$data_for_header['buyer_date_of_certificate'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
                     $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
@@ -560,7 +562,7 @@ class Document_model extends CI_Model
     private function get_marriage_info($car_in_marriage, $spouse_fio, $canvas=false)
     {
         $marriage = array();
-        $enter = "<w:br/>";
+        $enter = "</w:t></w:r></w:p><w:p><w:r><w:t>";
         if ($canvas  == true){
             $enter = "^+";
         };
@@ -582,7 +584,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function get_requisites($data, $canvans = false)
     {
-        $enter = "<w:br/>";
+        $enter = "</w:t></w:r></w:p><w:p><w:r><w:t>";
         if($canvans == true){$enter = '^+';}
         $output = ""; //Строка вывода
         switch ($data['type_of_side'])
@@ -659,7 +661,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
         //Подготовка
@@ -973,7 +975,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
 
@@ -1317,7 +1319,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
         //Подготовка
@@ -1479,7 +1481,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
         // Подготовка данных для работы с документов
@@ -1780,7 +1782,7 @@ class Document_model extends CI_Model
         $document->setValue('payment_date', $result->payment_date);
         if ($result->payment_date == 'В рассрочку по следующему графику')
         {
-            $credit = ": аванс в сумме $result->credit (".$this->num2str($result->credit).") $result->credit_currency оплачен покупателем при подписании настоящего договора, оставшуюся часть денег покупатель обязуется оплатить до $credit_date ";
+            $credit = ": аванс в сумме $result->credit (".$this->num2str($result->credit).") $result->credit_currency оплачен покупателем при подписании настоящего договора, оставшуюся часть денег покупатель обязуется оплатить до $credit_date";
         }
         else
         {
@@ -1824,7 +1826,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
         //Подготовка данных
@@ -2149,7 +2151,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
         //Подготовка данных
@@ -2284,7 +2286,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
         //Подготовка
@@ -2415,7 +2417,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-                $result->$key = 'отсутствует';
+                $result->$key = 'не указано';
             }
         }
         //Подготовка
@@ -2550,48 +2552,48 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_buysale()
     {
-//        //Проверка на пустоту
-//        //_______________________________
-//        //Массив исключений
-//        $exception = array
-//        (
-//            'vendor_phone' => '',
-//            'vendor_law_proxy_number' => '',
-//            'vendor_law_proxy_date' => '',
-//            'buyer_phone' => '',
-//            'buyer_law_proxy_number' => '',
-//            'buyer_law_proxy_date' => '',
-//            'engine_model' => '',
-//            'shassi' => '',
-//            'carcass' => '',
-//            'other_parameters' => '',
-//            'additional_devices_array' => '',
-//            'oil_in_car' => '',
-//            'car_allstatus' => '',
-//            'maintenance_date' => '',
-//            'maintenance_bywho' => '',
-//            'penalty' => '',
-//            'gibdd_inn' => '',
-//        );
-//
-//        foreach ($_POST as $key => $value)
-//        {
-//            if ($_POST["$key"] == $exception["$key"])
-//            {
-//                continue;
-//            }
-//            else
-//            {
-//                if(empty($_POST["$key"]))
-//                {
-//                    redirect('/');
-//                }
-//            }
-//        }
-//        //_______________________________
+        //Проверка на пустоту
+        //_______________________________
+        //Массив исключений
+        $exception = array
+        (
+            'vendor_phone' => '',
+            'vendor_law_proxy_number' => '',
+            'vendor_law_proxy_date' => '',
+            'buyer_phone' => '',
+            'buyer_law_proxy_number' => '',
+            'buyer_law_proxy_date' => '',
+            'engine_model' => '',
+            'shassi' => '',
+            'carcass' => '',
+            'other_parameters' => '',
+            'additional_devices_array' => '',
+            'oil_in_car' => '',
+            'car_allstatus' => '',
+            'maintenance_date' => '',
+            'maintenance_bywho' => '',
+            'penalty' => '',
+            'gibdd_inn' => '',
+        );
+
+        foreach ($_POST as $key => $value)
+        {
+            if ($_POST["$key"] == $exception["$key"])
+            {
+                continue;
+            }
+            else
+            {
+                if(empty($_POST["$key"]))
+                {
+                    redirect('/');
+                }
+            }
+        }
+        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
-        if ($_POST['defects'] == 'false') {$_POST['defects'] = 'отсутствует';}
-        if ($_POST['features'] == 'false') {$_POST['features'] = 'отсутствует';}
+        if ($_POST['defects'] == 'false') {$_POST['defects'] = 'не указано';}
+        if ($_POST['features'] == 'false') {$_POST['features'] = 'не указано';}
         $data = array
         (
             'type_id' => $type_id,
@@ -2816,38 +2818,38 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     public function insert_into_database_gift()
     {
-//        //Проверка на пустоту
-//        //_______________________________
-//        //Массив исключений
-//        $exception = array
-//        (
-//            'vendor_phone' => '',
-//            'vendor_law_proxy_number' => '',
-//            'vendor_law_proxy_date' => '',
-//            'buyer_phone' => '',
-//            'buyer_law_proxy_number' => '',
-//            'buyer_law_proxy_date' => '',
-//            'engine_model' => '',
-//            'shassi' => '',
-//            'carcass' => '',
-//            'gibdd_inn' => '',
-//        );
-//
-//        foreach ($_POST as $key => $value)
-//        {
-//            if ($_POST["$key"] == $exception["$key"])
-//            {
-//                continue;
-//            }
-//            else
-//            {
-//                if(empty($_POST["$key"]))
-//                {
-//                    redirect('/');
-//                }
-//            }
-//        }
-//        //_______________________________
+        //Проверка на пустоту
+        //_______________________________
+        //Массив исключений
+        $exception = array
+        (
+            'vendor_phone' => '',
+            'vendor_law_proxy_number' => '',
+            'vendor_law_proxy_date' => '',
+            'buyer_phone' => '',
+            'buyer_law_proxy_number' => '',
+            'buyer_law_proxy_date' => '',
+            'engine_model' => '',
+            'shassi' => '',
+            'carcass' => '',
+            'gibdd_inn' => '',
+        );
+
+        foreach ($_POST as $key => $value)
+        {
+            if ($_POST["$key"] == $exception["$key"])
+            {
+                continue;
+            }
+            else
+            {
+                if(empty($_POST["$key"]))
+                {
+                    redirect('/');
+                }
+            }
+        }
+        //_______________________________
         $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
         $data = array
         (
