@@ -391,19 +391,19 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].' , с одной стороны, и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].' '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn'].' , с одной стороны, и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', '.$data_for_header['agent_vendor_birthday'].', паспорт: серия'.$data_for_header['agent_vendor_pass_serial'].' №'.$data_for_header['agent_vendor_pass_number'].'выдан'.$data_for_header['agent_vendor_pass_bywho'].' '.$data_for_header['agent_vendor_pass_date'].', зарегистрирован по адресу:'.$data_for_header['agent_vendor_adress'].', действующий от имени '.$bold_start.$data_for_header['vendor_law_company_name'].$bold_end.' на основании доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].', далее именуемый "'.$first_person.'"  с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].' '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].', паспорт: серия'.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].'выдан'.$data_for_header['for_agent_proxy_pass_bywho'].' '.$data_for_header['for_agent_proxy_pass_date'].', зарегистрирован по адресу:'.$data_for_header['for_agent_proxy_adress'].', действующий от имени '.$bold_start.$data_for_header['buyer_law_company_name'].$bold_end.' на основании доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -421,10 +421,10 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position '].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].' '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].', паспорт: серия'.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].'выдан'.$data_for_header['for_agent_proxy_pass_bywho'].' '.$data_for_header['for_agent_proxy_pass_date'].', зарегистрирован по адресу:'.$data_for_header['for_agent_proxy_adress'].', действующий от имени '.$bold_start.$data_for_header['buyer_law_company_name'].$bold_end.' на основании доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             }
         }
@@ -433,10 +433,10 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].' , с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].' '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn'].' , с одной стороны, и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', '.$data_for_header['agent_vendor_birthday'].', паспорт: серия'.$data_for_header['agent_vendor_pass_serial'].' №'.$data_for_header['agent_vendor_pass_number'].'выдан'.$data_for_header['agent_vendor_pass_bywho'].' '.$data_for_header['agent_vendor_pass_date'].', зарегистрирован по адресу:'.$data_for_header['agent_vendor_adress'].', действующий от имени '.$bold_start.$data_for_header['vendor_law_company_name'].$bold_end.' на основании доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].', далее именуемый "'.$first_person.'"  с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -496,10 +496,10 @@ class Document_model extends CI_Model
             switch ($data_for_header['vendor_is_owner_car'])
             {
                 case 'own_car':
-                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].', '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn']. ' №'.$data_for_header['vendor_law_proxy_number']. ' от '.$data_for_header['vendor_law_proxy_date'].'с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].' '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn'].' , с одной стороны, и ';
                     break;
                 case 'not_own_car':
-                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ';
+                    $header = $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', '.$data_for_header['agent_vendor_birthday'].', паспорт: серия'.$data_for_header['agent_vendor_pass_serial'].' №'.$data_for_header['agent_vendor_pass_number'].'выдан'.$data_for_header['agent_vendor_pass_bywho'].' '.$data_for_header['agent_vendor_pass_date'].', зарегистрирован по адресу:'.$data_for_header['agent_vendor_adress'].', действующий от имени '.$bold_start.$data_for_header['vendor_law_company_name'].$bold_end.' на основании доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].', далее именуемый "'.$first_person.'"  с одной стороны и ';
                     break;
             };
             switch ($data_for_header['buyer_is_owner_car'])
@@ -526,10 +526,10 @@ class Document_model extends CI_Model
             switch ($data_for_header['buyer_is_owner_car'])
             {
                 case 'own_car':
-                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].', '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn']. ' №'.$data_for_header['buyer_law_proxy_number']. ' от '.$data_for_header['buyer_law_proxy_date']. ', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].' '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
                 case 'not_own_car':
-                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
+                    $header .= $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].', паспорт: серия'.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].'выдан'.$data_for_header['for_agent_proxy_pass_bywho'].' '.$data_for_header['for_agent_proxy_pass_date'].', зарегистрирован по адресу:'.$data_for_header['for_agent_proxy_adress'].', действующий от имени '.$bold_start.$data_for_header['buyer_law_company_name'].$bold_end.' на основании доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].', далее именуемый "'.$second_person.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:';
                     break;
             };
         }
@@ -583,8 +583,7 @@ class Document_model extends CI_Model
     private function get_requisites($data, $canvans = false)
     {
         $enter = "<w:br/>";
-        if($canvans == true)
-            $enter = '^+';
+        if($canvans == true){$enter = '^+';}
         $output = ""; //Строка вывода
         switch ($data['type_of_side'])
         {
@@ -701,6 +700,11 @@ class Document_model extends CI_Model
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
+        //Новая дата
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -708,6 +712,9 @@ class Document_model extends CI_Model
         //$buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
         $vendor_ind_adress = $this->format_adress($result->vendor_ind_city,$result->vendor_ind_street,$result->vendor_ind_house,$result->vendor_ind_flat);
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
+        //Новые адресса
+        $agent_vendor_adress = $this->format_adress($result->agent_vendor_city,$result->agent_vendor_street,$result->agent_vendor_house,$result->agent_vendor_flat);
+        $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Иное
         $data_for_header = array(
             'vendor_fio' =>$vendor_fio,
@@ -740,6 +747,19 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_number' => $result->for_agent_buyer_proxy_number,
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
+            //Новые данные для реквизитов
+            'agent_vendor_birthday' => $agent_vendor_birthday,
+            'agent_vendor_pass_serial' => $result->agent_vendor_pass_serial,
+            'agent_vendor_pass_number' => $result->agent_vendor_pass_number,
+            'agent_vendor_pass_date' => $agent_vendor_pass_date,
+            'agent_vendor_pass_bywho' => $result->agent_vendor_pass_bywho,
+            'agent_vendor_adress' => $agent_vendor_adress,
+            'for_agent_proxy_birthday' => $for_agent_proxy_birthday,
+            'for_agent_proxy_pass_serial' => $result->for_agent_proxy_pass_serial,
+            'for_agent_proxy_pass_number' => $result->for_agent_proxy_pass_number,
+            'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
+            'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
+            'for_agent_proxy_adress' => $for_agent_proxy_adress,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
@@ -997,6 +1017,11 @@ class Document_model extends CI_Model
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
+        //Новая дата
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -1004,6 +1029,9 @@ class Document_model extends CI_Model
         //$buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
         $vendor_ind_adress = $this->format_adress($result->vendor_ind_city,$result->vendor_ind_street,$result->vendor_ind_house,$result->vendor_ind_flat);
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
+        //Новые адресса
+        $agent_vendor_adress = $this->format_adress($result->agent_vendor_city,$result->agent_vendor_street,$result->agent_vendor_house,$result->agent_vendor_flat);
+        $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Иное
         $data_for_header = array(
             'vendor_fio' =>$vendor_fio,
@@ -1036,6 +1064,19 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_number' => $result->for_agent_buyer_proxy_number,
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
+            //Новые данные для реквизитов
+            'agent_vendor_birthday' => $agent_vendor_birthday,
+            'agent_vendor_pass_serial' => $result->agent_vendor_pass_serial,
+            'agent_vendor_pass_number' => $result->agent_vendor_pass_number,
+            'agent_vendor_pass_date' => $agent_vendor_pass_date,
+            'agent_vendor_pass_bywho' => $result->agent_vendor_pass_bywho,
+            'agent_vendor_adress' => $agent_vendor_adress,
+            'for_agent_proxy_birthday' => $for_agent_proxy_birthday,
+            'for_agent_proxy_pass_serial' => $result->for_agent_proxy_pass_serial,
+            'for_agent_proxy_pass_number' => $result->for_agent_proxy_pass_number,
+            'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
+            'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
+            'for_agent_proxy_adress' => $for_agent_proxy_adress,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
@@ -1468,6 +1509,9 @@ class Document_model extends CI_Model
         //$buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
         $vendor_ind_adress = $this->format_adress($result->vendor_ind_city,$result->vendor_ind_street,$result->vendor_ind_house,$result->vendor_ind_flat);
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
+        //Новые адресса
+        $agent_vendor_adress = $this->format_adress($result->agent_vendor_city,$result->agent_vendor_street,$result->agent_vendor_house,$result->agent_vendor_flat);
+        $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
         $date_of_product = $this->format_date($result->date_of_product);
@@ -1488,6 +1532,11 @@ class Document_model extends CI_Model
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
         $credit_date = $this->format_date($result->credit_date);
+        //Новая дата
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
         //Джсон
         $documents = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string_accessories($result->accessories);
@@ -1526,6 +1575,19 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_number' => $result->for_agent_buyer_proxy_number,
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
+            //Новые данные для реквизитов
+            'agent_vendor_birthday' => $agent_vendor_birthday,
+            'agent_vendor_pass_serial' => $result->agent_vendor_pass_serial,
+            'agent_vendor_pass_number' => $result->agent_vendor_pass_number,
+            'agent_vendor_pass_date' => $agent_vendor_pass_date,
+            'agent_vendor_pass_bywho' => $result->agent_vendor_pass_bywho,
+            'agent_vendor_adress' => $agent_vendor_adress,
+            'for_agent_proxy_birthday' => $for_agent_proxy_birthday,
+            'for_agent_proxy_pass_serial' => $result->for_agent_proxy_pass_serial,
+            'for_agent_proxy_pass_number' => $result->for_agent_proxy_pass_number,
+            'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
+            'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
+            'for_agent_proxy_adress' => $for_agent_proxy_adress,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
@@ -1792,6 +1854,9 @@ class Document_model extends CI_Model
         //$buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
         $vendor_ind_adress = $this->format_adress($result->vendor_ind_city,$result->vendor_ind_street,$result->vendor_ind_house,$result->vendor_ind_flat);
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
+        //Новые адресса
+        $agent_vendor_adress = $this->format_adress($result->agent_vendor_city,$result->agent_vendor_street,$result->agent_vendor_house,$result->agent_vendor_flat);
+        $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
         $date_of_product = $this->format_date($result->date_of_product);
@@ -1811,6 +1876,11 @@ class Document_model extends CI_Model
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
+        //Новая дата
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
         //Джсон
         $documents = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string($result->accessories);
@@ -1849,6 +1919,19 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_number' => $result->for_agent_buyer_proxy_number,
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $result->for_agent_buyer_proxy_notary,
+            //Новые данные для реквизитов
+            'agent_vendor_birthday' => $agent_vendor_birthday,
+            'agent_vendor_pass_serial' => $result->agent_vendor_pass_serial,
+            'agent_vendor_pass_number' => $result->agent_vendor_pass_number,
+            'agent_vendor_pass_date' => $agent_vendor_pass_date,
+            'agent_vendor_pass_bywho' => $result->agent_vendor_pass_bywho,
+            'agent_vendor_adress' => $agent_vendor_adress,
+            'for_agent_proxy_birthday' => $for_agent_proxy_birthday,
+            'for_agent_proxy_pass_serial' => $result->for_agent_proxy_pass_serial,
+            'for_agent_proxy_pass_number' => $result->for_agent_proxy_pass_number,
+            'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
+            'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
+            'for_agent_proxy_adress' => $for_agent_proxy_adress,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
@@ -2952,25 +3035,25 @@ class Document_model extends CI_Model
                 $data_input["$key"] = $value;
             }
         }
-
-
         //ФИО
         $vendor_fio = $this->format_fio($data_input['vendor_surname'], $data_input['vendor_name'], $data_input['vendor_patronymic']);
         $buyer_fio = $this->format_fio($data_input['buyer_surname'],$data_input['buyer_name'],$data_input['buyer_patronymic']);
         $spouse_fio = $this->format_fio($_POST['spouse_surname'],$_POST['spouse_name'],$_POST['spouse_patronymic']);
-        $vendor_law_fio = $this->format_fio($_POST['vendor_law_surname'],$_POST['vendor_law_name'],$_POST['vendor_law_patronymic']);
-        $buyer_law_fio = $this->format_fio($_POST['buyer_law_surname'],$_POST['buyer_law_name'],$_POST['buyer_law_patronymic']);
+        $vendor_law_fio = $this->format_fio($_POST['vendor_law_actor_surname'],$_POST['vendor_law_actor_name'],$_POST['vendor_law_actor_patronymic']);
+        $buyer_law_fio = $this->format_fio($_POST['buyer_law_actor_surname'],$_POST['buyer_law_actor_name'],$_POST['buyer_law_actor_patronymic']);
         $vendor_ind_fio = $this->format_fio($_POST['vendor_ind_surname'],$_POST['vendor_ind_name'],$_POST['vendor_ind_patronymic']);
         $buyer_ind_fio = $this->format_fio($_POST['buyer_ind_surname'],$_POST['buyer_ind_name'],$_POST['buyer_ind_patronymic']);
-        $vendor_agent_fio = $this->format_fio($_POST['vendor_agent_surname'],$_POST['vendor_agent_name'],$_POST['vendor_agent_patronymic']);
-        $buyer_agent_fio = $this->format_fio($_POST['buyer_agent_surname'],$_POST['buyer_agent_name'],$_POST['buyer_agent_patronymic']);
+        $vendor_agent_fio = $this->format_fio($_POST['for_agent_vendor_surname'],$_POST['for_agent_vendor_name'],$_POST['for_agent_vendor_patronymic']);
+        $buyer_agent_fio = $this->format_fio($_POST['for_agent_buyer_surname'],$_POST['for_agent_buyer_name'],$_POST['for_agent_buyer_patronymic']);
 
         //Адрес
         $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
         $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
         $vendor_ind_adress = $this->format_adress($_POST['vendor_ind_city'],$_POST['vendor_ind_street'],$_POST['vendor_ind_house'],$_POST['vendor_ind_flat']);
         $buyer_ind_adress = $this->format_adress($_POST['buyer_ind_city'],$_POST['buyer_ind_street'],$_POST['buyer_ind_house'],$_POST['buyer_ind_flat']);
-
+        //Новые адресса
+        $agent_vendor_adress = $this->format_adress($_POST['agent_vendor_city'],$_POST['agent_vendor_street'],$_POST['agent_vendor_house'],$_POST['agent_vendor_flat']);
+        $for_agent_proxy_adress = $this->format_adress($_POST['for_agent_proxy_city'],$_POST['for_agent_proxy_street'],$_POST['for_agent_proxy_house'],$_POST['for_agent_proxy_flat']);
         //Дата
         $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($_POST['date_of_contract']) : $data_input['date_of_contract'];
         $date_of_product = !empty($_POST['date_of_product']) ? $this->format_date($_POST['date_of_product']) : $data_input['date_of_product'];
@@ -2992,6 +3075,11 @@ class Document_model extends CI_Model
         $vendor_ind_date_of_certificate =  $this->format_date($_POST['$vendor_ind_date_of_certificate']);
         $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
         $credit_date =  $this->format_date($_POST['credit_date']);
+        //Новая дата
+        $agent_vendor_birthday = $this->format_date($_POST['agent_vendor_birthday']);
+        $agent_vendor_pass_date = $this->format_date($_POST['agent_vendor_pass_date']);
+        $for_agent_proxy_birthday = $this->format_date($_POST['for_agent_proxy_birthday']);
+        $for_agent_proxy_pass_date = $this->format_date($_POST['for_agent_proxy_pass_date']);
 
         //Джсон
         $documents = !empty($_POST['documents']) ? $this->json_to_string(json_encode($_POST['documents'])) : $data_input['documents'];
@@ -3168,6 +3256,19 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
+            //Новые данные для реквизитов
+            'agent_vendor_birthday' => $agent_vendor_birthday,
+            'agent_vendor_pass_serial' => $_POST['agent_vendor_pass_serial'],
+            'agent_vendor_pass_number' => $_POST['agent_vendor_pass_number'],
+            'agent_vendor_pass_date' => $agent_vendor_pass_date,
+            'agent_vendor_pass_bywho' => $_POST['agent_vendor_pass_bywho'],
+            'agent_vendor_adress' => $agent_vendor_adress,
+            'for_agent_proxy_birthday' => $for_agent_proxy_birthday,
+            'for_agent_proxy_pass_serial' => $_POST['for_agent_proxy_pass_serial'],
+            'for_agent_proxy_pass_number' => $_POST['for_agent_proxy_pass_number'],
+            'for_agent_proxy_pass_bywho' => $_POST['for_agent_proxy_pass_bywho'],
+            'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
+            'for_agent_proxy_adress' => $for_agent_proxy_adress,
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Сроки подписания договора
@@ -3512,14 +3613,17 @@ class Document_model extends CI_Model
         $buyer_law_fio = $this->format_fio($_POST['buyer_law_surname'],$_POST['buyer_law_name'],$_POST['buyer_law_patronymic']);
         $vendor_ind_fio = $this->format_fio($_POST['vendor_ind_surname'],$_POST['vendor_ind_name'],$_POST['vendor_ind_patronymic']);
         $buyer_ind_fio = $this->format_fio($_POST['buyer_ind_surname'],$_POST['buyer_ind_name'],$_POST['buyer_ind_patronymic']);
-        $vendor_agent_fio = $this->format_fio($_POST['vendor_agent_surname'],$_POST['vendor_agent_name'],$_POST['vendor_agent_patronymic']);
-        $buyer_agent_fio = $this->format_fio($_POST['buyer_agent_surname'],$_POST['buyer_agent_name'],$_POST['buyer_agent_patronymic']);
+        $vendor_agent_fio = $this->format_fio($_POST['for_agent_vendor_surname'],$_POST['for_agent_vendor_name'],$_POST['for_agent_vendor_patronymic']);
+        $buyer_agent_fio = $this->format_fio($_POST['for_agent_buyer_surname'],$_POST['for_agent_buyer_name'],$_POST['for_agent_buyer_patronymic']);
 
         //Адрес
         $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
         $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
         $vendor_ind_adress = $this->format_adress($_POST['vendor_ind_city'],$_POST['vendor_ind_street'],$_POST['vendor_ind_house'],$_POST['vendor_ind_flat']);
         $buyer_ind_adress = $this->format_adress($_POST['buyer_ind_city'],$_POST['buyer_ind_street'],$_POST['buyer_ind_house'],$_POST['buyer_ind_flat']);
+        //Новые адресса
+        $agent_vendor_adress = $this->format_adress($_POST['agent_vendor_city'],$_POST['agent_vendor_street'],$_POST['agent_vendor_house'],$_POST['agent_vendor_flat']);
+        $for_agent_proxy_adress = $this->format_adress($_POST['for_agent_proxy_city'],$_POST['for_agent_proxy_street'],$_POST['for_agent_proxy_house'],$_POST['for_agent_proxy_flat']);
 
         //Дата
         $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($data_input['date_of_contract']) : $data_input['date_of_contract'];
@@ -3539,6 +3643,12 @@ class Document_model extends CI_Model
         $buyer_law_proxy_date =  $this->format_date($_POST['$buyer_law_proxy_date']);
         $vendor_ind_date_of_certificate =  $this->format_date($_POST['$vendor_ind_date_of_certificate']);
         $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
+        //Новая дата
+        $agent_vendor_birthday = $this->format_date($_POST['agent_vendor_birthday']);
+        $agent_vendor_pass_date = $this->format_date($_POST['agent_vendor_pass_date']);
+        $for_agent_proxy_birthday = $this->format_date($_POST['for_agent_proxy_birthday']);
+        $for_agent_proxy_pass_date = $this->format_date($_POST['for_agent_proxy_pass_date']);
+
         //Джсон
         $other_parameters = $this->json_to_string($_POST['other_parameters']);
         //Продавец
@@ -3708,6 +3818,7 @@ class Document_model extends CI_Model
             'for_agent_buyer_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
             'for_agent_buyer_proxy_date' => $for_agent_buyer_proxy_date,
             'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
+
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Массив данных для канванса
