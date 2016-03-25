@@ -21,7 +21,7 @@ class Document_model extends CI_Model
         {
             if (empty($value) == true)
             {
-               $result->$key = 'отсутствует';
+               $result->$key = 'не указано';
             }
         }
 
@@ -161,7 +161,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function format_date($date)
     {
-        if(empty($date) || $date == 'отсутствует'){
+        if(empty($date) || $date == 'не указано'){
             return false;
         }
         $date = DateTime::createFromFormat('Y-m-d', $date);
@@ -2197,19 +2197,19 @@ class Document_model extends CI_Model
         {
             case 'physical':
                 if ($result->vendor_is_owner_car == 'own_car')
-                    $vendor_data = "Я, $vendor_fio паспорт серия $result->vendor_passport_serial, № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $vendor_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_fio, паспорт серия $result->vendor_passport_serial № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $vendor_adress (далее - Продавец)";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
                 break;
             case 'law':
                 if ($result->vendor_is_owner_car == 'own_car')
-                    $vendor_data = "Я, $vendor_law_fio в лице $result->vendor_law_actor_position компании $result->vendor_law_company_name, ИНН $result->vendor_law_inn , ОГРН $result->vendor_law_ogrn зарегистрированной по адресу: $result->vendor_law_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_law_fio, в лице $result->vendor_law_actor_position компании $result->vendor_law_company_name, ИНН $result->vendor_law_inn , ОГРН $result->vendor_law_ogrn зарегистрированной по адресу: $result->vendor_law_adress (далее - Продавец)";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
                     $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
                 break;
             case 'individual':
                 if ($result->vendor_is_owner_car == 'own_car')
-                    $vendor_data = "Я, $vendor_ind_fio паспорт серия $result->vendor_ind_passport_serial, № $result->vendor_ind_passport_number, выдан $result->vendor_ind_passport_bywho дата выдачи $vendor_ind_passport_date, зарегистрированный(ая) по адресу: $vendor_ind_adress (далее - Продавец)";
+                    $vendor_data = "Я, $vendor_ind_fio, паспорт серия $result->vendor_ind_passport_serial № $result->vendor_ind_passport_number, выдан $result->vendor_ind_passport_bywho дата выдачи $vendor_ind_passport_date, зарегистрированный(ая) по адресу: $vendor_ind_adress (далее - Продавец)";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
                     $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец)";
                 break;
@@ -2574,6 +2574,20 @@ class Document_model extends CI_Model
             'maintenance_bywho' => '',
             'penalty' => '',
             'gibdd_inn' => '',
+            //Правочки
+            'reg_gov_number' => '',
+            'vendor_ind_phone' => '',
+            'vendor_ind_bank_acc' => '',
+            'vendor_ind_bank_name' => '',
+            'vendor_ind_korr_acc' => '',
+            'vendor_ind_bik' => '',
+            'buyer_ind_phone' => '',
+            'buyer_ind_bank_acc' => '',
+            'buyer_ind_bank_name' => '',
+            'buyer_ind_korr_acc' => '',
+            'buyer_ind_bik' => '',
+            'for_agent_vendor_proxy_notary' => '',
+            'for_agent_buyer_proxy_notary' => '',
         );
 
         foreach ($_POST as $key => $value)
@@ -2833,6 +2847,19 @@ class Document_model extends CI_Model
             'shassi' => '',
             'carcass' => '',
             'gibdd_inn' => '',
+            'reg_gov_number' => '',
+            'vendor_ind_phone' => '',
+            'vendor_ind_bank_acc' => '',
+            'vendor_ind_bank_name' => '',
+            'vendor_ind_korr_acc' => '',
+            'vendor_ind_bik' => '',
+            'buyer_ind_phone' => '',
+            'buyer_ind_bank_acc' => '',
+            'buyer_ind_bank_name' => '',
+            'buyer_ind_korr_acc' => '',
+            'buyer_ind_bik' => '',
+            'for_agent_vendor_proxy_notary' => '',
+            'for_agent_buyer_proxy_notary' => '',
         );
 
         foreach ($_POST as $key => $value)
@@ -3027,8 +3054,8 @@ class Document_model extends CI_Model
         //Подготовка данных
         strip_tags($_POST);
         // Обновление ифнормации в связи с ПОСТуплением
-        if ($_POST['defects'] == 'false') {$_POST['defects'] = 'отсутствует';}
-        if ($_POST['features'] == 'false') {$_POST['features'] = 'отсутствует';}
+        if ($_POST['defects'] == 'false') {$_POST['defects'] = 'не указано';}
+        if ($_POST['features'] == 'false') {$_POST['features'] = 'не указано';}
         include 'array_for_canvans.php';
         foreach ($_POST as $key => $value)
         {
