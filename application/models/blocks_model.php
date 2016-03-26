@@ -1380,7 +1380,10 @@ END;
                     <input  required  class = "form-control" type="text" name="vendor_law_actor_patronymic"  placeholder="Отчество руководителя:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="vendor_law_actor_position"  placeholder="В лице(должность): ">
+                    <select  required  class="form-control" name="vendor_law_actor_position" ">
+                        <option value="Генеральный директор">Генеральный директор</option>
+                        <option value="Директор">Директор</option>
+                    </select>
                 </div>
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:">
@@ -1476,19 +1479,19 @@ END;
                     <input  required  class = "form-control" type="text" name="vendor_ind_flat"  placeholder="Номер квартиры:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_ind_phone"  placeholder="Телефон">
+                    <input   class = "form-control" type="text" name="vendor_ind_phone"  placeholder="Телефон">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_ind_bank_acc"  placeholder="Расчетный счет:">
+                    <input  class = "form-control" type="text" name="vendor_ind_bank_acc"  placeholder="Расчетный счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_ind_bank_name"  placeholder="В банке:">
+                    <input    class = "form-control" type="text" name="vendor_ind_bank_name"  placeholder="В банке:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="vendor_ind_korr_acc"  placeholder="Корр.счет:">
+                    <input   class="form-control" type="text" name="vendor_ind_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="vendor_ind_bik"  placeholder="БИК:">
+                    <input   class="form-control" type="text" name="vendor_ind_bik"  placeholder="БИК:">
                 </div>
             </div>
            </div>
@@ -1521,7 +1524,10 @@ END;
                     <input  required  class = "form-control" type="text" name="buyer_law_actor_patronymic"  placeholder="Отчество руководителя:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="buyer_law_actor_position"  placeholder="В лице(должность): ">
+                    <select  required  class="form-control" name="buyer_law_actor_position" ">
+                        <option value="Генеральный директор">Генеральный директор</option>
+                        <option value="Директор">Директор</option>
+                    </select>
                 </div>
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="buyer_law_document_osn"  placeholder="Действующего на основании:">
@@ -1617,19 +1623,19 @@ END;
                     <input  required  class = "form-control" type="text" name="buyer_ind_flat"  placeholder="Номер квартиры:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_ind_phone"  placeholder="Телефон">
+                    <input  class = "form-control" type="text" name="buyer_ind_phone"  placeholder="Телефон">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_ind_bank_acc"  placeholder="Расчетный счет:">
+                    <input class = "form-control" type="text" name="buyer_ind_bank_acc"  placeholder="Расчетный счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_ind_bank_name"  placeholder="В банке:">
+                    <input   class = "form-control" type="text" name="buyer_ind_bank_name"  placeholder="В банке:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="buyer_ind_korr_acc"  placeholder="Корр.счет:">
+                    <input    class="form-control" type="text" name="buyer_ind_korr_acc"  placeholder="Корр.счет:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="buyer_ind_bik"  placeholder="БИК:">
+                    <input   class="form-control" type="text" name="buyer_ind_bik"  placeholder="БИК:">
                 </div>
             </div>
            </div>
