@@ -1620,17 +1620,17 @@ END;
             <div class = "content-radio-group">
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="До подписания настоящего договора">
+                    <input type="radio" name="payment_date" value="до подписания настоящего договора">
                     <span class = "content-input-align">До подписания настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="При подписании настоящего договора">
+                    <input type="radio" name="payment_date" value="при подписании настоящего договора">
                     <span class = "content-input-align">При подписании настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input id="credit" type="radio" name="payment_date" value="В рассрочку по следующему графику">
+                    <input id="credit" type="radio" name="payment_date" value="в рассрочку по следующему графику">
                     <span class = "content-input-align">В рассрочку по следующему графику:</span>
                 </div>
 
