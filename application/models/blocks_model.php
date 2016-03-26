@@ -39,7 +39,7 @@ END;
 </div>
 END;
     }
-
+//
     //Базовые блоки продавца
     public function bs_block_deal()
     {
