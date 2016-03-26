@@ -39,7 +39,7 @@ END;
 </div>
 END;
     }
-
+//
     //Базовые блоки продавца
     public function bs_block_deal()
     {
@@ -126,14 +126,17 @@ END;
             <div class = "content-block">
              <p class = "content-header">Введите данныe продавца:</p>
                 <div class = "content-input">
-                <div class = "content-input-group">
-                <input  required   required  class = "form-control" type="text" name="vendor_surname"  placeholder="Фамилия:">
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="vendor_surname"  placeholder="Фамилия:">
+                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="vendor_surname_parent"  placeholder="Фамилия:">
                 </div>
-                <div class = "content-input-group">
-                <input  required   required  class="form-control" type="text" name="vendor_name"  placeholder="Имя:">
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class="form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="vendor_name"  placeholder="Имя:">
+                <input  required   required  class="form-control" style="float:left;width:48%;" type="text" name="vendor_name_parent"  placeholder="Имя:">
                 </div>
-                <div class = "content-input-group">
-                <input  required   required  class = "form-control" type="text" name="vendor_patronymic"  placeholder="Отчество:">
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="vendor_patronymic"  placeholder="Отчество:">
+                <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="vendor_patronymic_parent"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
                 <input  required   required  id="vendor_birthday" class="form-control datetimepicker" type="text"  name="vendor_birthday"  placeholder="Дата рождения:">
@@ -179,15 +182,18 @@ END;
             <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
                 <div class = "content-input">
-                    <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="for_agent_vendor_name"  placeholder="Имя:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
-                    </div>
+                    <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:">
+                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="for_agent_vendor_surname_parent"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class="form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_vendor_name"  placeholder="Имя:">
+                <input  required   required  class="form-control" style="float:left;width:48%;" type="text" name="for_agent_vendor_name_parent"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
+                <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="for_agent_vendor_patronymic_parent"  placeholder="Отчество:">
+                </div>
                     <div class = "content-input-group">
                     <input  required  class = "form-control datetimepicker" type="text" name="agent_vendor_birthday"  placeholder="Дата рождения:">
                     </div>
@@ -241,15 +247,18 @@ END;
             <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
                 <div class = "content-input">
-                    <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="for_agent_vendor_name"  placeholder="Имя:">
-                    </div>
-                    <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
-                    </div>
+                    <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:">
+                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="for_agent_vendor_surname_parent"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class="form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_vendor_name"  placeholder="Имя:">
+                <input  required   required  class="form-control" style="float:left;width:48%;" type="text" name="for_agent_vendor_name_parent"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество:">
+                <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="for_agent_vendor_patronymic_parent"  placeholder="Отчество:">
+                </div>
                     <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:">
                     </div>
@@ -273,15 +282,18 @@ END;
         <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
              <div class = "content-input">
-                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:">
-                 </div>
-                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="for_agent_buyer_name"  placeholder="Имя:">
-                 </div>
-                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
-                 </div>
+                 <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:">
+                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="for_agent_buyer_surname_parent"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class="form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_name"  placeholder="Имя:">
+                <input  required   required  class="form-control" style="float:left;width:48%;" type="text" name="for_agent_buyer_name_parent"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
+                <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="for_agent_buyer_patronymic_parent"  placeholder="Отчество:">
+                </div>
                  <div class = "content-input-group">
                     <input  required  class = "form-control datetimepicker" type="text" name="for_agent_proxy_birthday"  placeholder="Дата рождения:">
                  </div>
@@ -335,15 +347,18 @@ END;
         <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
              <div class = "content-input">
-                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:">
-                 </div>
-                 <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="for_agent_buyer_name"  placeholder="Имя:">
-                 </div>
-                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
-                 </div>
+                 <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:">
+                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="for_agent_buyer_surname_parent"  placeholder="Фамилия:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class="form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_name"  placeholder="Имя:">
+                <input  required   required  class="form-control" style="float:left;width:48%;" type="text" name="for_agent_buyer_name_parent"  placeholder="Имя:">
+                </div>
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество:">
+                <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="for_agent_buyer_patronymic_parent"  placeholder="Отчество:">
+                </div>
                  <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:">
                  </div>
@@ -397,14 +412,17 @@ END;
         <p class = "content-header">Введите данныe покупателя:</p>
         <div class = "content-radio">
             <div class = "content-input">
-                <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_surname"  placeholder="Фамилия:">
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="buyer_surname"  placeholder="Фамилия:">
+                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="buyer_surname_parent"  placeholder="Фамилия:">
                 </div>
-                <div class = "content-input-group">
-                    <input  required  class="form-control" type="text" name="buyer_name"  placeholder="Имя:">
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class="form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="buyer_name"  placeholder="Имя:">
+                <input  required   required  class="form-control" style="float:left;width:48%;" type="text" name="buyer_name_parent"  placeholder="Имя:">
                 </div>
-                <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_patronymic"  placeholder="Отчество:">
+                <div class = "content-input-group" style="display:inline-block;width:100%">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="buyer_patronymic"  placeholder="Отчество:">
+                <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="buyer_patronymic_parent"  placeholder="Отчество:">
                 </div>
                 <div class = "content-input-group">
                     <input  required  id="buyer_birthday" class="form-control datetimepicker" type="text"  name="buyer_birthday"  placeholder="Дата рождения:">
