@@ -689,7 +689,7 @@ class Document_model extends CI_Model
         $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-        $date_of_product = $this->format_date($result->date_of_product);
+//        $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
@@ -936,7 +936,7 @@ class Document_model extends CI_Model
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('car_type', $result->car_type);
         $document->setValue('category', $result->category);
-        $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('date_of_product', $result->date_of_product);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('shassi', $result->shassi);
         $document->setValue('carcass', $result->carcass);
@@ -1011,7 +1011,7 @@ class Document_model extends CI_Model
         $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-        $date_of_product = $this->format_date($result->date_of_product);
+//        $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
@@ -1255,7 +1255,7 @@ class Document_model extends CI_Model
         $document->setValue('vin', $result->vin);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('car_type', $result->car_type);
-        $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('date_of_product', $result->date_of_product);
         $document->setValue('category', $result->category);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('shassi', $result->shassi);
@@ -1344,7 +1344,7 @@ class Document_model extends CI_Model
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
 //        $buyer_law_adress = $this->format_adress($result->buyer_law_city,$result->buyer_law_street,$result->buyer_law_house,$result->buyer_law_flat);
         //Дата
-        $date_of_product = $this->format_date($result->date_of_product);
+//        $date_of_product = $this->format_date($result->date_of_product);
         $buyer_date = $this->format_date($result->buyer_birthday);
         $buyer_ind_date = $this->format_date($result->buyer_ind_birthday);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
@@ -1370,7 +1370,7 @@ class Document_model extends CI_Model
         $document->setValue('gibdd_reg_name', $result->gibdd_reg_name);
         $document->setValue('buyer_name', $buyer_name);
         $document->setValue('mark', $result->mark);
-        $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('date_of_product', $result->date_of_product);
         $document->setValue('vin', $result->vin);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         //Определяем тип заявителя
@@ -1528,7 +1528,7 @@ class Document_model extends CI_Model
         $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-        $date_of_product = $this->format_date($result->date_of_product);
+//        $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
@@ -1771,7 +1771,7 @@ class Document_model extends CI_Model
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('car_type', $result->car_type);
         $document->setValue('category', $result->category);
-        $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('date_of_product', $result->date_of_product);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('shassi', $result->shassi);
         $document->setValue('carcass', $result->carcass);
@@ -1875,7 +1875,7 @@ class Document_model extends CI_Model
         $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-        $date_of_product = $this->format_date($result->date_of_product);
+//        $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday);
         $buyer_birthday = $this->format_date($result->buyer_birthday);
@@ -2118,7 +2118,7 @@ class Document_model extends CI_Model
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         $document->setValue('car_type', $result->car_type);
         $document->setValue('category', $result->category);
-        $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('date_of_product', $result->date_of_product);
         $document->setValue('engine_model', $result->engine_model);
         $document->setValue('shassi', $result->shassi);
         $document->setValue('carcass', $result->carcass);
@@ -2191,7 +2191,7 @@ class Document_model extends CI_Model
         $agent_vendor_adress = $this->format_adress($result->agent_vendor_city,$result->agent_vendor_street,$result->agent_vendor_house,$result->agent_vendor_flat);
         $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
-        $date_of_contract = $this->format_date($result->date_of_contract);
+//        $date_of_contract = $this->format_date($result->date_of_contract);
         $vendor_passport_date  = $this->format_date($result->vendor_passport_date);
         $vendor_ind_passport_date = $this->format_date($result->vendor_ind_passport_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
@@ -2266,7 +2266,7 @@ class Document_model extends CI_Model
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/receipt_of_money.docx');
         //Заполнение
         $document->setValue('place_of_contract', $result->place_of_contract);
-        $document->setValue('date_of_contract', $date_of_contract);
+        $document->setValue('date_of_contract', $result->date_of_product);
         $document->setValue('vendor_data', $vendor_data);
         $document->setValue('buyer_data', $buyer_data);
         $document->setValue('price', $result->price_car);
@@ -2318,7 +2318,7 @@ class Document_model extends CI_Model
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
         $buyer_ind_adress = $this->format_adress($result->buyer_ind_city,$result->buyer_ind_street,$result->buyer_ind_house,$result->buyer_ind_flat);
         //Дата
-        $date_of_product = $this->format_date($result->date_of_product);
+//        $date_of_product = $this->format_date($result->date_of_product);
         $buyer_date = $this->format_date($result->buyer_birthday);
         $buyer_ind_date = $this->format_date($result->buyer_ind_birthday);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
@@ -2344,7 +2344,7 @@ class Document_model extends CI_Model
         $document->setValue('gibdd_reg_name', $result->gibdd_reg_name);
         $document->setValue('buyer_name', $buyer_name);
         $document->setValue('mark', $result->mark);
-        $document->setValue('date_of_product', $date_of_product);
+        $document->setValue('date_of_product', $result->date_of_product);
         $document->setValue('vin', $result->vin);
         $document->setValue('reg_gov_number', $result->reg_gov_number);
         //Определяем тип заявителя
@@ -3162,7 +3162,7 @@ class Document_model extends CI_Model
         $for_agent_proxy_adress = $this->format_adress($_POST['for_agent_proxy_city'],$_POST['for_agent_proxy_street'],$_POST['for_agent_proxy_house'],$_POST['for_agent_proxy_flat']);
         //Дата
         $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($_POST['date_of_contract']) : $data_input['date_of_contract'];
-        $date_of_product = !empty($_POST['date_of_product']) ? $this->format_date($_POST['date_of_product']) : $data_input['date_of_product'];
+        $date_of_product = !empty($_POST['date_of_product']) ? $_POST['date_of_product'] : $data_input['date_of_product'];
         $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
@@ -3733,7 +3733,7 @@ class Document_model extends CI_Model
 
         //Дата
         $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($data_input['date_of_contract']) : $data_input['date_of_contract'];
-        $date_of_product = !empty($_POST['date_of_product']) ? $this->format_date($data_input['date_of_contract']) : $data_input['date_of_product'];
+        $date_of_product = !empty($_POST['date_of_product']) ? $_POST['date_of_product'] : $data_input['date_of_product'];
         $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
