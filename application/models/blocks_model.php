@@ -1183,7 +1183,7 @@ END;
             <div class = "content-radio">
 
                 <div class = "content-input-group" style="display:inline-block;width:100%">
-                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="spouse_surname"  placeholder="Фамилия:">
+                <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="spouse_surname"  placeholder="Фамилия в именительном падеже:">
                 <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="spouse_surname_parent"  placeholder="Фамилия в родительном падеже:">
                 </div>
                 <div class = "content-input-group" style="display:inline-block;width:100%">
