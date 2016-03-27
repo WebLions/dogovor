@@ -4043,14 +4043,10 @@ class Document_model extends CI_Model
             ),
             24 => array
             (
-                'text' => "^3/Даритель: ^3*Одаряемый:",
-                'text-type' => 'columns',
-            ),
-            25 => array
-            (
-                'text' => "^3/$firstside_requisites ^3*$secondside_requisites",
+                'text' => "^6/Даритель: $firstside_requisites ^+______________ Подпись ^6*Одаряемый:  $secondside_requisites ^+______________ Подпись ",
                 'text-type' => 'columns',
             )
+
         );
 
         $data = json_encode($data);
