@@ -139,10 +139,20 @@ $( document ).ready(function() {
             format: 'YYYY-MM-DD', locale: 'ru'
         });
     });
+
+
+
     $("#doc_create").delegate(".datetimepicker", "focusin", function(){
         var name = $(this).attr('name');
-        $('input[name='+name+']').datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
+        if(name != 'date_of_product')
+            $('input[name='+name+']').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: 'ru'
+
+        });
+        else  $('input[name='+name+']').datetimepicker({
+            format: 'YYYY',
+            locale: 'ru'
         });
     });
 
@@ -301,6 +311,19 @@ $( document ).ready(function() {
                         'buyer_law_proxy_date',
                         'engine_model',
                         'shassi',
+                        'reg_gov_number',
+                        'vendor_ind_phone',
+                        'vendor_ind_bank_acc',
+                        'vendor_ind_bank_name',
+                        'vendor_ind_korr_acc',
+                        'vendor_ind_bik',
+                        'buyer_ind_phone',
+                        'buyer_ind_bank_acc',
+                        'buyer_ind_bank_name',
+                        'buyer_ind_korr_acc',
+                        'buyer_ind_bik',
+                        'for_agent_vendor_proxy_notary',
+                        'for_agent_buyer_proxy_notary',
                         'carcass',
                         'other_parameters',
                         'additional_devices_array',
