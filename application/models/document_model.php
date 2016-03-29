@@ -956,7 +956,7 @@ class Document_model extends CI_Model
         $name_for_server = '/documents/gift/'.$id.'gift.docx';
         exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
         exec('rm /var/www/carsdoc.ru'.$name_for_server);
-        $name_for_server = '/documents/buy_sale/'.$id.'gift.pdf';
+        $name_for_server = '/documents/gift/'.$id.'gift.pdf';
         $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
         return true;
     }
@@ -1276,7 +1276,7 @@ class Document_model extends CI_Model
         $name_for_server = '/documents/gift/'.$id.'act_of_reception.docx';
         exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
         exec('rm /var/www/carsdoc.ru'.$name_for_server);
-        $name_for_server = '/documents/buy_sale/'.$id.'act_of_reception.pdf';
+        $name_for_server = '/documents/gift/'.$id.'act_of_reception.pdf';
         $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
         return true;
 
@@ -1438,7 +1438,7 @@ class Document_model extends CI_Model
         $name_for_server = '/documents/gift/'.$id.'gibdd.docx';
         exec('unoconv -f pdf /var/www/carsdoc.ru'.$name_for_server);
         exec('rm /var/www/carsdoc.ru'.$name_for_server);
-        $name_for_server = '/documents/buy_sale/'.$id.'gibdd.pdf';
+        $name_for_server = '/documents/gift/'.$id.'gibdd.pdf';
         $this->file_force_download('/var/www/carsdoc.ru'.$name_for_server);
         return true;
     }

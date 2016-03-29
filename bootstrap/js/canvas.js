@@ -305,7 +305,7 @@ function canvas_render(link){
                     x: marginLeft,
                     y: marginTop
                 },{
-                    width: maxWidth-160,
+                    width: maxWidth-100-marginLeft,
                     height: 20
                 });
 

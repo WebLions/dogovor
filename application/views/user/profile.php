@@ -18,8 +18,8 @@
                                   <p><?=$user->about?></p>
                                   <p><?=$user->email?></p>
                                   <h6>
-                                      <span><i class="icon_clock_alt"></i><span id="now"></span></span>
                                       <span><i class="icon_calendar"></i><?=date("Y-m-d")?></span>
+                                      <!--<span><i class="icon_clock_alt"></i>МСК<span id="now"></span></span>-->
                                   </h6>
                               </div>
                           </div>

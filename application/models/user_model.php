@@ -25,7 +25,40 @@ class User_model extends CI_Model
             }
         }
     }
+    public function reset_pass($email)
+    {
+        $this->db->where("email", $email);
+        $query = $this->db->get("users",1,0);
+        if($query->num_rows() == 1)
+        {
+            $pass = $this->generate_password(8);
+            $password = md5($pass . 'soult228');
 
+            $data = array(
+                'password' => $password
+            );
+            $this->db->update('users', $data);
+
+            $text = "Спасибо за использование нашего сервиса CarsDoc.ru!<br>";
+            $text.= "Ваш новый пароль от <a href=\"http://carsdoc.ru/user/login\">личного кабинета</a><br>";
+            $text.= "Пароль: " . $pass . "<br>";
+            $text.= "Внимание! Поменяйте сгенерированый пароль на новый!<br>";
+
+            //Отправляем пароль
+            $this->load->library('email');
+
+            $this->email->from('admin@carsdoc.ru', 'CarsDoc');
+            $this->email->to($email);
+            $this->email->set_mailtype("html");
+            $this->email->subject('Востановление пароля');
+            $this->email->message($text);
+
+            $this->email->send();
+        }else{
+            return false;
+        }
+        return true;
+    }
     public function register($email)
     {
         $this->db->where("email", $email);

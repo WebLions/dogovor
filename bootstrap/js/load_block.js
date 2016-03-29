@@ -252,21 +252,24 @@ $( document ).ready(function() {
         if(features == false) $('#features_additional_block').remove();
         features=true;
     });
+    $('.document').on('change','input[name=payment_date]', function() {
+        $('.document').find('.load-credit').remove();
+    });
 
     $('.document').on('change','#credit', function() {
 
-        if(credit == true) $('#block_payment_date').append('<div style="width:100%"class = "content-input-group">'+
-            '<input  required  style="width:80%;float:left;"class="form-control" type="text"  name="credit"  placeholder="Аванс оплачеваемый покупателем при подписании договора:">'+
-            '<select style="width:15%" class="form-control" name="credit_currency">'+
-            '<option value="рублей">рублей</option>'+
-            '<option value="долларов">долларов</option>'+
-            '<option value="евро">евро</option>'+
-            '</select>'+
-            '</div>'+
-            '<div class = "content-input-group">'+
-            '<input  required  id="credit_date" class="form-control datetimepicker" type="text"  name="credit_date"  placeholder="Дата рождения:">'+
-            '</div>');
-        credit=false;
+            $('#block_payment_date').append('<div style="width:100%"class = "content-input-group load-credit">' +
+                '<input  required style="width:80%;float:left;"class="form-control" type="text"  name="credit"  placeholder="Аванс оплачеваемый покупателем при подписании договора:">' +
+                '<select style="width:15%" class="form-control" name="credit_currency">' +
+                '<option value="рублей">рублей</option>' +
+                '<option value="долларов">долларов</option>' +
+                '<option value="евро">евро</option>' +
+                '</select>' +
+                '</div>' +
+                '<div class = "content-input-group load-credit">' +
+                '<input  required  id="credit_date" class="form-control datetimepicker" type="text"  name="credit_date"  placeholder="оставшуюся часть денег до даты:">' +
+                '</div>');
+
     });
 
     $('.document').on('change','#accessories_other', function() {
@@ -336,16 +339,17 @@ $( document ).ready(function() {
         $('.document').on('click', '#ready_button', function () {
             var ready = true;
             $('.document').find('input[type=text]').each(function(){
-                $(this).addClass("content-required");
                 var name = $(this).attr('name');
-                console.log(name);
-                if(typeof inputs[name]=='undefined'&&name.indexOf("accessories")==-1){
+                console.log(inputs[name]);
+                if(typeof inputs[name]=='undefined'&&name.indexOf("accessories")==-1&&$(this).val()==''){
                     $(this).addClass("content-required");
                     ready = false;
                 }
             });
-            if(ready == true)
+            if(ready == true){
+                console.log(true);
                 $('#document_form').submit();
+            }
             $('#modal_ready').modal('hide')
         });
 

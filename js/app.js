@@ -71,11 +71,12 @@ function initializeJS() {
     });
 }
 jQuery(document).ready(function(){
+    /*
     setInterval(function(){
         var d = new Date();
         var time = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
         $("#now").html(time);
-    }, 1000);
+    }, 1000);*/
     initializeJS();
 });
 
