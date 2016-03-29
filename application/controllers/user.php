@@ -38,6 +38,26 @@ class User extends CI_Controller {
             $this->load->view('user/footer');
         }
     }
+    public function reset()
+    {
+        if( $this->data['user_id'] ) {
+            redirect('/user/profile','refresh');
+        }
+        $this->form_validation->set_rules('login','Login','trim|required|xss_clean');
+        if( $this->form_validation->run() == TRUE )
+        {
+            $result = $this->user_model->reset_pass( $this->input->post('login') );
+            if($result){
+                redirect('user/login?m=true');
+            }else{
+                redirect('user/login');
+            }
+        }else {
+            $this->load->view('user/login_header');
+            $this->load->view('user/reset');
+            $this->load->view('user/footer');
+        }
+    }
 
     public function documents()
     {

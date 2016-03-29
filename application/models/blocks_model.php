@@ -345,7 +345,7 @@ END;
 <div class="row" id="for_agent_vendor_info">
     <div class="col-lg-12">
         <div class = "content-block">
-             <p class = "content-header">Введите данныe предствителя:</p>
+             <p class = "content-header">Введите данныe представителя:</p>
              <div class = "content-input">
                  <div class = "content-input-group" style="display:inline-block;width:100%">
                 <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия в именительном падеже:">
@@ -1273,7 +1273,7 @@ END;
 <div class="row" id="block_ready">
     <div class="col-lg-12">
         <div class = "content-button">
-            <button type="button" id="ready_button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_ready">
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal_ready">
                 Оплатить и скачать
             </button>
             <!-- Modal -->

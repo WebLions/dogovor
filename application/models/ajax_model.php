@@ -1509,46 +1509,52 @@ END;
         echo $input;
         $this->bs_block_accessories($d,$data);
     }
-    public function bs_block_accessories($d,$data)
+    public function bs_block_accessories($d, $data)
     {
         $this->db->select("bs.accessories");
         $this->db->join("documents", "documents.doc_id=bs.id");
         $this->db->where("documents.id", $d);
         $query = $this->db->get("buy_sale as bs", 1, 0)->row();
+        $documents = json_decode($query->accessories);
+
+        foreach($documents as $key => $k){
+            if(is_array($k)) {
+                $v[$key][0] = empty($k[0]) ? "" : "checked";
+                $v[$key][1] = $k[1];
+            }
+            else{
+                $v[$key] = empty($k)?"":"checked";
+            }
+            if($key = 5) $v[$key] = $k;
+        }
         $input = <<<END
 <div class="row" id="block_accessories_other" data-id="18">
     <div class="col-lg-12">
         <div class = "content-block" id="block_accessories">
             <p class = "content-header">Продавец передает Покупателю следующие инструменты и принадлежности:</p>
             <div class = "content-radio-group">
-
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories[]" value="Оригинальные ключи в количестве">
-                    <span class = "content-input-align">Оригинальные ключи в количестве :</span>
+                    <input  type="checkbox" name="accessories[0][0]" value="Оригинальные ключи в количестве" {$v[0][0]}>
+                    <span class = "content-input-align">Оригинальные ключи в количестве: <input  type="text" name="accessories[0][1]" value="{$v[0][1]}"></span>
                 </div>
-
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories[]" value="Ключи от иммобилайзера в количестве">
-                    <span class = "content-input-align">Ключи от иммобилайзера в количестве </span>
+                    <input type="checkbox" name="accessories[1][0]" value="Ключи от иммобилайзера в количестве" {$v[1][0]}>
+                    <span class = "content-input-align">Ключи от иммобилайзера в количестве: <input  type="text" name="accessories[1][1]" value="{$v[1][1]}"></span>
                 </div>
-
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories[]" value="Запасное колесо">
+                    <input type="checkbox" name="accessories[2]" value="Запасное колесо" {$v[2]}>
                     <span class = "content-input-align">Запасное колесо</span>
                 </div>
-
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories[]" value="Домкрат">
+                    <input type="checkbox" name="accessories[3]" value="Домкрат" {$v[3]}>
                     <span class = "content-input-align">Домкрат</span>
                 </div>
-
                 <div class = "content-input">
-                    <input type="checkbox" name="accessories[]" value="Балонный ключ">
+                    <input  type="checkbox" name="accessories[4]" value="Балонный ключ" {$v[4]}>
                     <span class = "content-input-align">Балонный ключ</span>
                 </div>
-
                 <div class = "content-input">
-                    <input type="radio" id="accessories_other">
+                    <input  type="radio" id="accessories_other">
                     <span class = "content-input-align">Иное:</span>
                 </div>
                 %{text}%
@@ -1556,30 +1562,21 @@ END;
         </div>
     </div>
 </div>
-
 END;
-        $documents = json_decode($query->accessories);
 
-        foreach ($documents as $key => $document) {
-            if (strripos($input, $document)) {
-                $input = str_replace("value=\"{$document}\"", "value=\"{$document}\" checked", $input);
-                unset($documents[$key]);
-            }
-        }
         $text = '';
-        if (!empty($documents)) {
-            foreach ($documents as $document) {
+        if (!empty($v[5])) {
                 $text = <<<END
                 <div class="content-input-group">
-                    <input class="form-control" type="text" name="accessories[]" placeholder="Дополнительные принадлежности:" value="{$document}">
+                    <input class="form-control" type="text" name="accessories[5]" placeholder="Дополнительные принадлежности:" value="{$v[5]}">
                 </div>
 END;
-            }
             $input = str_replace("id=\"accessories_other\"", "id=\"accessories_other\" checked", $input);
         }
         $input = str_replace("%{text}%", $text, $input);
         echo $input;
     }
+
     public function bs_block_car_price($d, $data)
     {
         $this->db->select("bs.price_car,
@@ -1587,9 +1584,9 @@ END;
         $this->db->join("documents","documents.doc_id=bs.id");
         $this->db->where("documents.id",$d);
         $query = $this->db->get("buy_sale as bs",1,0)->row();
-        $v[] = ($query->currency=="RUB")?' checked':'';
-        $v[] = ($query->currency=="USD")?' checked':'';
-        $v[] = ($query->currency=="EUR")?' checked':'';
+        $v[] = ($query->currency=="рублей")?' checked':'';
+        $v[] = ($query->currency=="долларов")?' checked':'';
+        $v[] = ($query->currency=="евро")?' checked':'';
         echo <<<END
 <div class="row" id="block_car_price" data-id="9">
     <div class="col-lg-12">
@@ -1598,9 +1595,9 @@ END;
             <div style="width:100%"class = "content-input-group">
                    <input style="width:80%;float:left;"class="form-control" type="text"  name="price_car"  placeholder="Стоимость:" value="{$query->price_car}">
                 <select style="width:15%" class="form-control" name="currency">
-                    <option value="RUB"{$v[0]}>RUB</option>
-                    <option value="USD"{$v[1]}>USD</option>
-                    <option value="EUR"{$v[2]}>EUR</option>
+                    <option value="рублей"{$v[0]}>рублей</option>
+                    <option value="долларов"{$v[1]}>долларов</option>
+                    <option value="евро"{$v[2]}>евро</option>
                 </select>
             </div>
         </div>
@@ -1608,10 +1605,36 @@ END;
 </div>
 
 END;
-        $this->bs_block_payment_date();
+        $this->bs_block_payment_date($d, $data);
     }
-    public function bs_block_payment_date()
+    public function bs_block_payment_date($d, $data)
     {
+        $this->db->select("bs.payment_date, bs.credit, bs.credit_currency, bs.credit_date");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("buy_sale as bs",1,0)->row();
+        $v[] = ($query->payment_date=="До подписания настоящего договора")?' checked':'';
+        $v[] = ($query->payment_date=="При подписании настоящего договора")?' checked':'';
+        $v[] = ($query->payment_date=="В рассрочку по следующему графику")?' checked':'';
+        $text = "";
+        if($v[2]==' checked'){
+            $k[] = ($query->credit_currency=="рублей")?' checked':'';
+            $k[] = ($query->credit_currency=="долларов")?' checked':'';
+            $k[] = ($query->credit_currency=="евро")?' checked':'';
+            $text = <<<END
+            <div style="width:100%"class = "content-input-group  load-credit">
+            <input  required  style="width:80%;float:left;"class="form-control" type="text" value="{$query->credit}"  name="credit"  placeholder="Аванс оплачеваемый покупателем при подписании договора:">
+            <select style="width:15%" class="form-control" name="credit_currency">
+            <option value="рублей">рублей</option>
+            <option value="долларов">долларов</option>
+            <option value="евро">евро</option>
+            </select>
+            </div>
+            <div class = "content-input-group  load-credit">
+            <input  required  id="credit_date" class="form-control datetimepicker" type="text"  name="credit_date"  placeholder="оставшуюся часть денег до дата:" value="{$query->credit_date}">
+            </div>
+END;
+        }
         echo <<<END
 <div class="row" id="block_payment_date" data-id="16">
     <div class="col-lg-12">
@@ -1620,29 +1643,36 @@ END;
             <div class = "content-radio-group">
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="до подписания настоящего договора">
+                    <input type="radio" name="payment_date" value="До подписания настоящего договора" {$v[0]}>
                     <span class = "content-input-align">До подписания настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="при подписании настоящего договора">
+                    <input type="radio" name="payment_date" value="При подписании настоящего договора" {$v[1]}>
                     <span class = "content-input-align">При подписании настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input id="credit" type="radio" name="payment_date" value="в рассрочку по следующему графику">
+                    <input id="credit" type="radio" name="payment_date" value="В рассрочку по следующему графику" {$v[2]}>
                     <span class = "content-input-align">В рассрочку по следующему графику:</span>
                 </div>
-
             </div>
         </div>
     </div>
+    {$text}
 </div>
 END;
-        $this->bs_block_penalty();
+        $this->bs_block_penalty($d, $data);
     }
-    public function bs_block_penalty()
+    public function bs_block_penalty($d, $data)
     {
+        $this->db->select("bs.penalty");
+        $this->db->join("documents","documents.doc_id=bs.id");
+        $this->db->where("documents.id",$d);
+        $query = $this->db->get("buy_sale as bs",1,0)->row();
+        $v[] = ($query->penalty=="0,02%")?' checked':'';
+        $v[] = ($query->penalty=="0,05%")?' checked':'';
+        $v[] = ($query->penalty=="0,1%")?' checked':'';
         echo <<<END
         <div class="row" id="block_penalty" data-id="21">
     <div class="col-lg-12">
@@ -1651,13 +1681,13 @@ END;
             <div class = "content-radio-header">
 
                 <div class = "content-input-inlane">
-                    <input type="radio" name="penalty" value="0,02%">
+                    <input type="radio" name="penalty" value="0,02%" {$v[0]}>
                     <span class = "content-input-align">0,02%</span>
 
-                    <input type="radio" name="penalty" value="0,05%">
+                    <input type="radio" name="penalty" value="0,05%" {$v[1]}>
                     <span class = "content-input-align">0,05%</span>
 
-                    <input type="radio" name="penalty" value="0,1%">
+                    <input type="radio" name="penalty" value="0,1%" {$v[2]}>
                     <span class = "content-input-align">0,1%</span>
                 </div>
 
