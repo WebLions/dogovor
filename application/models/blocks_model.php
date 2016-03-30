@@ -183,6 +183,7 @@ END;
             <div class="col-lg-12">
             <div class = "content-block">
              <p class = "content-header">Введите данныe предствителя:</p>
+
                 <div class = "content-input">
                     <div class = "content-input-group" style="display:inline-block;width:100%">
                     <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для договора:</p>
