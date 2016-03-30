@@ -1403,7 +1403,13 @@ END;
 
             <div class = "content-input">
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование кампании: ">
+                    <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование компании: ">
+                </div>
+                <div class = "content-input-group">
+                    <select  required  class="form-control" name="vendor_law_actor_position" ">
+                        <option value="Генеральный директор">Генеральный директор</option>
+                        <option value="Директор">Директор</option>
+                    </select>
                 </div>
                 <div class = "content-input-group" style="display:inline-block;width:100%">
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для договора:</p>
@@ -1420,12 +1426,7 @@ END;
                 <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="vendor_law_actor_patronymic_parent"  placeholder="Отчество, например Ивановича">
                 </div>
 
-                <div class = "content-input-group">
-                    <select  required  class="form-control" name="vendor_law_actor_position" ">
-                        <option value="Генеральный директор">Генеральный директор</option>
-                        <option value="Директор">Директор</option>
-                    </select>
-                </div>
+
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="vendor_law_document_osn"  placeholder="Действующего на основании:">
                 </div>
@@ -1558,7 +1559,13 @@ END;
 
             <div class = "content-input">
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование(кампания): ">
+                    <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование компании: ">
+                </div>
+                <div class = "content-input-group">
+                    <select  required  class="form-control" name="buyer_law_actor_position" ">
+                        <option value="Генеральный директор">Генеральный директор</option>
+                        <option value="Директор">Директор</option>
+                    </select>
                 </div>
                 <div class = "content-input-group" style="display:inline-block;width:100%">
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для договора:</p>
@@ -1574,12 +1581,7 @@ END;
                 <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="buyer_law_actor_patronymic"  placeholder="Отчество, например Иванович">
                 <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="buyer_law_actor_patronymic_parent"  placeholder="Отчество, например Ивановича">
                 </div>
-                <div class = "content-input-group">
-                    <select  required  class="form-control" name="buyer_law_actor_position" ">
-                        <option value="Генеральный директор">Генеральный директор</option>
-                        <option value="Директор">Директор</option>
-                    </select>
-                </div>
+
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="buyer_law_document_osn"  placeholder="Действующего на основании:">
                 </div>
@@ -2106,6 +2108,15 @@ END;
         <div class = "content-radio">
 
             <div class = "content-input">
+                <div class = "content-input-group">
+                    <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование компании: ">
+                </div>
+                <div class = "content-input-group">
+                    <select  required  class="form-control" name="vendor_law_actor_position" ">
+                        <option value="Генеральный директор">Генеральный директор</option>
+                        <option value="Директор">Директор</option>
+                    </select>
+                </div>
                  <div class = "content-input-group" style="display:inline-block;width:100%">
                  <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для договора:</p>
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для остальных документов:</p>
@@ -2120,9 +2131,7 @@ END;
                 <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="vendor_law_actor_patronymic"  placeholder="Отчество, например Иванович">
                 <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="vendor_law_actor_patronymic_parent"  placeholder="Отчество, например Ивановича">
                 </div>
-                <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование: ">
-                </div>
+
                 <div class = "content-input-group">
                     <input  required  class="form-control" type="text" name="vendor_law_actor_position"  placeholder="В лице: ">
                 </div>
@@ -2257,6 +2266,16 @@ END;
         <div class = "content-radio">
 
             <div class = "content-input">
+
+                <div class = "content-input-group">
+                    <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование компании: ">
+                </div>
+                <div class = "content-input-group">
+                    <select  required  class="form-control" name="buyer_law_actor_position" ">
+                        <option value="Генеральный директор">Генеральный директор</option>
+                        <option value="Директор">Директор</option>
+                    </select>
+                </div>
                  <div class = "content-input-group" style="display:inline-block;width:100%">
                  <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для договора:</p>
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для остальных документов:</p>
@@ -2272,7 +2291,7 @@ END;
                 <input  required   required  class = "form-control" style="float:left;width:48%;" type="text" name="buyer_law_actor_patronymic_parent"  placeholder="Отчество, например Ивановича:">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование: ">
+                    <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование компании: ">
                 </div>
                 <div class = "content-input-group">
                     <input  required  class="form-control" type="text" name="buyer_law_actor_position"  placeholder="В лице: ">
