@@ -1410,8 +1410,8 @@ END;
                 <div class = "content-input-group">
                 <p class = "content-input-title" style="width:48%;margin-right:20px;">В лице:</p>
                     <select  required  class="form-control" name="vendor_law_actor_position" ">
-                        <option value="Генеральный директор">Генеральный директор</option>
-                        <option value="Директор">Директор</option>
+                        <option value="генерального директора">Генеральный директор</option>
+                        <option value="директора">Директор</option>
                     </select>
                 </div>
                 <div class = "content-input-group" style="display:inline-block;width:100%">
@@ -1566,15 +1566,15 @@ END;
                 <div class = "content-input-group">
                  <p class = "content-input-title" style="float:left;width:48%;margin-right:20px;">В лице:</p>
                     <select  required  class="form-control" name="buyer_law_actor_position" ">
-                        <option value="Генеральный директор">Генеральный директор</option>
-                        <option value="Директор">Директор</option>
+                        <option value="генерального директора">Генеральный директор</option>
+                        <option value="директора">Директор</option>
                     </select>
                 </div>
                 <div class = "content-input-group" style="display:inline-block;width:100%">
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для договора:</p>
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:6px;">Для остальных документов:</p>
                 <input  required   required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="buyer_law_actor_surname"  placeholder="Фамилия, например Иванов">
-                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="buyerr_law_actor_surname_parent"  placeholder="Фамилия, например Иванова:">
+                <input  required   required  class = "form-control" style="float:left;width:48%" type="text" name="buyer_law_actor_surname_parent"  placeholder="Фамилия, например Иванова:">
                 </div>
                 <div class = "content-input-group" style="display:inline-block;width:100%">
                 <input  required   required  class="form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="buyer_law_actor_name"  placeholder="Имя, например Иван">
@@ -2118,8 +2118,8 @@ END;
                 <div class = "content-input-group">
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:20px;">В лице:</p>
                     <select  required  class="form-control" name="vendor_law_actor_position" ">
-                        <option value="генеральный директор">Генеральный директор</option>
-                        <option value="директор">Директор</option>
+                        <option value="генерального директора">Генеральный директор</option>
+                        <option value="директора">Директор</option>
                     </select>
                 </div>
                  <div class = "content-input-group" style="display:inline-block;width:100%">
@@ -2275,8 +2275,8 @@ END;
                 <div class = "content-input-group">
                    <p class = "content-input-title" style="float:left;width:48%;margin-right:20px;">В лице:</p>
                     <select  required  class="form-control" name="buyer_law_actor_position" ">
-                        <option value="генеральный директор">Генеральный директор</option>
-                        <option value="директор">Директор</option>
+                        <option value="генерального директора">Генеральный директор</option>
+                        <option value="директора">Директор</option>
                     </select>
                 </div>
                  <div class = "content-input-group" style="display:inline-block;width:100%">
