@@ -2616,7 +2616,7 @@ class Document_model extends CI_Model
             'vendor_phone' => '',
             'vendor_law_proxy_number' => '',
             'vendor_law_proxy_date' => '',
-            'buyer_phone' => '',
+//            'buyer_phone' => '',
             'buyer_law_proxy_number' => '',
             'buyer_law_proxy_date' => '',
             'engine_model' => '',
@@ -2923,9 +2923,9 @@ class Document_model extends CI_Model
         $exception = array
         (
             'vendor_phone' => '',
+//            'buyer_phone' => '',
             'vendor_law_proxy_number' => '',
             'vendor_law_proxy_date' => '',
-            'buyer_phone' => '',
             'buyer_law_proxy_number' => '',
             'buyer_law_proxy_date' => '',
             'engine_model' => '',
