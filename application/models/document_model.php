@@ -1442,7 +1442,7 @@ class Document_model extends CI_Model
         $document->setValue('giver_adress',  $giver['adress']);
         $document->setValue('giver_phone', $giver['phone']);
         //
-        if ($result->statement_form == true)
+        if ($result->statement_form == 'true')
         {
             $document->setValue('buyer_agent_fio', $buyer_agent_fio);
             $document->setValue('buyer_agent_pass', $buyer_agent_pass);
@@ -2363,9 +2363,9 @@ class Document_model extends CI_Model
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         //Паспорта
-        $buyer_pass = "Паспорт: серия $result->buyer_passport_serial № $result->buyer_passport_number выдан $result->buyer_passport_bywho от  $buyer_passport_date";
-        $buyer_ind_pass = "Паспорт: серия $result->buyer_ind_passport_serial № $result->buyer_ind_passport_number выдан $result->buyer_ind_passport_bywho от  $buyer_ind_passport_date";
-        $buyer_agent_pass = "Паспорт: серия $result->for_agent_proxy_pass_serial № $result->for_agent_proxy_pass_number выдан $result->for_agent_proxy_pass_bywho от  $for_agent_proxy_pass_date";
+        $buyer_pass = "Паспорт: серия $result->buyer_passport_serial № $result->buyer_passport_number выдан $result->buyer_passport_bywho от $buyer_passport_date";
+        $buyer_ind_pass = "Паспорт: серия $result->buyer_ind_passport_serial № $result->buyer_ind_passport_number выдан $result->buyer_ind_passport_bywho от $buyer_ind_passport_date";
+        $buyer_agent_pass = "Паспорт: серия $result->for_agent_proxy_pass_serial № $result->for_agent_proxy_pass_number выдан $result->for_agent_proxy_pass_bywho от $for_agent_proxy_pass_date";
         //Имя заявителя
         $namedata = array
         (
@@ -2416,7 +2416,7 @@ class Document_model extends CI_Model
         $document->setValue('giver_adress',  $giver['adress']);
         $document->setValue('giver_phone', $giver['phone']);
         //
-        if ($result->statement_form == true)
+        if ($result->statement_form == 'true')
         {
             $document->setValue('buyer_agent_fio', $buyer_agent_fio);
             $document->setValue('buyer_agent_pass', $buyer_agent_pass);
@@ -2821,6 +2821,7 @@ class Document_model extends CI_Model
             'police_form' => $_POST['police_form'],
             'gibdd_power_engine' => $_POST['gibdd_power_engine'],
             'gibdd_eco_class' => $_POST['gibdd_eco_class'],
+            'gibdd_inn' => $_POST['gibdd_inn'],
             'gibdd_max_mass' => $_POST['gibdd_max_mass'],
             'gibdd_min_mass' => $_POST['gibdd_min_mass'],
             'gibdd_reg_name' => $_POST['gibdd_reg_name'],
