@@ -312,6 +312,7 @@ $( document ).ready(function() {
                         'vendor_law_proxy_date',
                         'buyer_phone', 'buyer_law_proxy_number',
                         'buyer_law_proxy_date',
+                        'buyer_phone',
                         'engine_model',
                         'shassi',
                         'reg_gov_number',

@@ -1684,7 +1684,7 @@ END;
                     <input  required  class = "form-control" type="text" name="buyer_ind_flat"  placeholder="Номер квартиры:">
                 </div>
                 <div class = "content-input-group">
-                    <input  class = "form-control" type="text" name="buyer_ind_phone"  placeholder="Телефон">
+                    <input required class = "form-control" type="text" name="buyer_ind_phone"  placeholder="Телефон:">
                 </div>
                 <div class = "content-input-group">
                     <input class = "form-control" type="text" name="buyer_ind_bank_acc"  placeholder="Расчетный счет:">
@@ -2014,7 +2014,7 @@ END;
                     <input  required  class = "form-control" type="text" name="buyer_flat"  placeholder="Квартира:">
                 </div>
                 <div class = "content-input-group">
-                    <input  class="form-control" type="text" name="buyer_phone"  placeholder="Телефон">
+                    <input required class="form-control" type="text" name="buyer_phone"  placeholder="Телефон">
                 </div>
             </div>
            </div>
