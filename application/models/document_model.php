@@ -370,14 +370,14 @@ class Document_model extends CI_Model
         //Физ.лицо шаблоны
         $phys = array(
             'vendor' => array(
-                'own' => $bold_start. 'Гражданин  ' . $data_for_header['vendor_fio']. $bold_end . ', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ',
+                'own' => $bold_start. 'гр.' . $data_for_header['vendor_fio']. $bold_end .', '.$data_for_header['vendor_birthday'].' рождения, паспорт: серия '.$data_for_header['vendor_passport_serial'].' №'.$data_for_header['vendor_passport_number'].' выдан '.$data_for_header['vendor_passport_bywho'].' '.$data_for_header['vendor_passport_date'].', зарегистрирован по адресу: '.$data_for_header['vendor_adress'].', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ',
 
-                'not_own' => $bold_start.$data_for_header['vendor_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$first_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_vendor_proxy_notary'].', с одной стороны и ',
+                'not_own' => $bold_start.'гр.'.$data_for_header['vendor_agent_fio'].$bold_end.', '.$data_for_header['agent_vendor_birthday'].' рождения, паспорт: серия '.$data_for_header['agent_vendor_pass_serial'].' №'.$data_for_header['agent_vendor_pass_number'].' выдан '.$data_for_header['agent_vendor_pass_bywho'].' '.$data_for_header['agent_vendor_pass_date'].', зарегистирован по адресу: '.$data_for_header['agent_vendor_adress'].', действующий на основании доверенности №'.$data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].', от имени '.$data_for_header['vendor_fio_parent'].', '.$data_for_header['vendor_birthday'].' рождения, паспорт: серия '.$data_for_header['vendor_passport_serial'].' №'.$data_for_header['vendor_passport_number'].' выдан '.$data_for_header['vendor_passport_bywho'].' '.$data_for_header['vendor_passport_date'].', зарегистрирован по адресу: '.$data_for_header['vendor_adress'].', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ',
             ),
             'buyer' => array(
-                'own' => $bold_start.'гражданин ' . $data_for_header['buyer_fio'] .$bold_end. ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
+                'own' => $bold_start. 'гр.' . $data_for_header['buyer_fio']. $bold_end .', '.$data_for_header['buyer_birthday'].' рождения, паспорт: серия '.$data_for_header['buyer_passport_serial'].' №'.$data_for_header['buyer_passport_number'].' выдан '.$data_for_header['buyer_passport_bywho'].' '.$data_for_header['buyer_passport_date'].', зарегистрирован по адресу: '.$data_for_header['buyer_adress']. ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
 
-                'not_own' => $bold_start.$data_for_header['buyer_agent_fio'].$bold_end.', далее именуемый "'.$bold_start.$second_person.$bold_end.'", действующий на основании свидетельства доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].' выданым  нотариусом '.$data_for_header['for_agent_buyer_proxy_notary'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
+                'not_own' => $bold_start.'гр.'.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].' рождения, паспорт: серия '.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].' выдан '.$data_for_header['for_agent_proxy_pass_bywho'].' '.$data_for_header['for_agent_proxy_pass_date'].', зарегистирован по адресу: '.$data_for_header['for_agent_proxy_pass_adress'].', действующий на основании доверенности №'.$data_for_header['for_agent_buyer_proxy_number'].' от '.$data_for_header['for_agent_buyer_proxy_date'].', от имени '.$data_for_header['buyer_fio_parent'].', '.$data_for_header['buyer_birthday'].' рождения, паспорт: серия '.$data_for_header['buyer_passport_serial'].' №'.$data_for_header['buyer_passport_number'].' выдан '.$data_for_header['buyer_passport_bywho'].' '.$data_for_header['buyer_passport_date'].', зарегистрирован по адресу: '.$data_for_header['buyer_adress'].', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
             ),
         );
 
@@ -712,9 +712,6 @@ class Document_model extends CI_Model
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
-        //Заготовочка
-        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
-        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
         //Короткое фио
         $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
@@ -724,6 +721,14 @@ class Document_model extends CI_Model
         $short_buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $short_vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        //Родительское фио
+        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
+        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+        $vendor_fio_parent = $this->format_fio($result->vendor_surname_parent, $result->vendor_name_parent, $result->vendor_patronymic_parent);
+        $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
+        $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
+        $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
+
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
 //        $date_of_product = $this->format_date($result->date_of_product);
@@ -804,6 +809,35 @@ class Document_model extends CI_Model
             'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
             'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
             'for_agent_proxy_adress' => $for_agent_proxy_adress,
+            //Ещё правки
+            'vendor_birthday' => $vendor_birthday,
+            'buyer_birthday' => $buyer_birthday,
+            'vendor_ind_birthday' => $vendor_ind_birthday,
+            'buyer_ind_birthday' => $buyer_ind_birthday,
+            'vendor_passport_serial' => $result->vendor_passport_serial,
+            'vendor_passport_number' => $result->vendor_passport_number,
+            'vendor_passport_bywho' => $result->vendor_passport_bywho,
+            'vendor_passport_date' => $vendor_passport_date,
+            'vendor_adress' => $vendor_adress,
+            'vendor_ind_passport_serial' => $result->vendor_ind_passport_serial,
+            'vendor_ind_passport_number' => $result->vendor_ind_passport_number,
+            'vendor_ind_passport_bywho' => $result->vendor_ind_passport_bywho,
+            'vendor_ind_passport_date' => $vendor_ind_passport_date,
+            'vendor_ind_adress'=> $vendor_ind_adress,
+            'buyer_passport_serial'=> $result->buyer_passport_serial,
+            'buyer_passport_number'=> $result->buyer_passport_number,
+            'buyer_passport_bywho'=> $result->buyer_passport_bywho,
+            'buyer_passport_date'=> $buyer_passport_date,
+            'buyer_adress'=> $buyer_adress,
+            'buyer_ind_passport_serial' => $result->buyer_ind_passport_serial,
+            'buyer_ind_passport_number' => $result->buyer_ind_passport_number,
+            'buyer_ind_passport_bywho' => $result->buyer_ind_passport_bywho,
+            'buyer_ind_passport_date' => $buyer_ind_passport_date,
+            'buyer_ind_adress'=> $buyer_ind_adress,
+            'vendor_fio_parent'=> $vendor_fio_parent,
+            'buyer_fio_parent'=> $buyer_fio_parent,
+            'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
+            'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
@@ -1034,9 +1068,7 @@ class Document_model extends CI_Model
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
-        //Заготовочка
-        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
-        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+
         //Короткое фио
         $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
@@ -1046,6 +1078,14 @@ class Document_model extends CI_Model
         $short_buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $short_vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        //Родительское фио
+        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
+        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+        $vendor_fio_parent = $this->format_fio($result->vendor_surname_parent, $result->vendor_name_parent, $result->vendor_patronymic_parent);
+        $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
+        $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
+        $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
+
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
 //        $date_of_product = $this->format_date($result->date_of_product);
@@ -1126,6 +1166,35 @@ class Document_model extends CI_Model
             'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
             'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
             'for_agent_proxy_adress' => $for_agent_proxy_adress,
+            //Ещё правки
+            'vendor_birthday' => $vendor_birthday,
+            'buyer_birthday' => $buyer_birthday,
+            'vendor_ind_birthday' => $vendor_ind_birthday,
+            'buyer_ind_birthday' => $buyer_ind_birthday,
+            'vendor_passport_serial' => $result->vendor_passport_serial,
+            'vendor_passport_number' => $result->vendor_passport_number,
+            'vendor_passport_bywho' => $result->vendor_passport_bywho,
+            'vendor_passport_date' => $vendor_passport_date,
+            'vendor_adress' => $vendor_adress,
+            'vendor_ind_passport_serial' => $result->vendor_ind_passport_serial,
+            'vendor_ind_passport_number' => $result->vendor_ind_passport_number,
+            'vendor_ind_passport_bywho' => $result->vendor_ind_passport_bywho,
+            'vendor_ind_passport_date' => $vendor_ind_passport_date,
+            'vendor_ind_adress'=> $vendor_ind_adress,
+            'buyer_passport_serial'=> $result->buyer_passport_serial,
+            'buyer_passport_number'=> $result->buyer_passport_number,
+            'buyer_passport_bywho'=> $result->buyer_passport_bywho,
+            'buyer_passport_date'=> $buyer_passport_date,
+            'buyer_adress'=> $buyer_adress,
+            'buyer_ind_passport_serial' => $result->buyer_ind_passport_serial,
+            'buyer_ind_passport_number' => $result->buyer_ind_passport_number,
+            'buyer_ind_passport_bywho' => $result->buyer_ind_passport_bywho,
+            'buyer_ind_passport_date' => $buyer_ind_passport_date,
+            'buyer_ind_adress'=> $buyer_ind_adress,
+            'vendor_fio_parent'=> $vendor_fio_parent,
+            'buyer_fio_parent'=> $buyer_fio_parent,
+            'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
+            'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
@@ -1402,7 +1471,7 @@ class Document_model extends CI_Model
         );
         $buyer_name = $this->get_side_name($result->type_of_taker, $result->buyer_is_owner_car, $namedata);
 
-        $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/gibdd.docx');
+        $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/gift/patterns/gibdd.docx');
         //Заполнение
         $document->setValue('gibdd_reg_name', $result->gibdd_reg_name);
         $document->setValue('buyer_name', $buyer_name);
@@ -1423,7 +1492,7 @@ class Document_model extends CI_Model
             case 'law':
                 $giver['name'] = $result->buyer_law_company_name;
                 $giver['date'] = $buyer_law_proxy_date ;
-//                $giver['pass'] = $result->buyer_fio;
+                $giver['pass'] = '';
                 $giver['adress'] = $result->buyer_law_adress;
                 $giver['phone'] = $result->buyer_law_phone;
                 break;
@@ -1536,14 +1605,20 @@ class Document_model extends CI_Model
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
         $vendor_law_fio = $this->format_fio($result->vendor_law_actor_surname,$result->vendor_law_actor_name,$result->vendor_law_actor_patronymic);
-        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
         $buyer_law_fio = $this->format_fio($result->buyer_law_actor_surname,$result->buyer_law_actor_name,$result->buyer_law_actor_patronymic);
-        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
         $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         $spouse_parent_fio = $this->format_fio($result->spouse_surname_parent,$result->spouse_name_parent,$result->spouse_patronymic_parent);
+        //Родительское фио
+        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
+        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+        $vendor_fio_parent = $this->format_fio($result->vendor_surname_parent, $result->vendor_name_parent, $result->vendor_patronymic_parent);
+        $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
+        $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
+        $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
+
         //Короткое фио
         $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
@@ -1553,6 +1628,7 @@ class Document_model extends CI_Model
         $short_buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $short_vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -1639,6 +1715,35 @@ class Document_model extends CI_Model
             'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
             'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
             'for_agent_proxy_adress' => $for_agent_proxy_adress,
+            //Ещё правки
+            'vendor_birthday' => $vendor_birthday,
+            'buyer_birthday' => $buyer_birthday,
+            'vendor_ind_birthday' => $vendor_ind_birthday,
+            'buyer_ind_birthday' => $buyer_ind_birthday,
+            'vendor_passport_serial' => $result->vendor_passport_serial,
+            'vendor_passport_number' => $result->vendor_passport_number,
+            'vendor_passport_bywho' => $result->vendor_passport_bywho,
+            'vendor_passport_date' => $vendor_passport_date,
+            'vendor_adress' => $vendor_adress,
+            'vendor_ind_passport_serial' => $result->vendor_ind_passport_serial,
+            'vendor_ind_passport_number' => $result->vendor_ind_passport_number,
+            'vendor_ind_passport_bywho' => $result->vendor_ind_passport_bywho,
+            'vendor_ind_passport_date' => $vendor_ind_passport_date,
+            'vendor_ind_adress'=> $vendor_ind_adress,
+            'buyer_passport_serial'=> $result->buyer_passport_serial,
+            'buyer_passport_number'=> $result->buyer_passport_number,
+            'buyer_passport_bywho'=> $result->buyer_passport_bywho,
+            'buyer_passport_date'=> $buyer_passport_date,
+            'buyer_adress'=> $buyer_adress,
+            'buyer_ind_passport_serial' => $result->buyer_ind_passport_serial,
+            'buyer_ind_passport_number' => $result->buyer_ind_passport_number,
+            'buyer_ind_passport_bywho' => $result->buyer_ind_passport_bywho,
+            'buyer_ind_passport_date' => $buyer_ind_passport_date,
+            'buyer_ind_adress'=> $buyer_ind_adress,
+            'vendor_fio_parent'=> $vendor_fio_parent,
+            'buyer_fio_parent'=> $buyer_fio_parent,
+            'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
+            'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
@@ -1889,8 +1994,7 @@ class Document_model extends CI_Model
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
-        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
-        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+
         //Короткое фио
         $short_vendor_fio = $this->format_shortfio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $short_buyer_fio = $this->format_shortfio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
@@ -1900,6 +2004,14 @@ class Document_model extends CI_Model
         $short_buyer_ind_fio = $this->format_shortfio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $short_vendor_agent_fio = $this->format_shortfio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $short_buyer_agent_fio = $this->format_shortfio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        //Родительское фио
+        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
+        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+        $vendor_fio_parent = $this->format_fio($result->vendor_surname_parent, $result->vendor_name_parent, $result->vendor_patronymic_parent);
+        $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
+        $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
+        $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
+
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -1985,6 +2097,35 @@ class Document_model extends CI_Model
             'for_agent_proxy_pass_bywho' => $result->for_agent_proxy_pass_bywho,
             'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
             'for_agent_proxy_adress' => $for_agent_proxy_adress,
+            //Ещё правки
+            'vendor_birthday' => $vendor_birthday,
+            'buyer_birthday' => $buyer_birthday,
+            'vendor_ind_birthday' => $vendor_ind_birthday,
+            'buyer_ind_birthday' => $buyer_ind_birthday,
+            'vendor_passport_serial' => $result->vendor_passport_serial,
+            'vendor_passport_number' => $result->vendor_passport_number,
+            'vendor_passport_bywho' => $result->vendor_passport_bywho,
+            'vendor_passport_date' => $vendor_passport_date,
+            'vendor_adress' => $vendor_adress,
+            'vendor_ind_passport_serial' => $result->vendor_ind_passport_serial,
+            'vendor_ind_passport_number' => $result->vendor_ind_passport_number,
+            'vendor_ind_passport_bywho' => $result->vendor_ind_passport_bywho,
+            'vendor_ind_passport_date' => $vendor_ind_passport_date,
+            'vendor_ind_adress'=> $vendor_ind_adress,
+            'buyer_passport_serial'=> $result->buyer_passport_serial,
+            'buyer_passport_number'=> $result->buyer_passport_number,
+            'buyer_passport_bywho'=> $result->buyer_passport_bywho,
+            'buyer_passport_date'=> $buyer_passport_date,
+            'buyer_adress'=> $buyer_adress,
+            'buyer_ind_passport_serial' => $result->buyer_ind_passport_serial,
+            'buyer_ind_passport_number' => $result->buyer_ind_passport_number,
+            'buyer_ind_passport_bywho' => $result->buyer_ind_passport_bywho,
+            'buyer_ind_passport_date' => $buyer_ind_passport_date,
+            'buyer_ind_adress'=> $buyer_ind_adress,
+            'vendor_fio_parent'=> $vendor_fio_parent,
+            'buyer_fio_parent'=> $buyer_fio_parent,
+            'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
+            'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
@@ -3183,15 +3324,20 @@ class Document_model extends CI_Model
         $vendor_fio = $this->format_fio($data_input['vendor_surname'], $data_input['vendor_name'], $data_input['vendor_patronymic']);
         $buyer_fio = $this->format_fio($data_input['buyer_surname'],$data_input['buyer_name'],$data_input['buyer_patronymic']);
         $spouse_fio = $this->format_fio($_POST['spouse_surname'],$_POST['spouse_name'],$_POST['spouse_patronymic']);
-        $vendor_law_fio_parent = $this->format_fio($_POST['vendor_law_actor_surname_parent'],$_POST['vendor_law_actor_name_parent'],$_POST['vendor_law_actor_patronymic_parent']);
-//        $vendor_law_fio = $this->format_fio($_POST['vendor_law_actor_surname'],$_POST['vendor_law_actor_name'],$_POST['vendor_law_actor_patronymic']);
-        $buyer_law_fio_parent = $this->format_fio($_POST['buyer_law_actor_surname_parent'],$_POST['buyer_law_actor_name_parent'],$_POST['buyer_law_actor_patronymic_parent']);
+        
 //        $buyer_law_fio = $this->format_fio($_POST['buyer_law_actor_surname'],$_POST['buyer_law_actor_name'],$_POST['buyer_law_actor_patronymic']);
         $vendor_ind_fio = $this->format_fio($_POST['vendor_ind_surname'],$_POST['vendor_ind_name'],$_POST['vendor_ind_patronymic']);
         $buyer_ind_fio = $this->format_fio($_POST['buyer_ind_surname'],$_POST['buyer_ind_name'],$_POST['buyer_ind_patronymic']);
         $vendor_agent_fio = $this->format_fio($_POST['for_agent_vendor_surname'],$_POST['for_agent_vendor_name'],$_POST['for_agent_vendor_patronymic']);
         $buyer_agent_fio = $this->format_fio($_POST['for_agent_buyer_surname'],$_POST['for_agent_buyer_name'],$_POST['for_agent_buyer_patronymic']);
-
+        //Родительское фио
+        $vendor_law_fio_parent = $this->format_fio($_POST['vendor_law_actor_surname_parent'],$_POST['vendor_law_actor_name_parent'],$_POST['vendor_law_actor_patronymic_parent']);
+        $buyer_law_fio_parent = $this->format_fio($_POST['buyer_law_actor_surname_parent'],$_POST['buyer_law_actor_name_parent'],$_POST['buyer_law_actor_patronymic_parent']);
+        $vendor_fio_parent = $this->format_fio($_POST['vendor_surname_parent'], $_POST['vendor_name_parent'], $_POST['vendor_patronymic_parent']);
+        $buyer_fio_parent = $this->format_fio($_POST['buyer_surname_parent'],$_POST['buyer_name_parent'],$_POST['buyer_patronymic_parent']);
+        $vendor_ind_fio_parent = $this->format_fio($_POST['vendor_ind_surname_parent'],$_POST['vendor_ind_name_parent'],$_POST['vendor_ind_patronymic_parent']);
+        $buyer_ind_fio_parent = $this->format_fio($_POST['buyer_ind_surname_parent'],$_POST['buyer_ind_name_parent'],$_POST['buyer_ind_patronymic_parent']);
+        
         //Адрес
         $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
         $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
@@ -3417,6 +3563,35 @@ class Document_model extends CI_Model
             'for_agent_proxy_pass_bywho' => $_POST['for_agent_proxy_pass_bywho'],
             'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
             'for_agent_proxy_adress' => $for_agent_proxy_adress,
+            //Ещё правки
+            'vendor_birthday' => $vendor_birthday,
+            'buyer_birthday' => $buyer_birthday,
+            'vendor_ind_birthday' => $vendor_ind_birthday,
+            'buyer_ind_birthday' => $buyer_ind_birthday,
+            'vendor_passport_serial' => $_POST['vendor_passport_serial'],
+            'vendor_passport_number' => $_POST['vendor_passport_number'],
+            'vendor_passport_bywho' => $_POST['vendor_passport_bywho'],
+            'vendor_passport_date' => $vendor_passport_date,
+            'vendor_adress' => $vendor_adress,
+            'vendor_ind_passport_serial' => $_POST['vendor_ind_passport_serial'],
+            'vendor_ind_passport_number' => $_POST['vendor_ind_passport_number'],
+            'vendor_ind_passport_bywho' => $_POST['vendor_ind_passport_bywho'],
+            'vendor_ind_passport_date' => $vendor_ind_passport_date,
+            'vendor_ind_adress'=> $vendor_ind_adress,
+            'buyer_passport_serial'=> $_POST['buyer_passport_serial'],
+            'buyer_passport_number'=> $_POST['buyer_passport_number'],
+            'buyer_passport_bywho'=> $_POST['buyer_passport_bywho'],
+            'buyer_passport_date'=> $buyer_passport_date,
+            'buyer_adress'=> $buyer_adress,
+            'buyer_ind_passport_serial' => $_POST['buyer_ind_passport_serial'],
+            'buyer_ind_passport_number' => $_POST['buyer_ind_passport_number'],
+            'buyer_ind_passport_bywho' => $_POST['buyer_ind_passport_bywho'],
+            'buyer_ind_passport_date' => $buyer_ind_passport_date,
+            'buyer_ind_adress'=> $buyer_ind_adress,
+            'vendor_fio_parent'=> $vendor_fio_parent,
+            'buyer_fio_parent'=> $buyer_fio_parent,
+            'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
+            'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Сроки подписания договора
@@ -3765,7 +3940,13 @@ class Document_model extends CI_Model
         $buyer_ind_fio = $this->format_fio($_POST['buyer_ind_surname'],$_POST['buyer_ind_name'],$_POST['buyer_ind_patronymic']);
         $vendor_agent_fio = $this->format_fio($_POST['for_agent_vendor_surname'],$_POST['for_agent_vendor_name'],$_POST['for_agent_vendor_patronymic']);
         $buyer_agent_fio = $this->format_fio($_POST['for_agent_buyer_surname'],$_POST['for_agent_buyer_name'],$_POST['for_agent_buyer_patronymic']);
-
+        //Родительское фио
+        $vendor_law_fio_parent = $this->format_fio($_POST['vendor_law_actor_surname_parent'],$_POST['vendor_law_actor_name_parent'],$_POST['vendor_law_actor_patronymic_parent']);
+        $buyer_law_fio_parent = $this->format_fio($_POST['buyer_law_actor_surname_parent'],$_POST['buyer_law_actor_name_parent'],$_POST['buyer_law_actor_patronymic_parent']);
+        $vendor_fio_parent = $this->format_fio($_POST['vendor_surname_parent'], $_POST['vendor_name_parent'], $_POST['vendor_patronymic_parent']);
+        $buyer_fio_parent = $this->format_fio($_POST['buyer_surname_parent'],$_POST['buyer_name_parent'],$_POST['buyer_patronymic_parent']);
+        $vendor_ind_fio_parent = $this->format_fio($_POST['vendor_ind_surname_parent'],$_POST['vendor_ind_name_parent'],$_POST['vendor_ind_patronymic_parent']);
+        $buyer_ind_fio_parent = $this->format_fio($_POST['buyer_ind_surname_parent'],$_POST['buyer_ind_name_parent'],$_POST['buyer_ind_patronymic_parent']);
         //Адрес
         $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
         $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
@@ -3981,7 +4162,35 @@ class Document_model extends CI_Model
             'for_agent_proxy_pass_bywho' => $_POST['for_agent_proxy_pass_bywho'],
             'for_agent_proxy_pass_date' => $for_agent_proxy_pass_date,
             'for_agent_proxy_adress' => $for_agent_proxy_adress,
-
+            //Ещё правки
+            'vendor_birthday' => $vendor_birthday,
+            'buyer_birthday' => $buyer_birthday,
+            'vendor_ind_birthday' => $vendor_ind_birthday,
+            'buyer_ind_birthday' => $buyer_ind_birthday,
+            'vendor_passport_serial' => $_POST['vendor_passport_serial'],
+            'vendor_passport_number' => $_POST['vendor_passport_number'],
+            'vendor_passport_bywho' => $_POST['vendor_passport_bywho'],
+            'vendor_passport_date' => $vendor_passport_date,
+            'vendor_adress' => $vendor_adress,
+            'vendor_ind_passport_serial' => $_POST['vendor_ind_passport_serial'],
+            'vendor_ind_passport_number' => $_POST['vendor_ind_passport_number'],
+            'vendor_ind_passport_bywho' => $_POST['vendor_ind_passport_bywho'],
+            'vendor_ind_passport_date' => $vendor_ind_passport_date,
+            'vendor_ind_adress'=> $vendor_ind_adress,
+            'buyer_passport_serial'=> $_POST['buyer_passport_serial'],
+            'buyer_passport_number'=> $_POST['buyer_passport_number'],
+            'buyer_passport_bywho'=> $_POST['buyer_passport_bywho'],
+            'buyer_passport_date'=> $buyer_passport_date,
+            'buyer_adress'=> $buyer_adress,
+            'buyer_ind_passport_serial' => $_POST['buyer_ind_passport_serial'],
+            'buyer_ind_passport_number' => $_POST['buyer_ind_passport_number'],
+            'buyer_ind_passport_bywho' => $_POST['buyer_ind_passport_bywho'],
+            'buyer_ind_passport_date' => $buyer_ind_passport_date,
+            'buyer_ind_adress'=> $buyer_ind_adress,
+            'vendor_fio_parent'=> $vendor_fio_parent,
+            'buyer_fio_parent'=> $buyer_fio_parent,
+            'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
+            'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Массив данных для канванса
