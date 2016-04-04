@@ -289,8 +289,8 @@ class Document_model extends CI_Model
             }
             elseif ($giver == 'law' && $taker == 'law')
             {
-                $id_type = 2;
-                if ($gibdd == 'false') $id_type = 10;
+                $id_type = 6;
+                if ($gibdd == 'false') $id_type = 15;
             }
             elseif ($giver == 'physical' && $taker == 'law' || $taker == 'individual')
             {
@@ -331,11 +331,6 @@ class Document_model extends CI_Model
                 if ($gibdd == 'false') $id_type = 15;
             }
             elseif ($giver == 'law' && $taker == 'individual' || $taker == 'physical')
-            {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            }
-            elseif ($giver == 'law' && $taker == 'law')
             {
                 $id_type = 6;
                 if ($gibdd == 'false') $id_type = 15;
