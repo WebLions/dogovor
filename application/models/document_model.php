@@ -335,6 +335,11 @@ class Document_model extends CI_Model
                 $id_type = 6;
                 if ($gibdd == 'false') $id_type = 15;
             }
+            elseif ($giver == 'law' && $taker == 'law')
+            {
+                $id_type = 6;
+                if ($gibdd == 'false') $id_type = 15;
+            }
             else $id_type = false;
         }
         return $id_type;
@@ -628,7 +633,7 @@ class Document_model extends CI_Model
                     $output = "{$data['agent_fio']} $enter";
                     $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
                     $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
-                    $output .= "Нотариус: {$data['agent_proxy_notary']} $enter";
+                    $output .= "Выдана: {$data['agent_proxy_notary']} $enter";
                 }
                 $output .= "Дата рождения: {$data['date']} $enter";
                 $output .= "Паспорт: серия {$data['document_serial']} №{$data['document_number']} выдан {$data['document_bywho']} {$data['document_date']}  $enter";
@@ -642,7 +647,7 @@ class Document_model extends CI_Model
                     $output .= "{$data['agent_fio']} $enter";
                     $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
                     $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
-                    $output .= "Нотариус: {$data['agent_proxy_notary']} $enter";
+                    $output .= "Выдана: {$data['agent_proxy_notary']} $enter";
                 }
                 $output .= "ИНН: {$data['inn']} $enter";
                 $output .= "ОГРН: {$data['ogrn']}$enter";
@@ -659,7 +664,7 @@ class Document_model extends CI_Model
                     $output = "{$data['agent_fio']} $enter";
                     $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
                     $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
-                    $output .= "Нотариус: {$data['agent_proxy_notary']} $enter";
+                    $output .= "Выдана: {$data['agent_proxy_notary']} $enter";
                 }
                 $output .= "Свидетельство №{$data['number_of_certificate']} от {$data['date_of_certificate']} $enter";
                 $output .="Дата рождения : {$data['date']} $enter";

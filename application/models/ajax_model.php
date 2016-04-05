@@ -133,7 +133,7 @@ END;
          <div class="row" id="for_agent_vendor_info">
             <div class="col-lg-12">
             <div class = "content-block">
-             <p class = "content-header">Введите данныe предствителя:</p>
+             <p class = "content-header">Введите данныe представителя:</p>
                 <div class = "content-input">
                     <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:" value="{$query->for_agent_vendor_surname}">
@@ -555,7 +555,7 @@ END;
 <div class="row" id="for_agent_vendor_info">
     <div class="col-lg-12">
         <div class = "content-block">
-             <p class = "content-header">Введите данныe предствителя:</p>
+             <p class = "content-header">Введите данныe представителя:</p>
              <div class = "content-input">
                  <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:" value="{$query->for_agent_buyer_surname}">
@@ -2349,7 +2349,7 @@ END;
          <div class="row" id="for_agent_vendor_info">
             <div class="col-lg-12">
             <div class = "content-block">
-             <p class = "content-header">Введите данныe предствителя:</p>
+             <p class = "content-header">Введите данныe представителя:</p>
                 <div class = "content-input">
                     <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_vendor_surname"  placeholder="Фамилия:" value="{$query->for_agent_vendor_surname}">
@@ -2737,7 +2737,7 @@ END;
 <div class="row" id="for_agent_vendor_info">
     <div class="col-lg-12">
         <div class = "content-block">
-             <p class = "content-header">Введите данныe предствителя:</p>
+             <p class = "content-header">Введите данныe представителя:</p>
              <div class = "content-input">
                  <div class = "content-input-group">
                     <input class = "form-control" type="text" name="for_agent_buyer_surname"  placeholder="Фамилия:" value="{$query->for_agent_buyer_surname}">
