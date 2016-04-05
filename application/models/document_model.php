@@ -621,6 +621,7 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function get_requisites($data, $canvans = false)
     {
+
         $enter = "</w:t><w:br/><w:t>";
         if($canvans == true){$enter = '^+';}
         $output = ""; //Строка вывода
