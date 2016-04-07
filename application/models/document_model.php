@@ -1513,7 +1513,7 @@ class Document_model extends CI_Model
         $document->setValue('giver_adress',  $giver['adress']);
         $document->setValue('giver_phone', $giver['phone']);
         //
-        if ($result->statement_form == 'true')
+        if ($result->statement_form == 'false')
         {
             $document->setValue('buyer_agent_fio', $buyer_agent_fio);
             $document->setValue('buyer_agent_pass', $buyer_agent_pass);
@@ -2559,7 +2559,7 @@ class Document_model extends CI_Model
         $document->setValue('giver_adress',  $giver['adress']);
         $document->setValue('giver_phone', $giver['phone']);
         //
-        if ($result->statement_form == 'true')
+        if ($result->statement_form == 'false')
         {
             $document->setValue('buyer_agent_fio', $buyer_agent_fio);
             $document->setValue('buyer_agent_pass', $buyer_agent_pass);
