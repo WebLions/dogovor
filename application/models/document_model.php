@@ -304,12 +304,17 @@ class Document_model extends CI_Model
                 $id_type = 4;
                 if ($gibdd == 'false') $id_type = 13;
             }
-            elseif ($giver == 'individual' || $gibdd == 'physical' && $taker == 'law')
+            elseif ($giver == 'individual' || $giver == 'physical' && $taker == 'law')
             {
                 $id_type = 1;
                 if ($gibdd == 'false') $id_type = 7;
                 if ($marriage == 'false' || $marriage = null ) $id_type = 9;
                 if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+            }
+            elseif ($giver == 'law' && $taker == 'individual')
+            {
+                $id_type = 4;
+                if ($gibdd == 'false') $id_type = 13;
             }
             else $id_type = false;
         }
