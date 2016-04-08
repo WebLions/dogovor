@@ -133,10 +133,16 @@ $( document ).ready(function() {
     });
 
     //ДАТАПИКЕР
+    $.datepicker.setDefaults(
+        $.extend($.datepicker.regional["ru"])
+    );
 
     $("#editForm").delegate(".datetimepicker", "focusin", function(){
-        $(this).datetimepicker({
-            format: 'YYYY-MM-DD', locale: 'ru'
+        $(this).datepicker({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1950:2016'
         });
     });
 
@@ -144,15 +150,18 @@ $( document ).ready(function() {
 
     $("#doc_create").delegate(".datetimepicker", "focusin", function(){
         var name = $(this).attr('name');
-        if(name != 'date_of_product')
-            $('input[name='+name+']').datetimepicker({
-            format: 'YYYY-MM-DD',
-            locale: 'ru'
-
-        });
-        else  $('input[name='+name+']').datetimepicker({
-            format: 'YYYY',
-            locale: 'ru'
+        if(name == 'date_of_product'){
+            $(this).datepicker({
+                dateFormat: "yy",
+                changeYear: true,
+                yearRange: '1950:2016'
+            });
+            return true;
+        }
+        $('input[name='+name+']').datepicker({
+            dateFormat: "yy-mm-dd",
+            changeYear: true,
+            yearRange: '1950:2016'
         });
     });
 
@@ -199,7 +208,8 @@ $( document ).ready(function() {
     //BLOCK MODAL FUNCTION
     $('.document').on('change','.modal-button', function() {
         var buyer = $('input[data-name=bs_block_buyer_selected_not_owner]:checked').val();
-        if(buyer=='not_own_car')
+        var buyer_g = $('input[data-name=gift_block_buyer_selected_not_owner]:checked').val();
+        if(buyer=='not_own_car'||buyer_g=='not_own_car')
             buyer='true';
         else
             buyer='false';
