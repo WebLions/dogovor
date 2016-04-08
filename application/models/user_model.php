@@ -37,6 +37,8 @@ class User_model extends CI_Model
             $data = array(
                 'password' => $password
             );
+            $query = $query->row();
+            $this->db->where('id',$query->id);
             $this->db->update('users', $data);
 
             $text = "Спасибо за использование нашего сервиса CarsDoc.ru!<br>";
@@ -45,6 +47,7 @@ class User_model extends CI_Model
             $text.= "Внимание! Поменяйте сгенерированый пароль на новый!<br>";
 
             //Отправляем пароль
+
             $this->load->library('email');
 
             $this->email->from('admin@carsdoc.ru', 'CarsDoc');

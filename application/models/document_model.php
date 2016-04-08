@@ -3051,7 +3051,7 @@ class Document_model extends CI_Model
             'marriage_svid_number' => $_POST['marriage_svid_number'],
             'marriage_svid_date' => $_POST['marriage_svid_date'],
             'marriage_svid_bywho' => $_POST['marriage_svid_bywho'],
-            'penalty' => $_POST['penalty'],
+            'penalty' => (empty($_POST['penalty']) ? '0%' : $_POST['penalty']),
         );
         //Бизопаснасть
         /*foreach ($data as $key)
