@@ -397,6 +397,9 @@ END;
                 <input  required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_buyer_patronymic"  placeholder="Отчество, например Иванович">
                 <input  required  class = "form-control" style="float:left;width:48%;" type="text" name="for_agent_buyer_patronymic_parent"  placeholder="Отчество, например Ивановича">
                 </div>
+                <div class = "content-input-group">
+                    <input  required  class = "form-control datetimepicker" type="text" name="for_agent_proxy_birthday"  placeholder="Дата рождения:">
+                 </div>
                  <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="for_agent_buyer_proxy_number"  placeholder="Номер доверенности:">
                  </div>
@@ -1460,7 +1463,9 @@ END;
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование компании: ">
                 </div>
-
+                <div class = "content-input-group">
+                    <input  required  class = "form-control" type="text" name="vendor_law_date_of_create"  placeholder="Дата регистрации/создания общества">
+                </div>
                 <div class = "content-input-group">
                 <p class = "content-input-title" style="width:48%;margin-right:20px;">В лице:</p>
                     <select  required  class="form-control" name="vendor_law_actor_position" ">
@@ -1616,7 +1621,9 @@ END;
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование компании: ">
                 </div>
-
+                <div class = "content-input-group">
+                    <input  required  class = "form-control" type="text" name="buyer_law_date_of_create"  placeholder="Дата регистрации/создания общества">
+                </div>
                 <div class = "content-input-group">
                  <p class = "content-input-title" style="float:left;width:48%;margin-right:20px;">В лице:</p>
                     <select  required  class="form-control" name="buyer_law_actor_position" ">
@@ -2168,6 +2175,9 @@ END;
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование компании: ">
                 </div>
+                <div class = "content-input-group">
+                    <input  required  class = "form-control" type="text" name="vendor_law_date_of_create"  placeholder="Дата регистрации/создания общества">
+                </div>
 
                 <div class = "content-input-group">
                 <p class = "content-input-title" style="float:left;width:48%;margin-right:20px;">В лице:</p>
@@ -2324,6 +2334,9 @@ END;
 
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование компании: ">
+                </div>
+                <div class = "content-input-group">
+                    <input  required  class = "form-control" type="text" name="buyer_law_date_of_create"  placeholder="Дата регистрации/создания общества">
                 </div>
 
                 <div class = "content-input-group">
