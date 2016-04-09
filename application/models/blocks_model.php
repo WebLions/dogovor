@@ -1908,7 +1908,6 @@ END;
 
     }
 
-
     //Дарение ТС
     public function gift_block_vendor()
     {
