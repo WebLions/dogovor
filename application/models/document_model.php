@@ -174,19 +174,21 @@ class Document_model extends CI_Model
         return $name;
     }
     //------------------------------------------------------------------------------------------------------------------
-    private function format_date($date, $birthday=false)
+    private function format_date($date, $brd = false)
     {
         if(empty($date) || $date == 'не указано'){
             return false;
-        }
-        $birthday = 'г.';
-        if ($birthday == true) {$birthday = 'года';};
+        };
+
+        if ($brd == true) {$brd = ' года';}
+        else {$brd = 'г.';}
+
         $date = DateTime::createFromFormat('Y-m-d', $date);
         $day = $date->format('d');
         $month = $date->format('m');
         $month = $this->get_month_from_number($month);
         $year = $date->format('Y');
-        $date = '"'. $day . '" ' . $month . ' ' . $year . $birthday;
+        $date = '"'. $day . '" ' . $month . ' ' . $year.$brd;
         return $date;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -1064,6 +1066,11 @@ class Document_model extends CI_Model
         $document->setValue('secondside_requisites', $secondside_requisites);
         $document->setValue('vendor_name', $vendor_name);
         $document->setValue('buyer_name', $buyer_name);
+        //Подпись представителя
+        $vendor_agent_sign = $this->get_sign($result->vendor_is_owner_car);
+        $buyer_agent_sign = $this->get_sign($result->buyer_is_owner_car);
+        $document->setValue('vendor_agent_sign', $vendor_agent_sign);
+        $document->setValue('buyer_agent_sign', $buyer_agent_sign);
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'gift.docx';//Имя файла и путь к нему
@@ -1426,6 +1433,11 @@ class Document_model extends CI_Model
         $document->setValue('secondside_requisites', $secondside_requisites);
         $document->setValue('buyer_name', $buyer_name);
         $document->setValue('vendor_name', $vendor_name);
+        //Подпись представителя
+        $vendor_agent_sign = $this->get_sign($result->vendor_is_owner_car);
+        $buyer_agent_sign = $this->get_sign($result->buyer_is_owner_car);
+        $document->setValue('vendor_agent_sign', $vendor_agent_sign);
+        $document->setValue('buyer_agent_sign', $buyer_agent_sign);
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/gift/'.$id.'act_of_reception.docx';//Имя файла и путь к нему
@@ -2016,8 +2028,8 @@ class Document_model extends CI_Model
         $document->setValue('secondside_requisites', $secondside_requisites);
 
         //Подпись представителя
-        $vendor_agent_sign = $this->get_sign($result->type_of_giver);
-        $buyer_agent_sign = $this->get_sign($result->type_of_taker);
+        $vendor_agent_sign = $this->get_sign($result->vendor_is_owner_car);
+        $buyer_agent_sign = $this->get_sign($result->buyer_is_owner_car);
         $document->setValue('vendor_agent_sign', $vendor_agent_sign);
         $document->setValue('buyer_agent_sign', $buyer_agent_sign);
 
@@ -2391,6 +2403,11 @@ class Document_model extends CI_Model
         $document->setValue('features', $result->features);
         $document->setValue('firstside_requisites', $firstside_requisites);
         $document->setValue('secondside_requisites', $secondside_requisites);
+        //Подпись представителя
+        $vendor_agent_sign = $this->get_sign($result->vendor_is_owner_car);
+        $buyer_agent_sign = $this->get_sign($result->buyer_is_owner_car);
+        $document->setValue('vendor_agent_sign', $vendor_agent_sign);
+        $document->setValue('buyer_agent_sign', $buyer_agent_sign);
 
         // Сохранение результатов
         $name_of_file = $_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/'.$id.'act_of_reception.docx';//Имя файла и путь к нему
