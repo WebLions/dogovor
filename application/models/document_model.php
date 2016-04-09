@@ -765,15 +765,16 @@ class Document_model extends CI_Model
         $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
         $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
         $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
+        $vendor_agent_fio_parent = $this->format_fio($result->for_agent_vendor_surname_parent,$result->for_agent_vendor_name_parent,$result->for_agent_vendor_patronymic_parent);
+        $buyer_agent_fio_parent = $this->format_fio($result->for_agent_buyer_surname_parent,$result->for_agent_buyer_name_parent,$result->for_agent_buyer_patronymic_parent);
 
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-//        $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
-        $vendor_birthday = $this->format_date($result->vendor_birthday);
-        $buyer_birthday = $this->format_date($result->buyer_birthday);
-        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
-        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
+        $vendor_birthday = $this->format_date($result->vendor_birthday, true);
+        $buyer_birthday = $this->format_date($result->buyer_birthday, true);
+        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday, true);
+        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday, true);
         $vendor_ind_date_of_certificate = $this->format_date($result->vendor_ind_date_of_certificate);
         $buyer_ind_date_of_certificate = $this->format_date($result->buyer_ind_date_of_certificate);
         $vendor_passport_date  = $this->format_date($result->vendor_passport_date);
@@ -785,10 +786,13 @@ class Document_model extends CI_Model
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
         //Новая дата
-        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday, true);
         $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
-        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday, true);
         $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
+        //Правки даты
+        $vendor_law_date_of_create = $this->format_date($result->vendor_law_date_of_create);
+        $buyer_law_date_of_create = $this->format_date($result->buyer_law_date_of_create);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -875,6 +879,9 @@ class Document_model extends CI_Model
             'buyer_fio_parent'=> $buyer_fio_parent,
             'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
             'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
+            //
+            'vendor_agent_fio_parent'=> $vendor_agent_fio_parent,
+            'buyer_agent_fio_parent'=> $buyer_agent_fio_parent,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
@@ -1122,15 +1129,15 @@ class Document_model extends CI_Model
         $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
         $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
         $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
-
+        $vendor_agent_fio_parent = $this->format_fio($result->for_agent_vendor_surname_parent,$result->for_agent_vendor_name_parent,$result->for_agent_vendor_patronymic_parent);
+        $buyer_agent_fio_parent = $this->format_fio($result->for_agent_buyer_surname_parent,$result->for_agent_buyer_name_parent,$result->for_agent_buyer_patronymic_parent);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-//        $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
-        $vendor_birthday = $this->format_date($result->vendor_birthday);
-        $buyer_birthday = $this->format_date($result->buyer_birthday);
-        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
-        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
+        $vendor_birthday = $this->format_date($result->vendor_birthday, true);
+        $buyer_birthday = $this->format_date($result->buyer_birthday, true);
+        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday, true);
+        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday, true);
         $vendor_ind_date_of_certificate = $this->format_date($result->vendor_ind_date_of_certificate);
         $buyer_ind_date_of_certificate = $this->format_date($result->buyer_ind_date_of_certificate);
         $vendor_passport_date  = $this->format_date($result->vendor_passport_date);
@@ -1142,10 +1149,13 @@ class Document_model extends CI_Model
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
         //Новая дата
-        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday, true);
         $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
-        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday, true);
         $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
+        //Правки даты
+        $vendor_law_date_of_create = $this->format_date($result->vendor_law_date_of_create);
+        $buyer_law_date_of_create = $this->format_date($result->buyer_law_date_of_create);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -1232,6 +1242,10 @@ class Document_model extends CI_Model
             'buyer_fio_parent'=> $buyer_fio_parent,
             'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
             'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
+            //
+            'vendor_agent_fio_parent'=> $vendor_agent_fio_parent,
+            'buyer_agent_fio_parent'=> $buyer_agent_fio_parent,
+
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         unset($data_for_header);
@@ -1494,7 +1508,7 @@ class Document_model extends CI_Model
         $for_agent_proxy_pass_date = $this->format_date($result->vendor_birthday);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
-        //новые данные юр.лица
+        //Правки даты
         $vendor_law_date_of_create = $this->format_date($result->vendor_law_date_of_create);
         $buyer_law_date_of_create = $this->format_date($result->buyer_law_date_of_create);
         //Паспорта
@@ -2068,6 +2082,8 @@ class Document_model extends CI_Model
         $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
         $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
         $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
+        $vendor_agent_fio_parent = $this->format_fio($result->for_agent_vendor_surname_parent,$result->for_agent_vendor_name_parent,$result->for_agent_vendor_patronymic_parent);
+        $buyer_agent_fio_parent = $this->format_fio($result->for_agent_buyer_surname_parent,$result->for_agent_buyer_name_parent,$result->for_agent_buyer_patronymic_parent);
 
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
@@ -2081,12 +2097,11 @@ class Document_model extends CI_Model
         $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
-//        $date_of_product = $this->format_date($result->date_of_product);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
         $vendor_birthday = $this->format_date($result->vendor_birthday, true);
         $buyer_birthday = $this->format_date($result->buyer_birthday, true);
-        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday);
-        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday);
+        $vendor_ind_birthday = $this->format_date($result->vendor_ind_birthday, true);
+        $buyer_ind_birthday = $this->format_date($result->buyer_ind_birthday, true);
         $vendor_ind_date_of_certificate = $this->format_date($result->vendor_ind_date_of_certificate);
         $buyer_ind_date_of_certificate = $this->format_date($result->buyer_ind_date_of_certificate);
         $maintenance_date = $this->format_date($result->maintenance_date);
@@ -2098,11 +2113,15 @@ class Document_model extends CI_Model
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
         $vendor_law_proxy_date = $this->format_date($result->vendor_law_proxy_date);
+        $credit_date = $this->format_date($result->credit_date);
         //Новая дата
-        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday);
+        $agent_vendor_birthday = $this->format_date($result->agent_vendor_birthday, true);
         $agent_vendor_pass_date = $this->format_date($result->agent_vendor_pass_date);
-        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday);
+        $for_agent_proxy_birthday = $this->format_date($result->for_agent_proxy_birthday, true);
         $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
+        //Правки даты
+        $vendor_law_date_of_create = $this->format_date($result->vendor_law_date_of_create);
+        $buyer_law_date_of_create = $this->format_date($result->buyer_law_date_of_create);
         //Джсон
         $documents = $this->json_to_string($result->documents);
         $accessories = $this->json_to_string($result->accessories);
@@ -2183,6 +2202,9 @@ class Document_model extends CI_Model
             'buyer_fio_parent'=> $buyer_fio_parent,
             'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
             'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
+            //
+            'vendor_agent_fio_parent'=> $vendor_agent_fio_parent,
+            'buyer_agent_fio_parent'=> $buyer_agent_fio_parent,
         );
         $header_doc = $this->set_header_doc($result->type_of_contract ,$result->type_of_giver, $result->type_of_taker, $data_for_header);
         //Реквизиты
@@ -3319,12 +3341,6 @@ class Document_model extends CI_Model
             'buyer_ind_bank_name' => $_POST['buyer_ind_bank_name'],
             'buyer_ind_korr_acc' => $_POST['buyer_ind_korr_acc'],
             'buyer_ind_bik' => $_POST['buyer_ind_bik'],
-            'for_agent_buyer_surname' => $_POST['for_agent_buyer_surname'],
-            'for_agent_buyer_name' => $_POST['for_agent_buyer_name'],
-            'for_agent_buyer_patronymic' => $_POST['for_agent_buyer_patronymic'],
-            'for_agent_buyer_proxy_number' => $_POST['for_agent_buyer_proxy_number'],
-            'for_agent_buyer_proxy_date' => $_POST['for_agent_buyer_proxy_date'],
-            'for_agent_buyer_proxy_notary' => $_POST['for_agent_buyer_proxy_notary'],
             'mark' => $_POST['mark'],
             'vin' => $_POST['vin'],
             'reg_gov_number' => $_POST['reg_gov_number'],
@@ -3424,7 +3440,8 @@ class Document_model extends CI_Model
         $buyer_fio_parent = $this->format_fio($_POST['buyer_surname_parent'],$_POST['buyer_name_parent'],$_POST['buyer_patronymic_parent']);
         $vendor_ind_fio_parent = $this->format_fio($_POST['vendor_ind_surname_parent'],$_POST['vendor_ind_name_parent'],$_POST['vendor_ind_patronymic_parent']);
         $buyer_ind_fio_parent = $this->format_fio($_POST['buyer_ind_surname_parent'],$_POST['buyer_ind_name_parent'],$_POST['buyer_ind_patronymic_parent']);
-        
+        $vendor_agent_fio_parent = $this->format_fio($_POST['for_agent_vendor_surname_parent'],$_POST['for_agent_vendor_name_parent'],$_POST['for_agent_vendor_patronymic_parent']);
+        $buyer_agent_fio_parent = $this->format_fio($_POST['for_agent_buyer_surname_parent'],$_POST['for_agent_buyer_name_parent'],$_POST['for_agent_buyer_patronymic_parent']);
         //Адрес
         $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
         $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
@@ -3436,18 +3453,18 @@ class Document_model extends CI_Model
         //Дата
         $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($_POST['date_of_contract']) : $data_input['date_of_contract'];
         $date_of_product = !empty($_POST['date_of_product']) ? $_POST['date_of_product'] : $data_input['date_of_product'];
-        $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
+        $vendor_birthday = $this->format_date($_POST['vendor_birthday'], true);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
-        $buyer_birthday = $this->format_date($_POST['buyer_birthday']);
-        $vendor_ind_birthday= $this->format_date($_POST['vendor_ind_birthday']);
-        $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date']);
+        $buyer_birthday = $this->format_date($_POST['buyer_birthday'], true);
+        $vendor_ind_birthday= $this->format_date($_POST['vendor_ind_birthday'], true);
+        $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date'], true);
         $for_agent_buyer_proxy_date = $this->format_date($_POST['for_agent_buyer_proxy_date']);
 //        $payment_date = $this->format_date($_POST['payment_date']);
         $date_of_serial_car = !empty($_POST['date_of_serial_car']) ? $this->format_date($_POST['date_of_serial_car']) : $data_input['date_of_serial_car'];
         $maintenance_date = !empty($_POST['maintenance_date']) ? $this->format_date($_POST['maintenance_date']) : $data_input['maintenance_date'];
         $for_agent_vendor_proxy_date = $this->format_date($_POST['for_agent_vendor_proxy_date']);
-        $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday']);
+        $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday'], true);
         $buyer_ind_passport_date = $this->format_date($_POST['buyer_ind_passport_date']);
         $vendor_law_proxy_date = $this->format_date($_POST['$vendor_law_proxy_date']);
         $buyer_law_proxy_date =  $this->format_date($_POST['$buyer_law_proxy_date']);
@@ -3455,9 +3472,9 @@ class Document_model extends CI_Model
         $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
         $credit_date =  $this->format_date($_POST['credit_date']);
         //Новая дата
-        $agent_vendor_birthday = $this->format_date($_POST['agent_vendor_birthday']);
+        $agent_vendor_birthday = $this->format_date($_POST['agent_vendor_birthday'], true);
         $agent_vendor_pass_date = $this->format_date($_POST['agent_vendor_pass_date']);
-        $for_agent_proxy_birthday = $this->format_date($_POST['for_agent_proxy_birthday']);
+        $for_agent_proxy_birthday = $this->format_date($_POST['for_agent_proxy_birthday'], true);
         $for_agent_proxy_pass_date = $this->format_date($_POST['for_agent_proxy_pass_date']);
 
 
@@ -3679,6 +3696,9 @@ class Document_model extends CI_Model
             'buyer_fio_parent'=> $buyer_fio_parent,
             'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
             'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
+            //
+            'vendor_agent_fio_parent'=> $vendor_agent_fio_parent,
+            'buyer_agent_fio_parent'=> $buyer_agent_fio_parent,
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Сроки подписания договора
@@ -4034,6 +4054,8 @@ class Document_model extends CI_Model
         $buyer_fio_parent = $this->format_fio($_POST['buyer_surname_parent'],$_POST['buyer_name_parent'],$_POST['buyer_patronymic_parent']);
         $vendor_ind_fio_parent = $this->format_fio($_POST['vendor_ind_surname_parent'],$_POST['vendor_ind_name_parent'],$_POST['vendor_ind_patronymic_parent']);
         $buyer_ind_fio_parent = $this->format_fio($_POST['buyer_ind_surname_parent'],$_POST['buyer_ind_name_parent'],$_POST['buyer_ind_patronymic_parent']);
+        $vendor_agent_fio_parent = $this->format_fio($_POST['for_agent_vendor_surname_parent'],$_POST['for_agent_vendor_name_parent'],$_POST['for_agent_vendor_patronymic_parent']);
+        $buyer_agent_fio_parent = $this->format_fio($_POST['for_agent_buyer_surname_parent'],$_POST['for_agent_buyer_name_parent'],$_POST['for_agent_buyer_patronymic_parent']);
         //Адрес
         $vendor_adress = $this->format_adress($_POST['vendor_city'],$_POST['vendor_street'],$_POST['vendor_house'],$_POST['vendor_flat']);
         $buyer_adress = $this->format_adress($_POST['buyer_city'],$_POST['buyer_street'],$_POST['buyer_house'],$_POST['buyer_flat']);
@@ -4044,27 +4066,28 @@ class Document_model extends CI_Model
         $for_agent_proxy_adress = $this->format_adress($_POST['for_agent_proxy_city'],$_POST['for_agent_proxy_street'],$_POST['for_agent_proxy_house'],$_POST['for_agent_proxy_flat']);
 
         //Дата
-        $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($data_input['date_of_contract']) : $data_input['date_of_contract'];
+        $date_of_contract = !empty($_POST['date_of_contract']) ? $this->format_date($_POST['date_of_contract']) : $data_input['date_of_contract'];
         $date_of_product = !empty($_POST['date_of_product']) ? $_POST['date_of_product'] : $data_input['date_of_product'];
-        $vendor_birthday = $this->format_date($_POST['vendor_birthday']);
+        $vendor_birthday = $this->format_date($_POST['vendor_birthday'], true);
         $vendor_passport_date = $this->format_date($_POST['vendor_passport_date']);
         $buyer_passport_date = $this->format_date($_POST['buyer_passport_date']);
-        $buyer_birthday = $this->format_date($_POST['buyer_birthday']);
-        $vendor_ind_birthday= $this->format_date($_POST['vendor_ind_birthday']);
-        $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date']);
+        $buyer_birthday = $this->format_date($_POST['buyer_birthday'], true);
+        $vendor_ind_birthday= $this->format_date($_POST['vendor_ind_birthday'], true);
+        $vendor_ind_passport_date= $this->format_date($_POST['vendor_ind_passport_date'], true);
         $for_agent_buyer_proxy_date = $this->format_date($_POST['for_agent_buyer_proxy_date']);
-        $date_of_serial_car = !empty($_POST['date_of_serial_car']) ? $this->format_date($data_input['date_of_serial_car']) : $data_input['date_of_serial_car'];
+//        $payment_date = $this->format_date($_POST['payment_date']);
+        $date_of_serial_car = !empty($_POST['date_of_serial_car']) ? $this->format_date($_POST['date_of_serial_car']) : $data_input['date_of_serial_car'];
         $for_agent_vendor_proxy_date = $this->format_date($_POST['for_agent_vendor_proxy_date']);
-        $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday']);
+        $buyer_ind_birthday = $this->format_date($_POST['buyer_ind_birthday'], true);
         $buyer_ind_passport_date = $this->format_date($_POST['buyer_ind_passport_date']);
         $vendor_law_proxy_date = $this->format_date($_POST['$vendor_law_proxy_date']);
         $buyer_law_proxy_date =  $this->format_date($_POST['$buyer_law_proxy_date']);
         $vendor_ind_date_of_certificate =  $this->format_date($_POST['$vendor_ind_date_of_certificate']);
         $buyer_ind_date_of_certificate =  $this->format_date($_POST['$buyer_ind_date_of_certificate']);
         //Новая дата
-        $agent_vendor_birthday = $this->format_date($_POST['agent_vendor_birthday']);
+        $agent_vendor_birthday = $this->format_date($_POST['agent_vendor_birthday'], true);
         $agent_vendor_pass_date = $this->format_date($_POST['agent_vendor_pass_date']);
-        $for_agent_proxy_birthday = $this->format_date($_POST['for_agent_proxy_birthday']);
+        $for_agent_proxy_birthday = $this->format_date($_POST['for_agent_proxy_birthday'], true);
         $for_agent_proxy_pass_date = $this->format_date($_POST['for_agent_proxy_pass_date']);
 
         //Джсон
@@ -4278,6 +4301,9 @@ class Document_model extends CI_Model
             'buyer_fio_parent'=> $buyer_fio_parent,
             'vendor_ind_fio_parent'=> $vendor_ind_fio_parent,
             'buyer_ind_fio_parent'=> $buyer_ind_fio_parent,
+            //
+            'vendor_agent_fio_parent'=> $vendor_agent_fio_parent,
+            'buyer_agent_fio_parent'=> $buyer_agent_fio_parent,
         );
         $header_doc = $this->set_header_doc($data_input['type_of_contract'], $data_input['type_of_giver'], $data_input['type_of_taker'], $data_for_header, true);
         //Массив данных для канванса
