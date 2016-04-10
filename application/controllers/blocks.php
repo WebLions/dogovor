@@ -228,10 +228,11 @@ class Blocks extends CI_Controller
         if( !$this->data['user_id'] ) {
             $email = true;
         }
-        if(isset( $_SESSION['buyer_state'])){
-            if( $_SESSION['buyer_state'] == 'physical'){$this->blocks_model->bs_block_police_yes_physical($email);}
-            else $this->blocks_model->bs_block_police_yes($email);
-        }
+//        if(isset( $_SESSION['buyer_state'])){
+//            if( $_SESSION['buyer_state'] == 'physical'){$this->blocks_model->bs_block_police_yes_physical($email);}
+//            else $this->blocks_model->bs_block_police_yes($email);
+//        }
+        $this->blocks_model->bs_block_police_yes_physical($email);
     }
     public function police_no(){
         //кнопка сохранить

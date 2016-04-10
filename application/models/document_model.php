@@ -667,7 +667,7 @@ class Document_model extends CI_Model
                 $output .= "{$data['date']} рождения $enter";
                 $output .= "паспорт серии {$data['document_serial']} №{$data['document_number']} выдан {$data['document_date']} {$data['document_bywho']}  $enter";
                 $output .= "Адрес: {$data['adress']}";
-                if (($data['phone'] != null) || ($data['phone'] !='' ))
+                if (($data['phone'] != null) || ($data['phone'] !='не указано' ))
                 {
                     $output .= "$enter"."Телефон: {$data['phone']}";
                 }
@@ -687,7 +687,7 @@ class Document_model extends CI_Model
                 $output .= "р/счёт {$data['acc']} в банке {$data['bank_name']}$enter";
                 $output .= "кор. счет {$data['korr_acc']} $enter";
                 $output .= "БИК {$data['bik']}";
-                if (($data['phone'] != null) || ($data['phone'] !='' ))
+                if (($data['phone'] != null) || ($data['phone'] !='не указано' ))
                 {
                     $output .= "$enter"."Телефон: {$data['phone']}";
 
@@ -710,7 +710,7 @@ class Document_model extends CI_Model
                 $output .= "р/счёт {$data['acc']} в банке {$data['bank_name']}$enter";
                 $output .= "кор. счет: {$data['korr_acc']} $enter";
                 $output .= "БИК {$data['bik']}";
-                if (($data['phone'] != null) || ($data['phone'] !='' ))
+                if (($data['phone'] != null) || ($data['phone'] !='не указано' ))
                 {
                     $output .= "$enter"."Телефон: {$data['phone']}";
                 }
@@ -2448,16 +2448,26 @@ class Document_model extends CI_Model
         //ФИО
         $vendor_fio = $this->format_fio($result->vendor_surname, $result->vendor_name, $result->vendor_patronymic);
         $buyer_fio = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
-//        $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
-        $buyer_law_fio = $this->format_fio($result->buyer_law_surname_parent,$result->buyer_law_name_parent,$result->buyer_law_patronymic_parent);
-//        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
+        $vendor_law_fio = $this->format_fio($result->vendor_law_actor_surname,$result->vendor_law_actor_name,$result->vendor_law_actor_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
         $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
-//        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
+        $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname_parent,$result->for_agent_buyer_name_parent,$result->for_agent_buyer_patronymic_parent);
-//        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
+        //Родительские ФИО
+        $vendor_fio_parent = $this->format_fio($result->vendor_surname_parent, $result->vendor_name_parent, $result->vendor_patronymic_parent);
+        $buyer_fio_parent = $this->format_fio($result->buyer_surname_parent,$result->buyer_name_parent,$result->buyer_patronymic_parent);
+        $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
+        $vendor_ind_fio_parent = $this->format_fio($result->vendor_ind_surname_parent,$result->vendor_ind_name_parent,$result->vendor_ind_patronymic_parent);
+        $buyer_ind_fio_parent = $this->format_fio($result->buyer_ind_surname_parent,$result->buyer_ind_name_parent,$result->buyer_ind_patronymic_parent);
+        $vendor_agent_fio_parent = $this->format_fio($result->for_agent_vendor_surname_parent,$result->for_agent_vendor_name_parent,$result->for_agent_vendor_patronymic_parent);
+        $buyer_agent_fio_parent = $this->format_fio($result->for_agent_buyer_surname_parent_parent,$result->for_agent_buyer_name_parent_parent,$result->for_agent_buyer_patronymic_parent_parent);
+        $buyer_agent_fio_parent = $this->format_fio($result->for_agent_buyer_surname_parent,$result->for_agent_buyer_name_parent,$result->for_agent_buyer_patronymic_parent);
+        $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
         //Адрес
         $vendor_adress = $this->format_adress($result->vendor_city,$result->vendor_street,$result->vendor_house,$result->vendor_flat);
         $buyer_adress = $this->format_adress($result->buyer_city,$result->buyer_street,$result->buyer_house,$result->buyer_flat);
@@ -2466,7 +2476,7 @@ class Document_model extends CI_Model
         $agent_vendor_adress = $this->format_adress($result->agent_vendor_city,$result->agent_vendor_street,$result->agent_vendor_house,$result->agent_vendor_flat);
         $for_agent_proxy_adress = $this->format_adress($result->for_agent_proxy_city,$result->for_agent_proxy_street,$result->for_agent_proxy_house,$result->for_agent_proxy_flat);
         //Дата
-//        $date_of_contract = $this->format_date($result->date_of_contract);
+        $date_of_contract = $this->format_date($result->date_of_contract);
         $vendor_passport_date  = $this->format_date($result->vendor_passport_date);
         $vendor_ind_passport_date = $this->format_date($result->vendor_ind_passport_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
@@ -2492,19 +2502,19 @@ class Document_model extends CI_Model
                 if ($result->vendor_is_owner_car == 'own_car')
                     $vendor_data = "Я, $vendor_fio, паспорт серия $result->vendor_passport_serial № $result->vendor_passport_number, выдан $result->vendor_passport_bywho дата выдачи $vendor_passport_date, зарегистрированный(ая) по адресу: $vendor_adress (далее - Продавец),";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец),";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio_parent (далее - Продавец),";
                 break;
             case 'law':
                 if ($result->vendor_is_owner_car == 'own_car')
                     $vendor_data = "Я, $vendor_law_fio, в лице $result->vendor_law_actor_position компании $result->vendor_law_company_name, ИНН $result->vendor_law_inn , ОГРН $result->vendor_law_ogrn зарегистрированной по адресу: $result->vendor_law_adress (далее - Продавец),";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец),";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_law_fio_parent (далее - Продавец),";
                 break;
             case 'individual':
                 if ($result->vendor_is_owner_car == 'own_car')
                     $vendor_data = "Я, $vendor_ind_fio, паспорт серия $result->vendor_ind_passport_serial № $result->vendor_ind_passport_number, выдан $result->vendor_ind_passport_bywho дата выдачи $vendor_ind_passport_date, зарегистрированный(ая) по адресу: $vendor_ind_adress (далее - Продавец),";
                 elseif ($result->vendor_is_owner_car == 'not_own_car')
-                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_fio (далее - Продавец),";
+                    $vendor_data = "Я, $vendor_agent_fio, $agent_vendor_birthday паспорт серия $result->agent_vendor_pass_serial, № $result->agent_vendor_pass_number, выдан $result->agent_vendor_pass_bywho дата выдачи $agent_vendor_pass_date, зарегистрированный(ая) по адресу: $agent_vendor_adress действующий на основании доверенности от имени $vendor_ind_fio_parent (далее - Продавец),";
                 break;
         }
         //Покупатель
@@ -2512,21 +2522,21 @@ class Document_model extends CI_Model
         {
             case 'physical':
                 if ($result->buyer_is_owner_car == 'own_car')
-                    $buyer_data = " получил от $buyer_fio паспорт серия $result->buyer_passport_serial, № $result->buyer_passport_number, выдан $result->buyer_passport_bywho дата выдачи $buyer_passport_date, зарегистрированный(ая) по адресу: $buyer_adress (далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_fio_parent паспорт серия $result->buyer_passport_serial, № $result->buyer_passport_number, выдан $result->buyer_passport_bywho дата выдачи $buyer_passport_date, зарегистрированный(ая) по адресу: $buyer_adress (далее - Покупатель)";
                 elseif ($result->buyer_is_owner_car == 'not_own_car')
-                    $buyer_data = " получил от $buyer_agent_fio $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_fio(далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_agent_fio_parent $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_fio_parent(далее - Покупатель)";
                 break;
             case 'law':
                 if ($result->buyer_is_owner_car == 'own_car')
-                    $buyer_data = " получил от $buyer_law_fio в лице $result->buyer_law_actor_position компании $result->buyer_law_company_name, ИНН $result->buyer_law_inn , ОГРН $result->buyer_law_ogrn зарегистрированной по адресу: $result->buyer_law_adress (далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_law_fio_parent в лице $result->buyer_law_actor_position компании $result->buyer_law_company_name, ИНН $result->buyer_law_inn , ОГРН $result->buyer_law_ogrn зарегистрированной по адресу: $result->buyer_law_adress (далее - Покупатель)";
                 elseif ($result->buyer_is_owner_car == 'not_own_car')
-                    $buyer_data = " получил от $buyer_agent_fio $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_fio(далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_agent_fio_parent $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_law_fio_parent(далее - Покупатель)";
                 break;
             case 'individual':
                 if ($result->buyer_is_owner_car == 'own_car')
-                    $buyer_data = " получил от $buyer_ind_fio паспорт серия $result->buyer_ind_passport_serial, № $result->buyer_ind_passport_number, выдан $result->buyer_ind_passport_bywho дата выдачи $buyer_ind_passport_date, зарегистрированный(ая) по адресу: $buyer_ind_adress (далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_ind_fio_parent паспорт серия $result->buyer_ind_passport_serial, № $result->buyer_ind_passport_number, выдан $result->buyer_ind_passport_bywho дата выдачи $buyer_ind_passport_date, зарегистрированный(ая) по адресу: $buyer_ind_adress (далее - Покупатель)";
                 elseif ($result->buyer_is_owner_car == 'not_own_car')
-                    $buyer_data = " получил от $buyer_agent_fio $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_fio(далее - Покупатель)";
+                    $buyer_data = " получил от $buyer_agent_fio_parent $for_agent_proxy_birthday паспорт серия $result->for_agent_proxy_pass_serial, № $result->for_agent_proxy_pass_number, выдан $result->for_agent_proxy_pass_bywho дата выдачи $for_agent_proxy_pass_date, зарегистрированный(ая) по адресу: $for_agent_proxy_adress действующий на основании доверенности от имени $buyer_ind_fio_parent(далее - Покупатель)";
                 break;
         }
         //Для подписи
@@ -2541,7 +2551,7 @@ class Document_model extends CI_Model
         $document = $this->word->loadTemplate($_SERVER['DOCUMENT_ROOT'] . '/documents/buy_sale/patterns/receipt_of_money.docx');
         //Заполнение
         $document->setValue('place_of_contract', $result->place_of_contract);
-        $document->setValue('date_of_contract', $result->date_of_product);
+        $document->setValue('date_of_contract', $date_of_contract);
         $document->setValue('vendor_data', $vendor_data);
         $document->setValue('buyer_data', $buyer_data);
         $document->setValue('price', $result->price_car);
@@ -2585,7 +2595,7 @@ class Document_model extends CI_Model
         //Подготовка
         //Фио
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
-        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_actor_surname,$result->buyer_law_actor_name,$result->buyer_law_actor_patronymic);
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
         //Адрес
@@ -2723,7 +2733,7 @@ class Document_model extends CI_Model
         $buyer_fio = $this->format_fio($result->buyer_surname,$result->buyer_name,$result->buyer_patronymic);
 //        $spouse_fio = $this->format_fio($result->spouse_surname,$result->spouse_name,$result->spouse_patronymic);
 //        $vendor_law_fio = $this->format_fio($result->vendor_law_surname,$result->vendor_law_name,$result->vendor_law_patronymic);
-        $buyer_law_fio = $this->format_fio($result->buyer_law_surname,$result->buyer_law_name,$result->buyer_law_patronymic);
+        $buyer_law_fio = $this->format_fio($result->buyer_law_actor_surname,$result->buyer_law_actor_name,$result->buyer_law_actor_patronymic);
         $vendor_ind_fio = $this->format_fio($result->vendor_ind_surname,$result->vendor_ind_name,$result->vendor_ind_patronymic);
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
@@ -2746,7 +2756,7 @@ class Document_model extends CI_Model
         //Дата
         $date_of_contract = $this->format_date($result->date_of_contract);
         $vendor_passport_date = $this->format_date($result->vendor_passport_date);
-        $date_of_product = $this->format_date($result->date_of_product);
+        $date_of_product = $result->date_of_product;
         $spouse_pass_date = $this->format_date($result->spouse_pass_date);
         $marriage_svid_date = $this->format_date($result->marriage_svid_date);
         $date_of_serial_car = $this->format_date($result->date_of_serial_car);
