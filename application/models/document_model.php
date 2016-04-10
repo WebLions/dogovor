@@ -666,10 +666,10 @@ class Document_model extends CI_Model
 //                }
                 $output .= "{$data['date']} рождения $enter";
                 $output .= "паспорт серии {$data['document_serial']} №{$data['document_number']} выдан {$data['document_date']} {$data['document_bywho']}  $enter";
-                $output .= "Адрес: {$data['adress']} $enter";
+                $output .= "Адрес: {$data['adress']}";
                 if (($data['phone'] != null) || ($data['phone'] !='' ))
                 {
-                    $output .= "Телефон: {$data['phone']}";
+                    $output .= "$enter"."Телефон: {$data['phone']}";
                 }
                 break;
 
@@ -689,7 +689,8 @@ class Document_model extends CI_Model
                 $output .= "БИК {$data['bik']}";
                 if (($data['phone'] != null) || ($data['phone'] !='' ))
                 {
-                    $output .= "Телефон: {$data['phone']}";
+                    $output .= "$enter"."Телефон: {$data['phone']}";
+
                 }
                 break;
 
@@ -711,7 +712,7 @@ class Document_model extends CI_Model
                 $output .= "БИК {$data['bik']}";
                 if (($data['phone'] != null) || ($data['phone'] !='' ))
                 {
-                    $output .= "Телефон: {$data['phone']}";
+                    $output .= "$enter"."Телефон: {$data['phone']}";
                 }
                 break;
         }
