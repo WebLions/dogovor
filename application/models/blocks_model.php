@@ -218,7 +218,7 @@ END;
                     <input  required  class = "form-control" type="text" name="agent_vendor_pass_number"  placeholder="Номер паспорта:">
                     </div>
                     <div class = "content-input-group">
-                    <input  required  id="vendor_birthday" class="form-control datetimepicker" type="text"  name="agent_vendor_pass_date"  placeholder="Когда выдан :">
+                    <input  required  class="form-control datetimepicker" type="text"  name="agent_vendor_pass_date"  placeholder="Когда выдан :">
                     </div>
                     <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="agent_vendor_pass_bywho"  placeholder="Кем выдан:">
@@ -266,6 +266,9 @@ END;
                 <input  required  class = "form-control" style="float:left;width:48%;margin-right:6px;" type="text" name="for_agent_vendor_patronymic"  placeholder="Отчество, например Иванович">
                 <input  required  class = "form-control" style="float:left;width:48%;" type="text" name="for_agent_vendor_patronymic_parent"  placeholder="Отчество, например Ивановича">
                 </div>
+                    <div class="content-input-group">
+                        <input required="" class="form-control datetimepicker" type="text" name="for_agent_proxy_birthday" placeholder="Дата рождения:" id="dp1460280812193">
+                    </div>
                     <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="for_agent_vendor_proxy_number"  placeholder="Номер доверенности:">
                     </div>
@@ -282,7 +285,7 @@ END;
                     <input  required  class = "form-control" type="text" name="agent_vendor_pass_number"  placeholder="Номер паспорта:">
                     </div>
                     <div class = "content-input-group">
-                    <input  required  id="vendor_birthday" class="form-control datetimepicker" type="text"  name="agent_vendor_pass_date"  placeholder="Когда выдан :">
+                    <input  required  class="form-control datetimepicker" type="text"  name="agent_vendor_pass_date"  placeholder="Когда выдан :">
                     </div>
                     <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="agent_vendor_pass_bywho"  placeholder="Кем выдан:">
@@ -1464,7 +1467,7 @@ END;
                     <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование компании: ">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_law_date_of_create"  placeholder="Дата регистрации/создания общества">
+                    <input  required  class = "form-control datetimepicker" type="text" name="vendor_law_date_of_create"  placeholder="Дата регистрации/создания общества">
                 </div>
                 <div class = "content-input-group">
                 <p class = "content-input-title" style="width:48%;margin-right:20px;">В лице:</p>
@@ -1622,7 +1625,7 @@ END;
                     <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование компании: ">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_law_date_of_create"  placeholder="Дата регистрации/создания общества">
+                    <input  required  class = "form-control datetimepicker" type="text" name="buyer_law_date_of_create"  placeholder="Дата регистрации/создания общества">
                 </div>
                 <div class = "content-input-group">
                  <p class = "content-input-title" style="float:left;width:48%;margin-right:20px;">В лице:</p>
