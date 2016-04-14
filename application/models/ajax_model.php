@@ -1613,9 +1613,9 @@ END;
         $this->db->join("documents","documents.doc_id=bs.id");
         $this->db->where("documents.id",$d);
         $query = $this->db->get("buy_sale as bs",1,0)->row();
-        $v[] = ($query->payment_date=="До подписания настоящего договора")?' checked':'';
-        $v[] = ($query->payment_date=="При подписании настоящего договора")?' checked':'';
-        $v[] = ($query->payment_date=="В рассрочку по следующему графику")?' checked':'';
+        $v[] = ($query->payment_date=="до подписания настоящего договора")?' checked':'';
+        $v[] = ($query->payment_date=="при подписании настоящего договора")?' checked':'';
+        $v[] = ($query->payment_date=="в рассрочку по следующему графику")?' checked':'';
         $text = "";
         if($v[2]==' checked'){
             $k[] = ($query->credit_currency=="рублей")?' checked':'';
@@ -1643,17 +1643,17 @@ END;
             <div class = "content-radio-group">
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="До подписания настоящего договора" {$v[0]}>
+                    <input type="radio" name="payment_date" value="до подписания настоящего договора" {$v[0]}>
                     <span class = "content-input-align">До подписания настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input type="radio" name="payment_date" value="При подписании настоящего договора" {$v[1]}>
+                    <input type="radio" name="payment_date" value="при подписании настоящего договора" {$v[1]}>
                     <span class = "content-input-align">При подписании настоящего договора</span>
                 </div>
 
                 <div class = "content-radio">
-                    <input id="credit" type="radio" name="payment_date" value="В рассрочку по следующему графику" {$v[2]}>
+                    <input id="credit" type="radio" name="payment_date" value="в рассрочку по следующему графику" {$v[2]}>
                     <span class = "content-input-align">В рассрочку по следующему графику:</span>
                 </div>
             </div>
