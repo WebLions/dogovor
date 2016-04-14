@@ -1825,7 +1825,7 @@ END;
             <div class = "content-radio-header">
 
              <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:">
+                    <input  required  class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в кВт:">
               </div>
               <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:">
@@ -1890,7 +1890,7 @@ END;
             <div class = "content-radio-header">
 
              <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:">
+                    <input  required  class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в кВт:">
               </div>
               <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:">
