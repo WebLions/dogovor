@@ -1894,7 +1894,7 @@ END;
             <div class = "content-radio-header">
 
              <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:" value="{$query->gibdd_power_engine}">
+                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в кВт:" value="{$query->gibdd_power_engine}">
               </div>
               <div class = "content-input-group">
                     <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:" value="{$query->gibdd_eco_class}">
@@ -2932,7 +2932,7 @@ END;
             <div class = "content-radio-header">
 
              <div class = "content-input-group">
-                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в ВТ:" value="{$query->gibdd_power_engine}">
+                    <input class = "form-control" type="text" name="gibdd_power_engine"  placeholder="Мощность двигателя в кВт:" value="{$query->gibdd_power_engine}">
               </div>
               <div class = "content-input-group">
                     <input class = "form-control" type="text" name="gibdd_eco_class"  placeholder="Экологический класс:" value="{$query->gibdd_eco_class}">

@@ -657,13 +657,6 @@ class Document_model extends CI_Model
         {
             case 'physical':
                 $output =  "{$data['fio']} $enter";
-//                if ($data['owner_car'] == 'not_own_car')
-//                {
-//                    $output = "{$data['agent_fio']} $enter";
-//                    $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
-//                    $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
-//                    $output .= "Выдана: {$data['agent_proxy_notary']} $enter";
-//                }
                 $output .= "{$data['date']} рождения $enter";
                 $output .= "паспорт серии {$data['document_serial']} №{$data['document_number']} выдан {$data['document_date']} {$data['document_bywho']}  $enter";
                 $output .= "Адрес: {$data['adress']}";
@@ -675,13 +668,6 @@ class Document_model extends CI_Model
 
             case 'law':
                 $output = "{$data['name']} $enter";
-                if ($data['owner_car'] == 'not_own_car')
-//                {
-//                    $output .= "{$data['agent_fio']} $enter";
-//                    $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
-//                    $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
-//                    $output .= "Выдана: {$data['agent_proxy_notary']} $enter";
-//                }
                 $output .= "{$data['adress']} $enter";
                 $output .= "ИНН {$data['inn']}, ОГРН {$data['ogrn']}  $enter";
                 $output .= "р/счёт {$data['acc']} в банке {$data['bank_name']}$enter";
@@ -696,13 +682,6 @@ class Document_model extends CI_Model
 
             case 'individual':
                 $output = "ИП {$data['fio']} $enter";
-//                if ($data['owner_car'] == 'not_own_car')
-//                {
-//                    $output = "{$data['agent_fio']} $enter";
-//                    $output .= "Доверенность № {$data['agent_proxy_number']} $enter";
-//                    $output .= "Дата выдачи: {$data['agent_proxy_date']} $enter";
-//                    $output .= "Выдана: {$data['agent_proxy_notary']} $enter";
-//                }
                 $output .="{$data['date']} рождения $enter";
                 $output .= "Свидетельство №{$data['number_of_certificate']} от {$data['date_of_certificate']} $enter";
                 $output .="паспорт серии {$data['document_serial']} №{$data['document_number']} выдан {$data['document_date']} {$data['document_bywho']}  $enter";
@@ -1518,7 +1497,7 @@ class Document_model extends CI_Model
         $buyer_date = $this->format_date($result->buyer_birthday);
         $buyer_ind_date = $this->format_date($result->buyer_ind_birthday);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
-        $for_agent_proxy_pass_date = $this->format_date($result->vendor_birthday);
+        $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         //Правки даты
@@ -1559,7 +1538,7 @@ class Document_model extends CI_Model
             case 'law':
                 $giver['name'] = $result->buyer_law_company_name;
                 $giver['date'] = $buyer_law_date_of_create ;
-                $giver['pass'] = 'не указано';
+                $giver['pass'] = '';
                 $giver['adress'] = $result->buyer_law_adress;
                 $giver['phone'] = $result->buyer_law_phone;
                 break;
@@ -2620,7 +2599,7 @@ class Document_model extends CI_Model
         $buyer_date = $this->format_date($result->buyer_birthday);
         $buyer_ind_date = $this->format_date($result->buyer_ind_birthday);
         $buyer_law_proxy_date = $this->format_date($result->buyer_law_proxy_date);
-        $for_agent_proxy_pass_date = $this->format_date($result->vendor_birthday);
+        $for_agent_proxy_pass_date = $this->format_date($result->for_agent_proxy_pass_date);
         $buyer_passport_date = $this->format_date($result->buyer_passport_date);
         $buyer_ind_passport_date = $this->format_date($result->buyer_ind_passport_date);
         //новые данные юр.лица
@@ -2662,7 +2641,7 @@ class Document_model extends CI_Model
             case 'law':
                 $giver['name'] = $result->buyer_law_company_name;
                 $giver['date'] = $buyer_law_date_of_create ;
-                $giver['pass'] = 'не указано';
+                $giver['pass'] = '';
                 $giver['adress'] = $result->buyer_law_adress;
                 $giver['phone'] = $result->buyer_law_phone;
                 break;
@@ -3923,7 +3902,7 @@ class Document_model extends CI_Model
             ),
             31 => array
             (
-                'text' => "^4/3.3. Покупатель оплачивает стоимость транспортного средства путем передачи наличных денег Продавцу {$data_input['payment_date']}$credit. При получении денежных средств Продавец в соответствии с п. 2 ст. 408 ГК РФ выдает расписку.",
+                'text' => "^4/3.3. Покупатель оплачивает стоимость транспортного средства путем передачи наличных денег продавцу {$data_input['payment_date']}$credit. При получении денежных средств Продавец в соответствии с п. 2 ст. 408 ГК РФ выдает расписку.",
                 'text-type' => 'paragraph',
             ),
             32 => array
