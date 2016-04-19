@@ -214,6 +214,7 @@ class Document_model extends CI_Model
     {
         $string = "";
         if (empty($target)) return 'не указано';
+        if ($target == 'не указано'){return $target;}
         $target = json_decode($target);
 //        $quantity = count($target);
 //        $last_element = $quantity-1;//Ибо счет с нуля
@@ -337,6 +338,7 @@ class Document_model extends CI_Model
             }
             else $id_type = false;
         }
+        // Дарение
         if ($type_of_document == 'gift')
         {
             if ($giver == 'physical' && $taker == 'physical' || $taker == 'individual')
@@ -400,7 +402,7 @@ class Document_model extends CI_Model
                 'not_own' => $bold_start.'Гражданин '.$data_for_header['vendor_agent_fio'].$bold_end.', '.$data_for_header['agent_vendor_birthday'].' рождения, паспорт серии '.$data_for_header['agent_vendor_pass_serial'].' №'.$data_for_header['agent_vendor_pass_number'].' выдан '.$data_for_header['agent_vendor_pass_date'].' '.$data_for_header['agent_vendor_pass_bywho'].', зарегистирован по адресу: '.$data_for_header['agent_vendor_adress'].', действующий от имени гражданина '.$data_for_header['vendor_fio_parent'].' на основании доверенности от '.$data_for_header['for_agent_vendor_proxy_date'].' №'.$data_for_header['for_agent_vendor_proxy_number'].', выданной '.$data_for_header['for_agent_vendor_proxy_notary'].', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ',
             ),
             'buyer' => array(
-                'own' => $bold_start. 'гражанин ' . $data_for_header['buyer_fio']. $bold_end . ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
+                'own' => $bold_start. 'гражданин ' . $data_for_header['buyer_fio']. $bold_end . ', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
 
                 'not_own' => $bold_start.'гражданин '.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].' рождения, паспорт серии '.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].' выдан '.$data_for_header['for_agent_proxy_pass_date'].' '.$data_for_header['for_agent_proxy_pass_bywho'].', зарегистирован по адресу: '.$data_for_header['for_agent_proxy_adress'].', действующий от имени гражданина '.$data_for_header['buyer_fio_parent'].' на основании доверенности от '.$data_for_header['for_agent_buyer_proxy_date'].' №'.$data_for_header['for_agent_buyer_proxy_number'].', выданной '.$data_for_header['for_agent_buyer_proxy_notary'].', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
             ),
@@ -411,7 +413,7 @@ class Document_model extends CI_Model
             'vendor' => array(
                 'own' => $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$first_person.$bold_end.'", в лице '. $data_for_header['vendor_law_actor_position'].' '. $data_for_header['vendor_law_fio'].', действующего на основании '. $data_for_header['vendor_law_document_osn'].' , с одной стороны, и ',
 
-                'not_own' => $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице '. $data_for_header['vendor_agent_fio_parent'].', действующего на основании доверености №'. $data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
+                'not_own' => $bold_start.$data_for_header['vendor_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице '. $data_for_header['vendor_agent_fio_parent'].', действующего на основании доверености №'. $data_for_header['for_agent_vendor_proxy_number'].' от '.$data_for_header['for_agent_vendor_proxy_date'].', с одной стороны, и ',
             ),
             'buyer' => array(
                 'own' => $bold_start.$data_for_header['buyer_law_company_name'].$bold_end.', далее именуемое "'.$bold_start.$second_person.$bold_end.'", в лице ' . $data_for_header['buyer_law_actor_position'].' '. $data_for_header['buyer_law_fio'].', действующего на основании '. $data_for_header['buyer_law_document_osn'].', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
@@ -428,7 +430,7 @@ class Document_model extends CI_Model
             'buyer' => array(
                 'own' => 'Индивидуальный предприниматель '.$bold_start.$data_for_header['buyer_ind_fio'].$bold_end.'", действующий на основании свидетельства от '.$data_for_header['buyer_date_of_certificate'].' №'.$data_for_header['buyer_number_of_certificate'].', далее именуемый "'.$bold_start.$second_person.$bold_end.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
 
-                'not_own' => $bold_start.'гражданин '.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].' рождения, паспорт сериb '.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].' выдан '.$data_for_header['for_agent_proxy_pass_date'].' '.$data_for_header['for_agent_proxy_pass_bywho'].', зарегистирован по адресу: '.$data_for_header['for_agent_proxy_adress'].', действующий от имени индивидуального предпринимателя '.$data_for_header['buyer_ind_fio_parent'].' на основании доверенности от '.$data_for_header['for_agent_buyer_proxy_date'].' №'.$data_for_header['for_agent_buyer_proxy_number'].', выданной '.$data_for_header['for_agent_buyer_proxy_notary'].', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
+                'not_own' => $bold_start.'гражданин '.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].' рождения, паспорт серии '.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].' выдан '.$data_for_header['for_agent_proxy_pass_date'].' '.$data_for_header['for_agent_proxy_pass_bywho'].', зарегистирован по адресу: '.$data_for_header['for_agent_proxy_adress'].', действующий от имени индивидуального предпринимателя '.$data_for_header['buyer_ind_fio_parent'].' на основании доверенности от '.$data_for_header['for_agent_buyer_proxy_date'].' №'.$data_for_header['for_agent_buyer_proxy_number'].', выданной '.$data_for_header['for_agent_buyer_proxy_notary'].', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
             ),
         );
         if ($type_of_vendor == 'physical' && $type_of_buyer == 'physical')
@@ -633,7 +635,7 @@ class Document_model extends CI_Model
         if ($car_in_marriage == 'true')
         {
             // Если продавец в браке то
-            $marriage['info'] ="$enter"."   4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства принадлежащие ему(ей) и супруге(у) ".$spouse_fio." и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
+            $marriage['info'] ="$enter"."    4.4. Продавец довел до Покупателя сведения о том, что транспортное средство приобретено им в период брака на совместные денежные средства принадлежащие ему(ей) и супруге(у) ".$spouse_fio." и является совместным имуществом супругов. По заявлению Продавца договор заключается по обоюдному согласию супругов, Покупатель ознакомлен с содержанием указанного заявления. ";
             $marriage['number'] = 5; //номер следующего пункта
         }
 //        elseif ($car_in_marriage == 'false')
@@ -1656,8 +1658,8 @@ class Document_model extends CI_Model
         $buyer_ind_fio = $this->format_fio($result->buyer_ind_surname,$result->buyer_ind_name,$result->buyer_ind_patronymic);
         $vendor_agent_fio = $this->format_fio($result->for_agent_vendor_surname,$result->for_agent_vendor_name,$result->for_agent_vendor_patronymic);
         $buyer_agent_fio = $this->format_fio($result->for_agent_buyer_surname,$result->for_agent_buyer_name,$result->for_agent_buyer_patronymic);
-        $spouse_parent_fio = $this->format_fio($result->spouse_surname_parent,$result->spouse_name_parent,$result->spouse_patronymic_parent);
         //Родительское фио
+        $spouse_parent_fio = $this->format_fio($result->spouse_surname_parent,$result->spouse_name_parent,$result->spouse_patronymic_parent);
         $vendor_law_fio_parent = $this->format_fio($result->vendor_law_actor_surname_parent,$result->vendor_law_actor_name_parent,$result->vendor_law_actor_patronymic_parent);
         $buyer_law_fio_parent = $this->format_fio($result->buyer_law_actor_surname_parent,$result->buyer_law_actor_name_parent,$result->buyer_law_actor_patronymic_parent);
         $vendor_fio_parent = $this->format_fio($result->vendor_surname_parent, $result->vendor_name_parent, $result->vendor_patronymic_parent);
@@ -2955,9 +2957,9 @@ class Document_model extends CI_Model
             'buyer_ind_surname_parent' => $_POST['buyer_ind_surname_parent'],
             'buyer_ind_name_parent' => $_POST['buyer_ind_name_parent'],
             'buyer_ind_patronymic_parent' => $_POST['buyer_ind_patronymic_parent'],
-            'spouse_surname_parent' => $_POST['buyer_ind_patronymic_parent'],
-            'spouse_name_parent' => $_POST['buyer_ind_patronymic_parent'],
-            'spouse_patronymic_parent' => $_POST['buyer_ind_patronymic_parent'],
+            'spouse_surname_parent' => $_POST['spouse_surname_parent'],
+            'spouse_name_parent' => $_POST['spouse_name_parent'],
+            'spouse_patronymic_parent' => $_POST['spouse_patronymic_parent'],
 
             //Доверенное лицо
                 //Продавец
@@ -3255,9 +3257,9 @@ class Document_model extends CI_Model
             'buyer_ind_surname_parent' => $_POST['buyer_ind_surname_parent'],
             'buyer_ind_name_parent' => $_POST['buyer_ind_name_parent'],
             'buyer_ind_patronymic_parent' => $_POST['buyer_ind_patronymic_parent'],
-            'spouse_surname_parent' => $_POST['buyer_ind_patronymic_parent'],
-            'spouse_name_parent' => $_POST['buyer_ind_patronymic_parent'],
-            'spouse_patronymic_parent' => $_POST['buyer_ind_patronymic_parent'],
+            'spouse_surname_parent' => $_POST['spouse_surname_parent'],
+            'spouse_name_parent' => $_POST['spouse_name_parent'],
+            'spouse_patronymic_parent' => $_POST['spouse_patronymic_parent'],
             //Конец новых
             'type_of_giver' => $_POST['type_of_giver'],
             'vendor_is_owner_car' => $_POST['vendor_is_owner_car'],
