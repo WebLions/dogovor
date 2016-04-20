@@ -212,10 +212,9 @@ class Document_model extends CI_Model
     //------------------------------------------------------------------------------------------------------------------
     private function json_to_string($target)
     {
-        $string = "";
-        if (empty($target)) return 'не указано';
-        if ($target == 'не указано'){return $target;}
         $target = json_decode($target);
+        if (empty($target) == true) {return'не указано';}
+        ///
 //        $quantity = count($target);
 //        $last_element = $quantity-1;//Ибо счет с нуля
 //        if ($quantity == 1)
@@ -231,8 +230,9 @@ class Document_model extends CI_Model
 //            }
 //            $string .= "; " . $target[$last_element] . ".";
 //        }
-        $string = join("; ", $target);
-        return $string;
+        ///
+        $target = join("; ", $target);
+        return $target;
     }
     //------------------------------------------------------------------------------------------------------------------
     public function json_to_string_accessories($target)
@@ -293,70 +293,109 @@ class Document_model extends CI_Model
     {
         if ($type_of_document == 'buy_sell')
         {
+        }
+        // Дарение
+        if ($giver == 'physical' && $taker == 'physical')
+        {
+            $id_type = 1;
+            if ($gibdd == 'false') $id_type = 7;
+            if ($marriage == 'false' || $marriage = null ) $id_type = 9;
+            if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+        }
+        elseif ($giver == 'individual' && $taker == 'individual')
+        {
+            $id_type = 1;
+            if ($gibdd == 'false') $id_type = 7;
+            if ($marriage == 'false'|| $marriage = null ) $id_type = 9;
+            if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+        }
+        elseif ($giver == 'law' && $taker == 'law')
+        {
+            $id_type = 6;
+            if ($gibdd == 'false') $id_type = 15;
+        }
+        elseif ($giver == 'law' && $taker == 'individual')
+        {
+            $id_type = 4;
+            if ($gibdd == 'false') $id_type = 13;
+        }
+        elseif ($giver == 'physical' && $taker == 'law' )
+        {
+            $id_type = 3;
+            if ($gibdd == 'false') $id_type = 7;
+            if ($marriage == 'false' || $marriage = null ) $id_type = 9;
+            if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+        }
+        elseif ($giver == 'physical' && $taker == 'individual')
+        {
+            $id_type = 3;
+            if ($gibdd == 'false') $id_type = 7;
+            if ($marriage == 'false' || $marriage = null ) $id_type = 9;
+            if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+        }
+        elseif ($giver == 'individual' && $taker == 'physical')
+        {
+            $id_type = 4;
+            if ($gibdd == 'false') $id_type = 13;
+        }
+        elseif ($giver == 'law' && $taker == 'physical')
+        {
+            $id_type = 4;
+            if ($gibdd == 'false') $id_type = 13;
+        }
+        elseif ($giver == 'individual' && $taker == 'law')
+        {
+            $id_type = 1;
+            if ($gibdd == 'false') $id_type = 7;
+            if ($marriage == 'false' || $marriage = null ) $id_type = 9;
+            if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+        }
+        elseif ($giver == 'physical' && $taker == 'law')
+        {
+            $id_type = 1;
+            if ($gibdd == 'false') $id_type = 7;
+            if ($marriage == 'false' || $marriage = null ) $id_type = 9;
+            if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+        }
+        else $id_type = false;
+        if ($type_of_document == 'gift')
+        {
             if ($giver == 'physical' && $taker == 'physical')
             {
-                $id_type = 1;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null ) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+                $id_type = 5;
+                if ($gibdd == 'false') $id_type = 14;
+            }
+            elseif ($giver == 'physical' && $taker == 'individual')
+            {
+                $id_type = 5;
+                if ($gibdd == 'false') $id_type = 14;
+            }
+            elseif ($giver == 'individual' && $taker == 'physical')
+            {
+                $id_type = 5;
+                if ($gibdd == 'false') $id_type = 14;
             }
             elseif ($giver == 'individual' && $taker == 'individual')
             {
-                $id_type = 1;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false'|| $marriage = null ) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+                $id_type = 5;
+                if ($gibdd == 'false') $id_type = 14;
             }
-            elseif ($giver == 'law' && $taker == 'law')
+            elseif ($giver == 'physical' && $taker == 'law')
             {
                 $id_type = 6;
                 if ($gibdd == 'false') $id_type = 15;
             }
-            elseif ($giver == 'physical' && $taker == 'law' || $taker == 'individual')
+            elseif ($giver == 'individual' && $taker == 'law')
             {
-                $id_type = 3;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null ) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+                $id_type = 6;
+                if ($gibdd == 'false') $id_type = 15;
             }
-            elseif ($giver == 'law' || $giver == 'individual' && $taker == 'physical')
+            elseif ($giver == 'law' && $taker == 'physical')
             {
-                $id_type = 4;
-                if ($gibdd == 'false') $id_type = 13;
-            }
-            elseif ($giver == 'individual' || $giver == 'physical' && $taker == 'law')
-            {
-                $id_type = 1;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null ) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null ) $id_type = 8;
+                $id_type = 6;
+                if ($gibdd == 'false') $id_type = 15;
             }
             elseif ($giver == 'law' && $taker == 'individual')
-            {
-                $id_type = 4;
-                if ($gibdd == 'false') $id_type = 13;
-            }
-            else $id_type = false;
-        }
-        // Дарение
-        if ($type_of_document == 'gift')
-        {
-            if ($giver == 'physical' && $taker == 'physical' || $taker == 'individual')
-            {
-                $id_type = 5;
-                if ($gibdd == 'false') $id_type = 14;
-            }
-            elseif ($giver == 'individual' && $taker == 'individual' || $taker == 'physical')
-            {
-                $id_type = 5;
-                if ($gibdd == 'false') $id_type = 14;
-            }
-            elseif ($giver == 'physical' || $giver == 'individual' && $taker == 'law')
-            {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            }
-            elseif ($giver == 'law' && $taker == 'individual' || $taker == 'physical')
             {
                 $id_type = 6;
                 if ($gibdd == 'false') $id_type = 15;
