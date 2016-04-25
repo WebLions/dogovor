@@ -188,24 +188,11 @@ class Document extends CI_Controller
     {
         $this->document_model->get_data_for_canvas_gift();//Возвращает json массив
     }
-    public function test()
-    {
-        echo '<meta http-equiv="content-type" content="text/html; charset=UTF-8" />';
-
-        $arr = array
-        (
-
-
-            0 => array(2),
-            1 => 'левый руль',
-            3 => 'передний привод',
-            2 => array('ключи от дома где деньги лежат', 1)
-        );
-//        print_r($arr);
-        $arr = json_encode($arr);
-        $arr = $this->document_model->json_to_string_accessories($arr);
-        print_r($arr);
-    }
+//    public function db_seed()
+//    {
+//        $result =  $this->document_model->set_pack_of_documents('law', 'law', 'gift', false);
+//        var_dump ($result);
+//    }
     public function edit($docum){
         if( !$this->data['user_id'] ) {
             redirect('/','refresh');

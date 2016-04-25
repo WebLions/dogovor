@@ -289,106 +289,169 @@ class Document_model extends CI_Model
         return $string;
     }
     //------------------------------------------------------------------------------------------------------------------
-    private function set_pack_of_documents($giver, $taker, $type_of_document, $marriage, $gibdd)
+    public function set_pack_of_documents($giver, $taker, $type_of_document, $gibdd, $marriage=false )
     {
-        if ($type_of_document == 'buy_sell')
-        {
+//        /**
+//         * КП
+//         * 1 - кп, акт, расписка, гибдд, супруга (ф-ф /ф-и /ф-ю /и-и /и-ф /и-ю)
+//         * 2 - кп, акт, гибдд (ю-ю)
+//         * 3 - кп, акт, расписка, гибдд (ю-ф /ю-и) или (когда нет супруги)
+//         * 4 - кп, акт, расписка, супруга (когда нет гибдд)
+//         * 5 - кп, акт, расписка (когда нет ни супруги, ни гибдд)
+//         * 6 - кп, акт (для юр лиц когда нет гибдд)
+//         * _____________________________________________________________________
+//         *
+//         * Дарение
+//         * 11 - дарение, гибдд (когда ф/и-ф/и)
+//         * 12 - дарение, акт, гибдд (когда ф/и-ю)
+//         * 13 - дарение (когда нет гибдд)
+//         * 14 - дарение, акт (когда нет гибдд у юр лица)
+//         *________________________________________________________________________
+//         * Миграция:
+//         *
+//         *  TRUNCATE TABLE  `types`
+//         *  ALTER TABLE  `types` ADD  `index` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ;
+//         *  INSERT INTO `project_dogovor`.`types` (`index`, `id`, `document_name`, `url`) VALUES (NULL, '1', 'Договор купли-продажи', 'buy_sale'), (NULL, '1', 'Акт приема-передачи', 'act_of_reception'), (NULL, '1', 'Расписка в получении денег', 'receipt_of_money'), (NULL, '1', 'Заявление в ГИБДД', 'statement_gibdd'), (NULL, '1', 'Заявление продавца о согласии супруга', 'marriage'), (NULL, '2', 'Договор купли-продажи', 'buy_sale'), (NULL, '2', 'Акт приема-передачи', 'act_of_reception'), (NULL, '2', 'Заявление в ГИБДД', 'statement_gibdd');
+//         *  INSERT INTO `project_dogovor`.`types` (`index`, `id`, `document_name`, `url`) VALUES (NULL, '3', 'Договор купли-продажи', 'buy_sale'), (NULL, '3', 'Акт приема-передачи', 'act_of_reception'), (NULL, '3', 'Расписка в получении денег', 'receipt_of_money'), (NULL, '3', 'Заявление в ГИБДД', 'statement_gibdd'), (NULL, '4', 'Договор купли-продажи', 'buy_sale'), (NULL, '4', 'Акт приема-передачи', 'act_of_reception'), (NULL, '4', 'Расписка в получении денег', 'receipt_of_money'), (NULL, '4', 'Заявление продавца о согласии супруга', 'marriage');
+//         *  INSERT INTO `project_dogovor`.`types` (`index`, `id`, `document_name`, `url`) VALUES (NULL, '5', 'Договор купли-продажи', 'buy_sale'), (NULL, '5', 'Акт приема-передачи', 'act_of_reception'), (NULL, '5', 'Расписка в получении денег', 'receipt_of_money'), (NULL, '6', 'Договор купли-продажи', 'buy_sale'), (NULL, '6', 'Акт приема-передачи', 'act_of_reception'), (NULL, '11', 'Договор дарения', 'gift'), (NULL, '11', 'Заявление в ГИБДД', 'statement_gibdd'), (NULL, '12', 'Договор дарения', 'gift'), (NULL, '12', 'Акт приема-передачи', 'act_of_reception'), (NULL, '12', 'Заявление в ГИБДД', 'statement_gibdd');
+//         *  INSERT INTO `project_dogovor`.`types` (`index`, `id`, `document_name`, `url`) VALUES (NULL, '13', 'Договор дарения', 'gift'), (NULL, '14', 'Договор дарения', 'gift'), (NULL, '14', 'Акт приема-передачи', 'act_of_reception');
+//         *
+//         */
+//        if ($type_of_document == 'buy_sell')
+//        {
+//
+//            if ($giver == 'physical' && $taker == 'physical') {
+//                $id_type = 1;
+//                if ($gibdd == 'false') $id_type = 7;
+//                if ($marriage == 'false' || $marriage = null) $id_type = 9;
+//                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
+//            } elseif ($giver == 'individual' && $taker == 'individual') {
+//                $id_type = 1;
+//                if ($gibdd == 'false') $id_type = 7;
+//                if ($marriage == 'false' || $marriage = null) $id_type = 9;
+//                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
+//            } elseif ($giver == 'law' && $taker == 'law') {
+//                $id_type = 2;
+//                if ($gibdd == 'false') $id_type = 15;
+//            } elseif ($giver == 'law' && $taker == 'individual') {
+//                $id_type = 4;
+//                if ($gibdd == 'false') $id_type = 13;
+//            } elseif ($giver == 'physical' && $taker == 'law') {
+//                $id_type = 3;
+//                if ($gibdd == 'false') $id_type = 7;
+//                if ($marriage == 'false' || $marriage = null) $id_type = 9;
+//                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
+//            } elseif ($giver == 'physical' && $taker == 'individual') {
+//                $id_type = 3;
+//                if ($gibdd == 'false') $id_type = 7;
+//                if ($marriage == 'false' || $marriage = null) $id_type = 9;
+//                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
+//            } elseif ($giver == 'individual' && $taker == 'physical') {
+//                $id_type = 4;
+//                if ($gibdd == 'false') $id_type = 13;
+//            } elseif ($giver == 'law' && $taker == 'physical') {
+//                $id_type = 4;
+//                if ($gibdd == 'false') $id_type = 13;
+//            } elseif ($giver == 'individual' && $taker == 'law') {
+//                $id_type = 1;
+//                if ($gibdd == 'false') $id_type = 7;
+//                if ($marriage == 'false' || $marriage = null) $id_type = 9;
+//                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
+//            } elseif ($giver == 'physical' && $taker == 'law') {
+//                $id_type = 1;
+//                if ($gibdd == 'false') $id_type = 7;
+//                if ($marriage == 'false' || $marriage = null) $id_type = 9;
+//                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
+//            } else $id_type = false;
+//        }
+//        if ($type_of_document == 'gift')
+//        {
+//            if ($giver == 'physical' && $taker == 'physical')
+//            {
+//                $id_type = 5;
+//                if ($gibdd == 'false') $id_type = 14;
+//            }
+//            elseif ($giver == 'physical' && $taker == 'individual')
+//            {
+//                $id_type = 5;
+//                if ($gibdd == 'false') $id_type = 14;
+//            }
+//            elseif ($giver == 'individual' && $taker == 'physical')
+//            {
+//                $id_type = 5;
+//                if ($gibdd == 'false') $id_type = 14;
+//            }
+//            elseif ($giver == 'individual' && $taker == 'individual')
+//            {
+//                $id_type = 5;
+//                if ($gibdd == 'false') $id_type = 14;
+//            }
+//            elseif ($giver == 'physical' && $taker == 'law')
+//            {
+//                $id_type = 6;
+//                if ($gibdd == 'false') $id_type = 15;
+//            }
+//            elseif ($giver == 'individual' && $taker == 'law')
+//            {
+//                $id_type = 6;
+//                if ($gibdd == 'false') $id_type = 15;
+//            }
+//            elseif ($giver == 'law' && $taker == 'physical')
+//            {
+//                $id_type = 6;
+//                if ($gibdd == 'false') $id_type = 15;
+//            }
+//            elseif ($giver == 'law' && $taker == 'individual')
+//            {
+//                $id_type = 6;
+//                if ($gibdd == 'false') $id_type = 15;
+//            }
+//            elseif ($giver == 'law' && $taker == 'law')
+//            {
+//                $id_type = 6;
+//                if ($gibdd == 'false') $id_type = 15;
+//            }
+//            else $id_type = false;
+//        }
 
-            if ($giver == 'physical' && $taker == 'physical') {
-                $id_type = 1;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
-            } elseif ($giver == 'individual' && $taker == 'individual') {
-                $id_type = 1;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
-            } elseif ($giver == 'law' && $taker == 'law') {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            } elseif ($giver == 'law' && $taker == 'individual') {
-                $id_type = 4;
-                if ($gibdd == 'false') $id_type = 13;
-            } elseif ($giver == 'physical' && $taker == 'law') {
-                $id_type = 3;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
-            } elseif ($giver == 'physical' && $taker == 'individual') {
-                $id_type = 3;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
-            } elseif ($giver == 'individual' && $taker == 'physical') {
-                $id_type = 4;
-                if ($gibdd == 'false') $id_type = 13;
-            } elseif ($giver == 'law' && $taker == 'physical') {
-                $id_type = 4;
-                if ($gibdd == 'false') $id_type = 13;
-            } elseif ($giver == 'individual' && $taker == 'law') {
-                $id_type = 1;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
-            } elseif ($giver == 'physical' && $taker == 'law') {
-                $id_type = 1;
-                if ($gibdd == 'false') $id_type = 7;
-                if ($marriage == 'false' || $marriage = null) $id_type = 9;
-                if ($gibdd == 'false' && $marriage == 'false' || $marriage = null) $id_type = 8;
-            } else $id_type = false;
-        }
-        if ($type_of_document == 'gift')
-        {
-            if ($giver == 'physical' && $taker == 'physical')
-            {
-                $id_type = 5;
-                if ($gibdd == 'false') $id_type = 14;
-            }
-            elseif ($giver == 'physical' && $taker == 'individual')
-            {
-                $id_type = 5;
-                if ($gibdd == 'false') $id_type = 14;
-            }
-            elseif ($giver == 'individual' && $taker == 'physical')
-            {
-                $id_type = 5;
-                if ($gibdd == 'false') $id_type = 14;
-            }
-            elseif ($giver == 'individual' && $taker == 'individual')
-            {
-                $id_type = 5;
-                if ($gibdd == 'false') $id_type = 14;
-            }
-            elseif ($giver == 'physical' && $taker == 'law')
-            {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            }
-            elseif ($giver == 'individual' && $taker == 'law')
-            {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            }
-            elseif ($giver == 'law' && $taker == 'physical')
-            {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            }
-            elseif ($giver == 'law' && $taker == 'individual')
-            {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            }
-            elseif ($giver == 'law' && $taker == 'law')
-            {
-                $id_type = 6;
-                if ($gibdd == 'false') $id_type = 15;
-            }
-            else $id_type = false;
-        }
+        if ($gibdd == null) $gibdd = false;
+        if ($marriage == null) $marriage = false;
 
+        $this->db->select('type_id');
+        $this->db->where('type_of_document', $type_of_document);
+        $this->db->where('giver', $giver);
+        $this->db->where('taker', $taker);
+        $this->db->where('gibdd', $gibdd);
+        $this->db->where('marriage', $marriage);
+        $query = $this->db->get('types_options');
+        $result = $query->row();
+        $id_type = $result->type_id;
         return $id_type;
+    }
+    //------------------------------------------------------------------------------------------------------------------
+    public function db_seed()
+    {
+        $data = array();
+        $a = array('physical', 'law', 'individual');
+        foreach ($a as $first){
+            foreach ($a as $second){
+                for ($i = 0; $i<2; $i++){
+                    for ($j = 0; $j<2; $j++){
+                        $buffer = array(
+                        'giver' => $first,
+                            'taker' => $second,
+                            'gibdd'=> $i,
+                            'type_of_document' => 'gift'
+                        );
+                        $data[] = $buffer;
+                    }
+                }
+            }
+        }
+
+        $this->db->insert_batch('types_options', $data);
+
+//        print_r($data);
     }
     //------------------------------------------------------------------------------------------------------------------
     //Функция вывода заголовка документа
@@ -443,11 +506,11 @@ class Document_model extends CI_Model
         //Инд лицо шаблоны
         $ind= array(
             'vendor' => array(
-                'own' => 'Индивидуальный предприниматель '.$bold_start.$data_for_header['vendor_ind_fio'].$bold_end.'", действующий на основании свидетельства от '.$data_for_header['vendor_date_of_certificate'].' № '.$data_for_header['vendor_number_of_certificate'].', далее именуемый "'.$bold_start.$first_person.$bold_end.', с одной стороны и ',
+                'own' => 'Индивидуальный предприниматель '.$bold_start.$data_for_header['vendor_ind_fio'].$bold_end.', действующий на основании свидетельства от '.$data_for_header['vendor_date_of_certificate'].' № '.$data_for_header['vendor_number_of_certificate'].', далее именуемый "'.$bold_start.$first_person.$bold_end.', с одной стороны и ',
                 'not_own' => $bold_start.'Гражданин '.$data_for_header['vendor_agent_fio'].$bold_end.', '.$data_for_header['agent_vendor_birthday'].' рождения, паспорт серии '.$data_for_header['agent_vendor_pass_serial'].' №'.$data_for_header['agent_vendor_pass_number'].' выдан '.$data_for_header['agent_vendor_pass_date'].' '.$data_for_header['agent_vendor_pass_bywho'].', зарегистирован по адресу: '.$data_for_header['agent_vendor_adress'].', действующий от имени индивидуального предпринимателя '.$data_for_header['vendor_ind_fio_parent'].' на основании доверенности от '.$data_for_header['for_agent_vendor_proxy_date'].' №'.$data_for_header['for_agent_vendor_proxy_number'].', выданной '.$data_for_header['for_agent_vendor_proxy_notary'].', далее именуемый "'.$bold_start.$first_person.$bold_end.'", с одной стороны и ',
             ),
             'buyer' => array(
-                'own' => 'Индивидуальный предприниматель '.$bold_start.$data_for_header['buyer_ind_fio'].$bold_end.'", действующий на основании свидетельства от '.$data_for_header['buyer_date_of_certificate'].' №'.$data_for_header['buyer_number_of_certificate'].', далее именуемый "'.$bold_start.$second_person.$bold_end.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
+                'own' => 'Индивидуальный предприниматель '.$bold_start.$data_for_header['buyer_ind_fio'].$bold_end.', действующий на основании свидетельства от '.$data_for_header['buyer_date_of_certificate'].' №'.$data_for_header['buyer_number_of_certificate'].', далее именуемый "'.$bold_start.$second_person.$bold_end.', с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
 
                 'not_own' => $bold_start.'гражданин '.$data_for_header['buyer_agent_fio'].$bold_end.', '.$data_for_header['for_agent_proxy_birthday'].' рождения, паспорт серии '.$data_for_header['for_agent_proxy_pass_serial'].' №'.$data_for_header['for_agent_proxy_pass_number'].' выдан '.$data_for_header['for_agent_proxy_pass_date'].' '.$data_for_header['for_agent_proxy_pass_bywho'].', зарегистирован по адресу: '.$data_for_header['for_agent_proxy_adress'].', действующий от имени индивидуального предпринимателя '.$data_for_header['buyer_ind_fio_parent'].' на основании доверенности от '.$data_for_header['for_agent_buyer_proxy_date'].' №'.$data_for_header['for_agent_buyer_proxy_number'].', выданной '.$data_for_header['for_agent_buyer_proxy_notary'].', далее именуемый "'.$bold_start.$second_person.$bold_end.'", с другой стороны, совместно в дальнейшем именуемые "Стороны", заключили настоящий договор (далее - Договор) о нижеследующем:',
             ),
@@ -2938,7 +3001,7 @@ class Document_model extends CI_Model
             }
         }
         //_______________________________
-        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['police_form'], $_POST['car_in_marriage']);
         if ($_POST['defects'] == 'false') {$_POST['defects'] = 'не указано';}
         if ($_POST['features'] == 'false') {$_POST['features'] = 'не указано';}
         $data = array
@@ -3244,7 +3307,7 @@ class Document_model extends CI_Model
             }
         }
         //_______________________________
-        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['car_in_marriage'], $_POST['police_form']);
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['police_form'] );
         $data = array
         (
             'type_id' => $type_id,
