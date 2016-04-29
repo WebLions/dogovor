@@ -421,11 +421,14 @@ class Document_model extends CI_Model
         $this->db->where('type_of_document', $type_of_document);
         $this->db->where('giver', $giver);
         $this->db->where('taker', $taker);
-        $this->db->where('gibdd', $gibdd);
-        $this->db->where('marriage', $marriage);
+        $this->db->where('gibdd', filter_var($gibdd, FILTER_VALIDATE_BOOLEAN));
+        $this->db->where('marriage', filter_var($marriage, FILTER_VALIDATE_BOOLEAN));
         $query = $this->db->get('types_options');
         $result = $query->row();
-        $id_type = $result->type_id;
+        $id_type = 1;
+        if (isset($result->type_id)) {
+            $id_type = $result->type_id;
+        }
         return $id_type;
     }
     //------------------------------------------------------------------------------------------------------------------
@@ -3001,7 +3004,7 @@ class Document_model extends CI_Model
             }
         }
         //_______________________________
-        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['police_form'], $_POST['car_in_marriage']);
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], 'buy_sale', $_POST['police_form'], $_POST['car_in_marriage']);
         if ($_POST['defects'] == 'false') {$_POST['defects'] = 'не указано';}
         if ($_POST['features'] == 'false') {$_POST['features'] = 'не указано';}
         $data = array
@@ -3307,7 +3310,7 @@ class Document_model extends CI_Model
             }
         }
         //_______________________________
-        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], $_POST['type_of_contract'], $_POST['police_form'] );
+        $type_id = $this->set_pack_of_documents($_POST['type_of_giver'], $_POST['type_of_taker'], 'gift', $_POST['police_form'] );
         $data = array
         (
             'type_id' => $type_id,
@@ -4584,7 +4587,7 @@ class Document_model extends CI_Model
         $post['car_in_marriage'] = !empty($post['car_in_marriage'])?$post['car_in_marriage']:$d->car_in_marriage;
         $post['police_form'] = !empty($post['police_form'])?$post['police_form']:$d->police_form;
         
-        $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], $post['type_of_contract'], $post['car_in_marriage'], $post['police_form']);
+        $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], 'buy_sale', $post['car_in_marriage'], $post['police_form']);
 
         if(!empty($post['additional_devices_array']))
             $post['additional_devices_array'] = json_encode($post['additional_devices_array']);
@@ -4617,7 +4620,7 @@ class Document_model extends CI_Model
         //$post['car_in_marriage'] = !empty($post['car_in_marriage'])?$post['car_in_marriage']:$d->car_in_marriage;
         $post['police_form'] = !empty($post['police_form'])?$post['police_form']:$d->police_form;
 
-        $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], $post['type_of_contract'], null, $post['police_form']);
+        $post['type_id'] = $this->set_pack_of_documents($post['type_of_giver'], $post['type_of_taker'], 'gift', null, $post['police_form']);
 
         foreach ($post as $key => $item) {
             $data[$key] = $item;

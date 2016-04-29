@@ -2,10 +2,10 @@
 /* Written by Andrew Stromnov (stromnov@gmail.com). */
 jQuery(function($){
 	$.datepicker.regional['ru'] = {
-		closeText: 'Закрыть',
+		closeText: 'ОК',
 		prevText: '&#x3c;Пред',
 		nextText: 'След&#x3e;',
-		currentText: 'Сегодня',
+		currentText: 'Текущий',
 		monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
 		'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
 		monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',

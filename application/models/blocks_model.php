@@ -1509,7 +1509,7 @@ END;
                     <input  required  class="form-control" type="text" name="vendor_law_adress"  placeholder="Юридический адрес: ">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_law_phone"  placeholder="Телефон:">
+                    <input  class = "form-control" type="text" name="vendor_law_phone"  placeholder="Телефон:">
                 </div>
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="vendor_law_acc"  placeholder="Расчетный счет">
@@ -1792,7 +1792,7 @@ END;
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
                     <input  required   class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true">
-                    <span class = "content-input-align">Покупатель лично</span>
+                    <span class = "content-input-align">Приобретатель лично</span>
 
                     <input  required   class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false">
                     <span class = "content-input-align">Представитель</span>
@@ -1855,7 +1855,7 @@ END;
             <div class = "content-radio-header">
                 <div class = "content-input-inlane">
                     <input  required   class="modal-button" data-type="statement" data-name="statement_buy" type="radio" name="statement_form" value="true">
-                    <span class = "content-input-align">Покупатель лично</span>
+                    <span class = "content-input-align">Приобретатель лично</span>
 
                     <input  required   class="modal-button" data-type="statement" data-name="statement_repres" type="radio" name="statement_form" value="false">
                     <span class = "content-input-align">Представитель</span>
@@ -1946,7 +1946,7 @@ END;
 <div class="row" id="block_seller">
     <div class="col-lg-12">
         <div class = "content-block">
-            <p class = "content-header">Одаряемый транспортного средства:</p>
+            <p class = "content-header">Одаряемый:</p>
             <div class = "content-radio-group">
                 <div class = "content-radio">
                     <input  required  data-id="block_seller" class="ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="physical">
@@ -2178,7 +2178,7 @@ END;
                     <input  required  class = "form-control" type="text" name="vendor_law_company_name"  placeholder="Наименование компании: ">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_law_date_of_create"  placeholder="Дата регистрации/создания общества">
+                    <input  required  class = "form-control datetimepicker" type="text" name="vendor_law_date_of_create"  placeholder="Дата регистрации/создания общества">
                 </div>
 
                 <div class = "content-input-group">
@@ -2221,7 +2221,7 @@ END;
                     <input  required  class="form-control" type="text" name="vendor_law_adress"  placeholder="Юридический адрес: ">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="vendor_law_phone"  placeholder="Телефон:">
+                    <input  class = "form-control" type="text" name="vendor_law_phone"  placeholder="Телефон:">
                 </div>
                 <div class = "content-input-group">
                     <input  required  class = "form-control" type="text" name="vendor_law_acc"  placeholder="Расчетный счет">
@@ -2338,7 +2338,7 @@ END;
                     <input  required  class = "form-control" type="text" name="buyer_law_company_name"  placeholder="Наименование компании: ">
                 </div>
                 <div class = "content-input-group">
-                    <input  required  class = "form-control" type="text" name="buyer_law_date_of_create"  placeholder="Дата регистрации/создания общества">
+                    <input  required  class = "form-control datetimepicker" type="text" name="buyer_law_date_of_create"  placeholder="Дата регистрации/создания общества">
                 </div>
 
                 <div class = "content-input-group">

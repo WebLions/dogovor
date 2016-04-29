@@ -184,7 +184,7 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        if($_SESSION['vendor_state'] == 'law' || $_SESSION['vendor_state'] == 'individual') {
+        if($_SESSION['vendor_state'] == 'law') {
 
             $this->blocks_model->bs_block_penalty();
             $this->blocks_model->bs_block_ready();
@@ -203,7 +203,7 @@ class Blocks extends CI_Controller
         $this->blocks_model->bs_block_payment_date();
         $this->blocks_model->bs_block_documents();
         $this->blocks_model->bs_block_accessories();
-        if($_SESSION['vendor_state'] == 'law' || $_SESSION['vendor_state'] == 'individual') {
+        if($_SESSION['vendor_state'] == 'law') {
             $this->blocks_model->bs_block_penalty();
             $this->blocks_model->bs_block_ready();
         }
