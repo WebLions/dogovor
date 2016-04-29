@@ -2392,7 +2392,7 @@ END;
 <div class="row" id="gift_buyer">
     <div class="col-lg-12">
         <div class = "content-block">
-            <p class = "content-header">Одаряемый транспортного средства:</p>
+            <p class = "content-header">Одаряемый:</p>
             <div class = "content-radio-group">
                 <div class = "content-radio">
                     <input data-id="gift_buyer" class="edit-ajax-button" data-name="gift_block_buyer_state" type="radio" name="type_of_taker" value="physical" {$v[0]}>

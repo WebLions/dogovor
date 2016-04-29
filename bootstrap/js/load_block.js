@@ -142,7 +142,7 @@ $( document ).ready(function() {
             dateFormat: "yy-mm-dd",
             changeMonth: true,
             changeYear: true,
-            yearRange: '1950:2016'
+            yearRange: '1935:2016'
         });
     });
 
@@ -151,17 +151,25 @@ $( document ).ready(function() {
     $("#doc_create").delegate(".datetimepicker", "focusin", function(){
         var name = $(this).attr('name');
         if(name == 'date_of_product'){
+            $('head').append("<style type='text/css' data-name=\"year\">.ui-datepicker-calendar,.ui-datepicker-month { display: none; }</style>");
             $(this).datepicker({
-                dateFormat: "yy",
+                changeMonth: false,
                 changeYear: true,
-                yearRange: '1950:2016'
+                showButtonPanel: true,
+                yearRange: '1935:2016',
+                dateFormat: 'yy',
+                onClose: function(dateText, inst) {
+                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                    $(this).datepicker('setDate', new Date(year, 0, 1));
+                    $('head').find('style[data-name="year"]').remove();
+                },
             });
             return true;
         }
         $('input[name='+name+']').datepicker({
             dateFormat: "yy-mm-dd",
             changeYear: true,
-            yearRange: '1950:2016'
+            yearRange: '1935:2016'
         });
     });
 
@@ -316,47 +324,47 @@ $( document ).ready(function() {
         });
     });
 
-
-        var inputs = [  'vendor_phone',
-                        'vendor_law_proxy_number',
-                        'vendor_law_proxy_date',
-                        'buyer_phone', 'buyer_law_proxy_number',
-                        'buyer_law_proxy_date',
-                        'buyer_phone',
-                        'engine_model',
-                        'shassi',
-                        'reg_gov_number',
-                        'vendor_ind_phone',
-                        'vendor_ind_bank_acc',
-                        'vendor_ind_bank_name',
-                        'vendor_ind_korr_acc',
-                        'vendor_ind_bik',
-                        'buyer_ind_phone',
-                        'buyer_ind_bank_acc',
-                        'buyer_ind_bank_name',
-                        'buyer_ind_korr_acc',
-                        'buyer_ind_bik',
-                        'for_agent_vendor_proxy_notary',
-                        'for_agent_buyer_proxy_notary',
-                        'carcass',
-                        'other_parameters',
-                        'additional_devices_array',
-                        'oil_in_car', 'car_allstatus',
-                        'maintenance_date',
-                        'maintenance_bywho',
-                        'penalty',
-                        'gibdd_inn'];
-
         $('.document').on('click', '#ready_button', function () {
             var ready = true;
+            var inputs = ['vendor_phone',
+                'vendor_law_proxy_number',
+                'vendor_law_proxy_date',
+                'buyer_law_proxy_number',
+                'buyer_law_proxy_date',
+                'engine_model',
+                'shassi',
+                'reg_gov_number',
+                'vendor_ind_phone',
+                'vendor_ind_bank_acc',
+                'vendor_ind_bank_name',
+                'vendor_ind_korr_acc',
+                'vendor_ind_bik',
+                'buyer_ind_bank_acc',
+                'buyer_ind_bank_name',
+                'buyer_ind_korr_acc',
+                'buyer_ind_bik',
+                'for_agent_vendor_proxy_notary',
+                'for_agent_buyer_proxy_notary',
+                'carcass',
+                'other_parameters',
+                'additional_devices_array',
+                'oil_in_car',
+                'car_allstatus',
+                'maintenance_date',
+                'maintenance_bywho',
+                'penalty',
+                'gibdd_inn'];
             $('.document').find('input[type=text]').each(function(){
                 var name = $(this).attr('name');
-                console.log(inputs[name]);
-                if(typeof inputs[name]=='undefined'&&name.indexOf("accessories")==-1&&$(this).val()==''){
+                console.log($.inArray(name, inputs));
+                if($.inArray(name, inputs) === -1 && name.indexOf("accessories") == -1 && $(this).val() == ''){
                     $(this).addClass("content-required");
                     ready = false;
+                } else {
+                    $(this).removeClass("content-required");
                 }
             });
+            console.log(ready);
             if(ready == true){
                 console.log(true);
                 $('#document_form').submit();
